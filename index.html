@@ -64,27 +64,27 @@
     font-family:var(--font-display); letter-spacing:.08em; text-transform:uppercase;
   }
 
-  /* ===================== FLOATING HORN BADGE ===================== */
+  /* ===================== FLOATING HORN BADGE (RELOCATED TO BOTTOM-RIGHT) ===================== */
   .floating-horn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 5%;
     z-index: 10;
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(20, 14, 10, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(20, 14, 10, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(244,234,212,0.2);
     color: var(--cream);
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 999px;
     font-family: var(--font-hindi);
     font-size: 15px;
     font-weight: 700;
     transition: background 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   }
 
   .floating-horn:hover {
@@ -102,11 +102,12 @@
     fill: currentColor;
   }
 
-  /* ===================== CENTERED DISPLAY TEXT ===================== */
+  /* ===================== CENTERED DISPLAY TEXT & LOGO ===================== */
   .hero-title-wrapper {
     position: absolute; top: 10%; left: 50%;
     transform: translateX(-50%); text-align: center;
     z-index: 10; width: 90%; max-width: 1200px; pointer-events: none;
+    display: flex; flex-direction: column; align-items: center;
   }
 
   .sub-heading {
@@ -119,6 +120,14 @@
     font-family: var(--font-hindi); font-size: clamp(48px, 9.5vw, 115px);
     font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 1px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
+  }
+
+  /* UP Parivahan Logo with Shadow */
+  .up-logo {
+    width: clamp(50px, 6vw, 85px);
+    height: auto;
+    margin-top: 12px;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
   }
 
   /* ===================== MINIMAL PLAYER CONTAINER ===================== */
@@ -212,6 +221,13 @@
     position:fixed; top:0; left:0; width:200px; height:200px;
     opacity:0.01; pointer-events:none; z-index:-1;
   }
+
+  @media(max-width: 768px){
+    .floating-horn {
+      bottom: 120px;
+      right: 20px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -224,7 +240,7 @@
   <div class="scrim"></div>
   <div class="hero-meta">Dhaba Radio · NH 27</div>
 
-  <!-- FLOATING HORN BUTTON -->
+  <!-- FLOATING HORN BUTTON (MOVED TO BOTTOM RIGHT AS DRAWN) -->
   <button class="floating-horn" id="hornBtn" title="Blow Horn (H)">
     <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
     <span>हॉर्न ओके प्लीज</span>
@@ -233,6 +249,8 @@
   <div class="hero-title-wrapper">
     <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
     <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
+    <!-- UP PARIVAHAN LOGO WITH SHADOW -->
+    <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
   </div>
 </section>
 
@@ -302,7 +320,6 @@ function playNextHorn() {
   horn.currentTime = 0;
   horn.play().catch(err => console.log('Horn audio play blocked:', err));
   
-  // Rotate index: 0 -> 1 -> 2 -> 0
   currentHornIndex = (currentHornIndex + 1) % HORN_FILES.length;
 }
 

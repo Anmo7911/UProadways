@@ -124,45 +124,81 @@
     will-change: transform, color, text-shadow;
   }
 
-  /* Horn Beat Animation for Main Heading */
-  .main-heading.horn-active {
-    animation: hornBeatSync 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  /* ===================== 3 PROFESSIONAL HORN ANIMATIONS ===================== */
+
+  /* ANIMATION 1: Letter-by-Letter Wave & Staggered Glow */
+  .anim-char {
+    display: inline-block;
+    animation: charWaveLoop 0.55s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i) * 0.05s);
+    will-change: transform, color, text-shadow;
   }
 
-  @keyframes hornBeatSync {
+  @keyframes charWaveLoop {
     0% {
-      transform: scale(1) rotate(0deg);
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
-    }
-    15% {
-      transform: scale(1.12) rotate(-1.5deg);
-      color: #fff3a1;
-      text-shadow: 0 0 25px rgba(217, 164, 65, 0.9), 0 0 50px rgba(187, 77, 37, 0.8);
-    }
-    35% {
-      transform: scale(1.08) rotate(1.5deg);
-    }
-    55% {
-      transform: scale(1.03) rotate(-0.8deg);
-    }
-    75% {
-      transform: scale(1.01) rotate(0.4deg);
+      transform: translateY(0) scale(1);
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
     }
     100% {
-      transform: scale(1) rotate(0deg);
-      color: #ffffff;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
+      transform: translateY(-14px) scale(1.15);
+      color: #fff4a3;
+      text-shadow: 0 0 25px rgba(217, 164, 65, 0.95), 0 0 45px rgba(187, 77, 37, 0.85);
     }
   }
 
- /* UP Parivahan Logo with Drop Shadow */
-.up-logo {
-  width: clamp(90px, 11vw, 150px);
-  height: auto;
-  margin-top: -28px; /* Space between the text and the logo below it */
-  margin-bottom: 0;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-}
+  /* ANIMATION 2: Word-by-Word Staggered Bounce */
+  .anim-word {
+    display: inline-block;
+    margin: 0 8px;
+    animation: wordPulseLoop 0.45s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i) * 0.12s);
+    will-change: transform, color, text-shadow;
+  }
+
+  @keyframes wordPulseLoop {
+    0% {
+      transform: scale(1) rotate(0deg);
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+    100% {
+      transform: scale(1.18) rotate(-1.5deg);
+      color: #ffd166;
+      text-shadow: 0 0 30px rgba(239, 71, 111, 0.9), 0 0 50px rgba(255, 209, 102, 0.85);
+    }
+  }
+
+  /* ANIMATION 3: Bass Jitter & Highway Glitch Split */
+  .main-heading.anim-bass-glitch {
+    animation: bassGlitchLoop 0.16s infinite alternate ease-in-out;
+  }
+
+  @keyframes bassGlitchLoop {
+    0% {
+      transform: scale(1) translate(0, 0);
+      text-shadow: -4px 0 #bb4d25, 4px 0 #d9a441, 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+    50% {
+      transform: scale(1.08) translate(-3px, -2px) rotate(-1deg);
+      color: #fff5cc;
+      text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441, 0 0 35px rgba(217, 164, 65, 0.9);
+    }
+    100% {
+      transform: scale(1.04) translate(3px, 2px) rotate(1deg);
+      color: #ffffff;
+      text-shadow: -3px 3px #bb4d25, 3px -3px #d9a441, 0 0 45px rgba(187, 77, 37, 0.9);
+    }
+  }
+
+  /* UP Parivahan Logo with Drop Shadow */
+  .up-logo {
+    width: clamp(90px, 11vw, 150px);
+    height: auto;
+    margin-top: -28px; /* Space between the text and the logo below it */
+    margin-bottom: 0;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  }
 
   /* ===================== MINIMAL PLAYER CONTAINER ===================== */
   .player-wrapper {
@@ -338,34 +374,88 @@ const PLAYLIST = [
   { id: "9MX-QejdVaQ", title: "Chaiyya Chaiyya",            artist: "Dil Se · Sukhwinder Singh, Sapna Awasthi" },
   { id: "-LESbtPT8uw", title: "Kaho Naa Pyaar Hai (Title)", artist: "Alka Yagnik, Udit Narayan" },
   { id: "d9L37Xv96gU", title: "Tumhein Dekhen Meri Aankhen", artist: "Alka Yagnik | Kumar Sanu" },
-  { id: "5tfChet8pK0", title: "Ek Dil Hai",        artist: "Kumar Sanu, Alka Yagnik" },
+  { id: "e3TFNC-FRUA", title: "Dil Ne Dil Ko Pukara",        artist: "Kaho Naa Pyaar Hai · Babul Supriyo" },
   { id: "vCTW2GfcepQ", title: "Tujhe Dekha Toh",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
 ];
 
 /* =====================================================
-   HORN SOUND FILES, ROTATION LOGIC & ANIMATION SYNC
+   HORN AUDIO & DYNAMIC RANDOM TEXT ANIMATION SYNC
 ===================================================== */
 const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
 const hornAudioObjects = HORN_FILES.map(file => new Audio(file));
 let currentHornIndex = 0;
+const ORIGINAL_TEXT = "उत्तर प्रदेश परिवहन";
+let activeHornAudio = null;
+let activeHornEndHandler = null;
 
-function triggerTextAnimation() {
+function stopTextAnimation() {
   const mainHeading = document.getElementById('mainHeading');
   if (!mainHeading) return;
 
-  // Restart animation keyframes
-  mainHeading.classList.remove('horn-active');
-  void mainHeading.offsetWidth; // Force CSS Reflow
-  mainHeading.classList.add('horn-active');
+  // Clear animation classes & restore original clean text
+  mainHeading.className = 'main-heading';
+  mainHeading.textContent = ORIGINAL_TEXT;
+
+  // Cleanup audio listeners if any exist
+  if (activeHornAudio && activeHornEndHandler) {
+    activeHornAudio.removeEventListener('ended', activeHornEndHandler);
+    activeHornAudio.removeEventListener('pause', activeHornEndHandler);
+    activeHornAudio = null;
+    activeHornEndHandler = null;
+  }
+}
+
+function startTextAnimation(hornAudio) {
+  const mainHeading = document.getElementById('mainHeading');
+  if (!mainHeading) return;
+
+  // Clear previous animation first
+  stopTextAnimation();
+
+  // Choose randomly between 3 professional animations (0, 1, or 2)
+  const animChoice = Math.floor(Math.random() * 3);
+
+  if (animChoice === 0) {
+    /* Style 1: Letter-by-Letter Wave */
+    let charIndex = 0;
+    mainHeading.innerHTML = ORIGINAL_TEXT.split('').map(char => {
+      if (char === ' ') return '&nbsp;';
+      return `<span class="anim-char" style="--i: ${charIndex++}">${char}</span>`;
+    }).join('');
+  } 
+  else if (animChoice === 1) {
+    /* Style 2: Word-by-Word Bounce */
+    const words = ORIGINAL_TEXT.split(' ');
+    mainHeading.innerHTML = words.map((word, i) => {
+      return `<span class="anim-word" style="--i: ${i}">${word}</span>`;
+    }).join(' ');
+  } 
+  else {
+    /* Style 3: Bass Glitch & Rumble */
+    mainHeading.classList.add('anim-bass-glitch');
+    mainHeading.textContent = ORIGINAL_TEXT;
+  }
+
+  // Attach auto-stop listener: animation ends exactly when horn audio finishes
+  activeHornAudio = hornAudio;
+  activeHornEndHandler = () => {
+    stopTextAnimation();
+  };
+
+  hornAudio.addEventListener('ended', activeHornEndHandler);
+  hornAudio.addEventListener('pause', activeHornEndHandler);
 }
 
 function playNextHorn() {
   const horn = hornAudioObjects[currentHornIndex];
   horn.currentTime = 0;
-  horn.play().catch(err => console.log('Horn audio play blocked:', err));
-  
-  // Trigger text animation sync
-  triggerTextAnimation();
+
+  startTextAnimation(horn);
+
+  horn.play().catch(err => {
+    console.log('Horn audio play blocked:', err);
+    stopTextAnimation();
+  });
 
   currentHornIndex = (currentHornIndex + 1) % HORN_FILES.length;
 }

@@ -256,11 +256,11 @@
     <source src="assets/bus-loop.mp4" type="video/mp4">
   </video>
   <div class="scrim"></div>
-  <div class="hero-meta">उत्तर प्रदेश परिवहन · NH 27</div>
+  <div class="hero-meta">Dhaba Radio · NH 27</div>
 
   <!-- CENTERED DISPLAY TEXT -->
   <div class="hero-title-wrapper">
-    <div class="sub-heading" id="heroSubCount">227 TRACKS · NON-STOP</div>
+    <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
     <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
   </div>
 </section>
@@ -328,6 +328,16 @@ const PLAYLIST = [
 
 function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
 
+/* Helper to generate a random track index */
+function getRandomIndex(excludeIndex = -1) {
+  if (PLAYLIST.length <= 1) return 0;
+  let nextIndex;
+  do {
+    nextIndex = Math.floor(Math.random() * PLAYLIST.length);
+  } while (nextIndex === excludeIndex);
+  return nextIndex;
+}
+
 /* =====================================================
    STATE
 ===================================================== */
@@ -392,13 +402,19 @@ document.body.appendChild(tag);
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('yt-player', {
     height: '1', width: '1',
-    playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
+    playerVars: { autoplay: 1, controls: 0, disablekb: 1, playsinline: 1 },
     events: {
       onReady: () => { ytReady = true; },
-      onStateChange: onPlayerStateChange
+      onStateChange: onPlayerStateChange,
+      onError: onPlayerError
     }
   });
 };
+
+function onPlayerError(e){
+  // Auto-skip unplayable/restricted videos seamlessly
+  playTrack(getRandomIndex(currentIndex));
+}
 
 function onPlayerStateChange(e){
   if (e.data === YT.PlayerState.PLAYING){
@@ -410,28 +426,35 @@ function onPlayerStateChange(e){
     updatePlayIcon();
     stopProgressLoop();
   } else if (e.data === YT.PlayerState.ENDED){
-    playTrack((currentIndex + 1) % PLAYLIST.length);
+    /* Play next random track when song ends */
+    playTrack(getRandomIndex(currentIndex));
+  } else if (e.data === YT.PlayerState.CUED){
+    /* Resume playback if video gets stuck in cued state */
+    ytPlayer.playVideo();
   }
 }
 
 function playTrack(index){
-  if (!ytReady){
+  if (!ytReady || !ytPlayer){
     setTimeout(() => playTrack(index), 300);
     return;
   }
   currentIndex = index;
   const t = PLAYLIST[index];
-  ytPlayer.loadVideoById(t.id);
-  ytPlayer.playVideo();
-
+  
   document.getElementById('nowArt').src = thumb(t.id);
   document.getElementById('nowTitle').textContent = t.title;
   document.getElementById('nowArtist').textContent = t.artist;
   renderActiveTrack();
+
+  // Load and auto-play cleanly without conflicting playVideo calls
+  if (ytPlayer.loadVideoById) {
+    ytPlayer.loadVideoById(t.id);
+  }
 }
 
 function togglePlayPause(){
-  if (currentIndex === -1){ playTrack(0); return; }
+  if (currentIndex === -1){ playTrack(getRandomIndex()); return; }
   if (isPlaying){ ytPlayer.pauseVideo(); } else { ytPlayer.playVideo(); }
 }
 
@@ -477,10 +500,10 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
 ===================================================== */
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
 document.getElementById('nextBtn').addEventListener('click', () => {
-  playTrack(currentIndex === -1 ? 0 : (currentIndex + 1) % PLAYLIST.length);
+  playTrack(getRandomIndex(currentIndex));
 });
 document.getElementById('prevBtn').addEventListener('click', () => {
-  playTrack(currentIndex <= 0 ? PLAYLIST.length - 1 : currentIndex - 1);
+  playTrack(getRandomIndex(currentIndex));
 });
 
 /* =====================================================

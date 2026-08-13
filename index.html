@@ -43,10 +43,10 @@
     width:100vw; height:100vh;
     overflow:hidden;
   }
-  .hero video{
-    position:absolute;inset:0;
-    width:100%;height:100%;object-fit:cover;
-    filter:saturate(1.05) contrast(1.02);
+  .hero #backgroundFrame{
+    position:absolute;inset:0;width:100%;height:100%;
+    border:0;display:block;z-index:0;
+    pointer-events:none;
   }
   
   .hero .scrim{
@@ -179,9 +179,7 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
-    <source src="assets/bus-loop.mp4" type="video/mp4">
-  </video>
+  <iframe id="backgroundFrame" src="data:text/html;base64,PCFkb2N0eXBlIGh0bWw+CjxodG1sPgo8aGVhZD4KPG1ldGEgY2hhcnNldD0iVVRGLTgiPgo8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLGluaXRpYWwtc2NhbGU9MSI+CjxzdHlsZT4KICBodG1sLGJvZHl7bWFyZ2luOjA7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtvdmVyZmxvdzpoaWRkZW47YmFja2dyb3VuZDojMDAwfQogIHZpZGVvewogICAgcG9zaXRpb246YWJzb2x1dGU7aW5zZXQ6MDt3aWR0aDoxMDAlO2hlaWdodDoxMDAlOwogICAgb2JqZWN0LWZpdDpjb3ZlcjsKICAgIGZpbHRlcjpzYXR1cmF0ZSgxLjA1KSBjb250cmFzdCgxLjAyKTsKICB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+Cjx2aWRlbyBhdXRvcGxheSBtdXRlZCBsb29wIHBsYXlzaW5saW5lIHByZWxvYWQ9ImF1dG8iIHBvc3Rlcj0iYXNzZXRzL2J1cy1sb29wLXBvc3Rlci5qcGciPgogIDxzb3VyY2Ugc3JjPSJhc3NldHMvYnVzLWxvb3AubXA0IiB0eXBlPSJ2aWRlby9tcDQiPgo8L3ZpZGVvPgo8c2NyaXB0PgooZnVuY3Rpb24oKXsKICBjb25zdCB2PWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ3ZpZGVvJyk7CiAgZnVuY3Rpb24gcmVzdW1lKCl7CiAgICBpZih2ICYmIHYucGF1c2VkICYmICF2LmVuZGVkKXsKICAgICAgY29uc3QgcD12LnBsYXkoKTsKICAgICAgaWYocCAmJiBwLmNhdGNoKSBwLmNhdGNoKCgpPT57fSk7CiAgICB9CiAgfQogIHJlc3VtZSgpOwogIHYuYWRkRXZlbnRMaXN0ZW5lcignY2FucGxheScscmVzdW1lKTsKICB2LmFkZEV2ZW50TGlzdGVuZXIoJ2xvYWRlZGRhdGEnLHJlc3VtZSk7CiAgdi5hZGRFdmVudExpc3RlbmVyKCdwYXVzZScscmVzdW1lKTsKICBzZXRJbnRlcnZhbChyZXN1bWUsMTUwMCk7Cn0pKCk7Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4=" aria-hidden="true"></iframe>
   <div class="scrim"></div>
   <div class="hero-meta">Dhaba Radio · NH 27</div>
 
@@ -258,58 +256,12 @@ function getRandomIndex(excludeIndex = -1) {
 
 let ytPlayer = null;
 let ytReady = false;
-let backgroundVideo = null;
-let backgroundKeepAliveTimer = null;
 let currentIndex = -1;
 let isPlaying = false;
 let shouldBePlaying = false;
 let progressTimer = null;
 
 const trackListEl = document.getElementById('trackList');
-backgroundVideo = document.getElementById('backgroundVideo');
-
-/*
- * The YouTube iframe and the HTML5 background video are two independent
- * media players. Some browsers may pause the HTML5 video when the YouTube
- * iframe changes/loads a new video. Keep the background animation alive.
- */
-function keepBackgroundPlaying(){
-  if (!backgroundVideo) return;
-
-  if (backgroundVideo.paused && !backgroundVideo.ended) {
-    const playPromise = backgroundVideo.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {});
-    }
-  }
-}
-
-function startBackgroundKeepAlive(){
-  if (backgroundKeepAliveTimer) clearInterval(backgroundKeepAliveTimer);
-
-  keepBackgroundPlaying();
-
-  backgroundKeepAliveTimer = setInterval(() => {
-    keepBackgroundPlaying();
-  }, 1000);
-}
-
-if (backgroundVideo) {
-  backgroundVideo.addEventListener('pause', keepBackgroundPlaying);
-  backgroundVideo.addEventListener('canplay', keepBackgroundPlaying);
-  backgroundVideo.addEventListener('loadeddata', keepBackgroundPlaying);
-  backgroundVideo.addEventListener('ended', () => {
-    backgroundVideo.currentTime = 0;
-    keepBackgroundPlaying();
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) keepBackgroundPlaying();
-  });
-
-  // Start/restore the bus animation without waiting for the YouTube player.
-  startBackgroundKeepAlive();
-}
 document.getElementById('heroSubCount').textContent = `गाज़ीपुर · लखनऊ`;
 
 PLAYLIST.forEach((t, i) => {
@@ -372,9 +324,6 @@ window.onYouTubeIframeAPIReady = function(){
 };
 
 function onPlayerStateChange(e){
-  // YouTube state changes must never control the background video's state.
-  keepBackgroundPlaying();
-
   if (e.data === YT.PlayerState.PLAYING){
     isPlaying = true;
     updatePlayIcon();
@@ -390,37 +339,28 @@ function onPlayerStateChange(e){
   }
 }
 
-let requestedTrackToken = 0;
-
 function playTrack(index){
-  const requestToken = ++requestedTrackToken;
-
   if (!ytReady || !ytPlayer){
-    setTimeout(() => {
-      if (requestToken === requestedTrackToken) playTrack(index);
-    }, 200);
+    setTimeout(() => playTrack(index), 200);
     return;
   }
-  
+
+  if (index < 0 || index >= PLAYLIST.length) return;
+
   currentIndex = index;
   shouldBePlaying = true;
+
   const t = PLAYLIST[index];
-  
+
   document.getElementById('nowArt').src = thumb(t.id);
   document.getElementById('nowTitle').textContent = t.title;
   document.getElementById('nowArtist').textContent = t.artist;
   renderActiveTrack();
 
+  // Only the YouTube player changes here.
+  // The MP4 background lives in a separate iframe/document.
   ytPlayer.loadVideoById(t.id);
-  
-  // Double fallback call to overcome browser focus restrictions on track change
-  setTimeout(() => {
-    if (ytPlayer && ytPlayer.playVideo) {
-      ytPlayer.playVideo();
-    }
-  }, 100);
 }
-
 function togglePlayPause(){
   if (currentIndex === -1){ 
     playTrack(getRandomIndex()); 
@@ -471,14 +411,8 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
 });
 
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => {
-  keepBackgroundPlaying();
-  playTrack(getRandomIndex(currentIndex));
-});
-document.getElementById('prevBtn').addEventListener('click', () => {
-  keepBackgroundPlaying();
-  playTrack(getRandomIndex(currentIndex));
-});
+document.getElementById('nextBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
+document.getElementById('prevBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
 
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;

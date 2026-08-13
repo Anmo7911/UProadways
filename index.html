@@ -122,12 +122,12 @@
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
   }
 
-  /* UP Parivahan Logo with Shadow */
+ /* UP Parivahan Logo with Drop Shadow */
 .up-logo {
-  width: clamp(90px, 11vw, 150px); /* Increased size */
+  width: clamp(90px, 11vw, 150px);
   height: auto;
-  margin-top: 8px;
-  margin-bottom: 12px; /* Adds space between logo and main text */
+  margin-top: 14px; /* Space between the text and the logo below it */
+  margin-bottom: 0;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
 }
 
@@ -247,11 +247,11 @@
     <span>हॉर्न ओके प्लीज</span>
   </button>
 
-  <div class="hero-title-wrapper">
+<div class="hero-title-wrapper">
   <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
-  <!-- LOGO PLACED ABOVE MAIN HEADING -->
-  <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
   <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
+  <!-- LOGO PLACED DIRECTLY BELOW MAIN TEXT -->
+  <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
 </div>
 </section>
 

@@ -120,6 +120,39 @@
     font-family: var(--font-hindi); font-size: clamp(48px, 9.5vw, 115px);
     font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 1px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    will-change: transform, color, text-shadow;
+  }
+
+  /* Horn Beat Animation for Main Heading */
+  .main-heading.horn-active {
+    animation: hornBeatSync 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes hornBeatSync {
+    0% {
+      transform: scale(1) rotate(0deg);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    15% {
+      transform: scale(1.12) rotate(-1.5deg);
+      color: #fff3a1;
+      text-shadow: 0 0 25px rgba(217, 164, 65, 0.9), 0 0 50px rgba(187, 77, 37, 0.8);
+    }
+    35% {
+      transform: scale(1.08) rotate(1.5deg);
+    }
+    55% {
+      transform: scale(1.03) rotate(-0.8deg);
+    }
+    75% {
+      transform: scale(1.01) rotate(0.4deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
   }
 
  /* UP Parivahan Logo with Drop Shadow */
@@ -249,7 +282,7 @@
 
 <div class="hero-title-wrapper">
   <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
-  <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
+  <h1 class="main-heading" id="mainHeading">उत्तर प्रदेश परिवहन</h1>
   <!-- LOGO PLACED DIRECTLY BELOW MAIN TEXT -->
   <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
 </div>
@@ -305,22 +338,35 @@ const PLAYLIST = [
   { id: "9MX-QejdVaQ", title: "Chaiyya Chaiyya",            artist: "Dil Se · Sukhwinder Singh, Sapna Awasthi" },
   { id: "-LESbtPT8uw", title: "Kaho Naa Pyaar Hai (Title)", artist: "Alka Yagnik, Udit Narayan" },
   { id: "d9L37Xv96gU", title: "Tumhein Dekhen Meri Aankhen", artist: "Alka Yagnik | Kumar Sanu" },
-  { id: "e3TFNC-FRUA", title: "Dil Ne Dil Ko Pukara",        artist: "Kaho Naa Pyaar Hai · Babul Supriyo" },
+  { id: "5tfChet8pK0", title: "Ek Dil Hai",        artist: "Kumar Sanu, Alka Yagnik" },
   { id: "vCTW2GfcepQ", title: "Tujhe Dekha Toh",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
 ];
 
 /* =====================================================
-   HORN SOUND FILES & ROTATION LOGIC
+   HORN SOUND FILES, ROTATION LOGIC & ANIMATION SYNC
 ===================================================== */
 const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
 const hornAudioObjects = HORN_FILES.map(file => new Audio(file));
 let currentHornIndex = 0;
+
+function triggerTextAnimation() {
+  const mainHeading = document.getElementById('mainHeading');
+  if (!mainHeading) return;
+
+  // Restart animation keyframes
+  mainHeading.classList.remove('horn-active');
+  void mainHeading.offsetWidth; // Force CSS Reflow
+  mainHeading.classList.add('horn-active');
+}
 
 function playNextHorn() {
   const horn = hornAudioObjects[currentHornIndex];
   horn.currentTime = 0;
   horn.play().catch(err => console.log('Horn audio play blocked:', err));
   
+  // Trigger text animation sync
+  triggerTextAnimation();
+
   currentHornIndex = (currentHornIndex + 1) % HORN_FILES.length;
 }
 

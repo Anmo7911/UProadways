@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#130904">
+<title>रात की बस · Raat Ki Bus — Nonstop 90s Hindi Songs</title>
+<meta name="description" content="Press play and ride along — nonstop 80s &amp; 90s Hindi songs, no login, no ads. Straight down the highway at midnight.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="road-noise" aria-hidden="true"></div>
+
+<div class="app" id="app">
+
+  <!-- ===== TICKET HERO ===== -->
+  <header class="ticket" id="ticket">
+    <div class="ticket__stub">
+      <div class="ticket__route">
+        <span class="ticket__co">रात की बस</span>
+        <span class="ticket__line">NH 44 · Delhi → Jaipur</span>
+      </div>
+      <div class="ticket__clock" id="clock">--:--</div>
+    </div>
+
+    <div class="ticket__perf" aria-hidden="true"></div>
+
+    <div class="ticket__body">
+      <div class="ticket__meta">
+        <span id="aboardCount">—</span> aboard&nbsp;·&nbsp;<span id="trackCount">0</span> tracks · non&#8209;stop
+      </div>
+      <h1 class="ticket__title">रात की बस</h1>
+      <p class="ticket__tag">All night on NH 44</p>
+      <p class="ticket__hin">हॉर्न ओके प्लीज़ <span>Horn OK Pleaseee</span></p>
+    </div>
+
+    <nav class="pills" id="genrePills" aria-label="Playlist mood">
+      <button class="pill pill--active" data-mood="all">90s</button>
+      <button class="pill" data-mood="nostalgic">Nostalgic</button>
+      <button class="pill" data-mood="patriotic">🇮🇳 Desh Bhakti</button>
+      <button class="pill" data-mood="bhojpuri">Bhojpuri</button>
+      <button class="pill" data-mood="hitlist">Hitlist</button>
+      <button class="pill" data-mood="workout">Workout</button>
+    </nav>
+
+    <div class="ticket__foot">
+      <span class="ticket__count"><span id="trackCount2">0</span> tracks</span>
+      <div class="langs" id="langs">
+        <button class="lang lang--active" data-lang="en">EN</button>
+        <button class="lang" data-lang="bn">বাং</button>
+        <button class="lang" data-lang="mr">मरा</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== TRACK LIST ===== -->
+  <main class="deck">
+    <ul class="tracklist" id="tracklist" role="list"></ul>
+
+    <div class="rider">
+      <p class="rider__share">Share the bus <strong id="shareUrl">raatkibus.wtf</strong></p>
+      <div class="rider__driver">
+        <div class="rider__avatar" aria-hidden="true">🚌</div>
+        <div>
+          <p class="rider__name">Anand</p>
+          <p class="rider__desc">I drive this bus. I pick every song on it.</p>
+          <a class="rider__follow" href="#" id="followLink" rel="noopener">Follow @anand.drives &rarr;</a>
+        </div>
+      </div>
+      <p class="rider__note">New songs join the bus most weeks.</p>
+    </div>
+  </main>
+
+</div>
+
+<!-- ===== DASHBOARD PLAYER BAR ===== -->
+<footer class="dash" id="dash">
+  <div class="dash__inner">
+    <button class="dash__art" id="dashArt" aria-label="Now playing artwork">
+      <img id="dashImg" src="" alt="" />
+    </button>
+
+    <div class="dash__info">
+      <p class="dash__title" id="dashTitle">Who's driving?</p>
+      <p class="dash__artist" id="dashArtist">Press play to board</p>
+      <div class="dash__scrub">
+        <span class="dash__time" id="dashCur">0:00</span>
+        <input type="range" id="dashSeek" class="dash__range" min="0" max="100" value="0">
+        <span class="dash__time" id="dashDur">0:00</span>
+      </div>
+    </div>
+
+    <div class="dash__controls">
+      <button id="btnPrev" class="dash__btn" aria-label="Previous track" title="P">⏮</button>
+      <button id="btnPlay" class="dash__btn dash__btn--main" aria-label="Play / pause" title="Space">▶</button>
+      <button id="btnNext" class="dash__btn" aria-label="Next track" title="N">⏭</button>
+      <button id="btnHorn" class="dash__btn dash__btn--horn" aria-label="Honk the horn" title="H">📯</button>
+      <button id="btnQueue" class="dash__btn" aria-label="Toggle queue view" title="Q">☰</button>
+      <button id="btnTicket" class="dash__btn" aria-label="Share your ticket" title="T">🎟</button>
+    </div>
+  </div>
+
+  <div class="dash__keys" id="dashKeys">
+    <span><kbd>Space</kbd> play / pause</span>
+    <span><kbd>←</kbd><kbd>→</kbd> seek</span>
+    <span><kbd>N</kbd><kbd>P</kbd> track</span>
+    <span><kbd>Q</kbd> queue</span>
+    <span><kbd>T</kbd> ticket</span>
+    <span><kbd>H</kbd> horn</span>
+  </div>
+</footer>
+
+<!-- ===== SHARE TICKET MODAL ===== -->
+<div class="modal" id="ticketModal" hidden>
+  <div class="modal__card">
+    <button class="modal__close" id="closeTicket" aria-label="Close">&times;</button>
+    <p class="modal__eyebrow">Share your ticket</p>
+    <h2 class="modal__title">ek share kar do na</h2>
+    <p class="modal__body">Someone you know still knows every word to these. There's room on the bus.</p>
+    <div class="modal__actions">
+      <button class="modal__btn modal__btn--main" id="sendTicket">Send it to one person</button>
+      <button class="modal__btn" id="notNowTicket">Not right now</button>
+    </div>
+  </div>
+</div>
+
+<!-- YouTube player mount (hidden, audio only) -->
+<div id="ytMount" class="yt-mount" aria-hidden="true"></div>
+
+<script src="tracks.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

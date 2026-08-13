@@ -226,6 +226,10 @@
         <button class="ctrl-btn" id="nextBtn" title="Next (N)">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
         </button>
+        <!-- HORN BUTTON -->
+        <button class="ctrl-btn" id="hornBtn" title="Blow Horn (H)">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <button class="ctrl-btn playlist-toggle" id="playlistBtn" title="Playlist">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
         </button>
@@ -245,6 +249,22 @@ const PLAYLIST = [
   { id: "e3TFNC-FRUA", title: "Dil Ne Dil Ko Pukara",        artist: "Kaho Naa Pyaar Hai · Babul Supriyo" },
   { id: "vCTW2GfcepQ", title: "Tujhe Dekha Toh",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
 ];
+
+/* =====================================================
+   HORN SOUND FILES & ROTATION LOGIC
+===================================================== */
+const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
+const hornAudioObjects = HORN_FILES.map(file => new Audio(file));
+let currentHornIndex = 0;
+
+function playNextHorn() {
+  const horn = hornAudioObjects[currentHornIndex];
+  horn.currentTime = 0;
+  horn.play().catch(err => console.log('Horn audio play blocked:', err));
+  
+  // Rotate index: 0 -> 1 -> 2 -> 0
+  currentHornIndex = (currentHornIndex + 1) % HORN_FILES.length;
+}
 
 function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
 
@@ -269,11 +289,6 @@ const backgroundVideo = document.getElementById('backgroundVideo');
 let backgroundWasPlaying = true;
 let backgroundResumeTimer = null;
 
-/*
- * The background is completely independent of the YouTube player.
- * We remember its exact position and immediately restore playback if a
- * browser pauses it during a YouTube track switch.
- */
 function resumeBackgroundVideo(){
   if (!backgroundVideo) return;
 
@@ -292,10 +307,8 @@ function protectBackgroundVideo(){
 
   backgroundWasPlaying = !backgroundVideo.paused && !backgroundVideo.ended;
 
-  // Play immediately while the button click is still a user gesture.
   resumeBackgroundVideo();
 
-  // Also retry immediately on the next rendering frames.
   cancelAnimationFrame(protectBackgroundVideo._raf1);
   cancelAnimationFrame(protectBackgroundVideo._raf2);
 
@@ -314,7 +327,6 @@ function protectBackgroundVideo(){
 }
 
 if (backgroundVideo) {
-  // If the browser pauses it for any reason, immediately request playback.
   backgroundVideo.addEventListener('pause', () => {
     if (backgroundWasPlaying) resumeBackgroundVideo();
   });
@@ -322,7 +334,6 @@ if (backgroundVideo) {
   backgroundVideo.addEventListener('canplay', resumeBackgroundVideo);
   backgroundVideo.addEventListener('loadeddata', resumeBackgroundVideo);
 
-  // Start it once.
   resumeBackgroundVideo();
 }
 
@@ -411,8 +422,6 @@ function playTrack(index){
 
   if (index < 0 || index >= PLAYLIST.length) return;
 
-  // IMPORTANT: do this inside the same user interaction that changes tracks.
-  // This gives the browser a valid playback gesture for the background video.
   protectBackgroundVideo();
 
   currentIndex = index;
@@ -430,14 +439,13 @@ function playTrack(index){
     startSeconds: 0
   });
 
-  // YouTube may pause another media element during the iframe transition.
-  // Restore the background at several points after the switch.
   protectBackgroundVideo();
 
   setTimeout(() => protectBackgroundVideo(), 50);
   setTimeout(() => protectBackgroundVideo(), 150);
   setTimeout(() => protectBackgroundVideo(), 400);
 }
+
 function togglePlayPause(){
   if (currentIndex === -1){ 
     playTrack(getRandomIndex()); 
@@ -497,6 +505,9 @@ document.getElementById('prevBtn').addEventListener('click', () => {
   playTrack(getRandomIndex(currentIndex));
 });
 
+/* Horn Button Event Listener */
+document.getElementById('hornBtn').addEventListener('click', playNextHorn);
+
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
   switch(e.code){
@@ -512,6 +523,8 @@ document.addEventListener('keydown', (e) => {
       document.getElementById('nextBtn').click(); break;
     case 'KeyP':
       document.getElementById('prevBtn').click(); break;
+    case 'KeyH':
+      playNextHorn(); break;
   }
 });
 </script>

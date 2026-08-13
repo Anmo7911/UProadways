@@ -106,7 +106,7 @@
   .hero-title-wrapper {
     position: absolute; top: 10%; left: 50%;
     transform: translateX(-50%); text-align: center;
-    z-index: 10; width: 90%; max-width: 1200px; pointer-events: none;
+    z-index: 10; width: 95%; max-width: 1200px; pointer-events: none;
     display: flex; flex-direction: column; align-items: center;
   }
 
@@ -117,20 +117,31 @@
   }
 
   .main-heading {
-    font-family: var(--font-hindi); font-size: clamp(48px, 9.5vw, 115px);
-    font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 1px;
+    font-family: var(--font-hindi); font-size: clamp(40px, 8vw, 110px);
+    font-weight: 800; color: #ffffff; margin: 0; line-height: 1.15; letter-spacing: 0.5px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
-    display: inline-block;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
     will-change: transform, color, text-shadow;
+  }
+
+  /* Devanagari Word & Glyph Containers */
+  .word-span {
+    display: inline-flex;
+    white-space: nowrap;
+    margin: 0 0.18em;
   }
 
   /* ===================== 3 PROFESSIONAL HORN ANIMATIONS ===================== */
 
-  /* ANIMATION 1: Letter-by-Letter Wave & Staggered Glow */
+  /* ANIMATION 1: Grapheme-Safe Character Wave */
   .anim-char {
     display: inline-block;
     animation: charWaveLoop 0.55s ease-in-out infinite alternate;
-    animation-delay: calc(var(--i) * 0.05s);
+    animation-delay: calc(var(--i) * 0.06s);
     will-change: transform, color, text-shadow;
   }
 
@@ -141,16 +152,14 @@
       text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
     }
     100% {
-      transform: translateY(-14px) scale(1.15);
+      transform: translateY(-12px) scale(1.12);
       color: #fff4a3;
       text-shadow: 0 0 25px rgba(217, 164, 65, 0.95), 0 0 45px rgba(187, 77, 37, 0.85);
     }
   }
 
-  /* ANIMATION 2: Word-by-Word Staggered Bounce */
+  /* ANIMATION 2: Word-by-Word Bounce */
   .anim-word {
-    display: inline-block;
-    margin: 0 8px;
     animation: wordPulseLoop 0.45s ease-in-out infinite alternate;
     animation-delay: calc(var(--i) * 0.12s);
     will-change: transform, color, text-shadow;
@@ -163,13 +172,13 @@
       text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
     }
     100% {
-      transform: scale(1.18) rotate(-1.5deg);
+      transform: scale(1.15) rotate(-1.2deg);
       color: #ffd166;
       text-shadow: 0 0 30px rgba(239, 71, 111, 0.9), 0 0 50px rgba(255, 209, 102, 0.85);
     }
   }
 
-  /* ANIMATION 3: Bass Jitter & Highway Glitch Split */
+  /* ANIMATION 3: Bass Glitch & Rumble */
   .main-heading.anim-bass-glitch {
     animation: bassGlitchLoop 0.16s infinite alternate ease-in-out;
   }
@@ -195,7 +204,7 @@
   .up-logo {
     width: clamp(90px, 11vw, 150px);
     height: auto;
-    margin-top: -28px; /* Space between the text and the logo below it */
+    margin-top: -24px;
     margin-bottom: 0;
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
   }
@@ -379,6 +388,18 @@ const PLAYLIST = [
 ];
 
 /* =====================================================
+   DEVANAGARI GRAPHEME SEGMENTER (PREVENTS LETTER BREAKS)
+===================================================== */
+function getGraphemes(text) {
+  if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+    const segmenter = new Intl.Segmenter('hi', { granularity: 'grapheme' });
+    return Array.from(segmenter.segment(text), s => s.segment);
+  }
+  // Fallback for older browsers
+  return text.match(/[\u0900-\u097F][\u0900-\u094F\u0962-\u0963\u0981]*|./g) || [text];
+}
+
+/* =====================================================
    HORN AUDIO & DYNAMIC RANDOM TEXT ANIMATION SYNC
 ===================================================== */
 const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
@@ -396,7 +417,7 @@ function stopTextAnimation() {
   mainHeading.className = 'main-heading';
   mainHeading.textContent = ORIGINAL_TEXT;
 
-  // Cleanup audio listeners if any exist
+  // Cleanup audio listeners
   if (activeHornAudio && activeHornEndHandler) {
     activeHornAudio.removeEventListener('ended', activeHornEndHandler);
     activeHornAudio.removeEventListener('pause', activeHornEndHandler);
@@ -409,26 +430,29 @@ function startTextAnimation(hornAudio) {
   const mainHeading = document.getElementById('mainHeading');
   if (!mainHeading) return;
 
-  // Clear previous animation first
   stopTextAnimation();
 
-  // Choose randomly between 3 professional animations (0, 1, or 2)
   const animChoice = Math.floor(Math.random() * 3);
 
   if (animChoice === 0) {
-    /* Style 1: Letter-by-Letter Wave */
-    let charIndex = 0;
-    mainHeading.innerHTML = ORIGINAL_TEXT.split('').map(char => {
-      if (char === ' ') return '&nbsp;';
-      return `<span class="anim-char" style="--i: ${charIndex++}">${char}</span>`;
+    /* Style 1: Grapheme-Safe Letter-by-Letter Wave */
+    const words = ORIGINAL_TEXT.split(' ');
+    let globalGraphemeIdx = 0;
+
+    mainHeading.innerHTML = words.map(word => {
+      const graphemes = getGraphemes(word);
+      const spans = graphemes.map(g => {
+        return `<span class="anim-char" style="--i: ${globalGraphemeIdx++}">${g}</span>`;
+      }).join('');
+      return `<span class="word-span">${spans}</span>`;
     }).join('');
   } 
   else if (animChoice === 1) {
     /* Style 2: Word-by-Word Bounce */
     const words = ORIGINAL_TEXT.split(' ');
     mainHeading.innerHTML = words.map((word, i) => {
-      return `<span class="anim-word" style="--i: ${i}">${word}</span>`;
-    }).join(' ');
+      return `<span class="word-span anim-word" style="--i: ${i}">${word}</span>`;
+    }).join('');
   } 
   else {
     /* Style 3: Bass Glitch & Rumble */
@@ -436,11 +460,9 @@ function startTextAnimation(hornAudio) {
     mainHeading.textContent = ORIGINAL_TEXT;
   }
 
-  // Attach auto-stop listener: animation ends exactly when horn audio finishes
+  // Attach stop handlers synced with horn audio end
   activeHornAudio = hornAudio;
-  activeHornEndHandler = () => {
-    stopTextAnimation();
-  };
+  activeHornEndHandler = () => stopTextAnimation();
 
   hornAudio.addEventListener('ended', activeHornEndHandler);
   hornAudio.addEventListener('pause', activeHornEndHandler);

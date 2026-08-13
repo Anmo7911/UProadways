@@ -168,7 +168,6 @@
   .track-title{font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .track-artist{font-size:11px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-  /* Keep video visible to browser DOM to satisfy Autoplay Policy */
   #yt-player{
     position:fixed; top:0; left:0; width:200px; height:200px;
     opacity:0.01; pointer-events:none; z-index:-1;
@@ -216,14 +215,8 @@
       </div>
 
       <div class="controls-group">
-        <button class="ctrl-btn" id="prevBtn" title="Previous (P)">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-        </button>
         <button class="ctrl-btn play-pause" id="playBtn" title="Play/Pause (Space)">
           <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <button class="ctrl-btn" id="nextBtn" title="Next (N)">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
         </button>
         <button class="ctrl-btn playlist-toggle" id="playlistBtn" title="Playlist">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
@@ -358,7 +351,6 @@ function playTrack(index){
 
   ytPlayer.loadVideoById(t.id);
   
-  // Double fallback call to overcome browser focus restrictions on track change
   setTimeout(() => {
     if (ytPlayer && ytPlayer.playVideo) {
       ytPlayer.playVideo();
@@ -416,8 +408,6 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
 });
 
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
-document.getElementById('prevBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
 
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
@@ -430,10 +420,6 @@ document.addEventListener('keydown', (e) => {
     case 'ArrowLeft':
       if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(Math.max(0, ytPlayer.getCurrentTime() - 5), true);
       break;
-    case 'KeyN':
-      document.getElementById('nextBtn').click(); break;
-    case 'KeyP':
-      document.getElementById('prevBtn').click(); break;
   }
 });
 </script>

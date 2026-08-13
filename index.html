@@ -245,34 +245,34 @@
     100% { transform: scale(1.05); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
   }
 
-  /* ===================== RETRO STEREO DECK CONTAINER ===================== */
+  /* ===================== RETRO STEREO DECK CONTAINER (COMPACT SIZE) ===================== */
   .player-wrapper {
-    position: fixed; bottom: 12px; left: 50%;
+    position: fixed; bottom: 8px; left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
 
-  /* Outer Head Unit Frame (Single DIN Stereo Deck) */
+  /* Compact Head Unit Frame */
   .stereo-unit {
-    width: 780px;
-    height: 200px;
+    width: 620px;         /* Reduced from 780px */
+    height: 145px;        /* Reduced from 200px */
     background: linear-gradient(180deg, #2c2d30 0%, #151618 15%, #0d0e10 85%, #222326 100%);
-    border: 8px solid #050505;
-    border-radius: 12px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    border: 6px solid #050505;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.2);
     display: flex;
-    padding: 12px;
-    gap: 14px;
+    padding: 8px 10px;
+    gap: 10px;
     position: relative;
   }
 
   /* Left Control Section (Volume Knob Dial) */
   .left-panel {
-    width: 160px;
+    width: 120px;
     height: 100%;
     background: linear-gradient(135deg, #1f2023, #111214);
-    border-radius: 6px;
+    border-radius: 5px;
     border: 1px solid #28292c;
     display: flex;
     flex-direction: column;
@@ -283,24 +283,24 @@
   }
 
   .knob-bezel {
-    width: 100px;
-    height: 100px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     background: radial-gradient(circle, #bb4d25 65%, #8e3a1b 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(187, 77, 37, 0.5), inset 0 0 4px #000;
+    box-shadow: 0 0 8px rgba(187, 77, 37, 0.5), inset 0 0 4px #000;
     cursor: ns-resize;
   }
 
   .volume-knob {
-    width: 78px;
-    height: 78px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #555 0%, #1a1a1b 70%, #050505 100%);
-    border: 3px solid #333;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.7);
+    border: 2px solid #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.7);
     position: relative;
     transition: transform 0.05s linear;
     display: flex;
@@ -310,21 +310,21 @@
 
   .knob-notch {
     position: absolute;
-    top: 5px;
-    width: 4px;
-    height: 10px;
+    top: 4px;
+    width: 3px;
+    height: 8px;
     background-color: #33ff00;
     border-radius: 2px;
-    box-shadow: 0 0 6px #33ff00;
+    box-shadow: 0 0 5px #33ff00;
   }
 
   .knob-text {
     position: absolute;
-    bottom: 6px;
-    font-size: 8px;
+    bottom: 4px;
+    font-size: 7px;
     color: #888;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 
   /* Right Main Panel (LCD Screen & Presets) */
@@ -336,14 +336,14 @@
   }
 
   .lcd-screen {
-    height: 110px;
+    height: 82px;
     background-color: #040d06;
-    border: 3px solid #1a1a1a;
+    border: 2px solid #1a1a1a;
     border-radius: 4px;
-    padding: 8px 12px;
+    padding: 5px 8px;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 15px rgba(51, 255, 0, 0.15);
+    box-shadow: inset 0 0 12px rgba(51, 255, 0, 0.15);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -358,8 +358,8 @@
 
   .screen-top {
     display: flex; justify-content: space-between;
-    color: #226611; font-family: 'VT323', monospace; font-size: 14px;
-    border-bottom: 1px dashed #113300; padding-bottom: 2px;
+    color: #226611; font-family: 'VT323', monospace; font-size: 11px;
+    border-bottom: 1px dashed #113300; padding-bottom: 1px;
   }
 
   .screen-main {
@@ -368,65 +368,65 @@
 
   .digital-font {
     font-family: 'VT323', monospace; color: #33ff00;
-    text-shadow: 0 0 8px rgba(51, 255, 0, 0.8), 0 0 20px rgba(51, 255, 0, 0.4);
+    text-shadow: 0 0 6px rgba(51, 255, 0, 0.8), 0 0 15px rgba(51, 255, 0, 0.4);
   }
 
   .song-title {
-    font-size: 22px; letter-spacing: 1px; white-space: nowrap;
-    text-transform: uppercase; max-width: 360px; overflow: hidden; text-overflow: ellipsis;
+    font-size: 17px; letter-spacing: 0.5px; white-space: nowrap;
+    text-transform: uppercase; max-width: 280px; overflow: hidden; text-overflow: ellipsis;
   }
 
   .time-vol-display {
-    font-size: 18px; color: #ffcc00;
-    text-shadow: 0 0 8px rgba(255, 204, 0, 0.8); margin-top: 2px;
+    font-size: 14px; color: #ffcc00;
+    text-shadow: 0 0 6px rgba(255, 204, 0, 0.8); margin-top: 1px;
   }
 
   /* Equalizer */
   .eq-container {
-    display: flex; gap: 3px; align-items: flex-end; height: 36px;
+    display: flex; gap: 2px; align-items: flex-end; height: 26px;
   }
   .eq-bar {
-    width: 5px; height: 100%; display: flex; flex-direction: column-reverse; gap: 2px;
+    width: 4px; height: 100%; display: flex; flex-direction: column-reverse; gap: 1px;
   }
-  .eq-dot { height: 4px; width: 100%; background-color: #0d2200; }
-  .eq-dot.active-green { background-color: #33ff00; box-shadow: 0 0 4px #33ff00; }
-  .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 4px #ffcc00; }
-  .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 4px #ff2a2a; }
+  .eq-dot { height: 3px; width: 100%; background-color: #0d2200; }
+  .eq-dot.active-green { background-color: #33ff00; box-shadow: 0 0 3px #33ff00; }
+  .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 3px #ffcc00; }
+  .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 3px #ff2a2a; }
 
   .screen-bottom {
-    display: flex; gap: 10px; font-family: 'VT323', monospace; font-size: 13px; color: #1a5500;
+    display: flex; gap: 8px; font-family: 'VT323', monospace; font-size: 11px; color: #1a5500;
   }
-  .mode-tag.active { color: #33ff00; text-shadow: 0 0 5px #33ff00; }
+  .mode-tag.active { color: #33ff00; text-shadow: 0 0 4px #33ff00; }
 
-  .bottom-controls { display: flex; gap: 5px; height: 38px; }
+  .bottom-controls { display: flex; gap: 4px; height: 30px; }
 
   .btn {
     flex: 1;
     background: linear-gradient(180deg, #3a3b3e, #1a1b1d);
-    border: 1px solid #48494d; border-radius: 4px; color: #ccc;
-    font-size: 11px; font-weight: bold; display: flex; align-items: center;
+    border: 1px solid #48494d; border-radius: 3px; color: #ccc;
+    font-size: 10px; font-weight: bold; display: flex; align-items: center;
     justify-content: center; cursor: pointer;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 3px 5px rgba(0,0,0,0.7);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.7);
     transition: all 0.08s ease;
   }
   .btn:hover { background: linear-gradient(180deg, #4a4b4e, #2a2b2d); color: #fff; }
-  .btn:active { background: #111214; transform: translateY(2px); box-shadow: inset 0 2px 4px rgba(0,0,0,0.8); }
-  .btn-preset-num { color: #ff3333; margin-right: 3px; }
+  .btn:active { background: #111214; transform: translateY(1px); box-shadow: inset 0 2px 4px rgba(0,0,0,0.8); }
+  .btn-preset-num { color: #ff3333; margin-right: 2px; }
 
   /* Playlist Overlay Drawer */
   .playlist-drawer {
     position: absolute; inset: 0; background: rgba(4, 13, 6, 0.96);
-    border-radius: 4px; z-index: 10; padding: 8px 12px; display: none; flex-direction: column;
+    border-radius: 4px; z-index: 10; padding: 6px 10px; display: none; flex-direction: column;
   }
   .playlist-drawer.open { display: flex; }
   .playlist-header {
     display: flex; justify-content: space-between; color: #33ff00;
-    font-family: 'VT323', monospace; font-size: 16px; border-bottom: 1px solid #1a5500;
-    padding-bottom: 4px; margin-bottom: 4px;
+    font-family: 'VT323', monospace; font-size: 14px; border-bottom: 1px solid #1a5500;
+    padding-bottom: 2px; margin-bottom: 2px;
   }
   .playlist-items { list-style: none; overflow-y: auto; flex: 1; }
   .playlist-items li {
-    padding: 3px; font-family: 'VT323', monospace; font-size: 16px; color: #1a5500;
+    padding: 2px; font-family: 'VT323', monospace; font-size: 14px; color: #1a5500;
     cursor: pointer; display: flex; justify-content: space-between;
   }
   .playlist-items li:hover, .playlist-items li.active {
@@ -434,25 +434,25 @@
   }
   .close-playlist { cursor: pointer; color: #ff3333; }
 
-  /* SEPARATE FLOATING TICKET WIDGET BUTTON */
+  /* FLOATING TICKET WIDGET BUTTON */
   .floating-ticket-btn {
     position: absolute;
-    right: -105px;
-    bottom: 25px;
+    right: -92px;
+    bottom: 12px;
     background: rgba(217,164,65,0.18);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(217,164,65,0.4);
     color: var(--mustard);
-    padding: 10px 16px; border-radius: 999px;
-    font-family: var(--font-display); font-size: 13px; font-weight: 700;
-    display: flex; align-items: center; gap: 6px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    padding: 7px 13px; border-radius: 999px;
+    font-family: var(--font-display); font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; gap: 5px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
     transition: all 0.2s ease;
   }
   .floating-ticket-btn:hover {
     background: var(--mustard); color: var(--ink); border-color: var(--mustard); transform: translateY(-2px);
   }
-  .floating-ticket-btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .floating-ticket-btn svg { width: 14px; height: 14px; fill: currentColor; }
 
   /* KEYBOARD SHORTCUTS BAR */
   .shortcuts-bar {

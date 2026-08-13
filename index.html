@@ -28,7 +28,7 @@
   html, body{
     margin:0; padding:0;
     width:100%; height:100%;
-    overflow:hidden; /* Prevent page scroll entirely */
+    overflow:hidden;
     background:#000;
     color:var(--cream);
     font-family:var(--font-body);
@@ -39,10 +39,8 @@
 
   /* ===================== HERO (FULL SCREEN) ===================== */
   .hero{
-    position:absolute;
-    inset:0;
-    width:100vw;
-    height:100vh;
+    position:absolute; inset:0;
+    width:100vw; height:100vh;
     overflow:hidden;
   }
   .hero video{
@@ -51,7 +49,6 @@
     filter:saturate(1.05) contrast(1.02);
   }
   
-  /* Bottom & Top Gradient Overlay */
   .hero .scrim{
     position:absolute;inset:0;
     background:
@@ -60,81 +57,48 @@
   }
 
   .hero-meta{
-    position:absolute;
-    top:20px; left:20px;
-    z-index:10;
-    font-size:13px;
-    color:rgba(244,234,212,0.75);
-    font-family:var(--font-display);
-    letter-spacing:.08em;
-    text-transform:uppercase;
+    position:absolute; top:20px; left:20px; z-index:10;
+    font-size:13px; color:rgba(244,234,212,0.75);
+    font-family:var(--font-display); letter-spacing:.08em; text-transform:uppercase;
   }
 
   /* ===================== CENTERED DISPLAY TEXT ===================== */
   .hero-title-wrapper {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 10;
-    width: 90%;
-    max-width: 1200px;
-    pointer-events: none;
+    position: absolute; top: 10%; left: 50%;
+    transform: translateX(-50%); text-align: center;
+    z-index: 10; width: 90%; max-width: 1200px; pointer-events: none;
   }
 
   .sub-heading {
-    font-family: var(--font-display);
-    font-size: clamp(11px, 1.6vw, 15px);
-    font-weight: 700;
-    letter-spacing: 0.35em;
-    color: rgba(244, 234, 212, 0.85);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-display); font-size: clamp(11px, 1.6vw, 15px);
+    font-weight: 700; letter-spacing: 0.35em; color: rgba(244, 234, 212, 0.85);
+    text-transform: uppercase; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .main-heading {
-    font-family: var(--font-hindi);
-    font-size: clamp(48px, 9.5vw, 115px);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0;
-    line-height: 1;
-    letter-spacing: 1px;
-    text-shadow: 
-      0 4px 20px rgba(0, 0, 0, 0.9),
-      0 10px 40px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-hindi); font-size: clamp(48px, 9.5vw, 115px);
+    font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 1px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
   }
 
   /* ===================== MINIMAL PLAYER CONTAINER ===================== */
   .player-wrapper {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 680px;
-    z-index: 100;
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%); width: calc(100% - 40px);
+    max-width: 680px; z-index: 100;
   }
 
   .player-card {
-    background: rgba(20, 14, 10, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(244,234,212,0.15);
-    border-radius: 20px;
-    padding: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    background: rgba(20, 14, 10, 0.85); backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(244,234,212,0.15);
+    border-radius: 20px; padding: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     position: relative;
   }
 
-  /* Progress Bar */
   .progress-row{
     display:flex;align-items:center;gap:10px;
     font-family:var(--font-display);font-size:12px;font-weight:600;
-    color:rgba(244,234,212,0.6);
-    margin-bottom:12px;
+    color:rgba(244,234,212,0.6); margin-bottom:12px;
   }
   .progress-track{
     flex:1;height:4px;background:rgba(244,234,212,0.2);
@@ -145,12 +109,7 @@
     background:var(--rust);border-radius:99px;width:0%;
   }
 
-  /* Controls Row */
-  .player-main {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
+  .player-main { display: flex; align-items: center; gap: 14px; }
   .now-art{
     width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0;
     background: rgba(255,255,255,0.05);
@@ -159,77 +118,41 @@
   .now-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .now-artist{font-size:12px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-  .controls-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .controls-group { display: flex; align-items: center; gap: 8px; }
 
   .ctrl-btn{
     background:none;border:none;color:var(--cream);
     width:36px;height:36px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-    transition:background .15s ease, transform .1s ease;
+    flex-shrink:0; transition:background .15s ease, transform .1s ease;
   }
   .ctrl-btn:hover{background:rgba(244,234,212,0.12);}
   .ctrl-btn:active{transform:scale(0.95);}
   .ctrl-btn svg{width:18px;height:18px;}
-  .ctrl-btn.play-pause{
-    background:var(--rust);width:42px;height:42px;
-  }
+  .ctrl-btn.play-pause{ background:var(--rust);width:42px;height:42px; }
   .ctrl-btn.play-pause:hover{background:var(--rust-dark);}
-  .ctrl-btn.playlist-toggle.active {
-    background: rgba(244,234,212,0.2);
-    color: var(--rust);
-  }
+  .ctrl-btn.playlist-toggle.active { background: rgba(244,234,212,0.2); color: var(--rust); }
 
   /* ===================== POPUP PLAYLIST DRAWER ===================== */
   .playlist-drawer {
-    position: absolute;
-    bottom: 100%;
-    left: 0; right: 0;
-    margin-bottom: 10px;
-    background: rgba(20, 14, 10, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(244,234,212,0.15);
-    border-radius: 20px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
+    position: absolute; bottom: 100%; left: 0; right: 0;
+    margin-bottom: 10px; background: rgba(20, 14, 10, 0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(244,234,212,0.15); border-radius: 20px;
+    max-height: 0; overflow: hidden; opacity: 0; pointer-events: none;
     transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
   }
 
-  .playlist-drawer.open {
-    max-height: 300px;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .drawer-inner {
-    padding: 12px;
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  .drawer-inner::-webkit-scrollbar {
-    width: 4px;
-  }
-  .drawer-inner::-webkit-scrollbar-thumb {
-    background: rgba(244,234,212,0.2);
-    border-radius: 4px;
-  }
+  .playlist-drawer.open { max-height: 300px; opacity: 1; pointer-events: auto; }
+  .drawer-inner { padding: 12px; max-height: 300px; overflow-y: auto; }
+  .drawer-inner::-webkit-scrollbar { width: 4px; }
+  .drawer-inner::-webkit-scrollbar-thumb { background: rgba(244,234,212,0.2); border-radius: 4px; }
 
   .track-list{list-style:none;margin:0;padding:0;}
   .track{
-    display:flex;align-items:center;gap:12px;
-    padding:8px 10px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:background .12s ease;
+    display:flex;align-items:center;gap:12px; padding:8px 10px;
+    border-radius:10px; cursor:pointer; transition:background .12s ease;
   }
   .track:hover{background:rgba(244,234,212,0.08);}
   .track.playing{background:rgba(187,77,37,0.2);}
@@ -245,7 +168,11 @@
   .track-title{font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .track-artist{font-size:11px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-  #yt-player{position:fixed;bottom:-1000px;left:-1000px;width:1px;height:1px;}
+  /* Keep video visible to browser DOM to satisfy Autoplay Policy */
+  #yt-player{
+    position:fixed; top:0; left:0; width:200px; height:200px;
+    opacity:0.01; pointer-events:none; z-index:-1;
+  }
 </style>
 </head>
 <body>
@@ -258,7 +185,6 @@
   <div class="scrim"></div>
   <div class="hero-meta">Dhaba Radio · NH 27</div>
 
-  <!-- CENTERED DISPLAY TEXT -->
   <div class="hero-title-wrapper">
     <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
     <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
@@ -267,15 +193,12 @@
 
 <!-- ===================== MINIMAL PLAYER ===================== -->
 <div class="player-wrapper">
-
-  <!-- Playlist Drawer -->
   <div class="playlist-drawer" id="playlistDrawer">
     <div class="drawer-inner">
       <ul class="track-list" id="trackList"></ul>
     </div>
   </div>
 
-  <!-- Player Main Card -->
   <div class="player-card">
     <div class="progress-row">
       <span id="curTime">0:00</span>
@@ -289,7 +212,7 @@
       <img class="now-art" id="nowArt" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23241608'/%3E%3C/svg%3E" alt="">
       <div class="now-info">
         <div class="now-title" id="nowTitle">उत्तर प्रदेश परिवहन </div>
-        <div class="now-artist" id="nowArtist">Select or play a track</div>
+        <div class="now-artist" id="nowArtist">Press play to start stream</div>
       </div>
 
       <div class="controls-group">
@@ -310,13 +233,9 @@
   </div>
 </div>
 
-<!-- Hidden YouTube Player Mount -->
 <div id="yt-player"></div>
 
 <script>
-/* =====================================================
-   PLAYLIST
-===================================================== */
 const PLAYLIST = [
   { id: "xteZNX3B4yA", title: "Tumse Milke Dil Ka Jo Haal", artist: "Main Hoon Na · Sonu Nigam" },
   { id: "9MX-QejdVaQ", title: "Chaiyya Chaiyya",            artist: "Dil Se · Sukhwinder Singh, Sapna Awasthi" },
@@ -328,7 +247,6 @@ const PLAYLIST = [
 
 function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
 
-/* Helper to generate a random track index */
 function getRandomIndex(excludeIndex = -1) {
   if (PLAYLIST.length <= 1) return 0;
   let nextIndex;
@@ -338,18 +256,13 @@ function getRandomIndex(excludeIndex = -1) {
   return nextIndex;
 }
 
-/* =====================================================
-   STATE
-===================================================== */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
 let isPlaying = false;
+let shouldBePlaying = false;
 let progressTimer = null;
 
-/* =====================================================
-   BUILD PLAYLIST DRAWER
-===================================================== */
 const trackListEl = document.getElementById('trackList');
 document.getElementById('heroSubCount').textContent = `गाज़ीपुर · लखनऊ`;
 
@@ -378,9 +291,6 @@ function renderActiveTrack(){
   });
 }
 
-/* =====================================================
-   DRAWER TOGGLE
-===================================================== */
 const drawerEl = document.getElementById('playlistDrawer');
 const playlistBtn = document.getElementById('playlistBtn');
 
@@ -392,29 +302,28 @@ function toggleDrawer(forceState){
 
 playlistBtn.addEventListener('click', () => toggleDrawer());
 
-/* =====================================================
-   YOUTUBE IFRAME API
-===================================================== */
 const tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 document.body.appendChild(tag);
 
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('yt-player', {
-    height: '1', width: '1',
-    playerVars: { autoplay: 1, controls: 0, disablekb: 1, playsinline: 1 },
+    height: '200', width: '200',
+    playerVars: { 
+      autoplay: 0, 
+      controls: 0, 
+      disablekb: 1, 
+      playsinline: 1,
+      enablejsapi: 1,
+      origin: window.location.origin || '*'
+    },
     events: {
       onReady: () => { ytReady = true; },
       onStateChange: onPlayerStateChange,
-      onError: onPlayerError
+      onError: () => playTrack(getRandomIndex(currentIndex))
     }
   });
 };
-
-function onPlayerError(e){
-  // Auto-skip unplayable/restricted videos seamlessly
-  playTrack(getRandomIndex(currentIndex));
-}
 
 function onPlayerStateChange(e){
   if (e.data === YT.PlayerState.PLAYING){
@@ -426,20 +335,20 @@ function onPlayerStateChange(e){
     updatePlayIcon();
     stopProgressLoop();
   } else if (e.data === YT.PlayerState.ENDED){
-    /* Play next random track when song ends */
     playTrack(getRandomIndex(currentIndex));
-  } else if (e.data === YT.PlayerState.CUED){
-    /* Resume playback if video gets stuck in cued state */
+  } else if ((e.data === YT.PlayerState.CUED || e.data === YT.PlayerState.UNSTARTED) && shouldBePlaying){
     ytPlayer.playVideo();
   }
 }
 
 function playTrack(index){
   if (!ytReady || !ytPlayer){
-    setTimeout(() => playTrack(index), 300);
+    setTimeout(() => playTrack(index), 200);
     return;
   }
+  
   currentIndex = index;
+  shouldBePlaying = true;
   const t = PLAYLIST[index];
   
   document.getElementById('nowArt').src = thumb(t.id);
@@ -447,16 +356,29 @@ function playTrack(index){
   document.getElementById('nowArtist').textContent = t.artist;
   renderActiveTrack();
 
-  // Load and explicitly play to ensure smooth transitions on user interaction
-  if (ytPlayer.loadVideoById) {
-    ytPlayer.loadVideoById(t.id);
-    ytPlayer.playVideo();
-  }
+  ytPlayer.loadVideoById(t.id);
+  
+  // Double fallback call to overcome browser focus restrictions on track change
+  setTimeout(() => {
+    if (ytPlayer && ytPlayer.playVideo) {
+      ytPlayer.playVideo();
+    }
+  }, 100);
 }
 
 function togglePlayPause(){
-  if (currentIndex === -1){ playTrack(getRandomIndex()); return; }
-  if (isPlaying){ ytPlayer.pauseVideo(); } else { ytPlayer.playVideo(); }
+  if (currentIndex === -1){ 
+    playTrack(getRandomIndex()); 
+    return; 
+  }
+  
+  if (isPlaying){ 
+    shouldBePlaying = false;
+    ytPlayer.pauseVideo(); 
+  } else { 
+    shouldBePlaying = true;
+    ytPlayer.playVideo(); 
+  }
 }
 
 function updatePlayIcon(){
@@ -466,9 +388,6 @@ function updatePlayIcon(){
     : '<path d="M8 5v14l11-7z"/>';
 }
 
-/* =====================================================
-   PROGRESS BAR
-===================================================== */
 function fmtTime(sec){
   if (!isFinite(sec) || sec < 0) sec = 0;
   const m = Math.floor(sec / 60);
@@ -496,20 +415,10 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
   ytPlayer.seekTo(ytPlayer.getDuration() * pct, true);
 });
 
-/* =====================================================
-   CONTROLS
-===================================================== */
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => {
-  playTrack(getRandomIndex(currentIndex));
-});
-document.getElementById('prevBtn').addEventListener('click', () => {
-  playTrack(getRandomIndex(currentIndex));
-});
+document.getElementById('nextBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
+document.getElementById('prevBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
 
-/* =====================================================
-   KEYBOARD SHORTCUTS
-===================================================== */
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
   switch(e.code){

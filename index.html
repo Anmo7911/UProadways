@@ -122,14 +122,14 @@
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
   }
 
-  /* UP Parivahan Logo - Scaled relative to heading font size */
-  .up-logo {
-    height: 1em;
-    max-height: clamp(48px, 9.5vw, 115px);
-    width: auto;
-    margin-top: 14px;
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-  }
+  /* UP Parivahan Logo with Shadow */
+.up-logo {
+  width: clamp(90px, 11vw, 150px); /* Increased size */
+  height: auto;
+  margin-top: 8px;
+  margin-bottom: 12px; /* Adds space between logo and main text */
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
 
   /* ===================== MINIMAL PLAYER CONTAINER ===================== */
   .player-wrapper {
@@ -248,11 +248,11 @@
   </button>
 
   <div class="hero-title-wrapper">
-    <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
-    <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
-    <!-- UP PARIVAHAN LOGO SCALED TO HEADING -->
-    <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
-  </div>
+  <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
+  <!-- LOGO PLACED ABOVE MAIN HEADING -->
+  <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
+  <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
+</div>
 </section>
 
 <!-- ===================== MINIMAL PLAYER ===================== -->

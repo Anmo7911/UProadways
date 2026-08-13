@@ -447,9 +447,10 @@ function playTrack(index){
   document.getElementById('nowArtist').textContent = t.artist;
   renderActiveTrack();
 
-  // Load and auto-play cleanly without conflicting playVideo calls
+  // Load and explicitly play to ensure smooth transitions on user interaction
   if (ytPlayer.loadVideoById) {
     ytPlayer.loadVideoById(t.id);
+    ytPlayer.playVideo();
   }
 }
 

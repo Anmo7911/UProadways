@@ -10,7 +10,7 @@
 <!-- ===================== FONTS ===================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@800&family=Teko:wght@700&family=Rajdhani:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@800&family=Teko:wght@700&family=Rajdhani:wght@500;600;700&family=Poppins:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -23,6 +23,7 @@
     --font-display:'Rajdhani', sans-serif;
     --font-body:'Poppins', sans-serif;
     --font-hindi:'Anek Devanagari', 'Teko', sans-serif;
+    --font-ticket:'Courier Prime', monospace;
   }
 
   *{box-sizing:border-box;}
@@ -47,17 +48,17 @@
   .hero video{
     position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;
-    filter:saturate(0.95) contrast(1.1) brightness(0.85);
+    filter:saturate(1.02) contrast(1.05) brightness(0.95);
     z-index:0;
   }
   
-  /* Rainy atmospheric scrim overlay */
+  /* REDUCED VIGNETTE SCRIM OVERLAY */
   .hero .scrim{
     position:absolute;inset:0;
     background:
-      radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%),
-      linear-gradient(to bottom, rgba(8, 5, 3, 0.85) 0%, transparent 25%),
-      linear-gradient(to top, rgba(8, 5, 3, 0.95) 0%, rgba(8, 5, 3, 0.4) 40%, transparent 70%);
+      radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%),
+      linear-gradient(to bottom, rgba(8, 5, 3, 0.55) 0%, transparent 22%),
+      linear-gradient(to top, rgba(8, 5, 3, 0.75) 0%, rgba(8, 5, 3, 0.2) 35%, transparent 65%);
     z-index:1;
   }
 
@@ -65,9 +66,9 @@
   .rain-overlay {
     position: absolute; inset: 0;
     pointer-events: none; z-index: 2;
-    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 8px),
-                repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 12px);
-    opacity: 0.6;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 14px);
+    opacity: 0.5;
     animation: rainMove 0.8s linear infinite;
   }
 
@@ -145,6 +146,7 @@
   }
   @keyframes livePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
 
+  /* INSTAGRAM LINK BADGE */
   .driver-badge {
     background: rgba(20, 14, 10, 0.7);
     border: 1px solid rgba(244,234,212,0.18);
@@ -152,9 +154,16 @@
     padding: 6px 14px; border-radius: 999px;
     font-size: 12px; font-weight: 600; color: #fff;
     display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .driver-badge:hover {
+    background: var(--rust);
+    border-color: var(--rust);
+    transform: translateY(-1px);
   }
   .driver-avatar {
-    width: 18px; height: 18px; background: var(--rust);
+    width: 18px; height: 18px; background: var(--mustard); color: #000;
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
     font-size: 10px; font-weight: 800;
   }
@@ -289,13 +298,13 @@
   .shortcuts-bar {
     display: flex; align-items: center; gap: 14px;
     font-family: var(--font-display); font-size: 10px; font-weight: 700;
-    letter-spacing: 0.1em; color: rgba(244,234,212,0.45);
+    letter-spacing: 0.1em; color: rgba(244,234,212,0.5);
     text-transform: uppercase;
   }
   .kbd-key {
-    background: rgba(244,234,212,0.1); border: 1px solid rgba(244,234,212,0.15);
-    color: rgba(244,234,212,0.75); padding: 2px 6px; border-radius: 4px;
-    margin-right: 3px; font-size: 9px;
+    background: rgba(244,234,212,0.1); border: 1px solid rgba(244,234,212,0.18);
+    color: rgba(244,234,212,0.85); padding: 2px 6px; border-radius: 4px;
+    margin-right: 3px; font-size: 9px; cursor: pointer;
   }
 
   /* POPUP PLAYLIST DRAWER */
@@ -322,6 +331,104 @@
   .track-info { min-width: 0; flex: 1; }
   .track-title { font-weight: 500; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
   .track-artist { font-size: 11px; color: rgba(244,234,212,0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ===================== OLD-FASHIONED BUS TICKET MODAL ===================== */
+  .ticket-modal-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    padding: 20px;
+  }
+  .ticket-modal-overlay.open {
+    opacity: 1; pointer-events: auto;
+  }
+
+  .ticket-card {
+    background: #f1e4c3;
+    background-image: radial-gradient(#d6c096 1px, transparent 0);
+    background-size: 12px 12px;
+    color: #2b1d0e;
+    width: 100%; max-width: 420px;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(130, 95, 45, 0.2);
+    font-family: var(--font-ticket);
+    position: relative;
+    border: 2px dashed #8b6e43;
+    transform: scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .ticket-modal-overlay.open .ticket-card { transform: scale(1); }
+
+  /* Cutout notch on ticket edges */
+  .ticket-card::before, .ticket-card::after {
+    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+    width: 20px; height: 20px; background: #080503; border-radius: 50%;
+  }
+  .ticket-card::before { left: -12px; }
+  .ticket-card::after { right: -12px; }
+
+  .ticket-header {
+    text-align: center; border-bottom: 2px solid #8b6e43;
+    padding-bottom: 12px; margin-bottom: 14px;
+  }
+  .ticket-corp-title {
+    font-family: var(--font-hindi); font-size: 20px; font-weight: 800;
+    letter-spacing: 1px; color: #7a2811; margin: 0; line-height: 1;
+  }
+  .ticket-sub {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; opacity: 0.75; margin-top: 4px;
+  }
+
+  .ticket-body { display: flex; flex-direction: column; gap: 10px; font-size: 12px; }
+  .ticket-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .ticket-label { font-size: 10px; opacity: 0.65; text-transform: uppercase; }
+  .ticket-val { font-weight: 700; }
+  .ticket-val-highlight { font-size: 14px; color: #8e3a1b; font-weight: 700; }
+
+  .ticket-seat-badge {
+    background: #7a2811; color: #f4ead4; padding: 4px 10px;
+    border-radius: 4px; font-weight: 700; font-size: 12px;
+    display: inline-block; text-transform: uppercase;
+  }
+
+  .ticket-audio-box {
+    margin-top: 12px; padding: 10px;
+    background: rgba(139, 110, 67, 0.12);
+    border: 1px solid rgba(139, 110, 67, 0.3);
+    border-radius: 6px;
+  }
+
+  /* Dynamic CSS Audio Waveform Visualizer */
+  .ticket-waveform {
+    display: flex; align-items: flex-end; gap: 3px; height: 22px; margin-top: 8px; justify-content: center;
+  }
+  .wave-bar {
+    width: 4px; background: #8e3a1b; border-radius: 2px;
+    animation: waveBounce 0.8s infinite alternate ease-in-out;
+  }
+  .wave-bar:nth-child(2n) { animation-delay: 0.15s; }
+  .wave-bar:nth-child(3n) { animation-delay: 0.3s; }
+  .wave-bar:nth-child(4n) { animation-delay: 0.45s; }
+
+  @keyframes waveBounce {
+    0% { height: 4px; }
+    100% { height: 22px; }
+  }
+
+  .ticket-barcode {
+    text-align: center; font-family: 'Courier New', monospace;
+    font-size: 26px; letter-spacing: 4px; margin-top: 14px; opacity: 0.8;
+  }
+
+  .ticket-close-btn {
+    position: absolute; top: 10px; right: 12px;
+    background: none; border: none; font-size: 18px; font-weight: 700;
+    color: #8b6e43; cursor: pointer;
+  }
+  .ticket-close-btn:hover { color: #8e3a1b; }
 
   #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
 
@@ -350,12 +457,14 @@
     <div class="clock-widget" id="liveClock">22:07 <span>IST</span></div>
     <div class="passenger-badge">
       <div class="live-dot"></div>
-      <span>319 ABOARD</span>
+      <span id="passengerCountText">319 ABOARD</span>
     </div>
-    <div class="driver-badge">
+
+    <!-- INSTAGRAM PAGE LINK -->
+    <a class="driver-badge" href="https://instagram.com/onlyanmolll" target="_blank" title="Visit Driver Profile">
       <div class="driver-avatar">M</div>
       <span>Who's driving?</span>
-    </div>
+    </a>
   </div>
 </header>
 
@@ -427,7 +536,70 @@
     <span><span class="kbd-key">Space</span> PLAY / PAUSE</span>
     <span><span class="kbd-key">←</span> <span class="kbd-key">→</span> SEEK</span>
     <span><span class="kbd-key">N</span> <span class="kbd-key">P</span> TRACK</span>
+    <span id="ticketShortcutBtn"><span class="kbd-key">T</span> TICKET</span>
     <span><span class="kbd-key">H</span> HORN</span>
+  </div>
+</div>
+
+<!-- ===================== OLD-FASHIONED VINTAGE TICKET MODAL ===================== -->
+<div class="ticket-modal-overlay" id="ticketModal">
+  <div class="ticket-card">
+    <button class="ticket-close-btn" id="closeTicketBtn">✕</button>
+    <div class="ticket-header">
+      <div class="ticket-corp-title">उत्तर प्रदेश राज्य सड़क परिवहन निगम</div>
+      <div class="ticket-sub">PASSENGER BUS TICKET · HIGHWAY RADIO</div>
+    </div>
+
+    <div class="ticket-body">
+      <div class="ticket-row">
+        <span class="ticket-label">Route:</span>
+        <span class="ticket-val-highlight">GHAZIPUR ➔ LUCKNOW</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Highway:</span>
+        <span class="ticket-val">NH-19 / EXPRESSWAY</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Seat Allocation:</span>
+        <span class="ticket-seat-badge">🪟 WINDOW SEAT (#14B)</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Issued Time:</span>
+        <span class="ticket-val" id="ticketTimeVal">10:19 PM</span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">Fare:</span>
+        <span class="ticket-val">₹ 319.00 (PAID)</span>
+      </div>
+
+      <!-- AUDIO GRAPH & CURRENT SONG -->
+      <div class="ticket-audio-box">
+        <div class="ticket-row">
+          <span class="ticket-label">NOW PLAYING STREAM:</span>
+        </div>
+        <div class="ticket-val" id="ticketSongTitle" style="color:#7a2811; margin-top:3px;">
+          Tumse Milke Dil Ka Jo Haal
+        </div>
+        <div class="ticket-label" id="ticketSongArtist" style="margin-top:2px;">
+          Main Hoon Na · Sonu Nigam
+        </div>
+
+        <div class="ticket-waveform">
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticket-barcode">|||| | |||||| || | |||||</div>
   </div>
 </div>
 
@@ -452,6 +624,19 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
+
+/* RANDOM DYNAMIC PASSENGER COUNTER (UP/DOWN EVERY 2-4 SECONDS) */
+let currentPassengers = 319;
+function updatePassengerCount() {
+  const delta = Math.floor(Math.random() * 7) - 3; // -3 to +3
+  currentPassengers = Math.max(305, Math.min(340, currentPassengers + delta));
+  document.getElementById('passengerCountText').textContent = `${currentPassengers} ABOARD`;
+
+  // Schedule next random update between 2000ms and 4000ms
+  const nextDelay = Math.floor(Math.random() * 2000) + 2000;
+  setTimeout(updatePassengerCount, nextDelay);
+}
+setTimeout(updatePassengerCount, 2500);
 
 /* DEVANAGARI SEGMENTER */
 function getGraphemes(text) {
@@ -543,7 +728,6 @@ let shouldBePlaying = false;
 let progressTimer = null;
 
 const trackListEl = document.getElementById('trackList');
-const backgroundVideo = document.getElementById('backgroundVideo');
 
 PLAYLIST.forEach((t, i) => {
   const li = document.createElement('li');
@@ -576,6 +760,32 @@ function toggleDrawer(forceState){
   playlistBtn.classList.toggle('active', isOpen);
 }
 playlistBtn.addEventListener('click', () => toggleDrawer());
+
+/* OLD-FASHIONED TICKET MODAL LOGIC */
+const ticketModal = document.getElementById('ticketModal');
+
+function openTicketModal() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('ticketTimeVal').textContent = timeString;
+
+  if (currentIndex !== -1 && PLAYLIST[currentIndex]) {
+    document.getElementById('ticketSongTitle').textContent = PLAYLIST[currentIndex].title;
+    document.getElementById('ticketSongArtist').textContent = PLAYLIST[currentIndex].artist;
+  }
+
+  ticketModal.classList.add('open');
+}
+
+function closeTicketModal() {
+  ticketModal.classList.remove('open');
+}
+
+document.getElementById('closeTicketBtn').addEventListener('click', closeTicketModal);
+document.getElementById('ticketShortcutBtn').addEventListener('click', openTicketModal);
+ticketModal.addEventListener('click', (e) => {
+  if (e.target === ticketModal) closeTicketModal();
+});
 
 const tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -616,8 +826,12 @@ function playTrack(index){
   document.getElementById('nowArt').src = thumb(t.id);
   document.getElementById('nowTitle').textContent = t.title;
   document.getElementById('nowArtist').textContent = t.artist;
-  renderActiveTrack();
+  
+  // Update Ticket Details as well
+  document.getElementById('ticketSongTitle').textContent = t.title;
+  document.getElementById('ticketSongArtist').textContent = t.artist;
 
+  renderActiveTrack();
   ytPlayer.loadVideoById({ videoId: t.id, startSeconds: 0 });
 }
 
@@ -675,6 +889,8 @@ document.addEventListener('keydown', (e) => {
     case 'KeyN': document.getElementById('nextBtn').click(); break;
     case 'KeyP': document.getElementById('prevBtn').click(); break;
     case 'KeyH': playNextHorn(); break;
+    case 'KeyT': openTicketModal(); break;
+    case 'Escape': closeTicketModal(); break;
   }
 });
 </script>

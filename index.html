@@ -43,10 +43,11 @@
     width:100vw; height:100vh;
     overflow:hidden;
   }
-  .hero #backgroundFrame{
-    position:absolute;inset:0;width:100%;height:100%;
-    border:0;display:block;z-index:0;
-    pointer-events:none;
+  .hero video{
+    position:absolute;inset:0;
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(1.05) contrast(1.02);
+    z-index:0;
   }
   
   .hero .scrim{
@@ -179,7 +180,9 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <iframe id="backgroundFrame" src="data:text/html;base64,PCFkb2N0eXBlIGh0bWw+CjxodG1sPgo8aGVhZD4KPG1ldGEgY2hhcnNldD0iVVRGLTgiPgo8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLGluaXRpYWwtc2NhbGU9MSI+CjxzdHlsZT4KICBodG1sLGJvZHl7bWFyZ2luOjA7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtvdmVyZmxvdzpoaWRkZW47YmFja2dyb3VuZDojMDAwfQogIHZpZGVvewogICAgcG9zaXRpb246YWJzb2x1dGU7aW5zZXQ6MDt3aWR0aDoxMDAlO2hlaWdodDoxMDAlOwogICAgb2JqZWN0LWZpdDpjb3ZlcjsKICAgIGZpbHRlcjpzYXR1cmF0ZSgxLjA1KSBjb250cmFzdCgxLjAyKTsKICB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+Cjx2aWRlbyBhdXRvcGxheSBtdXRlZCBsb29wIHBsYXlzaW5saW5lIHByZWxvYWQ9ImF1dG8iIHBvc3Rlcj0iYXNzZXRzL2J1cy1sb29wLXBvc3Rlci5qcGciPgogIDxzb3VyY2Ugc3JjPSJhc3NldHMvYnVzLWxvb3AubXA0IiB0eXBlPSJ2aWRlby9tcDQiPgo8L3ZpZGVvPgo8c2NyaXB0PgooZnVuY3Rpb24oKXsKICBjb25zdCB2PWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ3ZpZGVvJyk7CiAgZnVuY3Rpb24gcmVzdW1lKCl7CiAgICBpZih2ICYmIHYucGF1c2VkICYmICF2LmVuZGVkKXsKICAgICAgY29uc3QgcD12LnBsYXkoKTsKICAgICAgaWYocCAmJiBwLmNhdGNoKSBwLmNhdGNoKCgpPT57fSk7CiAgICB9CiAgfQogIHJlc3VtZSgpOwogIHYuYWRkRXZlbnRMaXN0ZW5lcignY2FucGxheScscmVzdW1lKTsKICB2LmFkZEV2ZW50TGlzdGVuZXIoJ2xvYWRlZGRhdGEnLHJlc3VtZSk7CiAgdi5hZGRFdmVudExpc3RlbmVyKCdwYXVzZScscmVzdW1lKTsKICBzZXRJbnRlcnZhbChyZXN1bWUsMTUwMCk7Cn0pKCk7Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4=" aria-hidden="true"></iframe>
+  <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
+    <source src="assets/bus-loop.mp4" type="video/mp4">
+  </video>
   <div class="scrim"></div>
   <div class="hero-meta">Dhaba Radio · NH 27</div>
 
@@ -262,6 +265,67 @@ let shouldBePlaying = false;
 let progressTimer = null;
 
 const trackListEl = document.getElementById('trackList');
+const backgroundVideo = document.getElementById('backgroundVideo');
+let backgroundWasPlaying = true;
+let backgroundResumeTimer = null;
+
+/*
+ * The background is completely independent of the YouTube player.
+ * We remember its exact position and immediately restore playback if a
+ * browser pauses it during a YouTube track switch.
+ */
+function resumeBackgroundVideo(){
+  if (!backgroundVideo) return;
+
+  if (backgroundVideo.ended) {
+    backgroundVideo.currentTime = 0;
+  }
+
+  const p = backgroundVideo.play();
+  if (p && typeof p.catch === 'function') {
+    p.catch(() => {});
+  }
+}
+
+function protectBackgroundVideo(){
+  if (!backgroundVideo) return;
+
+  backgroundWasPlaying = !backgroundVideo.paused && !backgroundVideo.ended;
+
+  // Play immediately while the button click is still a user gesture.
+  resumeBackgroundVideo();
+
+  // Also retry immediately on the next rendering frames.
+  cancelAnimationFrame(protectBackgroundVideo._raf1);
+  cancelAnimationFrame(protectBackgroundVideo._raf2);
+
+  protectBackgroundVideo._raf1 = requestAnimationFrame(() => {
+    resumeBackgroundVideo();
+
+    protectBackgroundVideo._raf2 = requestAnimationFrame(() => {
+      resumeBackgroundVideo();
+    });
+  });
+
+  clearTimeout(backgroundResumeTimer);
+  backgroundResumeTimer = setTimeout(() => {
+    resumeBackgroundVideo();
+  }, 250);
+}
+
+if (backgroundVideo) {
+  // If the browser pauses it for any reason, immediately request playback.
+  backgroundVideo.addEventListener('pause', () => {
+    if (backgroundWasPlaying) resumeBackgroundVideo();
+  });
+
+  backgroundVideo.addEventListener('canplay', resumeBackgroundVideo);
+  backgroundVideo.addEventListener('loadeddata', resumeBackgroundVideo);
+
+  // Start it once.
+  resumeBackgroundVideo();
+}
+
 document.getElementById('heroSubCount').textContent = `गाज़ीपुर · लखनऊ`;
 
 PLAYLIST.forEach((t, i) => {
@@ -307,10 +371,10 @@ document.body.appendChild(tag);
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('yt-player', {
     height: '200', width: '200',
-    playerVars: { 
-      autoplay: 0, 
-      controls: 0, 
-      disablekb: 1, 
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      disablekb: 1,
       playsinline: 1,
       enablejsapi: 1,
       origin: window.location.origin || '*'
@@ -347,6 +411,10 @@ function playTrack(index){
 
   if (index < 0 || index >= PLAYLIST.length) return;
 
+  // IMPORTANT: do this inside the same user interaction that changes tracks.
+  // This gives the browser a valid playback gesture for the background video.
+  protectBackgroundVideo();
+
   currentIndex = index;
   shouldBePlaying = true;
 
@@ -357,9 +425,18 @@ function playTrack(index){
   document.getElementById('nowArtist').textContent = t.artist;
   renderActiveTrack();
 
-  // Only the YouTube player changes here.
-  // The MP4 background lives in a separate iframe/document.
-  ytPlayer.loadVideoById(t.id);
+  ytPlayer.loadVideoById({
+    videoId: t.id,
+    startSeconds: 0
+  });
+
+  // YouTube may pause another media element during the iframe transition.
+  // Restore the background at several points after the switch.
+  protectBackgroundVideo();
+
+  setTimeout(() => protectBackgroundVideo(), 50);
+  setTimeout(() => protectBackgroundVideo(), 150);
+  setTimeout(() => protectBackgroundVideo(), 400);
 }
 function togglePlayPause(){
   if (currentIndex === -1){ 
@@ -411,8 +488,14 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
 });
 
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
-document.getElementById('prevBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
+document.getElementById('nextBtn').addEventListener('click', () => {
+  protectBackgroundVideo();
+  playTrack(getRandomIndex(currentIndex));
+});
+document.getElementById('prevBtn').addEventListener('click', () => {
+  protectBackgroundVideo();
+  playTrack(getRandomIndex(currentIndex));
+});
 
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;

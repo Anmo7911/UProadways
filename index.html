@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>उत्तर प्रदेश परिवहन  — Nonstop Highway Hindi Hits</title>
-<meta name="description" content="Pull over at Dhaba Radio — nonstop 90s & 2000s Hindi songs.">
 <meta name="theme-color" content="#241608">
 
 <!-- ===================== FONTS ===================== -->
@@ -28,7 +27,7 @@
   html, body{
     margin:0; padding:0;
     width:100%; height:100%;
-    overflow:hidden; /* Prevent page scroll entirely */
+    overflow:hidden;
     background:#000;
     color:var(--cream);
     font-family:var(--font-body);
@@ -39,10 +38,8 @@
 
   /* ===================== HERO (FULL SCREEN) ===================== */
   .hero{
-    position:absolute;
-    inset:0;
-    width:100vw;
-    height:100vh;
+    position:absolute; inset:0;
+    width:100vw; height:100vh;
     overflow:hidden;
   }
   .hero video{
@@ -51,7 +48,6 @@
     filter:saturate(1.05) contrast(1.02);
   }
   
-  /* Bottom & Top Gradient Overlay */
   .hero .scrim{
     position:absolute;inset:0;
     background:
@@ -60,81 +56,47 @@
   }
 
   .hero-meta{
-    position:absolute;
-    top:20px; left:20px;
-    z-index:10;
-    font-size:13px;
-    color:rgba(244,234,212,0.75);
-    font-family:var(--font-display);
-    letter-spacing:.08em;
-    text-transform:uppercase;
+    position:absolute; top:20px; left:20px; z-index:10;
+    font-size:13px; color:rgba(244,234,212,0.75);
+    font-family:var(--font-display); letter-spacing:.08em; text-transform:uppercase;
   }
 
   /* ===================== CENTERED DISPLAY TEXT ===================== */
   .hero-title-wrapper {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 10;
-    width: 90%;
-    max-width: 1200px;
-    pointer-events: none;
+    position: absolute; top: 10%; left: 50%;
+    transform: translateX(-50%); text-align: center;
+    z-index: 10; width: 90%; max-width: 1200px; pointer-events: none;
   }
 
   .sub-heading {
-    font-family: var(--font-display);
-    font-size: clamp(11px, 1.6vw, 15px);
-    font-weight: 700;
-    letter-spacing: 0.35em;
-    color: rgba(244, 234, 212, 0.85);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-display); font-size: clamp(11px, 1.6vw, 15px);
+    font-weight: 700; letter-spacing: 0.35em; color: rgba(244, 234, 212, 0.85);
+    text-transform: uppercase; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .main-heading {
-    font-family: var(--font-hindi);
-    font-size: clamp(48px, 9.5vw, 115px);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0;
-    line-height: 1;
-    letter-spacing: 1px;
-    text-shadow: 
-      0 4px 20px rgba(0, 0, 0, 0.9),
-      0 10px 40px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-hindi); font-size: clamp(48px, 9.5vw, 115px);
+    font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 1px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
   }
 
   /* ===================== MINIMAL PLAYER CONTAINER ===================== */
   .player-wrapper {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 680px;
-    z-index: 100;
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%); width: calc(100% - 40px);
+    max-width: 680px; z-index: 100;
   }
 
   .player-card {
-    background: rgba(20, 14, 10, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(244,234,212,0.15);
-    border-radius: 20px;
-    padding: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    position: relative;
+    background: rgba(20, 14, 10, 0.85); backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(244,234,212,0.15);
+    border-radius: 20px; padding: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   }
 
-  /* Progress Bar */
   .progress-row{
     display:flex;align-items:center;gap:10px;
     font-family:var(--font-display);font-size:12px;font-weight:600;
-    color:rgba(244,234,212,0.6);
-    margin-bottom:12px;
+    color:rgba(244,234,212,0.6); margin-bottom:12px;
   }
   .progress-track{
     flex:1;height:4px;background:rgba(244,234,212,0.2);
@@ -145,12 +107,7 @@
     background:var(--rust);border-radius:99px;width:0%;
   }
 
-  /* Controls Row */
-  .player-main {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
+  .player-main { display: flex; align-items: center; gap: 14px; }
   .now-art{
     width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0;
     background: rgba(255,255,255,0.05);
@@ -159,91 +116,19 @@
   .now-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .now-artist{font-size:12px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-  .controls-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .controls-group { display: flex; align-items: center; gap: 8px; }
 
   .ctrl-btn{
     background:none;border:none;color:var(--cream);
     width:36px;height:36px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-    transition:background .15s ease, transform .1s ease;
+    flex-shrink:0; transition:background .15s ease, transform .1s ease;
   }
   .ctrl-btn:hover{background:rgba(244,234,212,0.12);}
   .ctrl-btn:active{transform:scale(0.95);}
   .ctrl-btn svg{width:18px;height:18px;}
-  .ctrl-btn.play-pause{
-    background:var(--rust);width:42px;height:42px;
-  }
+  .ctrl-btn.play-pause{ background:var(--rust);width:42px;height:42px; }
   .ctrl-btn.play-pause:hover{background:var(--rust-dark);}
-  .ctrl-btn.playlist-toggle.active {
-    background: rgba(244,234,212,0.2);
-    color: var(--rust);
-  }
-
-  /* ===================== POPUP PLAYLIST DRAWER ===================== */
-  .playlist-drawer {
-    position: absolute;
-    bottom: 100%;
-    left: 0; right: 0;
-    margin-bottom: 10px;
-    background: rgba(20, 14, 10, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(244,234,212,0.15);
-    border-radius: 20px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
-  }
-
-  .playlist-drawer.open {
-    max-height: 300px;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .drawer-inner {
-    padding: 12px;
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  .drawer-inner::-webkit-scrollbar {
-    width: 4px;
-  }
-  .drawer-inner::-webkit-scrollbar-thumb {
-    background: rgba(244,234,212,0.2);
-    border-radius: 4px;
-  }
-
-  .track-list{list-style:none;margin:0;padding:0;}
-  .track{
-    display:flex;align-items:center;gap:12px;
-    padding:8px 10px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:background .12s ease;
-  }
-  .track:hover{background:rgba(244,234,212,0.08);}
-  .track.playing{background:rgba(187,77,37,0.2);}
-  .track-num{
-    width:20px;text-align:center;font-family:var(--font-display);
-    font-weight:600;color:var(--rust);font-size:13px;flex-shrink:0;
-  }
-  .track-art{
-    width:38px;height:38px;border-radius:6px;object-fit:cover;
-    flex-shrink:0;background:rgba(255,255,255,0.05);
-  }
-  .track-info{min-width:0;flex:1;}
-  .track-title{font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .track-artist{font-size:11px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   #yt-player{position:fixed;bottom:-1000px;left:-1000px;width:1px;height:1px;}
 </style>
@@ -260,22 +145,13 @@
 
   <!-- CENTERED DISPLAY TEXT -->
   <div class="hero-title-wrapper">
-    <div class="sub-heading" id="heroSubCount">227 TRACKS · NON-STOP</div>
+    <div class="sub-heading" id="heroSubCount">NON-STOP HIGHWAY RADIO</div>
     <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
   </div>
 </section>
 
 <!-- ===================== MINIMAL PLAYER ===================== -->
 <div class="player-wrapper">
-
-  <!-- Playlist Drawer -->
-  <div class="playlist-drawer" id="playlistDrawer">
-    <div class="drawer-inner">
-      <ul class="track-list" id="trackList"></ul>
-    </div>
-  </div>
-
-  <!-- Player Main Card -->
   <div class="player-card">
     <div class="progress-row">
       <span id="curTime">0:00</span>
@@ -289,7 +165,7 @@
       <img class="now-art" id="nowArt" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23241608'/%3E%3C/svg%3E" alt="">
       <div class="now-info">
         <div class="now-title" id="nowTitle">Dhaba Radio</div>
-        <div class="now-artist" id="nowArtist">Select or play a track</div>
+        <div class="now-artist" id="nowArtist">Press play to start stream</div>
       </div>
 
       <div class="controls-group">
@@ -302,9 +178,6 @@
         <button class="ctrl-btn" id="nextBtn" title="Next (N)">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
         </button>
-        <button class="ctrl-btn playlist-toggle" id="playlistBtn" title="Playlist">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-        </button>
       </div>
     </div>
   </div>
@@ -315,72 +188,15 @@
 
 <script>
 /* =====================================================
-   PLAYLIST
+   YOUTUBE PLAYLIST CONFIGURATION
+   Paste your YouTube Playlist ID here (the part after list=)
 ===================================================== */
-const PLAYLIST = [
-  { id: "xteZNX3B4yA", title: "Tumse Milke Dil Ka Jo Haal", artist: "Main Hoon Na · Sonu Nigam" },
-  { id: "9MX-QejdVaQ", title: "Chaiyya Chaiyya",            artist: "Dil Se · Sukhwinder Singh, Sapna Awasthi" },
-  { id: "-LESbtPT8uw", title: "Kaho Naa Pyaar Hai (Title)", artist: "Alka Yagnik, Udit Narayan" },
-  { id: "aGbPyM6lzBs", title: "Ek Pal Ka Jeena",             artist: "Kaho Naa Pyaar Hai · Lucky Ali" },
-  { id: "e3TFNC-FRUA", title: "Dil Ne Dil Ko Pukara",        artist: "Kaho Naa Pyaar Hai · Babul Supriyo" },
-  { id: "vCTW2GfcepQ", title: "Tujhe Dekha Toh",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
-];
+const PLAYLIST_ID = "RDd9L37Xv96gU"; // Replace with your YouTube Playlist ID
 
-function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
-
-/* =====================================================
-   STATE
-===================================================== */
 let ytPlayer = null;
 let ytReady = false;
-let currentIndex = -1;
 let isPlaying = false;
 let progressTimer = null;
-
-/* =====================================================
-   BUILD PLAYLIST DRAWER
-===================================================== */
-const trackListEl = document.getElementById('trackList');
-document.getElementById('heroSubCount').textContent = `${PLAYLIST.length} TRACKS · NON-STOP`;
-
-PLAYLIST.forEach((t, i) => {
-  const li = document.createElement('li');
-  li.className = 'track';
-  li.dataset.index = i;
-  li.innerHTML = `
-    <span class="track-num">${i + 1}</span>
-    <img class="track-art" src="${thumb(t.id)}" alt="">
-    <div class="track-info">
-      <div class="track-title">${t.title}</div>
-      <div class="track-artist">${t.artist}</div>
-    </div>
-  `;
-  li.addEventListener('click', () => {
-    playTrack(i);
-    toggleDrawer(false);
-  });
-  trackListEl.appendChild(li);
-});
-
-function renderActiveTrack(){
-  document.querySelectorAll('.track').forEach(el => {
-    el.classList.toggle('playing', Number(el.dataset.index) === currentIndex);
-  });
-}
-
-/* =====================================================
-   DRAWER TOGGLE
-===================================================== */
-const drawerEl = document.getElementById('playlistDrawer');
-const playlistBtn = document.getElementById('playlistBtn');
-
-function toggleDrawer(forceState){
-  const isOpen = forceState !== undefined ? forceState : !drawerEl.classList.contains('open');
-  drawerEl.classList.toggle('open', isOpen);
-  playlistBtn.classList.toggle('active', isOpen);
-}
-
-playlistBtn.addEventListener('click', () => toggleDrawer());
 
 /* =====================================================
    YOUTUBE IFRAME API
@@ -392,7 +208,14 @@ document.body.appendChild(tag);
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('yt-player', {
     height: '1', width: '1',
-    playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1 },
+    playerVars: { 
+      autoplay: 0, 
+      controls: 0, 
+      disablekb: 1, 
+      playsinline: 1,
+      listType: 'playlist',
+      list: PLAYLIST_ID
+    },
     events: {
       onReady: () => { ytReady = true; },
       onStateChange: onPlayerStateChange
@@ -404,35 +227,38 @@ function onPlayerStateChange(e){
   if (e.data === YT.PlayerState.PLAYING){
     isPlaying = true;
     updatePlayIcon();
+    updateTrackMetaData();
     startProgressLoop();
   } else if (e.data === YT.PlayerState.PAUSED){
     isPlaying = false;
     updatePlayIcon();
     stopProgressLoop();
-  } else if (e.data === YT.PlayerState.ENDED){
-    playTrack((currentIndex + 1) % PLAYLIST.length);
   }
 }
 
-function playTrack(index){
-  if (!ytReady){
-    setTimeout(() => playTrack(index), 300);
-    return;
+function updateTrackMetaData() {
+  if (!ytPlayer || !ytPlayer.getVideoData) return;
+  
+  const videoData = ytPlayer.getVideoData();
+  const videoId = videoData.video_id;
+  
+  if (videoData.title) {
+    document.getElementById('nowTitle').textContent = videoData.title;
+    document.getElementById('nowArtist').textContent = videoData.author || "Dhaba Radio";
   }
-  currentIndex = index;
-  const t = PLAYLIST[index];
-  ytPlayer.loadVideoById(t.id);
-  ytPlayer.playVideo();
-
-  document.getElementById('nowArt').src = thumb(t.id);
-  document.getElementById('nowTitle').textContent = t.title;
-  document.getElementById('nowArtist').textContent = t.artist;
-  renderActiveTrack();
+  
+  if (videoId) {
+    document.getElementById('nowArt').src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  }
 }
 
 function togglePlayPause(){
-  if (currentIndex === -1){ playTrack(0); return; }
-  if (isPlaying){ ytPlayer.pauseVideo(); } else { ytPlayer.playVideo(); }
+  if (!ytReady) return;
+  if (isPlaying){ 
+    ytPlayer.pauseVideo(); 
+  } else { 
+    ytPlayer.playVideo(); 
+  }
 }
 
 function updatePlayIcon(){
@@ -476,12 +302,8 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
    CONTROLS
 ===================================================== */
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => {
-  playTrack(currentIndex === -1 ? 0 : (currentIndex + 1) % PLAYLIST.length);
-});
-document.getElementById('prevBtn').addEventListener('click', () => {
-  playTrack(currentIndex <= 0 ? PLAYLIST.length - 1 : currentIndex - 1);
-});
+document.getElementById('nextBtn').addEventListener('click', () => { if (ytReady) ytPlayer.nextVideo(); });
+document.getElementById('prevBtn').addEventListener('click', () => { if (ytReady) ytPlayer.previousVideo(); });
 
 /* =====================================================
    KEYBOARD SHORTCUTS
@@ -498,9 +320,9 @@ document.addEventListener('keydown', (e) => {
       if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(Math.max(0, ytPlayer.getCurrentTime() - 5), true);
       break;
     case 'KeyN':
-      document.getElementById('nextBtn').click(); break;
+      if (ytReady) ytPlayer.nextVideo(); break;
     case 'KeyP':
-      document.getElementById('prevBtn').click(); break;
+      if (ytReady) ytPlayer.previousVideo(); break;
   }
 });
 </script>

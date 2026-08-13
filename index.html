@@ -245,7 +245,7 @@
     100% { transform: scale(1.05); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
   }
 
-  /* ===================== RETRO STEREO DECK CONTAINER (EXTRA COMPACT) ===================== */
+  /* ===================== RETRO STEREO DECK CONTAINER ===================== */
   .player-wrapper {
     position: fixed; bottom: 6px; left: 50%;
     transform: translateX(-50%);
@@ -253,7 +253,6 @@
     display: flex; flex-direction: column; align-items: center; gap: 3px;
   }
 
-  /* Compact Head Unit Frame */
   .stereo-unit {
     width: 520px;
     height: 125px;
@@ -267,7 +266,6 @@
     position: relative;
   }
 
-  /* Left Control Section (Volume Knob Dial) */
   .left-panel {
     width: 95px;
     height: 100%;
@@ -327,7 +325,6 @@
     letter-spacing: 0.5px;
   }
 
-  /* Right Main Panel (LCD Screen & Presets) */
   .right-panel {
     flex: 1;
     display: flex;
@@ -381,14 +378,12 @@
     text-shadow: 0 0 5px rgba(255, 204, 0, 0.8); margin-top: 1px;
   }
 
-  /* FULLY FUNCTIONAL LCD TIMELINE / SEEK TRACK */
-  /* ENLARGED LCD TIMELINE / SEEK TRACK */
   .lcd-progress-track {
     width: 100%;
-    height: 6px; /* Increased from 4px for better visibility and clicking */
+    height: 6px;
     background: #0d2200;
     border-radius: 3px;
-    margin: 6px 0 5px 0; /* Spaced out using the newly freed vertical space */
+    margin: 6px 0 5px 0;
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -401,7 +396,6 @@
     box-shadow: 0 0 8px #33ff00;
   }
 
-  /* Equalizer */
   .eq-container {
     display: flex; gap: 2px; align-items: flex-end; height: 22px;
   }
@@ -412,11 +406,6 @@
   .eq-dot.active-green { background-color: #33ff00; box-shadow: 0 0 2px #33ff00; }
   .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 2px #ffcc00; }
   .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 2px #ff2a2a; }
-
-  .screen-bottom {
-    display: flex; gap: 6px; font-family: 'VT323', monospace; font-size: 10px; color: #1a5500;
-  }
-  .mode-tag.active { color: #33ff00; text-shadow: 0 0 3px #33ff00; }
 
   .bottom-controls { display: flex; gap: 3px; height: 26px; }
 
@@ -433,7 +422,6 @@
   .btn:active { background: #111214; transform: translateY(1px); box-shadow: inset 0 2px 4px rgba(0,0,0,0.8); }
   .btn-preset-num { color: #ff3333; margin-right: 2px; }
 
-  /* Playlist Overlay Drawer */
   .playlist-drawer {
     position: absolute; inset: 0; background: rgba(4, 13, 6, 0.96);
     border-radius: 4px; z-index: 10; padding: 4px 8px; display: none; flex-direction: column;
@@ -454,7 +442,6 @@
   }
   .close-playlist { cursor: pointer; color: #ff3333; }
 
-  /* FLOATING TICKET WIDGET BUTTON */
   .floating-ticket-btn {
     position: absolute;
     right: -82px;
@@ -474,7 +461,6 @@
   }
   .floating-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
-  /* KEYBOARD SHORTCUTS BAR */
   .shortcuts-bar {
     display: flex; align-items: center; gap: 14px;
     font-family: var(--font-display); font-size: 10px; font-weight: 700;
@@ -550,12 +536,104 @@
 
   #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
 
-  @media(max-width: 900px){
-    .stereo-unit { width: 95vw; }
-    .floating-ticket-btn { position: relative; right: 0; bottom: 0; }
-    .shortcuts-bar { display: none; }
-    .header-bar { padding: 14px 16px; }
-    .driver-badge { display: none; }
+  /* ===================== MOBILE RESPONSIVE MEDIA QUERIES ===================== */
+  @media (max-width: 600px) {
+    .header-bar {
+      padding: 10px 14px;
+    }
+    .header-route {
+      font-size: 9px;
+    }
+    .driver-badge {
+      display: none;
+    }
+    .clock-widget {
+      font-size: 15px;
+    }
+
+    .hero-title-wrapper {
+      top: 10%;
+    }
+    .track-meta-badge {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+    }
+    .main-heading {
+      font-size: clamp(28px, 9vw, 55px);
+    }
+
+    .centered-horn-wrapper {
+      top: 32vh;
+    }
+    .floating-horn {
+      padding: 6px 14px;
+      font-size: 12px;
+    }
+
+    .player-wrapper {
+      bottom: 4px;
+      width: 96vw;
+    }
+    .stereo-unit {
+      width: 100%;
+      height: 110px;
+      padding: 5px;
+      gap: 6px;
+    }
+
+    .left-panel {
+      width: 75px;
+    }
+    .knob-bezel {
+      width: 50px;
+      height: 50px;
+    }
+    .volume-knob {
+      width: 38px;
+      height: 38px;
+    }
+
+    .lcd-screen {
+      height: 62px;
+      padding: 3px 5px;
+    }
+    .song-title {
+      font-size: 12px;
+      max-width: 150px;
+    }
+    .time-vol-display {
+      font-size: 10px;
+    }
+
+    .eq-container {
+      height: 18px;
+    }
+    .bottom-controls {
+      height: 24px;
+    }
+    .btn {
+      font-size: 8px;
+      padding: 0 2px;
+    }
+
+    .floating-ticket-btn {
+      position: static;
+      margin-top: 4px;
+      padding: 4px 10px;
+      font-size: 10px;
+    }
+
+    .shortcuts-bar {
+      display: none;
+    }
+
+    .ticket-card {
+      padding: 16px;
+      max-width: 92vw;
+    }
+    .ticket-corp-title {
+      font-size: 16px;
+    }
   }
 </style>
 </head>
@@ -654,16 +732,6 @@
 
           <!-- Graphic LED Equalizer Visualizer -->
           <div class="eq-container" id="eq-container"></div>
-        </div>
-
-        <div class="screen-bottom">
-          <span class="mode-tag active">ST</span>
-          <span class="mode-tag active">ROCK</span>
-          <span class="mode-tag">POP</span>
-          <span class="mode-tag">CLAS</span>
-          <span class="mode-tag active">MP3</span>
-          <span class="mode-tag">RPT</span>
-          <span class="mode-tag">RDM</span>
         </div>
       </div>
 
@@ -771,14 +839,14 @@ const PLAYLIST = [
   { id: "9MX-QejdVaQ", title: "TRK 02: CHAIYYA CHAIYYA",            artist: "Dil Se · Sukhwinder Singh, Sapna Awasthi" },
   { id: "-LESbtPT8uw", title: "TRK 03: KAHO NAA LYAAR HAI",         artist: "Alka Yagnik, Udit Narayan" },
   { id: "d9L37Xv96gU", title: "TRK 04: TUMHEIN DEKHEN MERI AANKHEN", artist: "Alka Yagnik | Kumar Sanu" },
-  { id: "5tfChet8pK0", title: "Ek Dil Hai",        artist: "Kumar Sanu, Alka Yagnik" }, 
-  { id: "HubRXgH0Erc", title: "Tumsa Koi Pyara",        artist: "Kumar Sanu, Alka Yagnik" },
+  { id: "5tfChet8pK0", title: "Ek Dil Hai",                        artist: "Kumar Sanu, Alka Yagnik" }, 
+  { id: "HubRXgH0Erc", title: "Tumsa Koi Pyara",                   artist: "Kumar Sanu, Alka Yagnik" },
   { id: "vCTW2GfcepQ", title: "TRK 06: TUJHE DEKHA TOH",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
 ];
 
 let currentTrackIndex = 0;
 let isPlaying = false;
-let volume = 15; // Range: 0 to 30
+let volume = 15;
 let rotationDeg = 0;
 let ytPlayer = null;
 let ytReady = false;

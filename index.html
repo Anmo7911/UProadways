@@ -64,7 +64,7 @@
     font-family:var(--font-display); letter-spacing:.08em; text-transform:uppercase;
   }
 
-  /* ===================== FLOATING HORN BADGE (RELOCATED TO BOTTOM-RIGHT) ===================== */
+  /* ===================== FLOATING HORN BADGE ===================== */
   .floating-horn {
     position: absolute;
     bottom: 30px;
@@ -122,11 +122,12 @@
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
   }
 
-  /* UP Parivahan Logo with Shadow */
+  /* UP Parivahan Logo - Scaled relative to heading font size */
   .up-logo {
-    width: clamp(50px, 6vw, 85px);
-    height: auto;
-    margin-top: 12px;
+    height: 1em;
+    max-height: clamp(48px, 9.5vw, 115px);
+    width: auto;
+    margin-top: 14px;
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
   }
 
@@ -240,7 +241,7 @@
   <div class="scrim"></div>
   <div class="hero-meta">Dhaba Radio · NH 27</div>
 
-  <!-- FLOATING HORN BUTTON (MOVED TO BOTTOM RIGHT AS DRAWN) -->
+  <!-- FLOATING HORN BUTTON -->
   <button class="floating-horn" id="hornBtn" title="Blow Horn (H)">
     <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
     <span>हॉर्न ओके प्लीज</span>
@@ -249,7 +250,7 @@
   <div class="hero-title-wrapper">
     <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
     <h1 class="main-heading">उत्तर प्रदेश परिवहन</h1>
-    <!-- UP PARIVAHAN LOGO WITH SHADOW -->
+    <!-- UP PARIVAHAN LOGO SCALED TO HEADING -->
     <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
   </div>
 </section>
@@ -304,7 +305,7 @@ const PLAYLIST = [
   { id: "9MX-QejdVaQ", title: "Chaiyya Chaiyya",            artist: "Dil Se · Sukhwinder Singh, Sapna Awasthi" },
   { id: "-LESbtPT8uw", title: "Kaho Naa Pyaar Hai (Title)", artist: "Alka Yagnik, Udit Narayan" },
   { id: "d9L37Xv96gU", title: "Tumhein Dekhen Meri Aankhen", artist: "Alka Yagnik | Kumar Sanu" },
-  { id: "Q6-x-SInVfc", title: "Ye Ladka Hay Allah",        artist: "Asha Bhosle, Mohd. Rafi " },
+  { id: "e3TFNC-FRUA", title: "Dil Ne Dil Ko Pukara",        artist: "Kaho Naa Pyaar Hai · Babul Supriyo" },
   { id: "vCTW2GfcepQ", title: "Tujhe Dekha Toh",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
 ];
 

@@ -179,7 +179,7 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <video autoplay muted loop playsinline poster="assets/bus-loop-poster.jpg">
+  <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
     <source src="assets/bus-loop.mp4" type="video/mp4">
   </video>
   <div class="scrim"></div>
@@ -258,12 +258,58 @@ function getRandomIndex(excludeIndex = -1) {
 
 let ytPlayer = null;
 let ytReady = false;
+let backgroundVideo = null;
+let backgroundKeepAliveTimer = null;
 let currentIndex = -1;
 let isPlaying = false;
 let shouldBePlaying = false;
 let progressTimer = null;
 
 const trackListEl = document.getElementById('trackList');
+backgroundVideo = document.getElementById('backgroundVideo');
+
+/*
+ * The YouTube iframe and the HTML5 background video are two independent
+ * media players. Some browsers may pause the HTML5 video when the YouTube
+ * iframe changes/loads a new video. Keep the background animation alive.
+ */
+function keepBackgroundPlaying(){
+  if (!backgroundVideo) return;
+
+  if (backgroundVideo.paused && !backgroundVideo.ended) {
+    const playPromise = backgroundVideo.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+  }
+}
+
+function startBackgroundKeepAlive(){
+  if (backgroundKeepAliveTimer) clearInterval(backgroundKeepAliveTimer);
+
+  keepBackgroundPlaying();
+
+  backgroundKeepAliveTimer = setInterval(() => {
+    keepBackgroundPlaying();
+  }, 1000);
+}
+
+if (backgroundVideo) {
+  backgroundVideo.addEventListener('pause', keepBackgroundPlaying);
+  backgroundVideo.addEventListener('canplay', keepBackgroundPlaying);
+  backgroundVideo.addEventListener('loadeddata', keepBackgroundPlaying);
+  backgroundVideo.addEventListener('ended', () => {
+    backgroundVideo.currentTime = 0;
+    keepBackgroundPlaying();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) keepBackgroundPlaying();
+  });
+
+  // Start/restore the bus animation without waiting for the YouTube player.
+  startBackgroundKeepAlive();
+}
 document.getElementById('heroSubCount').textContent = `गाज़ीपुर · लखनऊ`;
 
 PLAYLIST.forEach((t, i) => {
@@ -326,6 +372,9 @@ window.onYouTubeIframeAPIReady = function(){
 };
 
 function onPlayerStateChange(e){
+  // YouTube state changes must never control the background video's state.
+  keepBackgroundPlaying();
+
   if (e.data === YT.PlayerState.PLAYING){
     isPlaying = true;
     updatePlayIcon();
@@ -341,9 +390,15 @@ function onPlayerStateChange(e){
   }
 }
 
+let requestedTrackToken = 0;
+
 function playTrack(index){
+  const requestToken = ++requestedTrackToken;
+
   if (!ytReady || !ytPlayer){
-    setTimeout(() => playTrack(index), 200);
+    setTimeout(() => {
+      if (requestToken === requestedTrackToken) playTrack(index);
+    }, 200);
     return;
   }
   
@@ -416,8 +471,14 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
 });
 
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
-document.getElementById('prevBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
+document.getElementById('nextBtn').addEventListener('click', () => {
+  keepBackgroundPlaying();
+  playTrack(getRandomIndex(currentIndex));
+});
+document.getElementById('prevBtn').addEventListener('click', () => {
+  keepBackgroundPlaying();
+  playTrack(getRandomIndex(currentIndex));
+});
 
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;

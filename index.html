@@ -4,66 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dhaba Radio — Nonstop Highway Hindi Hits</title>
-<meta name="description" content="Pull over at Dhaba Radio — nonstop 90s & 2000s Hindi songs, playing on loop since the bus stopped for chai. Free, no login.">
+<meta name="description" content="Pull over at Dhaba Radio — nonstop 90s & 2000s Hindi songs.">
 <meta name="theme-color" content="#241608">
 
 <!-- ===================== FONTS ===================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root{
     --ink:#241608;
     --cream:#f4ead4;
-    --cream-soft:#efe0bf;
-    --card:#fff8e8;
     --rust:#bb4d25;
     --rust-dark:#8e3a1b;
-    --green:#2f5233;
-    --mustard:#d9a441;
-    --line:rgba(36,22,8,0.14);
-    --shadow:0 10px 30px rgba(36,22,8,0.18);
-    --radius:16px;
+    --line:rgba(244,234,212,0.15);
     --font-display:'Rajdhani', sans-serif;
     --font-body:'Poppins', sans-serif;
   }
 
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--cream);
-    color:var(--ink);
+  html, body{
+    margin:0; padding:0;
+    width:100%; height:100%;
+    overflow:hidden; /* Prevent page scroll entirely */
+    background:#000;
+    color:var(--cream);
     font-family:var(--font-body);
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
   }
-  a{color:inherit;}
+
   button{font-family:inherit;cursor:pointer;}
-  ::selection{background:var(--mustard);color:var(--ink);}
 
-  /* subtle paper grain */
-  body::before{
-    content:"";
-    position:fixed;inset:0;
-    pointer-events:none;
-    z-index:1000;
-    opacity:.05;
-    background-image:radial-gradient(#241608 1px, transparent 1px);
-    background-size:3px 3px;
-  }
-
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
-
-  /* ===================== HERO (FULLSCREEN) ===================== */
+  /* ===================== HERO (FULL SCREEN) ===================== */
   .hero{
-    position:relative;
-    height:100vh; /* Set to full screen */
+    position:absolute;
+    inset:0;
     width:100vw;
-    display:flex;
-    align-items:flex-end;
+    height:100vh;
     overflow:hidden;
-    border-bottom:4px solid var(--ink);
   }
   .hero video{
     position:absolute;inset:0;
@@ -74,167 +53,159 @@
   /* Bottom Vignette Gradient Effect */
   .hero .scrim{
     position:absolute;inset:0;
-    background:
-      linear-gradient(to top, 
-        rgba(0, 0, 0, 0.9) 0%, 
-        rgba(0, 0, 0, 0.4) 35%, 
-        transparent 70%
-      );
+    background:linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0,0,0,0.3) 40%, transparent 70%);
   }
-  .hero-content{
-    position:relative;z-index:2;
-    width:100%;
-    padding:0 20px 30px;
-    max-width:1080px;margin:0 auto;
-    color:var(--cream);
-  }
+
   .hero-meta{
-    font-size:14px;
-    color:rgba(244,234,212,0.85);
-    display:flex;gap:16px;flex-wrap:wrap;
+    position:absolute;
+    top:20px; left:20px;
+    z-index:10;
+    font-size:13px;
+    color:rgba(244,234,212,0.75);
     font-family:var(--font-display);
-    letter-spacing:.05em;
+    letter-spacing:.08em;
+    text-transform:uppercase;
   }
 
-  /* ===================== CATEGORY TICKER ===================== */
-  .ticker-row{
-    border-bottom:1px solid var(--line);
-    background:var(--cream-soft);
-    overflow:hidden;
+  /* ===================== MINIMAL PLAYER CONTAINER ===================== */
+  .player-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 680px;
+    z-index: 100;
   }
-  .ticker-inner{
-    display:flex;gap:10px;padding:12px 20px;
-    max-width:1080px;margin:0 auto;
-    overflow-x:auto;
-    scrollbar-width:none;
-  }
-  .ticker-inner::-webkit-scrollbar{display:none;}
-  .chip{
-    flex:0 0 auto;
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:14px;
-    padding:8px 16px;
-    border-radius:999px;
-    border:1.5px solid var(--ink);
-    background:transparent;
-    color:var(--ink);
-    white-space:nowrap;
-  }
-  .chip.active{background:var(--ink);color:var(--cream);}
-  .chip[disabled]{opacity:.4;cursor:not-allowed;}
 
-  /* ===================== MAIN LAYOUT ===================== */
-  .main{
-    max-width:1080px;margin:0 auto;
-    padding:36px 20px 140px;
+  .player-card {
+    background: rgba(20, 14, 10, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(244,234,212,0.15);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    position: relative;
   }
-  .section-head{
-    display:flex;align-items:baseline;justify-content:space-between;
-    margin-bottom:16px;
-  }
-  .section-head h2{
-    font-family:var(--font-display);
-    font-size:26px;font-weight:700;margin:0;
-  }
-  .section-head span{font-size:13px;color:var(--rust-dark);font-weight:600;}
 
-  .track-list{list-style:none;margin:0;padding:0;}
-  .track{
-    display:flex;align-items:center;gap:14px;
-    padding:10px 10px;
-    border-radius:12px;
-    cursor:pointer;
-    transition:background .12s ease;
-    border-bottom:1px solid var(--line);
-  }
-  .track:hover{background:var(--card);}
-  .track.playing{background:var(--card);box-shadow:inset 3px 0 0 var(--rust);}
-  .track-num{
-    width:26px;text-align:center;font-family:var(--font-display);
-    font-weight:600;color:var(--rust-dark);font-size:15px;flex-shrink:0;
-  }
-  .track.playing .track-num{color:var(--rust);}
-  .track-art{
-    width:52px;height:52px;border-radius:8px;object-fit:cover;
-    flex-shrink:0;border:1px solid var(--line);
-    background:var(--cream-soft);
-  }
-  .track-info{min-width:0;flex:1;}
-  .track-title{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .track-artist{font-size:13px;color:#5b4a33;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .track-playicon{width:22px;height:22px;flex-shrink:0;color:var(--rust);display:none;}
-  .track.playing .track-playicon{display:block;}
-
-  /* ===================== PLAYER BAR ===================== */
-  .player-bar{
-    position:fixed;left:0;right:0;bottom:0;
-    background:var(--ink);
-    color:var(--cream);
-    z-index:200;
-    border-top:3px solid var(--rust);
-  }
-  .player-inner{
-    max-width:1080px;margin:0 auto;
-    padding:10px 20px 14px;
-  }
+  /* Progress Bar */
   .progress-row{
     display:flex;align-items:center;gap:10px;
     font-family:var(--font-display);font-size:12px;font-weight:600;
-    color:rgba(244,234,212,0.7);
-    margin-bottom:8px;
+    color:rgba(244,234,212,0.6);
+    margin-bottom:12px;
   }
   .progress-track{
-    flex:1;height:5px;background:rgba(244,234,212,0.18);
+    flex:1;height:4px;background:rgba(244,234,212,0.2);
     border-radius:99px;position:relative;cursor:pointer;
   }
   .progress-fill{
     position:absolute;left:0;top:0;bottom:0;
     background:var(--rust);border-radius:99px;width:0%;
   }
-  .player-controls{
-    display:flex;align-items:center;gap:14px;
+
+  /* Controls Row */
+  .player-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
-  .now-art{width:46px;height:46px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+  .now-art{
+    width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0;
+    background: rgba(255,255,255,0.05);
+  }
   .now-info{min-width:0;flex:1;}
   .now-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .now-artist{font-size:12px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  .controls-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .ctrl-btn{
     background:none;border:none;color:var(--cream);
-    width:38px;height:38px;border-radius:50%;
+    width:36px;height:36px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     flex-shrink:0;
-    transition:background .12s ease;
+    transition:background .15s ease, transform .1s ease;
   }
-  .ctrl-btn:hover{background:rgba(244,234,212,0.1);}
-  .ctrl-btn svg{width:20px;height:20px;}
+  .ctrl-btn:hover{background:rgba(244,234,212,0.12);}
+  .ctrl-btn:active{transform:scale(0.95);}
+  .ctrl-btn svg{width:18px;height:18px;}
   .ctrl-btn.play-pause{
-    background:var(--rust);width:44px;height:44px;
+    background:var(--rust);width:42px;height:42px;
   }
   .ctrl-btn.play-pause:hover{background:var(--rust-dark);}
-  .kbd-hint{
-    display:none;
-    font-size:11px;color:rgba(244,234,212,0.45);
-    margin-left:auto;
-  }
-  @media(min-width:720px){ .kbd-hint{display:block;} }
-
-  /* ===================== FOOTER ===================== */
-  .footer{
-    max-width:1080px;margin:0 auto;
-    padding:20px 20px 160px;
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:10px;
-    font-size:13px;color:#5b4a33;
-    border-top:1px solid var(--line);
+  .ctrl-btn.playlist-toggle.active {
+    background: rgba(244,234,212,0.2);
+    color: var(--rust);
   }
 
-  /* youtube iframe hidden but present in DOM */
+  /* ===================== POPUP PLAYLIST DRAWER ===================== */
+  .playlist-drawer {
+    position: absolute;
+    bottom: 100%;
+    left: 0; right: 0;
+    margin-bottom: 10px;
+    background: rgba(20, 14, 10, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(244,234,212,0.15);
+    border-radius: 20px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .playlist-drawer.open {
+    max-height: 300px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .drawer-inner {
+    padding: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .drawer-inner::-webkit-scrollbar {
+    width: 4px;
+  }
+  .drawer-inner::-webkit-scrollbar-thumb {
+    background: rgba(244,234,212,0.2);
+    border-radius: 4px;
+  }
+
+  .track-list{list-style:none;margin:0;padding:0;}
+  .track{
+    display:flex;align-items:center;gap:12px;
+    padding:8px 10px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:background .12s ease;
+  }
+  .track:hover{background:rgba(244,234,212,0.08);}
+  .track.playing{background:rgba(187,77,37,0.2);}
+  .track-num{
+    width:20px;text-align:center;font-family:var(--font-display);
+    font-weight:600;color:var(--rust);font-size:13px;flex-shrink:0;
+  }
+  .track-art{
+    width:38px;height:38px;border-radius:6px;object-fit:cover;
+    flex-shrink:0;background:rgba(255,255,255,0.05);
+  }
+  .track-info{min-width:0;flex:1;}
+  .track-title{font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .track-artist{font-size:11px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
   #yt-player{position:fixed;bottom:-1000px;left:-1000px;width:1px;height:1px;}
-
-  @media(max-width:600px){
-    .track-artist{display:none;}
-  }
 </style>
 </head>
 <body>
@@ -245,43 +216,21 @@
     <source src="assets/bus-loop.mp4" type="video/mp4">
   </video>
   <div class="scrim"></div>
-  <div class="hero-content">
-    <div class="hero-meta">
-      <span id="trackCount">6 tracks · non-stop</span>
-      <span>·</span>
-      <span>NH 27 · Dhaba Radio</span>
-    </div>
-  </div>
+  <div class="hero-meta">Dhaba Radio · NH 27</div>
 </section>
 
-<!-- ===================== CATEGORY TICKER ===================== -->
-<div class="ticker-row">
-  <div class="ticker-inner">
-    <button class="chip active">Highway Hits</button>
-    <button class="chip" disabled>Sufi Nights</button>
-    <button class="chip" disabled>Wedding Season</button>
-    <button class="chip" disabled>Monsoon</button>
-    <button class="chip" disabled>Dhaba Classics</button>
+<!-- ===================== MINIMAL PLAYER ===================== -->
+<div class="player-wrapper">
+
+  <!-- Playlist Drawer -->
+  <div class="playlist-drawer" id="playlistDrawer">
+    <div class="drawer-inner">
+      <ul class="track-list" id="trackList"></ul>
+    </div>
   </div>
-</div>
 
-<!-- ===================== MAIN ===================== -->
-<div class="main">
-  <div class="section-head">
-    <h2>On the tape deck</h2>
-    <span id="nowPlayingLabel">tap any track to start</span>
-  </div>
-  <ul class="track-list" id="trackList"></ul>
-</div>
-
-<div class="footer">
-  <span>Dhaba Radio · powered by the roadside, not by us</span>
-  <span>Share the stop: dhabaradio.example</span>
-</div>
-
-<!-- ===================== PLAYER BAR ===================== -->
-<div class="player-bar">
-  <div class="player-inner">
+  <!-- Player Main Card -->
+  <div class="player-card">
     <div class="progress-row">
       <span id="curTime">0:00</span>
       <div class="progress-track" id="progressTrack">
@@ -289,27 +238,33 @@
       </div>
       <span id="durTime">0:00</span>
     </div>
-    <div class="player-controls">
-      <img class="now-art" id="nowArt" src="" alt="">
+
+    <div class="player-main">
+      <img class="now-art" id="nowArt" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23241608'/%3E%3C/svg%3E" alt="">
       <div class="now-info">
-        <div class="now-title" id="nowTitle">Nothing playing</div>
-        <div class="now-artist" id="nowArtist">Press play on any track</div>
+        <div class="now-title" id="nowTitle">Dhaba Radio</div>
+        <div class="now-artist" id="nowArtist">Select or play a track</div>
       </div>
-      <button class="ctrl-btn" id="prevBtn" title="Previous (P)">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-      <button class="ctrl-btn play-pause" id="playBtn" title="Play/Pause (Space)">
-        <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <button class="ctrl-btn" id="nextBtn" title="Next (N)">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
-      </button>
-      <span class="kbd-hint">Space play/pause · ← → seek · N/P track</span>
+
+      <div class="controls-group">
+        <button class="ctrl-btn" id="prevBtn" title="Previous (P)">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="ctrl-btn play-pause" id="playBtn" title="Play/Pause (Space)">
+          <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="ctrl-btn" id="nextBtn" title="Next (N)">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+        </button>
+        <button class="ctrl-btn playlist-toggle" id="playlistBtn" title="Playlist">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Hidden YouTube player mount -->
+<!-- Hidden YouTube Player Mount -->
 <div id="yt-player"></div>
 
 <script>
@@ -337,10 +292,9 @@ let isPlaying = false;
 let progressTimer = null;
 
 /* =====================================================
-   BUILD TRACK LIST UI
+   BUILD PLAYLIST DRAWER
 ===================================================== */
 const trackListEl = document.getElementById('trackList');
-document.getElementById('trackCount').textContent = `${PLAYLIST.length} tracks · non-stop`;
 
 PLAYLIST.forEach((t, i) => {
   const li = document.createElement('li');
@@ -353,9 +307,11 @@ PLAYLIST.forEach((t, i) => {
       <div class="track-title">${t.title}</div>
       <div class="track-artist">${t.artist}</div>
     </div>
-    <svg class="track-playicon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
   `;
-  li.addEventListener('click', () => playTrack(i));
+  li.addEventListener('click', () => {
+    playTrack(i);
+    toggleDrawer(false);
+  });
   trackListEl.appendChild(li);
 });
 
@@ -364,6 +320,20 @@ function renderActiveTrack(){
     el.classList.toggle('playing', Number(el.dataset.index) === currentIndex);
   });
 }
+
+/* =====================================================
+   DRAWER TOGGLE
+===================================================== */
+const drawerEl = document.getElementById('playlistDrawer');
+const playlistBtn = document.getElementById('playlistBtn');
+
+function toggleDrawer(forceState){
+  const isOpen = forceState !== undefined ? forceState : !drawerEl.classList.contains('open');
+  drawerEl.classList.toggle('open', isOpen);
+  playlistBtn.classList.toggle('active', isOpen);
+}
+
+playlistBtn.addEventListener('click', () => toggleDrawer());
 
 /* =====================================================
    YOUTUBE IFRAME API
@@ -410,7 +380,6 @@ function playTrack(index){
   document.getElementById('nowArt').src = thumb(t.id);
   document.getElementById('nowTitle').textContent = t.title;
   document.getElementById('nowArtist').textContent = t.artist;
-  document.getElementById('nowPlayingLabel').textContent = `now playing · track ${index + 1} of ${PLAYLIST.length}`;
   renderActiveTrack();
 }
 

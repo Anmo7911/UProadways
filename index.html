@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>उत्तर प्रदेश परिवहन  — Nonstop Highway Hindi Hits</title>
+<title>उत्तर प्रदेश परिवहन — Nonstop Highway Hindi Hits</title>
 <meta name="description" content="Pull over at Dhaba Radio — nonstop 90s & 2000s Hindi songs.">
-<meta name="theme-color" content="#241608">
+<meta name="theme-color" content="#120c08">
 
 <!-- ===================== FONTS ===================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,12 +14,12 @@
 
 <style>
   :root{
-    --ink:#241608;
+    --ink:#120c08;
     --cream:#f4ead4;
     --rust:#bb4d25;
     --rust-dark:#8e3a1b;
     --mustard:#d9a441;
-    --line:rgba(244,234,212,0.15);
+    --line:rgba(244,234,212,0.12);
     --font-display:'Rajdhani', sans-serif;
     --font-body:'Poppins', sans-serif;
     --font-hindi:'Anek Devanagari', 'Teko', sans-serif;
@@ -30,7 +30,7 @@
     margin:0; padding:0;
     width:100%; height:100%;
     overflow:hidden;
-    background:#000;
+    background:#080503;
     color:var(--cream);
     font-family:var(--font-body);
     -webkit-font-smoothing:antialiased;
@@ -38,7 +38,7 @@
 
   button{font-family:inherit;cursor:pointer;}
 
-  /* ===================== HERO (FULL SCREEN) ===================== */
+  /* ===================== HERO (FULL SCREEN & ATMOSPHERE) ===================== */
   .hero{
     position:absolute; inset:0;
     width:100vw; height:100vh;
@@ -47,293 +47,341 @@
   .hero video{
     position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;
-    filter:saturate(1.05) contrast(1.02);
+    filter:saturate(0.95) contrast(1.1) brightness(0.85);
     z-index:0;
   }
   
+  /* Rainy atmospheric scrim overlay */
   .hero .scrim{
     position:absolute;inset:0;
     background:
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 30%),
-      linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.3) 40%, transparent 70%);
+      radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%),
+      linear-gradient(to bottom, rgba(8, 5, 3, 0.85) 0%, transparent 25%),
+      linear-gradient(to top, rgba(8, 5, 3, 0.95) 0%, rgba(8, 5, 3, 0.4) 40%, transparent 70%);
+    z-index:1;
   }
 
-  .hero-meta{
-    position:absolute; top:20px; left:20px; z-index:10;
-    font-size:13px; color:rgba(244,234,212,0.75);
-    font-family:var(--font-display); letter-spacing:.08em; text-transform:uppercase;
+  /* CSS Rain Effect */
+  .rain-overlay {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 2;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 8px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 12px);
+    opacity: 0.6;
+    animation: rainMove 0.8s linear infinite;
   }
 
-  /* ===================== FLOATING HORN BADGE ===================== */
-  .floating-horn {
-    position: absolute;
-    bottom: 30px;
-    right: 5%;
-    z-index: 10;
+  @keyframes rainMove {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(20px) translateX(-5px); }
+  }
+
+  /* ===================== TOP HEADER BAR ===================== */
+  .header-bar {
+    position: absolute; top: 0; left: 0; right: 0;
+    z-index: 20;
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left {
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(20, 14, 10, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(244,234,212,0.2);
-    color: var(--cream);
-    padding: 10px 18px;
-    border-radius: 999px;
+    gap: 12px;
+  }
+
+  .bus-badge-icon {
+    width: 34px; height: 34px;
+    background: var(--mustard);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 15px rgba(217,164,65,0.4);
+  }
+  .bus-badge-icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+  .header-titles {
+    display: flex; flex-direction: column;
+  }
+  .header-brand {
     font-family: var(--font-hindi);
-    font-size: 15px;
-    font-weight: 700;
-    transition: background 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    font-weight: 800; font-size: 16px;
+    line-height: 1; color: #fff;
+  }
+  .header-route {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 600;
+    color: rgba(244,234,212,0.6);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-top: 3px;
   }
 
-  .floating-horn:hover {
-    background: var(--rust);
-    border-color: var(--rust);
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-family: var(--font-display);
   }
 
-  .floating-horn:active {
-    transform: scale(0.95);
+  .clock-widget {
+    font-size: 20px; font-weight: 700;
+    letter-spacing: 0.05em; color: #fff;
+    display: flex; align-items: baseline; gap: 3px;
+  }
+  .clock-widget span { font-size: 11px; opacity: 0.6; }
+
+  .passenger-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; color: rgba(244,234,212,0.85);
+  }
+  .live-dot {
+    width: 8px; height: 8px;
+    background: #ff595e; border-radius: 50%;
+    box-shadow: 0 0 8px #ff595e;
+    animation: livePulse 1.5s infinite alternate;
+  }
+  @keyframes livePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+  .driver-badge {
+    background: rgba(20, 14, 10, 0.7);
+    border: 1px solid rgba(244,234,212,0.18);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; color: #fff;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .driver-avatar {
+    width: 18px; height: 18px; background: var(--rust);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800;
   }
 
-  .floating-horn svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-  }
-
-  /* ===================== CENTERED DISPLAY TEXT & LOGO ===================== */
+  /* ===================== CENTERED DISPLAY TEXT & HERO ===================== */
   .hero-title-wrapper {
-    position: absolute; top: 10%; left: 50%;
+    position: absolute; top: 18%; left: 50%;
     transform: translateX(-50%); text-align: center;
     z-index: 10; width: 95%; max-width: 1200px; pointer-events: none;
     display: flex; flex-direction: column; align-items: center;
   }
 
-  .sub-heading {
-    font-family: var(--font-display); font-size: clamp(11px, 1.6vw, 15px);
-    font-weight: 700; letter-spacing: 0.35em; color: rgba(244, 234, 212, 0.85);
-    text-transform: uppercase; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  .track-meta-badge {
+    font-family: var(--font-display); font-size: clamp(10px, 1.4vw, 13px);
+    font-weight: 700; letter-spacing: 0.4em; color: rgba(244, 234, 212, 0.75);
+    text-transform: uppercase; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .main-heading {
-    font-family: var(--font-hindi); font-size: clamp(40px, 8vw, 110px);
-    font-weight: 800; color: #ffffff; margin: 0; line-height: 1.15; letter-spacing: 0.5px;
+    font-family: var(--font-hindi); font-size: clamp(48px, 9.5vw, 130px);
+    font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 0.5px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    will-change: transform, color, text-shadow;
+    display: flex; flex-wrap: nowrap; justify-content: center; align-items: center;
+    white-space: nowrap; will-change: transform, color, text-shadow;
   }
 
-  /* Devanagari Word & Glyph Containers */
   .word-span {
-    display: inline-flex;
-    white-space: nowrap;
-    margin: 0 0.18em;
+    display: inline-flex; white-space: nowrap; margin: 0 0.18em;
   }
 
-  /* ===================== 3 PROFESSIONAL HORN ANIMATIONS ===================== */
+  /* CENTERED FLOATING HORN BADGE OVER BUS */
+  .centered-horn-wrapper {
+    margin-top: 15px;
+    pointer-events: auto;
+  }
 
-  /* ANIMATION 1: Grapheme-Safe Character Wave */
+  .floating-horn {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(20, 14, 10, 0.88);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(244,234,212,0.25);
+    color: var(--cream); padding: 8px 20px; border-radius: 999px;
+    font-family: var(--font-hindi); font-size: 14px; font-weight: 700;
+    transition: background 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  }
+  .floating-horn:hover { background: var(--rust); border-color: var(--rust); }
+  .floating-horn:active { transform: scale(0.95); }
+  .floating-horn svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* ===================== ANIMATION STYLES ===================== */
   .anim-char {
     display: inline-block;
     animation: charWaveLoop 0.55s ease-in-out infinite alternate;
     animation-delay: calc(var(--i) * 0.06s);
-    will-change: transform, color, text-shadow;
   }
-
   @keyframes charWaveLoop {
-    0% {
-      transform: translateY(0) scale(1);
-      color: #ffffff;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-    }
-    100% {
-      transform: translateY(-12px) scale(1.12);
-      color: #fff4a3;
-      text-shadow: 0 0 25px rgba(217, 164, 65, 0.95), 0 0 45px rgba(187, 77, 37, 0.85);
-    }
+    0% { transform: translateY(0) scale(1); color: #ffffff; }
+    100% { transform: translateY(-12px) scale(1.12); color: #fff4a3; text-shadow: 0 0 25px rgba(217, 164, 65, 0.95); }
   }
 
-  /* ANIMATION 2: Word-by-Word Bounce */
   .anim-word {
     animation: wordPulseLoop 0.45s ease-in-out infinite alternate;
     animation-delay: calc(var(--i) * 0.12s);
-    will-change: transform, color, text-shadow;
   }
-
   @keyframes wordPulseLoop {
-    0% {
-      transform: scale(1) rotate(0deg);
-      color: #ffffff;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-    }
-    100% {
-      transform: scale(1.15) rotate(-1.2deg);
-      color: #ffd166;
-      text-shadow: 0 0 30px rgba(239, 71, 111, 0.9), 0 0 50px rgba(255, 209, 102, 0.85);
-    }
+    0% { transform: scale(1); color: #ffffff; }
+    100% { transform: scale(1.15); color: #ffd166; text-shadow: 0 0 30px rgba(239, 71, 111, 0.9); }
   }
 
-  /* ANIMATION 3: Bass Glitch & Rumble */
   .main-heading.anim-bass-glitch {
     animation: bassGlitchLoop 0.16s infinite alternate ease-in-out;
   }
-
   @keyframes bassGlitchLoop {
-    0% {
-      transform: scale(1) translate(0, 0);
-      text-shadow: -4px 0 #bb4d25, 4px 0 #d9a441, 0 4px 20px rgba(0, 0, 0, 0.9);
-    }
-    50% {
-      transform: scale(1.08) translate(-3px, -2px) rotate(-1deg);
-      color: #fff5cc;
-      text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441, 0 0 35px rgba(217, 164, 65, 0.9);
-    }
-    100% {
-      transform: scale(1.04) translate(3px, 2px) rotate(1deg);
-      color: #ffffff;
-      text-shadow: -3px 3px #bb4d25, 3px -3px #d9a441, 0 0 45px rgba(187, 77, 37, 0.9);
-    }
+    0% { transform: scale(1); text-shadow: -4px 0 #bb4d25, 4px 0 #d9a441; }
+    100% { transform: scale(1.05); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
   }
 
-  /* UP Parivahan Logo with Drop Shadow */
-  .up-logo {
-    width: clamp(90px, 11vw, 150px);
-    height: auto;
-    margin-top: -24px;
-    margin-bottom: 0;
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-  }
-
-  /* ===================== MINIMAL PLAYER CONTAINER ===================== */
+  /* ===================== BOTTOM PLAYER & SHORTCUTS ===================== */
   .player-wrapper {
-    position: fixed; bottom: 20px; left: 50%;
+    position: fixed; bottom: 15px; left: 50%;
     transform: translateX(-50%); width: calc(100% - 40px);
     max-width: 680px; z-index: 100;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
   }
 
   .player-card {
-    background: rgba(20, 14, 10, 0.85); backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(244,234,212,0.15);
-    border-radius: 20px; padding: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    background: rgba(18, 12, 8, 0.88); backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(244,234,212,0.15);
+    border-radius: 24px; padding: 14px 20px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     position: relative;
   }
 
-  .progress-row{
-    display:flex;align-items:center;gap:10px;
-    font-family:var(--font-display);font-size:12px;font-weight:600;
-    color:rgba(244,234,212,0.6); margin-bottom:12px;
-  }
-  .progress-track{
-    flex:1;height:4px;background:rgba(244,234,212,0.2);
-    border-radius:99px;position:relative;cursor:pointer;
-  }
-  .progress-fill{
-    position:absolute;left:0;top:0;bottom:0;
-    background:var(--rust);border-radius:99px;width:0%;
-  }
-
-  .player-main { display: flex; align-items: center; gap: 14px; }
+  .player-main { display: flex; align-items: center; gap: 16px; }
   .now-art{
-    width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0;
-    background: rgba(255,255,255,0.05);
+    width: 52px; height: 52px; border-radius: 12px; object-fit: cover; flex-shrink: 0;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
   }
-  .now-info{min-width:0;flex:1;}
-  .now-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .now-artist{font-size:12px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .now-info { min-width: 0; flex: 1; }
+  .now-title { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+  .now-artist { font-size: 12px; color: rgba(244,234,212,0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
 
-  .controls-group { display: flex; align-items: center; gap: 8px; }
-
-  .ctrl-btn{
-    background:none;border:none;color:var(--cream);
-    width:36px;height:36px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0; transition:background .15s ease, transform .1s ease;
+  .progress-inline {
+    display: flex; align-items: center; gap: 8px; margin-top: 6px;
+    font-family: var(--font-display); font-size: 11px; font-weight: 600; color: rgba(244,234,212,0.5);
   }
-  .ctrl-btn:hover{background:rgba(244,234,212,0.12);}
-  .ctrl-btn:active{transform:scale(0.95);}
-  .ctrl-btn svg{width:18px;height:18px;}
-  .ctrl-btn.play-pause{ background:var(--rust);width:42px;height:42px; }
-  .ctrl-btn.play-pause:hover{background:var(--rust-dark);}
-  .ctrl-btn.playlist-toggle.active { background: rgba(244,234,212,0.2); color: var(--rust); }
+  .progress-track {
+    flex: 1; height: 3px; background: rgba(244,234,212,0.18);
+    border-radius: 99px; position: relative; cursor: pointer;
+  }
+  .progress-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--rust); border-radius: 99px; width: 0%;
+  }
 
-  /* ===================== POPUP PLAYLIST DRAWER ===================== */
+  .controls-group { display: flex; align-items: center; gap: 10px; }
+
+  .ctrl-btn {
+    background: none; border: none; color: var(--cream);
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background .15s ease, transform .1s ease;
+  }
+  .ctrl-btn:hover { background: rgba(244,234,212,0.12); }
+  .ctrl-btn:active { transform: scale(0.92); }
+  .ctrl-btn svg { width: 18px; height: 18px; }
+  .ctrl-btn.play-pause { background: #ffffff; color: var(--ink); width: 44px; height: 44px; }
+  .ctrl-btn.play-pause:hover { background: var(--cream); transform: scale(1.04); }
+
+  /* KEYBOARD SHORTCUTS BAR */
+  .shortcuts-bar {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; color: rgba(244,234,212,0.45);
+    text-transform: uppercase;
+  }
+  .kbd-key {
+    background: rgba(244,234,212,0.1); border: 1px solid rgba(244,234,212,0.15);
+    color: rgba(244,234,212,0.75); padding: 2px 6px; border-radius: 4px;
+    margin-right: 3px; font-size: 9px;
+  }
+
+  /* POPUP PLAYLIST DRAWER */
   .playlist-drawer {
     position: absolute; bottom: 100%; left: 0; right: 0;
-    margin-bottom: 10px; background: rgba(20, 14, 10, 0.92);
+    margin-bottom: 12px; background: rgba(18, 12, 8, 0.95);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(244,234,212,0.15); border-radius: 20px;
     max-height: 0; overflow: hidden; opacity: 0; pointer-events: none;
     transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
   }
+  .playlist-drawer.open { max-height: 280px; opacity: 1; pointer-events: auto; }
+  .drawer-inner { padding: 12px; max-height: 280px; overflow-y: auto; }
+  .track-list { list-style: none; margin: 0; padding: 0; }
+  .track {
+    display: flex; align-items: center; gap: 12px; padding: 8px 10px;
+    border-radius: 10px; cursor: pointer; transition: background .12s ease;
+  }
+  .track:hover { background: rgba(244,234,212,0.08); }
+  .track.playing { background: rgba(187,77,37,0.25); }
+  .track-num { width: 20px; text-align: center; font-family: var(--font-display); font-weight: 600; color: var(--rust); font-size: 13px; }
+  .track-art { width: 36px; height: 36px; border-radius: 6px; object-fit: cover; }
+  .track-info { min-width: 0; flex: 1; }
+  .track-title { font-weight: 500; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+  .track-artist { font-size: 11px; color: rgba(244,234,212,0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  .playlist-drawer.open { max-height: 300px; opacity: 1; pointer-events: auto; }
-  .drawer-inner { padding: 12px; max-height: 300px; overflow-y: auto; }
-  .drawer-inner::-webkit-scrollbar { width: 4px; }
-  .drawer-inner::-webkit-scrollbar-thumb { background: rgba(244,234,212,0.2); border-radius: 4px; }
-
-  .track-list{list-style:none;margin:0;padding:0;}
-  .track{
-    display:flex;align-items:center;gap:12px; padding:8px 10px;
-    border-radius:10px; cursor:pointer; transition:background .12s ease;
-  }
-  .track:hover{background:rgba(244,234,212,0.08);}
-  .track.playing{background:rgba(187,77,37,0.2);}
-  .track-num{
-    width:20px;text-align:center;font-family:var(--font-display);
-    font-weight:600;color:var(--rust);font-size:13px;flex-shrink:0;
-  }
-  .track-art{
-    width:38px;height:38px;border-radius:6px;object-fit:cover;
-    flex-shrink:0;background:rgba(255,255,255,0.05);
-  }
-  .track-info{min-width:0;flex:1;}
-  .track-title{font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .track-artist{font-size:11px;color:rgba(244,234,212,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
-  #yt-player{
-    position:fixed; top:0; left:0; width:200px; height:200px;
-    opacity:0.01; pointer-events:none; z-index:-1;
-  }
+  #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
 
   @media(max-width: 768px){
-    .floating-horn {
-      bottom: 120px;
-      right: 20px;
-    }
+    .shortcuts-bar { display: none; }
+    .header-bar { padding: 14px 16px; }
+    .driver-badge { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- ===================== HERO ===================== -->
+<!-- ===================== TOP HEADER BAR ===================== -->
+<header class="header-bar">
+  <div class="header-left">
+    <div class="bus-badge-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 16c0 .88.39 1.67 1 2.22V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h8v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H6V6h12v5z"/></svg>
+    </div>
+    <div class="header-titles">
+      <div class="header-brand">उत्तर प्रदेश परिवहन</div>
+      <div class="header-route">NH 19 · GHAZIPUR — LUCKNOW</div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="clock-widget" id="liveClock">22:07 <span>IST</span></div>
+    <div class="passenger-badge">
+      <div class="live-dot"></div>
+      <span>319 ABOARD</span>
+    </div>
+    <div class="driver-badge">
+      <div class="driver-avatar">M</div>
+      <span>Who's driving?</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO SECTION ===================== -->
 <section class="hero">
   <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
     <source src="assets/bus-loop.mp4" type="video/mp4">
   </video>
   <div class="scrim"></div>
-  <div class="hero-meta">Crafted by - @onlyanmolll</div>
+  <div class="rain-overlay"></div>
 
-  <!-- FLOATING HORN BUTTON -->
-  <button class="floating-horn" id="hornBtn" title="Blow Horn (H)">
-    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-    <span>हॉर्न ओके प्लीज</span>
-  </button>
-
-<div class="hero-title-wrapper">
-  <div class="sub-heading" id="heroSubCount">गाज़ीपुर · लखनऊ</div>
-  <h1 class="main-heading" id="mainHeading">उत्तर प्रदेश परिवहन</h1>
-  <!-- LOGO PLACED DIRECTLY BELOW MAIN TEXT -->
-  <img class="up-logo" src="assets/upsrtc-logo.png" alt="UPSRTC Logo">
-</div>
+  <div class="hero-title-wrapper">
+    <div class="track-meta-badge">92 TRACKS · NON-STOP HIGHWAY RADIO</div>
+    <h1 class="main-heading" id="mainHeading">उत्तर प्रदेश परिवहन</h1>
+    
+    <!-- CENTERED FLOATING HORN BUTTON -->
+    <div class="centered-horn-wrapper">
+      <button class="floating-horn" id="hornBtn" title="Blow Horn (H)">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <span>हॉर्न ओके प्लीज · HORN OK PLEASE</span>
+      </button>
+    </div>
+  </div>
 </section>
 
-<!-- ===================== MINIMAL PLAYER ===================== -->
+<!-- ===================== PLAYER & KEYBOARD SHORTCUTS ===================== -->
 <div class="player-wrapper">
   <div class="playlist-drawer" id="playlistDrawer">
     <div class="drawer-inner">
@@ -342,19 +390,19 @@
   </div>
 
   <div class="player-card">
-    <div class="progress-row">
-      <span id="curTime">0:00</span>
-      <div class="progress-track" id="progressTrack">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <span id="durTime">0:00</span>
-    </div>
-
     <div class="player-main">
-      <img class="now-art" id="nowArt" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23241608'/%3E%3C/svg%3E" alt="">
+      <img class="now-art" id="nowArt" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23120c08'/%3E%3C/svg%3E" alt="">
+      
       <div class="now-info">
-        <div class="now-title" id="nowTitle">उत्तर प्रदेश परिवहन </div>
+        <div class="now-title" id="nowTitle">उत्तर प्रदेश परिवहन</div>
         <div class="now-artist" id="nowArtist">Press play to start stream</div>
+        <div class="progress-inline">
+          <span id="curTime">0:00</span>
+          <div class="progress-track" id="progressTrack">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span id="durTime">0:00</span>
+        </div>
       </div>
 
       <div class="controls-group">
@@ -373,6 +421,14 @@
       </div>
     </div>
   </div>
+
+  <!-- KEYBOARD SHORTCUT HELPER LEGEND -->
+  <div class="shortcuts-bar">
+    <span><span class="kbd-key">Space</span> PLAY / PAUSE</span>
+    <span><span class="kbd-key">←</span> <span class="kbd-key">→</span> SEEK</span>
+    <span><span class="kbd-key">N</span> <span class="kbd-key">P</span> TRACK</span>
+    <span><span class="kbd-key">H</span> HORN</span>
+  </div>
 </div>
 
 <div id="yt-player"></div>
@@ -387,21 +443,26 @@ const PLAYLIST = [
   { id: "vCTW2GfcepQ", title: "Tujhe Dekha Toh",             artist: "DDLJ · Kumar Sanu, Lata Mangeshkar" }
 ];
 
-/* =====================================================
-   DEVANAGARI GRAPHEME SEGMENTER (PREVENTS LETTER BREAKS)
-===================================================== */
+/* REALTIME CLOCK WIDGET */
+function updateClock() {
+  const now = new Date();
+  const hrs = String(now.getHours()).padStart(2, '0');
+  const mins = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('liveClock').innerHTML = `${hrs}:${mins} <span>IST</span>`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* DEVANAGARI SEGMENTER */
 function getGraphemes(text) {
   if (typeof Intl !== 'undefined' && Intl.Segmenter) {
     const segmenter = new Intl.Segmenter('hi', { granularity: 'grapheme' });
     return Array.from(segmenter.segment(text), s => s.segment);
   }
-  // Fallback for older browsers
   return text.match(/[\u0900-\u097F][\u0900-\u094F\u0962-\u0963\u0981]*|./g) || [text];
 }
 
-/* =====================================================
-   HORN AUDIO & DYNAMIC RANDOM TEXT ANIMATION SYNC
-===================================================== */
+/* HORN AUDIO & DYNAMIC ANIMATION */
 const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
 const hornAudioObjects = HORN_FILES.map(file => new Audio(file));
 let currentHornIndex = 0;
@@ -412,12 +473,9 @@ let activeHornEndHandler = null;
 function stopTextAnimation() {
   const mainHeading = document.getElementById('mainHeading');
   if (!mainHeading) return;
-
-  // Clear animation classes & restore original clean text
   mainHeading.className = 'main-heading';
   mainHeading.textContent = ORIGINAL_TEXT;
 
-  // Cleanup audio listeners
   if (activeHornAudio && activeHornEndHandler) {
     activeHornAudio.removeEventListener('ended', activeHornEndHandler);
     activeHornAudio.removeEventListener('pause', activeHornEndHandler);
@@ -431,39 +489,28 @@ function startTextAnimation(hornAudio) {
   if (!mainHeading) return;
 
   stopTextAnimation();
-
   const animChoice = Math.floor(Math.random() * 3);
 
   if (animChoice === 0) {
-    /* Style 1: Grapheme-Safe Letter-by-Letter Wave */
     const words = ORIGINAL_TEXT.split(' ');
     let globalGraphemeIdx = 0;
-
     mainHeading.innerHTML = words.map(word => {
       const graphemes = getGraphemes(word);
-      const spans = graphemes.map(g => {
-        return `<span class="anim-char" style="--i: ${globalGraphemeIdx++}">${g}</span>`;
-      }).join('');
+      const spans = graphemes.map(g => `<span class="anim-char" style="--i: ${globalGraphemeIdx++}">${g}</span>`).join('');
       return `<span class="word-span">${spans}</span>`;
     }).join('');
   } 
   else if (animChoice === 1) {
-    /* Style 2: Word-by-Word Bounce */
     const words = ORIGINAL_TEXT.split(' ');
-    mainHeading.innerHTML = words.map((word, i) => {
-      return `<span class="word-span anim-word" style="--i: ${i}">${word}</span>`;
-    }).join('');
+    mainHeading.innerHTML = words.map((word, i) => `<span class="word-span anim-word" style="--i: ${i}">${word}</span>`).join('');
   } 
   else {
-    /* Style 3: Bass Glitch & Rumble */
     mainHeading.classList.add('anim-bass-glitch');
     mainHeading.textContent = ORIGINAL_TEXT;
   }
 
-  // Attach stop handlers synced with horn audio end
   activeHornAudio = hornAudio;
   activeHornEndHandler = () => stopTextAnimation();
-
   hornAudio.addEventListener('ended', activeHornEndHandler);
   hornAudio.addEventListener('pause', activeHornEndHandler);
 }
@@ -471,14 +518,11 @@ function startTextAnimation(hornAudio) {
 function playNextHorn() {
   const horn = hornAudioObjects[currentHornIndex];
   horn.currentTime = 0;
-
   startTextAnimation(horn);
-
   horn.play().catch(err => {
     console.log('Horn audio play blocked:', err);
     stopTextAnimation();
   });
-
   currentHornIndex = (currentHornIndex + 1) % HORN_FILES.length;
 }
 
@@ -487,9 +531,7 @@ function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
 function getRandomIndex(excludeIndex = -1) {
   if (PLAYLIST.length <= 1) return 0;
   let nextIndex;
-  do {
-    nextIndex = Math.floor(Math.random() * PLAYLIST.length);
-  } while (nextIndex === excludeIndex);
+  do { nextIndex = Math.floor(Math.random() * PLAYLIST.length); } while (nextIndex === excludeIndex);
   return nextIndex;
 }
 
@@ -502,58 +544,6 @@ let progressTimer = null;
 
 const trackListEl = document.getElementById('trackList');
 const backgroundVideo = document.getElementById('backgroundVideo');
-let backgroundWasPlaying = true;
-let backgroundResumeTimer = null;
-
-function resumeBackgroundVideo(){
-  if (!backgroundVideo) return;
-
-  if (backgroundVideo.ended) {
-    backgroundVideo.currentTime = 0;
-  }
-
-  const p = backgroundVideo.play();
-  if (p && typeof p.catch === 'function') {
-    p.catch(() => {});
-  }
-}
-
-function protectBackgroundVideo(){
-  if (!backgroundVideo) return;
-
-  backgroundWasPlaying = !backgroundVideo.paused && !backgroundVideo.ended;
-
-  resumeBackgroundVideo();
-
-  cancelAnimationFrame(protectBackgroundVideo._raf1);
-  cancelAnimationFrame(protectBackgroundVideo._raf2);
-
-  protectBackgroundVideo._raf1 = requestAnimationFrame(() => {
-    resumeBackgroundVideo();
-
-    protectBackgroundVideo._raf2 = requestAnimationFrame(() => {
-      resumeBackgroundVideo();
-    });
-  });
-
-  clearTimeout(backgroundResumeTimer);
-  backgroundResumeTimer = setTimeout(() => {
-    resumeBackgroundVideo();
-  }, 250);
-}
-
-if (backgroundVideo) {
-  backgroundVideo.addEventListener('pause', () => {
-    if (backgroundWasPlaying) resumeBackgroundVideo();
-  });
-
-  backgroundVideo.addEventListener('canplay', resumeBackgroundVideo);
-  backgroundVideo.addEventListener('loadeddata', resumeBackgroundVideo);
-
-  resumeBackgroundVideo();
-}
-
-document.getElementById('heroSubCount').textContent = `गाज़ीपुर · लखनऊ`;
 
 PLAYLIST.forEach((t, i) => {
   const li = document.createElement('li');
@@ -567,10 +557,7 @@ PLAYLIST.forEach((t, i) => {
       <div class="track-artist">${t.artist}</div>
     </div>
   `;
-  li.addEventListener('click', () => {
-    playTrack(i);
-    toggleDrawer(false);
-  });
+  li.addEventListener('click', () => { playTrack(i); toggleDrawer(false); });
   trackListEl.appendChild(li);
 });
 
@@ -588,7 +575,6 @@ function toggleDrawer(forceState){
   drawerEl.classList.toggle('open', isOpen);
   playlistBtn.classList.toggle('active', isOpen);
 }
-
 playlistBtn.addEventListener('click', () => toggleDrawer());
 
 const tag = document.createElement('script');
@@ -598,14 +584,7 @@ document.body.appendChild(tag);
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('yt-player', {
     height: '200', width: '200',
-    playerVars: {
-      autoplay: 0,
-      controls: 0,
-      disablekb: 1,
-      playsinline: 1,
-      enablejsapi: 1,
-      origin: window.location.origin || '*'
-    },
+    playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1, enablejsapi: 1, origin: window.location.origin || '*' },
     events: {
       onReady: () => { ytReady = true; },
       onStateChange: onPlayerStateChange,
@@ -616,13 +595,9 @@ window.onYouTubeIframeAPIReady = function(){
 
 function onPlayerStateChange(e){
   if (e.data === YT.PlayerState.PLAYING){
-    isPlaying = true;
-    updatePlayIcon();
-    startProgressLoop();
+    isPlaying = true; updatePlayIcon(); startProgressLoop();
   } else if (e.data === YT.PlayerState.PAUSED){
-    isPlaying = false;
-    updatePlayIcon();
-    stopProgressLoop();
+    isPlaying = false; updatePlayIcon(); stopProgressLoop();
   } else if (e.data === YT.PlayerState.ENDED){
     playTrack(getRandomIndex(currentIndex));
   } else if ((e.data === YT.PlayerState.CUED || e.data === YT.PlayerState.UNSTARTED) && shouldBePlaying){
@@ -631,18 +606,11 @@ function onPlayerStateChange(e){
 }
 
 function playTrack(index){
-  if (!ytReady || !ytPlayer){
-    setTimeout(() => playTrack(index), 200);
-    return;
-  }
-
+  if (!ytReady || !ytPlayer){ setTimeout(() => playTrack(index), 200); return; }
   if (index < 0 || index >= PLAYLIST.length) return;
-
-  protectBackgroundVideo();
 
   currentIndex = index;
   shouldBePlaying = true;
-
   const t = PLAYLIST[index];
 
   document.getElementById('nowArt').src = thumb(t.id);
@@ -650,37 +618,19 @@ function playTrack(index){
   document.getElementById('nowArtist').textContent = t.artist;
   renderActiveTrack();
 
-  ytPlayer.loadVideoById({
-    videoId: t.id,
-    startSeconds: 0
-  });
-
-  protectBackgroundVideo();
-
-  setTimeout(() => protectBackgroundVideo(), 50);
-  setTimeout(() => protectBackgroundVideo(), 150);
-  setTimeout(() => protectBackgroundVideo(), 400);
+  ytPlayer.loadVideoById({ videoId: t.id, startSeconds: 0 });
 }
 
 function togglePlayPause(){
-  if (currentIndex === -1){ 
-    playTrack(getRandomIndex()); 
-    return; 
-  }
-  
-  if (isPlaying){ 
-    shouldBePlaying = false;
-    ytPlayer.pauseVideo(); 
-  } else { 
-    shouldBePlaying = true;
-    ytPlayer.playVideo(); 
-  }
+  if (currentIndex === -1){ playTrack(getRandomIndex()); return; }
+  if (isPlaying){ shouldBePlaying = false; ytPlayer.pauseVideo(); }
+  else { shouldBePlaying = true; ytPlayer.playVideo(); }
 }
 
 function updatePlayIcon(){
   const icon = document.getElementById('playIcon');
   icon.innerHTML = isPlaying
-    ? '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>'
+    ? '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'
     : '<path d="M8 5v14l11-7z"/>';
 }
 
@@ -712,35 +662,19 @@ document.getElementById('progressTrack').addEventListener('click', (e) => {
 });
 
 document.getElementById('playBtn').addEventListener('click', togglePlayPause);
-document.getElementById('nextBtn').addEventListener('click', () => {
-  protectBackgroundVideo();
-  playTrack(getRandomIndex(currentIndex));
-});
-document.getElementById('prevBtn').addEventListener('click', () => {
-  protectBackgroundVideo();
-  playTrack(getRandomIndex(currentIndex));
-});
-
-/* Horn Button Event Listener */
+document.getElementById('nextBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
+document.getElementById('prevBtn').addEventListener('click', () => playTrack(getRandomIndex(currentIndex)));
 document.getElementById('hornBtn').addEventListener('click', playNextHorn);
 
 document.addEventListener('keydown', (e) => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
   switch(e.code){
-    case 'Space':
-      e.preventDefault(); togglePlayPause(); break;
-    case 'ArrowRight':
-      if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(ytPlayer.getCurrentTime() + 5, true);
-      break;
-    case 'ArrowLeft':
-      if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(Math.max(0, ytPlayer.getCurrentTime() - 5), true);
-      break;
-    case 'KeyN':
-      document.getElementById('nextBtn').click(); break;
-    case 'KeyP':
-      document.getElementById('prevBtn').click(); break;
-    case 'KeyH':
-      playNextHorn(); break;
+    case 'Space': e.preventDefault(); togglePlayPause(); break;
+    case 'ArrowRight': if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(ytPlayer.getCurrentTime() + 5, true); break;
+    case 'ArrowLeft': if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(Math.max(0, ytPlayer.getCurrentTime() - 5), true); break;
+    case 'KeyN': document.getElementById('nextBtn').click(); break;
+    case 'KeyP': document.getElementById('prevBtn').click(); break;
+    case 'KeyH': playNextHorn(); break;
   }
 });
 </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>उत्तर प्रदेश परिवहन — Nonstop Highway Hindi Hits</title>
 <meta name="description" content="Pull over at Dhaba Radio — nonstop 90s & 2000s Hindi songs.">
 <meta name="theme-color" content="#120c08">
@@ -39,7 +39,7 @@
 
   button{font-family:inherit;cursor:pointer;}
 
-  /* ===================== HERO (FULL SCREEN & ATMOSPHERE) ===================== */
+  /* ===================== HERO & 16:9 VIDEO ATMOSPHERE ===================== */
   .hero{
     position:absolute; inset:0;
     width:100vw; height:100vh;
@@ -48,17 +48,17 @@
   .hero video{
     position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;
+    object-position: center center;
     filter:saturate(1.02) contrast(1.05) brightness(0.95);
     z-index:0;
   }
   
-  /* REDUCED VIGNETTE SCRIM OVERLAY */
   .hero .scrim{
     position:absolute;inset:0;
     background:
       radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%),
-      linear-gradient(to bottom, rgba(8, 5, 3, 0.5) 0%, transparent 20%),
-      linear-gradient(to top, rgba(8, 5, 3, 0.75) 0%, rgba(8, 5, 3, 0.2) 35%, transparent 65%);
+      linear-gradient(to bottom, rgba(8, 5, 3, 0.6) 0%, transparent 25%),
+      linear-gradient(to top, rgba(8, 5, 3, 0.8) 0%, rgba(8, 5, 3, 0.2) 35%, transparent 65%);
     z-index:1;
   }
 
@@ -81,7 +81,7 @@
   .header-bar {
     position: absolute; top: 0; left: 0; right: 0;
     z-index: 20;
-    padding: 18px 28px;
+    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,58 +90,58 @@
   .header-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   .bus-badge-icon {
-    width: 34px; height: 34px;
+    width: 32px; height: 32px;
     background: var(--mustard);
     color: var(--ink);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 15px rgba(217,164,65,0.4);
+    box-shadow: 0 0 12px rgba(217,164,65,0.4);
   }
-  .bus-badge-icon svg { width: 20px; height: 20px; fill: currentColor; }
+  .bus-badge-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
   .header-titles {
     display: flex; flex-direction: column;
   }
   .header-brand {
     font-family: var(--font-hindi);
-    font-weight: 800; font-size: 16px;
+    font-weight: 800; font-size: 15px;
     line-height: 1; color: #fff;
   }
   .header-route {
     font-family: var(--font-display);
-    font-size: 11px; font-weight: 600;
+    font-size: 10px; font-weight: 600;
     color: rgba(244,234,212,0.6);
-    letter-spacing: 0.12em; text-transform: uppercase;
-    margin-top: 3px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 2px;
   }
 
   .header-right {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     font-family: var(--font-display);
   }
 
   .clock-widget {
-    font-size: 20px; font-weight: 700;
+    font-size: 18px; font-weight: 700;
     letter-spacing: 0.05em; color: #fff;
     display: flex; align-items: baseline; gap: 3px;
   }
-  .clock-widget span { font-size: 11px; opacity: 0.6; }
+  .clock-widget span { font-size: 10px; opacity: 0.6; }
 
   .passenger-badge {
     display: flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 700;
+    font-size: 11px; font-weight: 700;
     letter-spacing: 0.08em; color: rgba(244,234,212,0.85);
   }
   .live-dot {
-    width: 8px; height: 8px;
+    width: 7px; height: 7px;
     background: #ff595e; border-radius: 50%;
-    box-shadow: 0 0 8px #ff595e;
+    box-shadow: 0 0 6px #ff595e;
     animation: livePulse 1.5s infinite alternate;
   }
   @keyframes livePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
@@ -150,40 +150,35 @@
     background: rgba(20, 14, 10, 0.7);
     border: 1px solid rgba(244,234,212,0.18);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 6px 14px; border-radius: 999px;
-    font-size: 12px; font-weight: 600; color: #fff;
-    display: flex; align-items: center; gap: 8px;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; color: #fff;
+    display: flex; align-items: center; gap: 6px;
     text-decoration: none;
-    transition: background 0.2s ease, transform 0.15s ease;
-  }
-  .driver-badge:hover {
-    background: var(--rust);
-    border-color: var(--rust);
-    transform: translateY(-1px);
+    transition: background 0.2s ease;
   }
   .driver-avatar {
-    width: 18px; height: 18px; background: var(--mustard); color: #000;
+    width: 16px; height: 16px; background: var(--mustard); color: #000;
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 800;
+    font-size: 9px; font-weight: 800;
   }
 
   /* ===================== CENTERED DISPLAY TEXT & HERO ===================== */
   .hero-title-wrapper {
-    position: absolute; top: 16%; left: 50%;
+    position: absolute; top: 14%; left: 50%;
     transform: translateX(-50%); text-align: center;
     z-index: 10; width: 95%; max-width: 1200px; pointer-events: none;
     display: flex; flex-direction: column; align-items: center;
   }
 
   .track-meta-badge {
-    font-family: var(--font-display); font-size: clamp(10px, 1.4vw, 13px);
-    font-weight: 700; letter-spacing: 0.4em; color: rgba(244, 234, 212, 0.75);
-    text-transform: uppercase; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-display); font-size: clamp(9px, 1.2vw, 12px);
+    font-weight: 700; letter-spacing: 0.3em; color: rgba(244, 234, 212, 0.75);
+    text-transform: uppercase; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .main-heading {
-    font-family: var(--font-hindi); font-size: clamp(48px, 9vw, 125px);
-    font-weight: 800; color: #ffffff; margin: 0; line-height: 1; letter-spacing: 0.5px;
+    font-family: var(--font-hindi); font-size: clamp(32px, 7.5vw, 110px);
+    font-weight: 800; color: #ffffff; margin: 0; line-height: 1.1; letter-spacing: 0.5px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
     display: flex; flex-wrap: nowrap; justify-content: center; align-items: center;
     white-space: nowrap; will-change: transform, color, text-shadow;
@@ -196,7 +191,7 @@
   /* FLOATING HORN BADGE POSITIONED JUST ABOVE BUS BODY */
   .centered-horn-wrapper {
     position: absolute;
-    top: 36.5vh;
+    top: 36vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 15;
@@ -208,14 +203,15 @@
     background: rgba(20, 14, 10, 0.88);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(244,234,212,0.25);
-    color: var(--cream); padding: 8px 20px; border-radius: 999px;
-    font-family: var(--font-hindi); font-size: 14px; font-weight: 700;
+    color: var(--cream); padding: 8px 18px; border-radius: 999px;
+    font-family: var(--font-hindi); font-size: 13px; font-weight: 700;
     transition: background 0.2s ease, transform 0.1s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
   }
   .floating-horn:hover { background: var(--rust); border-color: var(--rust); }
   .floating-horn:active { transform: scale(0.95); }
-  .floating-horn svg { width: 16px; height: 16px; fill: currentColor; }
+  .floating-horn svg { width: 15px; height: 15px; fill: currentColor; }
 
   /* ===================== ANIMATION STYLES ===================== */
   .anim-char {
@@ -225,7 +221,7 @@
   }
   @keyframes charWaveLoop {
     0% { transform: translateY(0) scale(1); color: #ffffff; }
-    100% { transform: translateY(-12px) scale(1.12); color: #fff4a3; text-shadow: 0 0 25px rgba(217, 164, 65, 0.95); }
+    100% { transform: translateY(-10px) scale(1.1); color: #fff4a3; text-shadow: 0 0 25px rgba(217, 164, 65, 0.95); }
   }
 
   .anim-word {
@@ -234,7 +230,7 @@
   }
   @keyframes wordPulseLoop {
     0% { transform: scale(1); color: #ffffff; }
-    100% { transform: scale(1.15); color: #ffd166; text-shadow: 0 0 30px rgba(239, 71, 111, 0.9); }
+    100% { transform: scale(1.12); color: #ffd166; text-shadow: 0 0 30px rgba(239, 71, 111, 0.9); }
   }
 
   .main-heading.anim-bass-glitch {
@@ -242,20 +238,20 @@
   }
   @keyframes bassGlitchLoop {
     0% { transform: scale(1); text-shadow: -4px 0 #bb4d25, 4px 0 #d9a441; }
-    100% { transform: scale(1.05); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
+    100% { transform: scale(1.04); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
   }
 
   /* ===================== RETRO STEREO DECK CONTAINER ===================== */
   .player-wrapper {
-    position: fixed; bottom: 6px; left: 50%;
+    position: fixed; bottom: 8px; left: 50%;
     transform: translateX(-50%);
     z-index: 100;
     display: flex; flex-direction: column; align-items: center; gap: 3px;
   }
 
   .stereo-unit {
-    width: 520px;
-    height: 125px;
+    width: 500px;
+    height: 120px;
     background: linear-gradient(180deg, #2c2d30 0%, #151618 15%, #0d0e10 85%, #222326 100%);
     border: 5px solid #050505;
     border-radius: 8px;
@@ -267,7 +263,7 @@
   }
 
   .left-panel {
-    width: 95px;
+    width: 90px;
     height: 100%;
     background: linear-gradient(135deg, #1f2023, #111214);
     border-radius: 4px;
@@ -281,59 +277,46 @@
   }
 
   .knob-bezel {
-    width: 62px;
-    height: 62px;
+    width: 60px; height: 60px;
     border-radius: 50%;
     background: radial-gradient(circle, #bb4d25 65%, #8e3a1b 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 6px rgba(187, 77, 37, 0.5), inset 0 0 3px #000;
     cursor: ns-resize;
   }
 
   .volume-knob {
-    width: 48px;
-    height: 48px;
+    width: 46px; height: 46px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #555 0%, #1a1a1b 70%, #050505 100%);
     border: 2px solid #333;
     box-shadow: 0 3px 6px rgba(0,0,0,0.7);
     position: relative;
     transition: transform 0.08s ease-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
   }
 
   .knob-notch {
-    position: absolute;
-    top: 3px;
-    width: 3px;
-    height: 7px;
-    background-color: #33ff00;
-    border-radius: 2px;
+    position: absolute; top: 3px;
+    width: 3px; height: 7px;
+    background-color: #33ff00; border-radius: 2px;
     box-shadow: 0 0 4px #33ff00;
   }
 
   .knob-text {
-    position: absolute;
-    bottom: 3px;
-    font-size: 6px;
-    color: #888;
-    font-weight: bold;
+    position: absolute; bottom: 3px;
+    font-size: 6px; color: #888; font-weight: bold;
     letter-spacing: 0.5px;
   }
 
   .right-panel {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     justify-content: space-between;
   }
 
   .lcd-screen {
-    height: 72px;
+    height: 70px;
     background-color: #040d06;
     border: 2px solid #1a1a1a;
     border-radius: 3px;
@@ -341,8 +324,7 @@
     position: relative;
     overflow: hidden;
     box-shadow: inset 0 0 10px rgba(51, 255, 0, 0.15);
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     justify-content: space-between;
   }
 
@@ -369,8 +351,8 @@
   }
 
   .song-title {
-    font-size: 14px; letter-spacing: 0.5px; white-space: nowrap;
-    text-transform: uppercase; max-width: 230px; overflow: hidden; text-overflow: ellipsis;
+    font-size: 13px; letter-spacing: 0.5px; white-space: nowrap;
+    text-transform: uppercase; max-width: 210px; overflow: hidden; text-overflow: ellipsis;
   }
 
   .time-vol-display {
@@ -380,10 +362,10 @@
 
   .lcd-progress-track {
     width: 100%;
-    height: 6px;
+    height: 5px;
     background: #0d2200;
     border-radius: 3px;
-    margin: 6px 0 5px 0;
+    margin: 4px 0;
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -397,7 +379,7 @@
   }
 
   .eq-container {
-    display: flex; gap: 2px; align-items: flex-end; height: 22px;
+    display: flex; gap: 2px; align-items: flex-end; height: 20px;
   }
   .eq-bar {
     width: 3px; height: 100%; display: flex; flex-direction: column-reverse; gap: 1px;
@@ -407,19 +389,19 @@
   .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 2px #ffcc00; }
   .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 2px #ff2a2a; }
 
-  .bottom-controls { display: flex; gap: 3px; height: 26px; }
+  .bottom-controls { display: flex; gap: 3px; height: 25px; }
 
   .btn {
     flex: 1;
     background: linear-gradient(180deg, #3a3b3e, #1a1b1d);
     border: 1px solid #48494d; border-radius: 3px; color: #ccc;
-    font-size: 9px; font-weight: bold; display: flex; align-items: center;
+    font-size: 8px; font-weight: bold; display: flex; align-items: center;
     justify-content: center; cursor: pointer;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 3px rgba(0,0,0,0.7);
     transition: all 0.08s ease;
   }
   .btn:hover { background: linear-gradient(180deg, #4a4b4e, #2a2b2d); color: #fff; }
-  .btn:active { background: #111214; transform: translateY(1px); box-shadow: inset 0 2px 4px rgba(0,0,0,0.8); }
+  .btn:active { background: #111214; transform: translateY(1px); }
   .btn-preset-num { color: #ff3333; margin-right: 2px; }
 
   .playlist-drawer {
@@ -442,6 +424,7 @@
   }
   .close-playlist { cursor: pointer; color: #ff3333; }
 
+  /* FLOATING TICKET WIDGET BUTTON */
   .floating-ticket-btn {
     position: absolute;
     right: -82px;
@@ -462,24 +445,24 @@
   .floating-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
   .shortcuts-bar {
-    display: flex; align-items: center; gap: 14px;
+    display: flex; align-items: center; gap: 12px;
     font-family: var(--font-display); font-size: 10px; font-weight: 700;
     letter-spacing: 0.1em; color: rgba(244,234,212,0.5);
     text-transform: uppercase;
   }
   .kbd-key {
     background: rgba(244,234,212,0.1); border: 1px solid rgba(244,234,212,0.18);
-    color: rgba(244,234,212,0.85); padding: 2px 6px; border-radius: 4px;
-    margin-right: 3px; font-size: 9px; cursor: pointer;
+    color: rgba(244,234,212,0.85); padding: 2px 5px; border-radius: 3px;
+    margin-right: 2px; font-size: 8px; cursor: pointer;
   }
 
-  /* ===================== OLD-FASHIONED BUS TICKET MODAL ===================== */
+  /* ===================== TICKET MODAL ===================== */
   .ticket-modal-overlay {
     position: fixed; inset: 0; z-index: 500;
     background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-    padding: 20px;
+    padding: 16px;
   }
   .ticket-modal-overlay.open { opacity: 1; pointer-events: auto; }
 
@@ -488,10 +471,10 @@
     background-image: radial-gradient(#d6c096 1px, transparent 0);
     background-size: 12px 12px;
     color: #2b1d0e;
-    width: 100%; max-width: 420px;
+    width: 100%; max-width: 400px;
     border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(130, 95, 45, 0.2);
+    padding: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
     font-family: var(--font-ticket);
     position: relative;
     border: 2px dashed #8b6e43;
@@ -502,125 +485,138 @@
 
   .ticket-card::before, .ticket-card::after {
     content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-    width: 20px; height: 20px; background: #080503; border-radius: 50%;
+    width: 18px; height: 18px; background: #080503; border-radius: 50%;
   }
-  .ticket-card::before { left: -12px; }
-  .ticket-card::after { right: -12px; }
+  .ticket-card::before { left: -10px; }
+  .ticket-card::after { right: -10px; }
 
-  .ticket-header { text-align: center; border-bottom: 2px solid #8b6e43; padding-bottom: 12px; margin-bottom: 14px; }
-  .ticket-corp-title { font-family: var(--font-hindi); font-size: 20px; font-weight: 800; letter-spacing: 1px; color: #7a2811; margin: 0; line-height: 1; }
-  .ticket-sub { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.75; margin-top: 4px; }
+  .ticket-header { text-align: center; border-bottom: 2px solid #8b6e43; padding-bottom: 10px; margin-bottom: 12px; }
+  .ticket-corp-title { font-family: var(--font-hindi); font-size: 18px; font-weight: 800; letter-spacing: 1px; color: #7a2811; margin: 0; line-height: 1; }
+  .ticket-sub { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.75; margin-top: 3px; }
 
-  .ticket-body { display: flex; flex-direction: column; gap: 10px; font-size: 12px; }
+  .ticket-body { display: flex; flex-direction: column; gap: 8px; font-size: 11px; }
   .ticket-row { display: flex; justify-content: space-between; align-items: baseline; }
-  .ticket-label { font-size: 10px; opacity: 0.65; text-transform: uppercase; }
+  .ticket-label { font-size: 9px; opacity: 0.65; text-transform: uppercase; }
   .ticket-val { font-weight: 700; }
-  .ticket-val-highlight { font-size: 14px; color: #8e3a1b; font-weight: 700; }
+  .ticket-val-highlight { font-size: 13px; color: #8e3a1b; font-weight: 700; }
 
-  .ticket-seat-badge { background: #7a2811; color: #f4ead4; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; display: inline-block; text-transform: uppercase; }
+  .ticket-seat-badge { background: #7a2811; color: #f4ead4; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; display: inline-block; text-transform: uppercase; }
 
-  .ticket-audio-box { margin-top: 12px; padding: 10px; background: rgba(139, 110, 67, 0.12); border: 1px solid rgba(139, 110, 67, 0.3); border-radius: 6px; }
+  .ticket-audio-box { margin-top: 10px; padding: 8px; background: rgba(139, 110, 67, 0.12); border: 1px solid rgba(139, 110, 67, 0.3); border-radius: 6px; }
 
-  .ticket-waveform { display: flex; align-items: flex-end; gap: 3px; height: 22px; margin-top: 8px; justify-content: center; }
-  .wave-bar { width: 4px; background: #8e3a1b; border-radius: 2px; animation: waveBounce 0.8s infinite alternate ease-in-out; }
+  .ticket-waveform { display: flex; align-items: flex-end; gap: 3px; height: 20px; margin-top: 6px; justify-content: center; }
+  .wave-bar { width: 3px; background: #8e3a1b; border-radius: 2px; animation: waveBounce 0.8s infinite alternate ease-in-out; }
   .wave-bar:nth-child(2n) { animation-delay: 0.15s; }
   .wave-bar:nth-child(3n) { animation-delay: 0.3s; }
   .wave-bar:nth-child(4n) { animation-delay: 0.45s; }
 
-  @keyframes waveBounce { 0% { height: 4px; } 100% { height: 22px; } }
+  @keyframes waveBounce { 0% { height: 4px; } 100% { height: 20px; } }
 
-  .ticket-barcode { text-align: center; font-family: 'Courier New', monospace; font-size: 26px; letter-spacing: 4px; margin-top: 14px; opacity: 0.8; }
+  .ticket-barcode { text-align: center; font-family: 'Courier New', monospace; font-size: 22px; letter-spacing: 4px; margin-top: 12px; opacity: 0.8; }
 
-  .ticket-close-btn { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 18px; font-weight: 700; color: #8b6e43; cursor: pointer; }
-  .ticket-close-btn:hover { color: #8e3a1b; }
+  .ticket-close-btn { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 16px; font-weight: 700; color: #8b6e43; cursor: pointer; }
 
   #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
 
-  /* ===================== MOBILE RESPONSIVE MEDIA QUERIES ===================== */
+  /* ===================== STRICT MOBILE OVERRIDES (SOLVES screenshot ISSUES) ===================== */
   @media (max-width: 600px) {
+    /* 1. Header & Title Adjustments */
     .header-bar {
-      padding: 10px 14px;
+      padding: 10px 12px;
+    }
+    .header-brand {
+      font-size: 13px;
     }
     .header-route {
-      font-size: 9px;
+      font-size: 8px;
     }
     .driver-badge {
       display: none;
     }
     .clock-widget {
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .hero-title-wrapper {
-      top: 10%;
+      top: 18%; /* Pushes text down safely below mobile status/nav bars */
     }
     .track-meta-badge {
-      font-size: 9px;
-      letter-spacing: 0.2em;
+      font-size: 8px;
+      letter-spacing: 0.15em;
     }
     .main-heading {
-      font-size: clamp(28px, 9vw, 55px);
+      font-size: clamp(24px, 7.5vw, 42px);
     }
 
+    /* 2. Horn Button Fits Cleanly Above Bus Roof */
     .centered-horn-wrapper {
-      top: 32vh;
+      top: 38vh;
     }
     .floating-horn {
       padding: 6px 14px;
-      font-size: 12px;
+      font-size: 11px;
     }
 
+    /* 3. Responsive 16:9 Video Positioning */
+    .hero video {
+      object-fit: cover;
+      object-position: center 48%; /* Keeps bus in full focal view */
+    }
+
+    /* 4. Completely Responsive Stereo Unit */
     .player-wrapper {
       bottom: 4px;
       width: 96vw;
     }
     .stereo-unit {
-      width: 100%;
-      height: 110px;
-      padding: 5px;
-      gap: 6px;
+      width: 100%; /* Adapts dynamically to any screen width */
+      height: 105px;
+      padding: 4px;
+      gap: 5px;
     }
 
     .left-panel {
-      width: 75px;
+      width: 70px;
     }
     .knob-bezel {
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
     }
     .volume-knob {
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
     }
 
     .lcd-screen {
-      height: 62px;
-      padding: 3px 5px;
+      height: 58px;
+      padding: 3px 4px;
     }
     .song-title {
-      font-size: 12px;
-      max-width: 150px;
+      font-size: 11px;
+      max-width: 130px;
     }
     .time-vol-display {
-      font-size: 10px;
+      font-size: 9px;
     }
 
     .eq-container {
-      height: 18px;
+      height: 16px;
     }
     .bottom-controls {
-      height: 24px;
+      height: 22px;
     }
     .btn {
-      font-size: 8px;
-      padding: 0 2px;
+      font-size: 7px;
+      padding: 0 1px;
     }
 
+    /* 5. Separate Ticket Button Repositioning (No LCD Overlap) */
     .floating-ticket-btn {
       position: static;
-      margin-top: 4px;
-      padding: 4px 10px;
+      margin-top: 3px;
+      padding: 3px 10px;
       font-size: 10px;
+      align-self: center;
     }
 
     .shortcuts-bar {
@@ -628,11 +624,11 @@
     }
 
     .ticket-card {
-      padding: 16px;
-      max-width: 92vw;
+      padding: 14px;
+      max-width: 94vw;
     }
     .ticket-corp-title {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 </style>

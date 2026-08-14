@@ -161,7 +161,6 @@
     font-family: var(--font-display);
   }
 
-  /* HEADER MOVED TICKET BUTTON */
   .header-ticket-btn {
     background: rgba(217,164,65,0.18);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -180,7 +179,6 @@
   }
   .header-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
-  /* SLIDER TOGGLE SWITCH */
   .view-slider-switch {
     background: rgba(18, 12, 8, 0.85);
     border: 1px solid rgba(217,164,65,0.35);
@@ -589,7 +587,7 @@
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none;
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 16px;
   }
   .booking-modal-overlay.open {
@@ -603,9 +601,9 @@
     width: 100%; max-width: 440px;
     padding: 24px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(244,234,212,0.15);
-    transform: translateY(35px) scale(0.96);
+    transform: translateY(45px) scale(0.95);
     opacity: 0;
-    transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
   }
   .booking-modal-overlay.open .booking-card {
@@ -614,7 +612,7 @@
   }
 
   .booking-header {
-    text-align: center; margin-bottom: 20px;
+    text-align: center; margin-bottom: 16px;
   }
   .booking-badge {
     background: rgba(217,164,65,0.15); border: 1px solid rgba(217,164,65,0.3);
@@ -629,10 +627,10 @@
   }
 
   .booking-form {
-    display: flex; flex-direction: column; gap: 14px;
+    display: flex; flex-direction: column; gap: 12px;
   }
   .input-group {
-    display: flex; flex-direction: column; gap: 5px;
+    display: flex; flex-direction: column; gap: 4px;
   }
   .input-label {
     font-family: var(--font-display); font-size: 11px; font-weight: 700;
@@ -643,7 +641,7 @@
     background: rgba(14, 9, 6, 0.9);
     border: 1px solid rgba(244,234,212,0.2);
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 9px 12px;
     color: var(--cream);
     font-family: var(--font-body);
     font-size: 13px;
@@ -661,12 +659,35 @@
     color: #fff;
   }
 
+  /* LIVE CALCULATED FARE BOX */
+  .fare-preview-box {
+    background: rgba(187, 77, 37, 0.15);
+    border: 1px dashed rgba(217, 164, 65, 0.4);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fare-label {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    color: rgba(244,234,212,0.7);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .fare-amount {
+    font-family: var(--font-display);
+    font-size: 16px; font-weight: 800;
+    color: var(--mustard);
+    letter-spacing: 0.05em;
+  }
+
   .book-now-btn {
-    margin-top: 8px;
+    margin-top: 4px;
     background: linear-gradient(135deg, var(--rust), var(--mustard));
     color: #fff;
     border: none;
-    padding: 12px 20px;
+    padding: 11px 20px;
     border-radius: 10px;
     font-family: var(--font-display);
     font-size: 14px;
@@ -691,7 +712,7 @@
     background: none; border: none;
     color: rgba(244,234,212,0.5);
     font-size: 11px; font-weight: 500;
-    text-align: center; margin-top: 6px;
+    text-align: center; margin-top: 4px;
     text-decoration: underline; cursor: pointer;
   }
   .booking-skip-btn:hover { color: var(--cream); }
@@ -1105,8 +1126,8 @@
   </div>
 </div>
 
-<!-- ===================== ONBOARDING BOOKING WINDOW MODAL ===================== -->
-<div class="booking-modal-overlay open" id="bookingModal">
+<!-- ===================== ONBOARDING BOOKING WINDOW MODAL (AUTO 5S FADEUP) ===================== -->
+<div class="booking-modal-overlay" id="bookingModal">
   <div class="booking-card">
     <div class="booking-header">
       <span class="booking-badge">🚌 TICKET COUNTER · टिकट खिड़की</span>
@@ -1117,7 +1138,7 @@
     <form class="booking-form" id="bookingForm" onsubmit="event.preventDefault(); handleBookingSubmit();">
       <div class="input-group">
         <label class="input-label"><i class="fa-solid fa-location-dot"></i> FROM (कहाँ से):</label>
-        <select class="city-select" id="fromCitySelect">
+        <select class="city-select" id="fromCitySelect" onchange="calculateLiveFare()">
           <option value="Ghazipur" selected>गाज़ीपुर (Ghazipur)</option>
           <option value="Lucknow">लखनऊ (Lucknow)</option>
           <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
@@ -1136,7 +1157,7 @@
 
       <div class="input-group">
         <label class="input-label"><i class="fa-solid fa-flag-checkered"></i> TO (कहाँ तक):</label>
-        <select class="city-select" id="toCitySelect">
+        <select class="city-select" id="toCitySelect" onchange="calculateLiveFare()">
           <option value="Lucknow" selected>लखनऊ (Lucknow)</option>
           <option value="Ghazipur">गाज़ीपुर (Ghazipur)</option>
           <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
@@ -1155,12 +1176,18 @@
 
       <div class="input-group">
         <label class="input-label"><i class="fa-solid fa-chair"></i> SEAT PREFERENCE:</label>
-        <select class="city-select" id="seatSelect">
+        <select class="city-select" id="seatSelect" onchange="calculateLiveFare()">
           <option value="🪟 WINDOW SEAT (#14B)" selected>🪟 Window Seat (#14B)</option>
           <option value="🪟 WINDOW SEAT (#04A)">🪟 Front Window Seat (#04A)</option>
           <option value="🚶 AISLE SEAT (#12C)">🚶 Aisle Seat (#12C)</option>
           <option value="👑 DRIVER SIDE SEAT (#02)">👑 Cabin Driver Side (#02)</option>
         </select>
+      </div>
+
+      <!-- LIVE CALCULATED FARE PREVIEW -->
+      <div class="fare-preview-box">
+        <span class="fare-label">ESTIMATED FARE (किराया):</span>
+        <span class="fare-amount" id="liveFareAmount">₹ 319.00</span>
       </div>
 
       <button type="submit" class="book-now-btn">
@@ -1679,7 +1706,7 @@ function renderPlaylist() {
   });
 }
 
-/* ===================== BOOKING, MODALS & SHARING LOGIC ===================== */
+/* ===================== BOOKING, FARE CALCULATION & MODALS ===================== */
 const bookingModal = document.getElementById('bookingModal');
 const ticketModal = document.getElementById('ticketModal');
 const driverModal = document.getElementById('driverModal');
@@ -1689,6 +1716,26 @@ function showToast(msg) {
   toastNotify.textContent = msg;
   toastNotify.classList.add('show');
   setTimeout(() => toastNotify.classList.remove('show'), 2500);
+}
+
+/* DYNAMIC LIVE FARE CALCULATION */
+function calculateLiveFare() {
+  const fromCity = document.getElementById('fromCitySelect').value;
+  const toCity = document.getElementById('toCitySelect').value;
+  
+  if (fromCity === toCity) {
+    document.getElementById('liveFareAmount').textContent = "₹ 0.00 (Same City)";
+    return;
+  }
+
+  // Generate deterministic realistic distance fare using char codes
+  let hash = 0;
+  const routeKey = fromCity + "➔" + toCity;
+  for (let i = 0; i < routeKey.length; i++) {
+    hash = (hash * 31 + routeKey.charCodeAt(i)) % 300;
+  }
+  const computedFare = 160 + hash; // ₹160 to ₹460 realistic UP Roadways fare
+  document.getElementById('liveFareAmount').textContent = `₹ ${computedFare}.00`;
 }
 
 function handleBookingSubmit() {
@@ -1701,19 +1748,18 @@ function handleBookingSubmit() {
     return;
   }
 
-  // Calculate random realistic UP Roadways fare (₹180 to ₹420)
-  const fareAmt = Math.floor(Math.random() * 240) + 180;
+  const currentFare = document.getElementById('liveFareAmount').textContent;
   userBooking = {
     from: fromCity,
     to: toCity,
     seat: seatPref,
-    fare: `₹ ${fareAmt}.00 (PAID)`
+    fare: `${currentFare} (PAID)`
   };
 
   // Update Header Route Text
   document.getElementById('headerRouteText').textContent = `NH 19 · ${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
 
-  // Update Ticket Details
+  // Update Physical Ticket Details
   document.getElementById('ticketRouteVal').textContent = `${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
   document.getElementById('ticketSeatVal').textContent = seatPref;
   document.getElementById('ticketFareVal').textContent = userBooking.fare;
@@ -1722,7 +1768,6 @@ function handleBookingSubmit() {
   bookingModal.classList.remove('open');
   setTimeout(() => {
     openTicketModal();
-    // Auto-start radio playback if not playing
     if (ytReady && ytPlayer && !isPlaying) {
       document.getElementById('btn-play-pause').click();
     }
@@ -1732,6 +1777,16 @@ function handleBookingSubmit() {
 function skipBooking() {
   bookingModal.classList.remove('open');
 }
+
+/* 5-6 SECOND DELAYED AUTO FADE-UP FOR TICKET WINDOW ON SITE ENTRY */
+window.addEventListener('load', () => {
+  calculateLiveFare();
+  setTimeout(() => {
+    if (!ticketModal.classList.contains('open') && !driverModal.classList.contains('open')) {
+      bookingModal.classList.add('open');
+    }
+  }, 5500); // Opens after 5.5 seconds seamlessly
+});
 
 function openTicketModal() {
   const now = new Date();

@@ -1004,13 +1004,14 @@ let rotationDeg = 0;
 let ytPlayer = null;
 let ytReady = false;
 
+
 /* =====================================================
    LOOPING ENGINE SOUND AUDIO ENGINE
 ===================================================== */
-const engineAudio = new Audio('assets/engine.mp3');
-engineAudio.loop = true;
-engineAudio.volume = 0.35;
-let isEngineSoundOn = true;
+const engineAudio = new Audio('assets/engine.mp3'); //[cite: 4]
+engineAudio.loop = true; //[cite: 4]
+engineAudio.volume = 0.12; // 👈 Lowered initial volume (change between 0.05 - 0.20 as needed)
+let isEngineSoundOn = true; //[cite: 4]
 
 function startEngineAudio() {
   if (isEngineSoundOn) {
@@ -1065,61 +1066,61 @@ const optOutside = document.getElementById('optOutside');
 const optCabin = document.getElementById('optCabin');
 
 function setView(targetView) {
-  if (isTransitioning || currentView === targetView) return;
-  isTransitioning = true;
+  if (isTransitioning || currentView === targetView) return; //[cite: 4]
+  isTransitioning = true; //[cite: 4]
 
-  if (targetView === 'interior') {
-    sliderSwitch.classList.add('interior-active');
-    optOutside.classList.remove('active');
-    optCabin.classList.add('active');
+  if (targetView === 'interior') { //[cite: 4]
+    sliderSwitch.classList.add('interior-active'); //[cite: 4]
+    optOutside.classList.remove('active'); //[cite: 4]
+    optCabin.classList.add('active'); //[cite: 4]
 
-    heroSection.classList.add('transition-to-interior');
+    heroSection.classList.add('transition-to-interior'); //[cite: 4]
 
-    // Richer engine rumble inside the cabin
-    if (isEngineSoundOn) engineAudio.volume = 0.5;
+    // 👈 Lowered Cabin Engine Volume (set to 0.18 instead of 0.50)
+    if (isEngineSoundOn) engineAudio.volume = 0.18;
 
-    setTimeout(() => {
-      flashMask.classList.add('active');
-    }, 450);
+    setTimeout(() => { //[cite: 4]
+      flashMask.classList.add('active'); //[cite: 4]
+    }, 450); //[cite: 4]
 
-    setTimeout(() => {
-      extVideo.style.opacity = '0';
-      intVideo.style.opacity = '1';
-      intVideo.play().catch(() => {});
+    setTimeout(() => { //[cite: 4]
+      extVideo.style.opacity = '0'; //[cite: 4]
+      intVideo.style.opacity = '1'; //[cite: 4]
+      intVideo.play().catch(() => {}); //[cite: 4]
 
-      document.body.classList.add('view-interior');
-      currentView = 'interior';
+      document.body.classList.add('view-interior'); //[cite: 4]
+      currentView = 'interior'; //[cite: 4]
 
-      heroSection.classList.remove('transition-to-interior');
-      flashMask.classList.remove('active');
-      isTransitioning = false;
-    }, 850);
+      heroSection.classList.remove('transition-to-interior'); //[cite: 4]
+      flashMask.classList.remove('active'); //[cite: 4]
+      isTransitioning = false; //[cite: 4]
+    }, 850); //[cite: 4]
   } else {
-    sliderSwitch.classList.remove('interior-active');
-    optCabin.classList.remove('active');
-    optOutside.classList.add('active');
+    sliderSwitch.classList.remove('interior-active'); //[cite: 4]
+    optCabin.classList.remove('active'); //[cite: 4]
+    optOutside.classList.add('active'); //[cite: 4]
 
-    heroSection.classList.add('transition-to-exterior');
+    heroSection.classList.add('transition-to-exterior'); //[cite: 4]
 
-    // Softer ambient engine sound outside
-    if (isEngineSoundOn) engineAudio.volume = 0.3;
+    // 👈 Lowered Highway Outside Engine Volume (set to 0.08 instead of 0.30)
+    if (isEngineSoundOn) engineAudio.volume = 0.08;
 
-    setTimeout(() => {
-      flashMask.classList.add('active');
-    }, 400);
+    setTimeout(() => { //[cite: 4]
+      flashMask.classList.add('active'); //[cite: 4]
+    }, 400); //[cite: 4]
 
-    setTimeout(() => {
-      intVideo.style.opacity = '0';
-      extVideo.style.opacity = '1';
-      extVideo.play().catch(() => {});
+    setTimeout(() => { //[cite: 4]
+      intVideo.style.opacity = '0'; //[cite: 4]
+      extVideo.style.opacity = '1'; //[cite: 4]
+      extVideo.play().catch(() => {}); //[cite: 4]
 
-      document.body.classList.remove('view-interior');
-      currentView = 'exterior';
+      document.body.classList.remove('view-interior'); //[cite: 4]
+      currentView = 'exterior'; //[cite: 4]
 
-      heroSection.classList.remove('transition-to-exterior');
-      flashMask.classList.remove('active');
-      isTransitioning = false;
-    }, 800);
+      heroSection.classList.remove('transition-to-exterior'); //[cite: 4]
+      flashMask.classList.remove('active'); //[cite: 4]
+      isTransitioning = false; //[cite: 4]
+    }, 800); //[cite: 4]
   }
 }
 

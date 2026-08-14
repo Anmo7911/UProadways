@@ -116,7 +116,7 @@
   .header-bar {
     position: absolute; top: 0; left: 0; right: 0;
     z-index: 20;
-    padding: 16px 24px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -157,11 +157,30 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     font-family: var(--font-display);
   }
 
-  /* ===================== RETRO SLIDER TOGGLE SWITCH ===================== */
+  /* HEADER MOVED TICKET BUTTON */
+  .header-ticket-btn {
+    background: rgba(217,164,65,0.18);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(217,164,65,0.45);
+    color: var(--mustard);
+    padding: 5px 12px; border-radius: 999px;
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; gap: 5px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease;
+  }
+  .header-ticket-btn:hover {
+    background: var(--mustard); color: var(--ink); border-color: var(--mustard); transform: translateY(-1px);
+  }
+  .header-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
+
+  /* SLIDER TOGGLE SWITCH (OUTSIDE / CABIN) */
   .view-slider-switch {
     background: rgba(18, 12, 8, 0.85);
     border: 1px solid rgba(217,164,65,0.35);
@@ -175,7 +194,7 @@
   }
 
   .slider-option {
-    padding: 4px 12px;
+    padding: 4px 10px;
     font-family: var(--font-display);
     font-size: 11px;
     font-weight: 700;
@@ -209,7 +228,7 @@
   }
 
   .clock-widget {
-    font-size: 18px; font-weight: 700;
+    font-size: 17px; font-weight: 700;
     letter-spacing: 0.05em; color: #fff;
     display: flex; align-items: baseline; gap: 3px;
   }
@@ -342,7 +361,7 @@
   }
 
   .stereo-unit {
-    width: 500px;
+    width: 480px;
     height: 120px;
     background: linear-gradient(180deg, #2c2d30 0%, #151618 15%, #0d0e10 85%, #222326 100%);
     border: 5px solid #050505;
@@ -481,6 +500,7 @@
   .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 2px #ffcc00; }
   .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 2px #ff2a2a; }
 
+  /* 4 REDUCED PRESET BUTTONS + CORE CONTROLS */
   .bottom-controls { display: flex; gap: 3px; height: 25px; }
 
   .btn {
@@ -516,11 +536,10 @@
   }
   .close-playlist { cursor: pointer; color: #ff3333; }
 
-  /* ===================== DASHBOARD INTEGRATED HORN BUTTON ===================== */
-  /* ===================== DASHBOARD INTEGRATED HORN BUTTON ===================== */
+  /* DASHBOARD POSITIONED HORN BUTTON */
   .dashboard-horn-btn {
     position: absolute;
-    bottom: 132px; /* Positioned directly above the stereo deck on the center engine box */
+    bottom: 132px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(20, 14, 10, 0.88);
@@ -541,39 +560,14 @@
     z-index: 10;
   }
   .dashboard-horn-btn:hover {
-    background: var(--rust);
-    border-color: var(--rust);
-    transform: translateX(-50%) translateY(-2px);
+    background: var(--rust); border-color: var(--rust); transform: translateX(-50%) translateY(-2px);
   }
-  .dashboard-horn-btn:active {
-    transform: translateX(-50%) scale(0.95);
-  }
-  .dashboard-horn-btn svg { width: 15px; height: 15px; fill: currentColor; }
+  .dashboard-horn-btn:active { transform: translateX(-50%) scale(0.95); }
+  .dashboard-horn-btn svg { width: 14px; height: 14px; fill: currentColor; }
 
-  /* Show dashboard horn button in interior view */
   body.view-interior .dashboard-horn-btn {
     display: flex;
   }
-
-  /* FLOATING TICKET WIDGET BUTTON */
-  .floating-ticket-btn {
-    position: absolute;
-    right: -82px;
-    bottom: 8px;
-    background: rgba(217,164,65,0.18);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(217,164,65,0.4);
-    color: var(--mustard);
-    padding: 6px 11px; border-radius: 999px;
-    font-family: var(--font-display); font-size: 11px; font-weight: 700;
-    display: flex; align-items: center; gap: 4px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
-    transition: all 0.2s ease;
-  }
-  .floating-ticket-btn:hover {
-    background: var(--mustard); color: var(--ink); border-color: var(--mustard); transform: translateY(-2px);
-  }
-  .floating-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
   .shortcuts-bar {
     display: flex; align-items: center; gap: 12px;
@@ -651,18 +645,23 @@
 
   /* ===================== STRICT MOBILE OVERRIDES ===================== */
   @media (max-width: 600px) {
-    .header-bar { padding: 10px 12px; }
-    .header-brand { font-size: 13px; }
-    .header-route { font-size: 8px; }
+    .header-bar { padding: 8px 10px; }
+    .header-brand { font-size: 12px; }
+    .header-route { font-size: 7.5px; }
     .driver-badge { display: none; }
-    .clock-widget { font-size: 14px; }
+    .clock-widget { font-size: 13px; }
+
+    .header-ticket-btn {
+      padding: 4px 8px;
+      font-size: 9.5px;
+    }
 
     .view-slider-switch {
       padding: 2px;
     }
     .slider-option {
-      padding: 3px 8px;
-      font-size: 9px;
+      padding: 3px 6px;
+      font-size: 8.5px;
     }
 
     .hero-title-wrapper {
@@ -682,6 +681,12 @@
       padding: 6px 14px; font-size: 11px;
     }
 
+    .dashboard-horn-btn {
+      bottom: 114px;
+      padding: 5px 12px;
+      font-size: 10px;
+    }
+
     .hero video {
       object-fit: cover;
       object-position: center 48%;
@@ -694,7 +699,7 @@
       width: 100%; height: 105px; padding: 4px; gap: 5px;
     }
 
-    .left-panel { width: 70px; }
+    .left-panel { width: 68px; }
     .knob-bezel { width: 44px; height: 44px; }
     .volume-knob { width: 34px; height: 34px; }
 
@@ -706,24 +711,15 @@
     .bottom-controls { height: 22px; }
     .btn { font-size: 7px; padding: 0 1px; }
 
-    .floating-ticket-btn, .dashboard-horn-btn {
-      position: static; margin-top: 3px; padding: 3px 10px; font-size: 10px; align-self: center;
+    /* Hide preset buttons on mobile to maximize core button sizes */
+    .btn-preset {
+      display: none;
     }
 
     .shortcuts-bar { display: none; }
     .ticket-card { padding: 14px; max-width: 94vw; }
     .ticket-corp-title { font-size: 15px; }
   }
-
-  .dashboard-horn-btn {
-      position: absolute;
-      bottom: 114px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 5px 12px;
-      font-size: 10px;
-    }
-  
 </style>
 </head>
 <body>
@@ -744,6 +740,12 @@
   </div>
 
   <div class="header-right">
+    <!-- MOVED TICKET BUTTON IN HEADER -->
+    <button class="header-ticket-btn" id="headerTicketBtn" title="Get Bus Ticket">
+      <svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.98-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.98 2-3.46s-.81-2.77-2-3.46V6h16v2.54zM9.5 11h5v2h-5z"/></svg>
+      <span>TICKET</span>
+    </button>
+
     <!-- SLIDER TOGGLE SWITCH (OUTSIDE / CABIN) -->
     <div class="view-slider-switch" id="viewSliderSwitch" title="Toggle View (V)">
       <div class="slider-thumb"></div>
@@ -848,28 +850,20 @@
         </div>
       </div>
 
-      <!-- Preset Buttons & Controls -->
+      <!-- 4 Quick Presets + Controls -->
       <div class="bottom-controls">
         <button class="btn" id="btn-play-pause" title="Play/Pause"><i class="fa-solid fa-play" id="play-icon"></i></button>
         <button class="btn" id="btn-prev" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
         <button class="btn" id="btn-next" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
         <button class="btn" id="btn-playlist" title="Playlist Queue"><i class="fa-solid fa-list"></i></button>
 
-        <!-- Quick Track Presets 1-6 -->
-        <button class="btn" onclick="selectTrack(0)"><span class="btn-preset-num">1</span> TRK 1</button>
-        <button class="btn" onclick="selectTrack(1)"><span class="btn-preset-num">2</span> TRK 2</button>
-        <button class="btn" onclick="selectTrack(2)"><span class="btn-preset-num">3</span> TRK 3</button>
-        <button class="btn" onclick="selectTrack(3)"><span class="btn-preset-num">4</span> TRK 4</button>
-        <button class="btn" onclick="selectTrack(4)"><span class="btn-preset-num">5</span> TRK 5</button>
-        <button class="btn" onclick="selectTrack(5)"><span class="btn-preset-num">6</span> TRK 6</button>
+        <!-- Reduced Track Presets 1-4 -->
+        <button class="btn btn-preset" onclick="selectTrack(0)"><span class="btn-preset-num">1</span> TRK 1</button>
+        <button class="btn btn-preset" onclick="selectTrack(1)"><span class="btn-preset-num">2</span> TRK 2</button>
+        <button class="btn btn-preset" onclick="selectTrack(2)"><span class="btn-preset-num">3</span> TRK 3</button>
+        <button class="btn btn-preset" onclick="selectTrack(3)"><span class="btn-preset-num">4</span> TRK 4</button>
       </div>
     </div>
-
-    <!-- SEPARATE FLOATING TICKET WIDGET BUTTON -->
-    <button class="floating-ticket-btn" id="floatingTicketBtn" title="Get Bus Ticket">
-      <svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.98-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.98 2-3.46s-.81-2.77-2-3.46V6h16v2.54zM9.5 11h5v2h-5z"/></svg>
-      <span>TICKET</span>
-    </button>
   </div>
 
   <!-- KEYBOARD SHORTCUT HELPER LEGEND -->
@@ -1380,7 +1374,7 @@ function closeTicketModal() {
 }
 
 document.getElementById('closeTicketBtn').addEventListener('click', closeTicketModal);
-document.getElementById('floatingTicketBtn').addEventListener('click', openTicketModal);
+document.getElementById('headerTicketBtn').addEventListener('click', openTicketModal);
 document.getElementById('ticketShortcutBtn').addEventListener('click', openTicketModal);
 ticketModal.addEventListener('click', (e) => {
   if (e.target === ticketModal) closeTicketModal();

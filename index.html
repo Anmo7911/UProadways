@@ -161,7 +161,6 @@
     font-family: var(--font-display);
   }
 
-  /* HEADER MOVED TICKET BUTTON */
   .header-ticket-btn {
     background: rgba(217,164,65,0.18);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -180,7 +179,6 @@
   }
   .header-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
-  /* SLIDER TOGGLE SWITCH (OUTSIDE / CABIN) */
   .view-slider-switch {
     background: rgba(18, 12, 8, 0.85);
     border: 1px solid rgba(217,164,65,0.35);
@@ -254,8 +252,11 @@
     padding: 5px 12px; border-radius: 999px;
     font-size: 11px; font-weight: 600; color: #fff;
     display: flex; align-items: center; gap: 6px;
-    text-decoration: none;
-    transition: background 0.2s ease;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .driver-badge:hover {
+    background: var(--rust); border-color: var(--rust); transform: translateY(-1px);
   }
   .driver-avatar {
     width: 16px; height: 16px; background: var(--mustard); color: #000;
@@ -500,7 +501,6 @@
   .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 2px #ffcc00; }
   .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 2px #ff2a2a; }
 
-  /* 4 REDUCED PRESET BUTTONS + CORE CONTROLS */
   .bottom-controls { display: flex; gap: 3px; height: 25px; }
 
   .btn {
@@ -639,7 +639,131 @@
 
   .ticket-barcode { text-align: center; font-family: 'Courier New', monospace; font-size: 22px; letter-spacing: 4px; margin-top: 12px; opacity: 0.8; }
 
+  /* SHARE TICKET BUTTON */
+  .ticket-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+  }
+  .share-ticket-btn {
+    background: #7a2811;
+    color: #f4ead4;
+    border: none;
+    padding: 7px 18px;
+    border-radius: 6px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+  }
+  .share-ticket-btn:hover {
+    background: #8e3a1b;
+    transform: translateY(-1px);
+  }
+  .share-ticket-btn:active {
+    transform: scale(0.96);
+  }
+
   .ticket-close-btn { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 16px; font-weight: 700; color: #8b6e43; cursor: pointer; }
+
+  /* ===================== DRIVER PROFILE MODAL ===================== */
+  .driver-modal-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    padding: 16px;
+  }
+  .driver-modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .driver-card {
+    background: rgba(20, 14, 10, 0.95);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(217, 164, 65, 0.3);
+    color: var(--cream);
+    width: 100%; max-width: 340px;
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    transform: scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .driver-modal-overlay.open .driver-card { transform: scale(1); }
+
+  .driver-avatar-large {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--mustard), var(--rust));
+    color: #fff;
+    border-radius: 50%;
+    font-size: 26px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px auto;
+    box-shadow: 0 0 20px rgba(217, 164, 65, 0.4);
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .driver-name {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 700;
+    letter-spacing: 0.05em; color: #fff; margin-bottom: 2px;
+  }
+  .driver-handle {
+    font-size: 13px; color: var(--mustard); font-weight: 600; margin-bottom: 10px;
+  }
+  .driver-desc {
+    font-size: 12px; color: rgba(244,234,212,0.7); line-height: 1.4; margin-bottom: 18px;
+  }
+
+  .driver-insta-btn {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .driver-insta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 39, 67, 0.6);
+  }
+  .driver-insta-btn:active {
+    transform: scale(0.96);
+  }
+
+  .driver-close-btn {
+    position: absolute; top: 12px; right: 14px;
+    background: none; border: none; font-size: 18px;
+    color: rgba(244,234,212,0.5); cursor: pointer;
+  }
+  .driver-close-btn:hover { color: #fff; }
+
+  /* Toast Notification */
+  .toast-notify {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-30px);
+    background: rgba(18, 12, 8, 0.95); border: 1px solid var(--mustard);
+    color: #fff; padding: 8px 18px; border-radius: 999px; font-family: var(--font-display);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.05em; z-index: 999;
+    opacity: 0; pointer-events: none; transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+  }
+  .toast-notify.show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
+  }
 
   #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
 
@@ -648,7 +772,6 @@
     .header-bar { padding: 8px 10px; }
     .header-brand { font-size: 12px; }
     .header-route { font-size: 7.5px; }
-    .driver-badge { display: none; }
     .clock-widget { font-size: 13px; }
 
     .header-ticket-btn {
@@ -711,7 +834,6 @@
     .bottom-controls { height: 22px; }
     .btn { font-size: 7px; padding: 0 1px; }
 
-    /* Hide preset buttons on mobile to maximize core button sizes */
     .btn-preset {
       display: none;
     }
@@ -726,6 +848,7 @@
 
 <!-- TRANSITION FLASH MASK -->
 <div class="view-flash-mask" id="viewFlashMask"></div>
+<div class="toast-notify" id="toastNotify">✓ Ticket Copied to Clipboard!</div>
 
 <!-- ===================== TOP HEADER BAR ===================== -->
 <header class="header-bar">
@@ -759,11 +882,11 @@
       <span id="passengerCountText">319 ABOARD</span>
     </div>
 
-    <!-- INSTAGRAM PAGE LINK -->
-    <a class="driver-badge" href="https://instagram.com/onlyanmolll" target="_blank" title="Visit Driver Profile">
+    <!-- WHO'S DRIVING POPUP TRIGGER -->
+    <div class="driver-badge" id="driverBadgeBtn" title="View Driver Details">
       <div class="driver-avatar">M</div>
       <span>Who's driving?</span>
-    </a>
+    </div>
   </div>
 </header>
 
@@ -936,6 +1059,29 @@
     </div>
 
     <div class="ticket-barcode">|||| | |||||| || | |||||</div>
+
+    <!-- SHARE TICKET BUTTON -->
+    <div class="ticket-actions">
+      <button class="share-ticket-btn" id="shareTicketBtn">
+        <i class="fa-solid fa-share-nodes"></i> SHARE YOUR TICKET
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DRIVER PROFILE MODAL ===================== -->
+<div class="driver-modal-overlay" id="driverModal">
+  <div class="driver-card">
+    <button class="driver-close-btn" id="closeDriverBtn">✕</button>
+    <div class="driver-avatar-large">M</div>
+    <div class="driver-name">Captain Anmol</div>
+    <div class="driver-handle">@onlyanmolll</div>
+    <div class="driver-desc">
+      Driving through the midnight rain on NH 19 · Ghazipur to Lucknow Highway Radio.
+    </div>
+    <a class="driver-insta-btn" href="https://instagram.com/onlyanmolll" target="_blank" id="followInstaBtn">
+      <i class="fa-brands fa-instagram"></i> Follow on Instagram
+    </a>
   </div>
 </div>
 
@@ -1353,8 +1499,16 @@ function renderPlaylist() {
   });
 }
 
-/* OLD-FASHIONED TICKET MODAL LOGIC */
+/* ===================== MODALS & SHARING LOGIC ===================== */
 const ticketModal = document.getElementById('ticketModal');
+const driverModal = document.getElementById('driverModal');
+const toastNotify = document.getElementById('toastNotify');
+
+function showToast(msg) {
+  toastNotify.textContent = msg;
+  toastNotify.classList.add('show');
+  setTimeout(() => toastNotify.classList.remove('show'), 2500);
+}
 
 function openTicketModal() {
   const now = new Date();
@@ -1372,6 +1526,45 @@ function openTicketModal() {
 function closeTicketModal() {
   ticketModal.classList.remove('open');
 }
+
+/* SHARE TICKET HANDLER */
+document.getElementById('shareTicketBtn').addEventListener('click', async () => {
+  const currentSong = PLAYLIST[currentTrackIndex] ? PLAYLIST[currentTrackIndex].title : "Highway Hits";
+  const shareText = `🚌 उत्तर प्रदेश परिवहन Passenger Ticket:\nRoute: Ghazipur ➔ Lucknow\nSeat: Window #14B\nNow Playing: ${currentSong}\nTune in at: ${window.location.href}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'उत्तर प्रदेश परिवहन Bus Ticket',
+        text: shareText,
+        url: window.location.href
+      });
+    } catch (err) {
+      console.log('Share canceled/dismissed');
+    }
+  } else {
+    navigator.clipboard.writeText(shareText).then(() => {
+      showToast('✓ Ticket Copied to Clipboard!');
+    }).catch(() => {
+      showToast('✓ Ticket Link Copied!');
+    });
+  }
+});
+
+/* DRIVER PROFILE MODAL HANDLERS */
+function openDriverModal() {
+  driverModal.classList.add('open');
+}
+
+function closeDriverModal() {
+  driverModal.classList.remove('open');
+}
+
+document.getElementById('driverBadgeBtn').addEventListener('click', openDriverModal);
+document.getElementById('closeDriverBtn').addEventListener('click', closeDriverModal);
+driverModal.addEventListener('click', (e) => {
+  if (e.target === driverModal) closeDriverModal();
+});
 
 document.getElementById('closeTicketBtn').addEventListener('click', closeTicketModal);
 document.getElementById('headerTicketBtn').addEventListener('click', openTicketModal);
@@ -1396,7 +1589,7 @@ document.addEventListener('keydown', (e) => {
     case 'KeyV':
     case 'KeyI': setView(currentView === 'exterior' ? 'interior' : 'exterior'); break;
     case 'KeyT': openTicketModal(); break;
-    case 'Escape': closeTicketModal(); break;
+    case 'Escape': closeTicketModal(); closeDriverModal(); break;
   }
 });
 

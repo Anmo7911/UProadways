@@ -517,25 +517,38 @@
   .close-playlist { cursor: pointer; color: #ff3333; }
 
   /* ===================== DASHBOARD INTEGRATED HORN BUTTON ===================== */
+  /* ===================== DASHBOARD INTEGRATED HORN BUTTON ===================== */
   .dashboard-horn-btn {
     position: absolute;
-    left: -82px;
-    bottom: 8px;
-    background: rgba(187, 77, 37, 0.25);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(187, 77, 37, 0.5);
-    color: var(--rust);
-    padding: 6px 11px; border-radius: 999px;
-    font-family: var(--font-hindi); font-size: 12px; font-weight: 700;
-    display: none; align-items: center; gap: 5px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
+    bottom: 132px; /* Positioned directly above the stereo deck on the center engine box */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 14, 10, 0.88);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(244,234,212,0.25);
+    color: var(--cream);
+    padding: 7px 18px;
+    border-radius: 999px;
+    font-family: var(--font-hindi);
+    font-size: 13px;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.85);
     transition: all 0.2s ease;
+    white-space: nowrap;
+    z-index: 10;
   }
   .dashboard-horn-btn:hover {
-    background: var(--rust); color: #fff; transform: translateY(-2px);
+    background: var(--rust);
+    border-color: var(--rust);
+    transform: translateX(-50%) translateY(-2px);
   }
-  .dashboard-horn-btn:active { transform: scale(0.95); }
-  .dashboard-horn-btn svg { width: 14px; height: 14px; fill: currentColor; }
+  .dashboard-horn-btn:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+  .dashboard-horn-btn svg { width: 15px; height: 15px; fill: currentColor; }
 
   /* Show dashboard horn button in interior view */
   body.view-interior .dashboard-horn-btn {

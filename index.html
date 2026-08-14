@@ -157,33 +157,11 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     font-family: var(--font-display);
   }
 
-  /* ENGINE ON / OFF TOGGLE BUTTON */
-  .engine-toggle-btn {
-    background: rgba(18, 12, 8, 0.85);
-    border: 1px solid rgba(217,164,65,0.35);
-    border-radius: 999px;
-    padding: 5px 12px;
-    color: var(--cream);
-    font-family: var(--font-display);
-    font-size: 11px; font-weight: 700;
-    display: flex; align-items: center; gap: 6px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
-    transition: all 0.2s ease;
-  }
-  .engine-toggle-btn.active {
-    background: rgba(187, 77, 37, 0.25);
-    border-color: var(--rust);
-    color: var(--rust);
-  }
-  .engine-toggle-btn i { font-size: 11px; }
-
-  /* RETRO SLIDER TOGGLE SWITCH */
+  /* ===================== RETRO SLIDER TOGGLE SWITCH ===================== */
   .view-slider-switch {
     background: rgba(18, 12, 8, 0.85);
     border: 1px solid rgba(217,164,65,0.35);
@@ -319,46 +297,9 @@
   .floating-horn:active { transform: scale(0.95); }
   .floating-horn svg { width: 15px; height: 15px; fill: currentColor; }
 
-  /* ===================== DASHBOARD CENTER BONNET HORN (CABIN VIEW) ===================== */
-  .dashboard-center-horn {
-    position: absolute;
-    top: 61.5%; /* Positioned right on the central bonnet / dashboard console */
-    left: 49.5%;
-    transform: translateX(-50%);
-    z-index: 16;
-    display: none;
-    align-items: center;
-    gap: 7px;
-    background: rgba(18, 12, 8, 0.9);
-    border: 1.5px solid var(--rust);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    color: var(--cream);
-    padding: 7px 18px;
-    border-radius: 999px;
-    font-family: var(--font-hindi);
-    font-size: 13px;
-    font-weight: 700;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.85), inset 0 0 10px rgba(187, 77, 37, 0.4);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .dashboard-center-horn:hover {
-    background: var(--rust);
-    color: #fff;
-    transform: translateX(-50%) translateY(-2px);
-    box-shadow: 0 8px 25px rgba(187, 77, 37, 0.6);
-  }
-  .dashboard-center-horn:active {
-    transform: translateX(-50%) scale(0.94);
-  }
-  .dashboard-center-horn svg { width: 15px; height: 15px; fill: currentColor; }
-
   /* CABIN VIEW STATE ADJUSTMENTS */
   body.view-interior .centered-horn-wrapper {
     opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.8);
-  }
-  body.view-interior .dashboard-center-horn {
-    display: flex;
   }
   body.view-interior .hero-title-wrapper {
     top: 10%;
@@ -575,6 +516,32 @@
   }
   .close-playlist { cursor: pointer; color: #ff3333; }
 
+  /* ===================== DASHBOARD INTEGRATED HORN BUTTON ===================== */
+  .dashboard-horn-btn {
+    position: absolute;
+    left: -82px;
+    bottom: 8px;
+    background: rgba(187, 77, 37, 0.25);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(187, 77, 37, 0.5);
+    color: var(--rust);
+    padding: 6px 11px; border-radius: 999px;
+    font-family: var(--font-hindi); font-size: 12px; font-weight: 700;
+    display: none; align-items: center; gap: 5px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease;
+  }
+  .dashboard-horn-btn:hover {
+    background: var(--rust); color: #fff; transform: translateY(-2px);
+  }
+  .dashboard-horn-btn:active { transform: scale(0.95); }
+  .dashboard-horn-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* Show dashboard horn button in interior view */
+  body.view-interior .dashboard-horn-btn {
+    display: flex;
+  }
+
   /* FLOATING TICKET WIDGET BUTTON */
   .floating-ticket-btn {
     position: absolute;
@@ -677,10 +644,6 @@
     .driver-badge { display: none; }
     .clock-widget { font-size: 14px; }
 
-    .engine-toggle-btn {
-      padding: 3px 8px;
-      font-size: 9px;
-    }
     .view-slider-switch {
       padding: 2px;
     }
@@ -704,12 +667,6 @@
     }
     .floating-horn {
       padding: 6px 14px; font-size: 11px;
-    }
-
-    .dashboard-center-horn {
-      top: 60%;
-      padding: 5px 14px;
-      font-size: 11px;
     }
 
     .hero video {
@@ -736,7 +693,7 @@
     .bottom-controls { height: 22px; }
     .btn { font-size: 7px; padding: 0 1px; }
 
-    .floating-ticket-btn {
+    .floating-ticket-btn, .dashboard-horn-btn {
       position: static; margin-top: 3px; padding: 3px 10px; font-size: 10px; align-self: center;
     }
 
@@ -764,12 +721,6 @@
   </div>
 
   <div class="header-right">
-    <!-- DEDICATED ENGINE ON/OFF TOGGLE BUTTON -->
-    <button class="engine-toggle-btn active" id="engineToggleBtn" title="Toggle Engine Sound (E)">
-      <i class="fa-solid fa-bolt" id="engineIcon"></i>
-      <span id="engineLabel">ENGINE ON</span>
-    </button>
-
     <!-- SLIDER TOGGLE SWITCH (OUTSIDE / CABIN) -->
     <div class="view-slider-switch" id="viewSliderSwitch" title="Toggle View (V)">
       <div class="slider-thumb"></div>
@@ -819,6 +770,7 @@
       <span>हॉर्न ओके प्लीज · HORN OK PLEASE</span>
     </button>
   </div>
+</section>
 
   <!-- DASHBOARD CENTER BONNET HORN BUTTON (CABIN VIEW - EXACT MARKED POSITION) -->
   <button class="dashboard-center-horn" id="dashboardCenterHorn" title="Blow Cabin Horn (H)">
@@ -829,6 +781,12 @@
 
 <!-- ===================== RETRO CAR STEREO DECK PLAYER ===================== -->
 <div class="player-wrapper">
+  <!-- DASHBOARD HORN BUTTON (ACTIVE IN CABIN VIEW) -->
+  <button class="dashboard-horn-btn" id="dashHornBtn" title="Cabin Horn (H)">
+    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    <span>हॉर्न HORN</span>
+  </button>
+
   <div class="stereo-unit">
     <!-- Left Section: Clamped Rotary Volume Dial Knob -->
     <div class="left-panel">
@@ -903,7 +861,6 @@
     <span><span class="kbd-key">Space</span> PLAY / PAUSE</span>
     <span><span class="kbd-key">←</span> <span class="kbd-key">→</span> SEEK</span>
     <span><span class="kbd-key">N</span> <span class="kbd-key">P</span> TRACK</span>
-    <span><span class="kbd-key">E</span> ENGINE</span>
     <span><span class="kbd-key">V</span> VIEW</span>
     <span id="ticketShortcutBtn"><span class="kbd-key">T</span> TICKET</span>
     <span><span class="kbd-key">H</span> HORN</span>
@@ -1004,56 +961,7 @@ let rotationDeg = 0;
 let ytPlayer = null;
 let ytReady = false;
 
-
-/* =====================================================
-   LOOPING ENGINE SOUND AUDIO ENGINE
-===================================================== */
-const engineAudio = new Audio('assets/engine.mp3'); //[cite: 4]
-engineAudio.loop = true; //[cite: 4]
-engineAudio.volume = 0.12; // 👈 Lowered initial volume (change between 0.05 - 0.20 as needed)
-let isEngineSoundOn = true; //[cite: 4]
-
-function startEngineAudio() {
-  if (isEngineSoundOn) {
-    engineAudio.play().catch(err => {
-      // Browser autoplay policy catch
-      console.log("Engine sound autoplay waiting for interaction:", err);
-    });
-  }
-}
-
-function toggleEngineSound() {
-  isEngineSoundOn = !isEngineSoundOn;
-  const engineBtn = document.getElementById('engineToggleBtn');
-  const engineLabel = document.getElementById('engineLabel');
-  const engineIcon = document.getElementById('engineIcon');
-
-  if (isEngineSoundOn) {
-    engineAudio.play().catch(() => {});
-    engineBtn.classList.add('active');
-    engineLabel.textContent = 'ENGINE ON';
-    engineIcon.className = 'fa-solid fa-bolt';
-  } else {
-    engineAudio.pause();
-    engineBtn.classList.remove('active');
-    engineLabel.textContent = 'ENGINE OFF';
-    engineIcon.className = 'fa-solid fa-bolt-slash';
-  }
-}
-
-document.getElementById('engineToggleBtn').addEventListener('click', toggleEngineSound);
-
-// Auto-start engine audio on first user click anywhere
-window.addEventListener('click', function autoStartEngineOnce() {
-  if (isEngineSoundOn) {
-    engineAudio.play().catch(() => {});
-  }
-  window.removeEventListener('click', autoStartEngineOnce);
-}, { once: true });
-
-/* =====================================================
-   3D CAMERA & SLIDER TOGGLE LOGIC
-===================================================== */
+/* 3D CAMERA & SLIDER TOGGLE LOGIC */
 let currentView = 'exterior';
 let isTransitioning = false;
 
@@ -1066,61 +974,55 @@ const optOutside = document.getElementById('optOutside');
 const optCabin = document.getElementById('optCabin');
 
 function setView(targetView) {
-  if (isTransitioning || currentView === targetView) return; //[cite: 4]
-  isTransitioning = true; //[cite: 4]
+  if (isTransitioning || currentView === targetView) return;
+  isTransitioning = true;
 
-  if (targetView === 'interior') { //[cite: 4]
-    sliderSwitch.classList.add('interior-active'); //[cite: 4]
-    optOutside.classList.remove('active'); //[cite: 4]
-    optCabin.classList.add('active'); //[cite: 4]
+  if (targetView === 'interior') {
+    sliderSwitch.classList.add('interior-active');
+    optOutside.classList.remove('active');
+    optCabin.classList.add('active');
 
-    heroSection.classList.add('transition-to-interior'); //[cite: 4]
+    heroSection.classList.add('transition-to-interior');
 
-    // 👈 Lowered Cabin Engine Volume (set to 0.18 instead of 0.50)
-    if (isEngineSoundOn) engineAudio.volume = 0.18;
+    setTimeout(() => {
+      flashMask.classList.add('active');
+    }, 450);
 
-    setTimeout(() => { //[cite: 4]
-      flashMask.classList.add('active'); //[cite: 4]
-    }, 450); //[cite: 4]
+    setTimeout(() => {
+      extVideo.style.opacity = '0';
+      intVideo.style.opacity = '1';
+      intVideo.play().catch(() => {});
 
-    setTimeout(() => { //[cite: 4]
-      extVideo.style.opacity = '0'; //[cite: 4]
-      intVideo.style.opacity = '1'; //[cite: 4]
-      intVideo.play().catch(() => {}); //[cite: 4]
+      document.body.classList.add('view-interior');
+      currentView = 'interior';
 
-      document.body.classList.add('view-interior'); //[cite: 4]
-      currentView = 'interior'; //[cite: 4]
-
-      heroSection.classList.remove('transition-to-interior'); //[cite: 4]
-      flashMask.classList.remove('active'); //[cite: 4]
-      isTransitioning = false; //[cite: 4]
-    }, 850); //[cite: 4]
+      heroSection.classList.remove('transition-to-interior');
+      flashMask.classList.remove('active');
+      isTransitioning = false;
+    }, 850);
   } else {
-    sliderSwitch.classList.remove('interior-active'); //[cite: 4]
-    optCabin.classList.remove('active'); //[cite: 4]
-    optOutside.classList.add('active'); //[cite: 4]
+    sliderSwitch.classList.remove('interior-active');
+    optCabin.classList.remove('active');
+    optOutside.classList.add('active');
 
-    heroSection.classList.add('transition-to-exterior'); //[cite: 4]
+    heroSection.classList.add('transition-to-exterior');
 
-    // 👈 Lowered Highway Outside Engine Volume (set to 0.08 instead of 0.30)
-    if (isEngineSoundOn) engineAudio.volume = 0.08;
+    setTimeout(() => {
+      flashMask.classList.add('active');
+    }, 400);
 
-    setTimeout(() => { //[cite: 4]
-      flashMask.classList.add('active'); //[cite: 4]
-    }, 400); //[cite: 4]
+    setTimeout(() => {
+      intVideo.style.opacity = '0';
+      extVideo.style.opacity = '1';
+      extVideo.play().catch(() => {});
 
-    setTimeout(() => { //[cite: 4]
-      intVideo.style.opacity = '0'; //[cite: 4]
-      extVideo.style.opacity = '1'; //[cite: 4]
-      extVideo.play().catch(() => {}); //[cite: 4]
+      document.body.classList.remove('view-interior');
+      currentView = 'exterior';
 
-      document.body.classList.remove('view-interior'); //[cite: 4]
-      currentView = 'exterior'; //[cite: 4]
-
-      heroSection.classList.remove('transition-to-exterior'); //[cite: 4]
-      flashMask.classList.remove('active'); //[cite: 4]
-      isTransitioning = false; //[cite: 4]
-    }, 800); //[cite: 4]
+      heroSection.classList.remove('transition-to-exterior');
+      flashMask.classList.remove('active');
+      isTransitioning = false;
+    }, 800);
   }
 }
 
@@ -1469,7 +1371,7 @@ ticketModal.addEventListener('click', (e) => {
 });
 
 document.getElementById('hornBtn').addEventListener('click', playNextHorn);
-document.getElementById('dashboardCenterHorn').addEventListener('click', playNextHorn);
+document.getElementById('dashHornBtn').addEventListener('click', playNextHorn);
 
 /* KEYBOARD SHORTCUTS */
 document.addEventListener('keydown', (e) => {
@@ -1481,7 +1383,6 @@ document.addEventListener('keydown', (e) => {
     case 'KeyN': document.getElementById('btn-next').click(); break;
     case 'KeyP': document.getElementById('btn-prev').click(); break;
     case 'KeyH': playNextHorn(); break;
-    case 'KeyE': toggleEngineSound(); break;
     case 'KeyV':
     case 'KeyI': setView(currentView === 'exterior' ? 'interior' : 'exterior'); break;
     case 'KeyT': openTicketModal(); break;
@@ -1493,7 +1394,6 @@ document.addEventListener('keydown', (e) => {
 createEqualizer();
 renderPlaylist();
 setVolumeLevel(15);
-startEngineAudio();
 </script>
 </body>
 </html>

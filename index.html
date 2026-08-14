@@ -49,7 +49,6 @@
     transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* 3D Camera Fly-in Zoom Animation */
   .hero.transition-to-interior {
     transform: scale(2.6) translateZ(200px) rotateY(-10deg) translateX(-18%);
     filter: brightness(0.6) blur(2px);
@@ -78,7 +77,6 @@
     pointer-events: none;
   }
 
-  /* Flash Mask for seamless transition */
   .view-flash-mask {
     position: fixed; inset: 0;
     background: #000;
@@ -100,7 +98,6 @@
     transition: opacity 0.5s ease;
   }
 
-  /* CSS Rain Effect */
   .rain-overlay {
     position: absolute; inset: 0;
     pointer-events: none; z-index: 2;
@@ -160,29 +157,56 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     font-family: var(--font-display);
   }
 
-  /* INSIDE / OUTSIDE TOGGLE PILL BUTTON */
-  .view-toggle-btn {
-    background: rgba(20, 14, 10, 0.75);
-    border: 1px solid rgba(217,164,65,0.4);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 6px 14px; border-radius: 999px;
-    font-family: var(--font-display);
-    font-size: 11px; font-weight: 700; color: var(--mustard);
-    display: flex; align-items: center; gap: 6px;
-    letter-spacing: 0.08em;
+  /* ===================== RETRO SLIDER TOGGLE SWITCH ===================== */
+  .view-slider-switch {
+    background: rgba(18, 12, 8, 0.85);
+    border: 1px solid rgba(217,164,65,0.35);
+    border-radius: 999px;
+    padding: 3px;
+    display: flex;
+    position: relative;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    transition: all 0.2s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
   }
-  .view-toggle-btn:hover {
-    background: var(--mustard); color: var(--ink);
-    border-color: var(--mustard); transform: translateY(-1px);
+
+  .slider-option {
+    padding: 4px 12px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(244,234,212,0.6);
+    z-index: 2;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
-  .view-toggle-btn i { font-size: 11px; }
+
+  .slider-option.active {
+    color: #000;
+  }
+
+  .slider-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    bottom: 3px;
+    width: calc(50% - 3px);
+    background: var(--mustard);
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+  }
+
+  .view-slider-switch.interior-active .slider-thumb {
+    transform: translateX(100%);
+  }
 
   .clock-widget {
     font-size: 18px; font-weight: 700;
@@ -226,7 +250,7 @@
     transform: translateX(-50%); text-align: center;
     z-index: 10; width: 95%; max-width: 1200px; pointer-events: none;
     display: flex; flex-direction: column; align-items: center;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.4s ease, top 0.4s ease;
   }
 
   .track-meta-badge {
@@ -247,7 +271,7 @@
     display: inline-flex; white-space: nowrap; margin: 0 0.18em;
   }
 
-  /* FLOATING HORN BADGE */
+  /* EXTERNAL FLOATING HORN (HIGHWAY VIEW) */
   .centered-horn-wrapper {
     position: absolute;
     top: 36vh;
@@ -273,7 +297,7 @@
   .floating-horn:active { transform: scale(0.95); }
   .floating-horn svg { width: 15px; height: 15px; fill: currentColor; }
 
-  /* In Interior View Mode, subtly soften hero text and hide external horn */
+  /* CABIN VIEW STATE ADJUSTMENTS */
   body.view-interior .centered-horn-wrapper {
     opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.8);
   }
@@ -315,7 +339,6 @@
     transform: translateX(-50%);
     z-index: 100;
     display: flex; flex-direction: column; align-items: center; gap: 3px;
-    transition: transform 0.4s ease;
   }
 
   .stereo-unit {
@@ -493,6 +516,32 @@
   }
   .close-playlist { cursor: pointer; color: #ff3333; }
 
+  /* ===================== DASHBOARD INTEGRATED HORN BUTTON ===================== */
+  .dashboard-horn-btn {
+    position: absolute;
+    left: -82px;
+    bottom: 8px;
+    background: rgba(187, 77, 37, 0.25);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(187, 77, 37, 0.5);
+    color: var(--rust);
+    padding: 6px 11px; border-radius: 999px;
+    font-family: var(--font-hindi); font-size: 12px; font-weight: 700;
+    display: none; align-items: center; gap: 5px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease;
+  }
+  .dashboard-horn-btn:hover {
+    background: var(--rust); color: #fff; transform: translateY(-2px);
+  }
+  .dashboard-horn-btn:active { transform: scale(0.95); }
+  .dashboard-horn-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* Show dashboard horn button in interior view */
+  body.view-interior .dashboard-horn-btn {
+    display: flex;
+  }
+
   /* FLOATING TICKET WIDGET BUTTON */
   .floating-ticket-btn {
     position: absolute;
@@ -595,9 +644,12 @@
     .driver-badge { display: none; }
     .clock-widget { font-size: 14px; }
 
-    .view-toggle-btn {
-      padding: 4px 10px;
-      font-size: 10px;
+    .view-slider-switch {
+      padding: 2px;
+    }
+    .slider-option {
+      padding: 3px 8px;
+      font-size: 9px;
     }
 
     .hero-title-wrapper {
@@ -641,7 +693,7 @@
     .bottom-controls { height: 22px; }
     .btn { font-size: 7px; padding: 0 1px; }
 
-    .floating-ticket-btn {
+    .floating-ticket-btn, .dashboard-horn-btn {
       position: static; margin-top: 3px; padding: 3px 10px; font-size: 10px; align-self: center;
     }
 
@@ -669,11 +721,12 @@
   </div>
 
   <div class="header-right">
-    <!-- VIEW TOGGLE BUTTON (INSIDE / OUTSIDE) -->
-    <button class="view-toggle-btn" id="viewToggleBtn" title="Toggle Inside/Outside View (V)">
-      <i class="fa-solid fa-camera-rotate"></i>
-      <span id="viewToggleLabel">CABIN VIEW</span>
-    </button>
+    <!-- SLIDER TOGGLE SWITCH (OUTSIDE / CABIN) -->
+    <div class="view-slider-switch" id="viewSliderSwitch" title="Toggle View (V)">
+      <div class="slider-thumb"></div>
+      <div class="slider-option active" id="optOutside"><i class="fa-solid fa-bus"></i> OUT</div>
+      <div class="slider-option" id="optCabin"><i class="fa-solid fa-gauge"></i> CABIN</div>
+    </div>
 
     <div class="clock-widget" id="liveClock">22:07 <span>IST</span></div>
     <div class="passenger-badge">
@@ -710,7 +763,7 @@
     <h1 class="main-heading" id="mainHeading">उत्तर प्रदेश परिवहन</h1>
   </div>
 
-  <!-- FLOATING HORN BUTTON POSITIONED JUST ABOVE BUS BODY -->
+  <!-- FLOATING HORN BUTTON POSITIONED JUST ABOVE BUS BODY (HIGHWAY VIEW) -->
   <div class="centered-horn-wrapper">
     <button class="floating-horn" id="hornBtn" title="Blow Horn (H)">
       <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -721,6 +774,12 @@
 
 <!-- ===================== RETRO CAR STEREO DECK PLAYER ===================== -->
 <div class="player-wrapper">
+  <!-- DASHBOARD HORN BUTTON (ACTIVE IN CABIN VIEW) -->
+  <button class="dashboard-horn-btn" id="dashHornBtn" title="Cabin Horn (H)">
+    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    <span>हॉर्न HORN</span>
+  </button>
+
   <div class="stereo-unit">
     <!-- Left Section: Clamped Rotary Volume Dial Knob -->
     <div class="left-panel">
@@ -895,31 +954,33 @@ let rotationDeg = 0;
 let ytPlayer = null;
 let ytReady = false;
 
-/* 3D CAMERA & VIEW TOGGLE LOGIC */
-let currentView = 'exterior'; // 'exterior' or 'interior'
+/* 3D CAMERA & SLIDER TOGGLE LOGIC */
+let currentView = 'exterior';
 let isTransitioning = false;
 
 const heroSection = document.getElementById('heroSection');
 const extVideo = document.getElementById('backgroundVideo');
 const intVideo = document.getElementById('interiorVideo');
 const flashMask = document.getElementById('viewFlashMask');
-const viewToggleBtn = document.getElementById('viewToggleBtn');
-const viewToggleLabel = document.getElementById('viewToggleLabel');
+const sliderSwitch = document.getElementById('viewSliderSwitch');
+const optOutside = document.getElementById('optOutside');
+const optCabin = document.getElementById('optCabin');
 
-function toggleCabinView() {
-  if (isTransitioning) return;
+function setView(targetView) {
+  if (isTransitioning || currentView === targetView) return;
   isTransitioning = true;
 
-  if (currentView === 'exterior') {
-    // 1. Phase 1: Camera zoom forward & pan right towards bus window
+  if (targetView === 'interior') {
+    sliderSwitch.classList.add('interior-active');
+    optOutside.classList.remove('active');
+    optCabin.classList.add('active');
+
     heroSection.classList.add('transition-to-interior');
 
-    // 2. Phase 2: Fade mask flash
     setTimeout(() => {
       flashMask.classList.add('active');
     }, 450);
 
-    // 3. Phase 3: Switch video sources smoothly
     setTimeout(() => {
       extVideo.style.opacity = '0';
       intVideo.style.opacity = '1';
@@ -927,14 +988,16 @@ function toggleCabinView() {
 
       document.body.classList.add('view-interior');
       currentView = 'interior';
-      viewToggleLabel.textContent = 'HIGHWAY VIEW';
 
       heroSection.classList.remove('transition-to-interior');
       flashMask.classList.remove('active');
       isTransitioning = false;
     }, 850);
   } else {
-    // Zoom out transition back to exterior
+    sliderSwitch.classList.remove('interior-active');
+    optCabin.classList.remove('active');
+    optOutside.classList.add('active');
+
     heroSection.classList.add('transition-to-exterior');
 
     setTimeout(() => {
@@ -948,7 +1011,6 @@ function toggleCabinView() {
 
       document.body.classList.remove('view-interior');
       currentView = 'exterior';
-      viewToggleLabel.textContent = 'CABIN VIEW';
 
       heroSection.classList.remove('transition-to-exterior');
       flashMask.classList.remove('active');
@@ -957,7 +1019,9 @@ function toggleCabinView() {
   }
 }
 
-viewToggleBtn.addEventListener('click', toggleCabinView);
+sliderSwitch.addEventListener('click', () => {
+  setView(currentView === 'exterior' ? 'interior' : 'exterior');
+});
 
 /* DOM ELEMENTS */
 const songTitleEl = document.getElementById('song-title');
@@ -1300,6 +1364,7 @@ ticketModal.addEventListener('click', (e) => {
 });
 
 document.getElementById('hornBtn').addEventListener('click', playNextHorn);
+document.getElementById('dashHornBtn').addEventListener('click', playNextHorn);
 
 /* KEYBOARD SHORTCUTS */
 document.addEventListener('keydown', (e) => {
@@ -1312,7 +1377,7 @@ document.addEventListener('keydown', (e) => {
     case 'KeyP': document.getElementById('btn-prev').click(); break;
     case 'KeyH': playNextHorn(); break;
     case 'KeyV':
-    case 'KeyI': toggleCabinView(); break;
+    case 'KeyI': setView(currentView === 'exterior' ? 'interior' : 'exterior'); break;
     case 'KeyT': openTicketModal(); break;
     case 'Escape': closeTicketModal(); break;
   }

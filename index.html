@@ -161,6 +161,7 @@
     font-family: var(--font-display);
   }
 
+  /* HEADER MOVED TICKET BUTTON */
   .header-ticket-btn {
     background: rgba(217,164,65,0.18);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -179,6 +180,7 @@
   }
   .header-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
+  /* SLIDER TOGGLE SWITCH */
   .view-slider-switch {
     background: rgba(18, 12, 8, 0.85);
     border: 1px solid rgba(217,164,65,0.35);
@@ -291,7 +293,7 @@
     display: inline-flex; white-space: nowrap; margin: 0 0.18em;
   }
 
-  /* EXTERNAL FLOATING HORN (HIGHWAY VIEW) */
+  /* EXTERNAL FLOATING HORN */
   .centered-horn-wrapper {
     position: absolute;
     top: 36vh;
@@ -317,7 +319,6 @@
   .floating-horn:active { transform: scale(0.95); }
   .floating-horn svg { width: 15px; height: 15px; fill: currentColor; }
 
-  /* CABIN VIEW STATE ADJUSTMENTS */
   body.view-interior .centered-horn-wrapper {
     opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.8);
   }
@@ -581,9 +582,123 @@
     margin-right: 2px; font-size: 8px; cursor: pointer;
   }
 
+  /* ===================== SEAMLESS ONBOARDING BOOKING MODAL ===================== */
+  .booking-modal-overlay {
+    position: fixed; inset: 0; z-index: 600;
+    background: rgba(8, 5, 3, 0.82);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 16px;
+  }
+  .booking-modal-overlay.open {
+    opacity: 1; pointer-events: auto;
+  }
+
+  .booking-card {
+    background: rgba(24, 16, 11, 0.94);
+    border: 1px solid rgba(217, 164, 65, 0.35);
+    border-radius: 20px;
+    width: 100%; max-width: 440px;
+    padding: 24px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(244,234,212,0.15);
+    transform: translateY(35px) scale(0.96);
+    opacity: 0;
+    transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+  .booking-modal-overlay.open .booking-card {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .booking-header {
+    text-align: center; margin-bottom: 20px;
+  }
+  .booking-badge {
+    background: rgba(217,164,65,0.15); border: 1px solid rgba(217,164,65,0.3);
+    color: var(--mustard); font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px; letter-spacing: 0.15em; display: inline-block; margin-bottom: 6px;
+  }
+  .booking-title {
+    font-family: var(--font-hindi); font-size: 24px; font-weight: 800; color: #fff; margin: 0;
+  }
+  .booking-sub {
+    font-size: 11px; color: rgba(244,234,212,0.65); margin-top: 4px;
+  }
+
+  .booking-form {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .input-group {
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .input-label {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; color: var(--mustard); text-transform: uppercase;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .city-select {
+    background: rgba(14, 9, 6, 0.9);
+    border: 1px solid rgba(244,234,212,0.2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .city-select:focus {
+    border-color: var(--mustard);
+    box-shadow: 0 0 10px rgba(217,164,65,0.3);
+  }
+  .city-select option {
+    background: #140e0a;
+    color: #fff;
+  }
+
+  .book-now-btn {
+    margin-top: 8px;
+    background: linear-gradient(135deg, var(--rust), var(--mustard));
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 8px 25px rgba(187, 77, 37, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .book-now-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(217, 164, 65, 0.6);
+  }
+  .book-now-btn:active {
+    transform: scale(0.97);
+  }
+
+  .booking-skip-btn {
+    background: none; border: none;
+    color: rgba(244,234,212,0.5);
+    font-size: 11px; font-weight: 500;
+    text-align: center; margin-top: 6px;
+    text-decoration: underline; cursor: pointer;
+  }
+  .booking-skip-btn:hover { color: var(--cream); }
+
   /* ===================== TICKET MODAL ===================== */
   .ticket-modal-overlay {
-    position: fixed; inset: 0; z-index: 500;
+    position: fixed; inset: 0; z-index: 550;
     background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
@@ -639,7 +754,6 @@
 
   .ticket-barcode { text-align: center; font-family: 'Courier New', monospace; font-size: 22px; letter-spacing: 4px; margin-top: 12px; opacity: 0.8; }
 
-  /* SHARE TICKET BUTTON */
   .ticket-actions {
     display: flex;
     justify-content: center;
@@ -673,7 +787,7 @@
 
   /* ===================== DRIVER PROFILE MODAL ===================== */
   .driver-modal-overlay {
-    position: fixed; inset: 0; z-index: 500;
+    position: fixed; inset: 0; z-index: 550;
     background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
@@ -833,20 +947,17 @@
     .eq-container { height: 16px; }
     .bottom-controls { height: 22px; }
     .btn { font-size: 7px; padding: 0 1px; }
-
-    .btn-preset {
-      display: none;
-    }
+    .btn-preset { display: none; }
 
     .shortcuts-bar { display: none; }
-    .ticket-card { padding: 14px; max-width: 94vw; }
+    .ticket-card, .booking-card { padding: 16px; max-width: 94vw; }
     .ticket-corp-title { font-size: 15px; }
   }
 </style>
 </head>
 <body>
 
-<!-- TRANSITION FLASH MASK -->
+<!-- TRANSITION FLASH MASK & TOAST -->
 <div class="view-flash-mask" id="viewFlashMask"></div>
 <div class="toast-notify" id="toastNotify">✓ Ticket Copied to Clipboard!</div>
 
@@ -858,13 +969,13 @@
     </div>
     <div class="header-titles">
       <div class="header-brand">उत्तर प्रदेश परिवहन</div>
-      <div class="header-route">NH 19 · GHAZIPUR — LUCKNOW</div>
+      <div class="header-route" id="headerRouteText">NH 19 · GHAZIPUR ➔ LUCKNOW</div>
     </div>
   </div>
 
   <div class="header-right">
-    <!-- MOVED TICKET BUTTON IN HEADER -->
-    <button class="header-ticket-btn" id="headerTicketBtn" title="Get Bus Ticket">
+    <!-- TICKET BUTTON IN HEADER -->
+    <button class="header-ticket-btn" id="headerTicketBtn" title="View Your Ticket (T)">
       <svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.98-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.98 2-3.46s-.81-2.77-2-3.46V6h16v2.54zM9.5 11h5v2h-5z"/></svg>
       <span>TICKET</span>
     </button>
@@ -893,11 +1004,9 @@
 <!-- ===================== HERO SECTION WITH DUAL VIDEO ENGINE ===================== -->
 <section class="hero" id="heroSection">
   <div class="hero-video-container">
-    <!-- Exterior Bus Loop Video -->
     <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
       <source src="assets/bus-loop.mp4" type="video/mp4">
     </video>
-    <!-- Interior Bus Loop Video (Preloaded) -->
     <video id="interiorVideo" muted loop playsinline preload="auto">
       <source src="assets/bus-interior.MP4" type="video/mp4">
     </video>
@@ -942,7 +1051,6 @@
     <!-- Right Section: Digital LCD Screen & Controls -->
     <div class="right-panel">
       <div class="lcd-screen">
-        <!-- Playlist Overlay Drawer -->
         <div class="playlist-drawer" id="playlist-drawer">
           <div class="playlist-header">
             <span>-- SELECT TRACK --</span>
@@ -960,7 +1068,6 @@
           <div>
             <div class="digital-font song-title" id="song-title">TRK 01: TUMSE MILKE DIL KA JO HAAL</div>
             
-            <!-- LCD Interactive Timeline Seek Bar -->
             <div class="lcd-progress-track" id="lcdProgressTrack" title="Click to seek track">
               <div class="lcd-progress-fill" id="lcdProgressFill"></div>
             </div>
@@ -968,7 +1075,6 @@
             <div class="digital-font time-vol-display" id="time-display">00:00 / 00:00 &nbsp;&nbsp;VOL 15</div>
           </div>
 
-          <!-- Graphic LED Equalizer Visualizer -->
           <div class="eq-container" id="eq-container"></div>
         </div>
       </div>
@@ -980,7 +1086,6 @@
         <button class="btn" id="btn-next" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
         <button class="btn" id="btn-playlist" title="Playlist Queue"><i class="fa-solid fa-list"></i></button>
 
-        <!-- Reduced Track Presets 1-4 -->
         <button class="btn btn-preset" onclick="selectTrack(0)"><span class="btn-preset-num">1</span> TRK 1</button>
         <button class="btn btn-preset" onclick="selectTrack(1)"><span class="btn-preset-num">2</span> TRK 2</button>
         <button class="btn btn-preset" onclick="selectTrack(2)"><span class="btn-preset-num">3</span> TRK 3</button>
@@ -1000,6 +1105,73 @@
   </div>
 </div>
 
+<!-- ===================== ONBOARDING BOOKING WINDOW MODAL ===================== -->
+<div class="booking-modal-overlay open" id="bookingModal">
+  <div class="booking-card">
+    <div class="booking-header">
+      <span class="booking-badge">🚌 TICKET COUNTER · टिकट खिड़की</span>
+      <h2 class="booking-title">अपनी यात्रा चुनें</h2>
+      <p class="booking-sub">Select your route & board the highway Dhaba radio express.</p>
+    </div>
+
+    <form class="booking-form" id="bookingForm" onsubmit="event.preventDefault(); handleBookingSubmit();">
+      <div class="input-group">
+        <label class="input-label"><i class="fa-solid fa-location-dot"></i> FROM (कहाँ से):</label>
+        <select class="city-select" id="fromCitySelect">
+          <option value="Ghazipur" selected>गाज़ीपुर (Ghazipur)</option>
+          <option value="Lucknow">लखनऊ (Lucknow)</option>
+          <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
+          <option value="Prayagraj">प्रयागराज (Prayagraj)</option>
+          <option value="Kanpur">कानपुर (Kanpur)</option>
+          <option value="Gorakhpur">गोरखपुर (Gorakhpur)</option>
+          <option value="Ayodhya">अयोध्या धाम (Ayodhya)</option>
+          <option value="Agra">आगरा (Agra)</option>
+          <option value="Bareilly">बरेली (Bareilly)</option>
+          <option value="Meerut">मेरठ (Meerut)</option>
+          <option value="Jhansi">झाँसी (Jhansi)</option>
+          <option value="Mathura">मथुरा (Mathura)</option>
+          <option value="Aligarh">अलीगढ़ (Aligarh)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label"><i class="fa-solid fa-flag-checkered"></i> TO (कहाँ तक):</label>
+        <select class="city-select" id="toCitySelect">
+          <option value="Lucknow" selected>लखनऊ (Lucknow)</option>
+          <option value="Ghazipur">गाज़ीपुर (Ghazipur)</option>
+          <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
+          <option value="Prayagraj">प्रयागराज (Prayagraj)</option>
+          <option value="Kanpur">कानपुर (Kanpur)</option>
+          <option value="Gorakhpur">गोरखपुर (Gorakhpur)</option>
+          <option value="Ayodhya">अयोध्या धाम (Ayodhya)</option>
+          <option value="Agra">आगरा (Agra)</option>
+          <option value="Bareilly">बरेली (Bareilly)</option>
+          <option value="Meerut">मेरठ (Meerut)</option>
+          <option value="Jhansi">झाँसी (Jhansi)</option>
+          <option value="Mathura">मथुरा (Mathura)</option>
+          <option value="Aligarh">अलीगढ़ (Aligarh)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label"><i class="fa-solid fa-chair"></i> SEAT PREFERENCE:</label>
+        <select class="city-select" id="seatSelect">
+          <option value="🪟 WINDOW SEAT (#14B)" selected>🪟 Window Seat (#14B)</option>
+          <option value="🪟 WINDOW SEAT (#04A)">🪟 Front Window Seat (#04A)</option>
+          <option value="🚶 AISLE SEAT (#12C)">🚶 Aisle Seat (#12C)</option>
+          <option value="👑 DRIVER SIDE SEAT (#02)">👑 Cabin Driver Side (#02)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="book-now-btn">
+        <i class="fa-solid fa-ticket"></i> जारी करें · BOARD BUS & GET TICKET
+      </button>
+
+      <button type="button" class="booking-skip-btn" onclick="skipBooking()">Skip directly to radio</button>
+    </form>
+  </div>
+</div>
+
 <!-- ===================== OLD-FASHIONED VINTAGE TICKET MODAL ===================== -->
 <div class="ticket-modal-overlay" id="ticketModal">
   <div class="ticket-card">
@@ -1012,7 +1184,7 @@
     <div class="ticket-body">
       <div class="ticket-row">
         <span class="ticket-label">Route:</span>
-        <span class="ticket-val-highlight">GHAZIPUR ➔ LUCKNOW</span>
+        <span class="ticket-val-highlight" id="ticketRouteVal">GHAZIPUR ➔ LUCKNOW</span>
       </div>
       <div class="ticket-row">
         <span class="ticket-label">Highway:</span>
@@ -1020,7 +1192,7 @@
       </div>
       <div class="ticket-row">
         <span class="ticket-label">Seat Allocation:</span>
-        <span class="ticket-seat-badge">🪟 WINDOW SEAT (#14B)</span>
+        <span class="ticket-seat-badge" id="ticketSeatVal">🪟 WINDOW SEAT (#14B)</span>
       </div>
       <div class="ticket-row">
         <span class="ticket-label">Issued Time:</span>
@@ -1028,7 +1200,7 @@
       </div>
       <div class="ticket-row">
         <span class="ticket-label">Fare:</span>
-        <span class="ticket-val">₹ 319.00 (PAID)</span>
+        <span class="ticket-val" id="ticketFareVal">₹ 319.00 (PAID)</span>
       </div>
 
       <!-- AUDIO GRAPH & CURRENT SONG -->
@@ -1116,6 +1288,14 @@ let volume = 15;
 let rotationDeg = 0;
 let ytPlayer = null;
 let ytReady = false;
+
+/* ACTIVE BOOKING STATE */
+let userBooking = {
+  from: "Ghazipur",
+  to: "Lucknow",
+  seat: "🪟 WINDOW SEAT (#14B)",
+  fare: "₹ 319.00 (PAID)"
+};
 
 /* 3D CAMERA & SLIDER TOGGLE LOGIC */
 let currentView = 'exterior';
@@ -1499,7 +1679,8 @@ function renderPlaylist() {
   });
 }
 
-/* ===================== MODALS & SHARING LOGIC ===================== */
+/* ===================== BOOKING, MODALS & SHARING LOGIC ===================== */
+const bookingModal = document.getElementById('bookingModal');
 const ticketModal = document.getElementById('ticketModal');
 const driverModal = document.getElementById('driverModal');
 const toastNotify = document.getElementById('toastNotify');
@@ -1508,6 +1689,48 @@ function showToast(msg) {
   toastNotify.textContent = msg;
   toastNotify.classList.add('show');
   setTimeout(() => toastNotify.classList.remove('show'), 2500);
+}
+
+function handleBookingSubmit() {
+  const fromCity = document.getElementById('fromCitySelect').value;
+  const toCity = document.getElementById('toCitySelect').value;
+  const seatPref = document.getElementById('seatSelect').value;
+
+  if (fromCity === toCity) {
+    showToast('⚠️ Please select different origin & destination cities.');
+    return;
+  }
+
+  // Calculate random realistic UP Roadways fare (₹180 to ₹420)
+  const fareAmt = Math.floor(Math.random() * 240) + 180;
+  userBooking = {
+    from: fromCity,
+    to: toCity,
+    seat: seatPref,
+    fare: `₹ ${fareAmt}.00 (PAID)`
+  };
+
+  // Update Header Route Text
+  document.getElementById('headerRouteText').textContent = `NH 19 · ${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
+
+  // Update Ticket Details
+  document.getElementById('ticketRouteVal').textContent = `${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
+  document.getElementById('ticketSeatVal').textContent = seatPref;
+  document.getElementById('ticketFareVal').textContent = userBooking.fare;
+
+  // Seamless transition: close booking modal, open generated ticket
+  bookingModal.classList.remove('open');
+  setTimeout(() => {
+    openTicketModal();
+    // Auto-start radio playback if not playing
+    if (ytReady && ytPlayer && !isPlaying) {
+      document.getElementById('btn-play-pause').click();
+    }
+  }, 350);
+}
+
+function skipBooking() {
+  bookingModal.classList.remove('open');
 }
 
 function openTicketModal() {
@@ -1530,7 +1753,7 @@ function closeTicketModal() {
 /* SHARE TICKET HANDLER */
 document.getElementById('shareTicketBtn').addEventListener('click', async () => {
   const currentSong = PLAYLIST[currentTrackIndex] ? PLAYLIST[currentTrackIndex].title : "Highway Hits";
-  const shareText = `🚌 उत्तर प्रदेश परिवहन Passenger Ticket:\nRoute: Ghazipur ➔ Lucknow\nSeat: Window #14B\nNow Playing: ${currentSong}\nTune in at: ${window.location.href}`;
+  const shareText = `🚌 उत्तर प्रदेश परिवहन Passenger Ticket:\nRoute: ${userBooking.from} ➔ ${userBooking.to}\nSeat: ${userBooking.seat}\nFare: ${userBooking.fare}\nNow Playing: ${currentSong}\nTune in at: ${window.location.href}`;
 
   if (navigator.share) {
     try {
@@ -1540,7 +1763,7 @@ document.getElementById('shareTicketBtn').addEventListener('click', async () => 
         url: window.location.href
       });
     } catch (err) {
-      console.log('Share canceled/dismissed');
+      console.log('Share dismissed');
     }
   } else {
     navigator.clipboard.writeText(shareText).then(() => {
@@ -1578,7 +1801,7 @@ document.getElementById('dashHornBtn').addEventListener('click', playNextHorn);
 
 /* KEYBOARD SHORTCUTS */
 document.addEventListener('keydown', (e) => {
-  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
   switch(e.code){
     case 'Space': e.preventDefault(); document.getElementById('btn-play-pause').click(); break;
     case 'ArrowRight': if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(ytPlayer.getCurrentTime() + 5, true); break;
@@ -1589,7 +1812,7 @@ document.addEventListener('keydown', (e) => {
     case 'KeyV':
     case 'KeyI': setView(currentView === 'exterior' ? 'interior' : 'exterior'); break;
     case 'KeyT': openTicketModal(); break;
-    case 'Escape': closeTicketModal(); closeDriverModal(); break;
+    case 'Escape': closeTicketModal(); closeDriverModal(); skipBooking(); break;
   }
 });
 

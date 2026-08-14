@@ -349,7 +349,7 @@
   }
   @keyframes bassGlitchLoop {
     0% { transform: scale(1); text-shadow: -4px 0 #bb4d25, 4px 0 #d9a441; }
-    100% { transform: scale(1.05); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
+    100% { transform: scale(1.04); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
   }
 
   /* ===================== RETRO STEREO DECK CONTAINER ===================== */
@@ -1025,17 +1025,12 @@
 <!-- ===================== HERO SECTION WITH DUAL VIDEO ENGINE ===================== -->
 <section class="hero" id="heroSection">
   <div class="hero-video-container">
-    <!-- Main Background Video with Responsive Sources -->
+    <!-- Exterior Video: Responsive Source Switching for Mobile & Desktop -->
     <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
       <source src="assets/bus-mob.MP4" type="video/mp4" media="(max-width: 768px)">
       <source src="assets/bus-loop.mp4" type="video/mp4">
     </video>
-    <!-- Secondary Crossfade Video for Seamless Mobile Video Loop Dissolve -->
-    <video id="crossfadeVideo" muted playsinline preload="auto" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; opacity:0; z-index:0; pointer-events:none;">
-      <source src="assets/bus-mob.MP4" type="video/mp4" media="(max-width: 768px)">
-      <source src="assets/bus-loop.mp4" type="video/mp4">
-    </video>
-    <!-- Interior Bus Loop Video -->
+    <!-- Interior Bus Loop Video (Preloaded) -->
     <video id="interiorVideo" muted loop playsinline preload="auto">
       <source src="assets/bus-interior.MP4" type="video/mp4">
     </video>
@@ -1134,7 +1129,7 @@
   </div>
 </div>
 
-<!-- ===================== ONBOARDING BOOKING WINDOW MODAL (AUTO 5.5S FADEUP) ===================== -->
+<!-- ===================== ONBOARDING BOOKING WINDOW MODAL (AUTO 5S FADEUP) ===================== -->
 <div class="booking-modal-overlay" id="bookingModal">
   <div class="booking-card">
     <div class="booking-header">
@@ -1782,7 +1777,7 @@ function skipBooking() {
   bookingModal.classList.remove('open');
 }
 
-/* 5.5 SECOND DELAYED AUTO FADE-UP FOR TICKET WINDOW ON SITE ENTRY */
+/* 5-6 SECOND DELAYED AUTO FADE-UP FOR TICKET WINDOW ON SITE ENTRY */
 window.addEventListener('load', () => {
   calculateLiveFare();
   setTimeout(() => {
@@ -1857,34 +1852,6 @@ ticketModal.addEventListener('click', (e) => {
 
 document.getElementById('hornBtn').addEventListener('click', playNextHorn);
 document.getElementById('dashHornBtn').addEventListener('click', playNextHorn);
-
-/* SEAMLESS MOBILE VIDEO DISSOLVE LOOP LOGIC */
-const mainVid = document.getElementById('backgroundVideo');
-const fadeVid = document.getElementById('crossfadeVideo');
-
-mainVid.addEventListener('timeupdate', () => {
-  if (mainVid.duration && (mainVid.duration - mainVid.currentTime <= 0.8)) {
-    if (fadeVid.paused && fadeVid.style.opacity === '0') {
-      fadeVid.currentTime = 0;
-      fadeVid.play().catch(() => {});
-      fadeVid.style.transition = 'opacity 0.7s ease';
-      mainVid.style.transition = 'opacity 0.7s ease';
-      fadeVid.style.opacity = '1';
-      mainVid.style.opacity = '0';
-    }
-  }
-});
-
-fadeVid.addEventListener('timeupdate', () => {
-  if (fadeVid.duration && (fadeVid.duration - fadeVid.currentTime <= 0.8)) {
-    if (mainVid.paused && mainVid.style.opacity === '0') {
-      mainVid.currentTime = 0;
-      mainVid.play().catch(() => {});
-      mainVid.style.opacity = '1';
-      fadeVid.style.opacity = '0';
-    }
-  }
-});
 
 /* KEYBOARD SHORTCUTS */
 document.addEventListener('keydown', (e) => {

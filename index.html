@@ -35,22 +35,59 @@
     color:var(--cream);
     font-family:var(--font-body);
     -webkit-font-smoothing:antialiased;
+    perspective: 1200px;
   }
 
   button{font-family:inherit;cursor:pointer;}
 
-  /* ===================== HERO & 16:9 VIDEO ATMOSPHERE ===================== */
+  /* ===================== 3D CINEMATIC HERO & VIDEO ENGINE ===================== */
   .hero{
     position:absolute; inset:0;
     width:100vw; height:100vh;
     overflow:hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* 3D Camera Fly-in Zoom Animation */
+  .hero.transition-to-interior {
+    transform: scale(2.6) translateZ(200px) rotateY(-10deg) translateX(-18%);
+    filter: brightness(0.6) blur(2px);
+  }
+
+  .hero.transition-to-exterior {
+    transform: scale(0.6) translateZ(-100px) rotateY(10deg);
+    filter: brightness(0.5);
+  }
+
+  .hero-video-container {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+  }
+
   .hero video{
-    position:absolute;inset:0;
-    width:100%;height:100%;object-fit:cover;
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
     object-position: center center;
     filter:saturate(1.02) contrast(1.05) brightness(0.95);
+    transition: opacity 0.5s ease;
     z-index:0;
+  }
+
+  #interiorVideo {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Flash Mask for seamless transition */
+  .view-flash-mask {
+    position: fixed; inset: 0;
+    background: #000;
+    opacity: 0; pointer-events: none;
+    z-index: 18;
+    transition: opacity 0.35s ease;
+  }
+  .view-flash-mask.active {
+    opacity: 0.9;
   }
   
   .hero .scrim{
@@ -60,6 +97,7 @@
       linear-gradient(to bottom, rgba(8, 5, 3, 0.6) 0%, transparent 25%),
       linear-gradient(to top, rgba(8, 5, 3, 0.8) 0%, rgba(8, 5, 3, 0.2) 35%, transparent 65%);
     z-index:1;
+    transition: opacity 0.5s ease;
   }
 
   /* CSS Rain Effect */
@@ -122,9 +160,29 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     font-family: var(--font-display);
   }
+
+  /* INSIDE / OUTSIDE TOGGLE PILL BUTTON */
+  .view-toggle-btn {
+    background: rgba(20, 14, 10, 0.75);
+    border: 1px solid rgba(217,164,65,0.4);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: 6px 14px; border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700; color: var(--mustard);
+    display: flex; align-items: center; gap: 6px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    transition: all 0.2s ease;
+  }
+  .view-toggle-btn:hover {
+    background: var(--mustard); color: var(--ink);
+    border-color: var(--mustard); transform: translateY(-1px);
+  }
+  .view-toggle-btn i { font-size: 11px; }
 
   .clock-widget {
     font-size: 18px; font-weight: 700;
@@ -168,6 +226,7 @@
     transform: translateX(-50%); text-align: center;
     z-index: 10; width: 95%; max-width: 1200px; pointer-events: none;
     display: flex; flex-direction: column; align-items: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
   .track-meta-badge {
@@ -188,7 +247,7 @@
     display: inline-flex; white-space: nowrap; margin: 0 0.18em;
   }
 
-  /* FLOATING HORN BADGE POSITIONED JUST ABOVE BUS BODY */
+  /* FLOATING HORN BADGE */
   .centered-horn-wrapper {
     position: absolute;
     top: 36vh;
@@ -196,6 +255,7 @@
     transform: translateX(-50%);
     z-index: 15;
     pointer-events: auto;
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
   .floating-horn {
@@ -212,6 +272,14 @@
   .floating-horn:hover { background: var(--rust); border-color: var(--rust); }
   .floating-horn:active { transform: scale(0.95); }
   .floating-horn svg { width: 15px; height: 15px; fill: currentColor; }
+
+  /* In Interior View Mode, subtly soften hero text and hide external horn */
+  body.view-interior .centered-horn-wrapper {
+    opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.8);
+  }
+  body.view-interior .hero-title-wrapper {
+    top: 10%;
+  }
 
   /* ===================== ANIMATION STYLES ===================== */
   .anim-char {
@@ -247,6 +315,7 @@
     transform: translateX(-50%);
     z-index: 100;
     display: flex; flex-direction: column; align-items: center; gap: 3px;
+    transition: transform 0.4s ease;
   }
 
   .stereo-unit {
@@ -518,122 +587,74 @@
 
   #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
 
-  /* ===================== STRICT MOBILE OVERRIDES (SOLVES screenshot ISSUES) ===================== */
+  /* ===================== STRICT MOBILE OVERRIDES ===================== */
   @media (max-width: 600px) {
-    /* 1. Header & Title Adjustments */
-    .header-bar {
-      padding: 10px 12px;
-    }
-    .header-brand {
-      font-size: 13px;
-    }
-    .header-route {
-      font-size: 8px;
-    }
-    .driver-badge {
-      display: none;
-    }
-    .clock-widget {
-      font-size: 14px;
+    .header-bar { padding: 10px 12px; }
+    .header-brand { font-size: 13px; }
+    .header-route { font-size: 8px; }
+    .driver-badge { display: none; }
+    .clock-widget { font-size: 14px; }
+
+    .view-toggle-btn {
+      padding: 4px 10px;
+      font-size: 10px;
     }
 
     .hero-title-wrapper {
-      top: 18%; /* Pushes text down safely below mobile status/nav bars */
+      top: 18%;
     }
     .track-meta-badge {
-      font-size: 8px;
-      letter-spacing: 0.15em;
+      font-size: 8px; letter-spacing: 0.15em;
     }
     .main-heading {
       font-size: clamp(24px, 7.5vw, 42px);
     }
 
-    /* 2. Horn Button Fits Cleanly Above Bus Roof */
     .centered-horn-wrapper {
       top: 38vh;
     }
     .floating-horn {
-      padding: 6px 14px;
-      font-size: 11px;
+      padding: 6px 14px; font-size: 11px;
     }
 
-    /* 3. Responsive 16:9 Video Positioning */
     .hero video {
       object-fit: cover;
-      object-position: center 48%; /* Keeps bus in full focal view */
+      object-position: center 48%;
     }
 
-    /* 4. Completely Responsive Stereo Unit */
     .player-wrapper {
-      bottom: 4px;
-      width: 96vw;
+      bottom: 4px; width: 96vw;
     }
     .stereo-unit {
-      width: 100%; /* Adapts dynamically to any screen width */
-      height: 105px;
-      padding: 4px;
-      gap: 5px;
+      width: 100%; height: 105px; padding: 4px; gap: 5px;
     }
 
-    .left-panel {
-      width: 70px;
-    }
-    .knob-bezel {
-      width: 44px;
-      height: 44px;
-    }
-    .volume-knob {
-      width: 34px;
-      height: 34px;
-    }
+    .left-panel { width: 70px; }
+    .knob-bezel { width: 44px; height: 44px; }
+    .volume-knob { width: 34px; height: 34px; }
 
-    .lcd-screen {
-      height: 58px;
-      padding: 3px 4px;
-    }
-    .song-title {
-      font-size: 11px;
-      max-width: 130px;
-    }
-    .time-vol-display {
-      font-size: 9px;
-    }
+    .lcd-screen { height: 58px; padding: 3px 4px; }
+    .song-title { font-size: 11px; max-width: 130px; }
+    .time-vol-display { font-size: 9px; }
 
-    .eq-container {
-      height: 16px;
-    }
-    .bottom-controls {
-      height: 22px;
-    }
-    .btn {
-      font-size: 7px;
-      padding: 0 1px;
-    }
+    .eq-container { height: 16px; }
+    .bottom-controls { height: 22px; }
+    .btn { font-size: 7px; padding: 0 1px; }
 
-    /* 5. Separate Ticket Button Repositioning (No LCD Overlap) */
     .floating-ticket-btn {
-      position: static;
-      margin-top: 3px;
-      padding: 3px 10px;
-      font-size: 10px;
-      align-self: center;
+      position: static; margin-top: 3px; padding: 3px 10px; font-size: 10px; align-self: center;
     }
 
-    .shortcuts-bar {
-      display: none;
-    }
-
-    .ticket-card {
-      padding: 14px;
-      max-width: 94vw;
-    }
-    .ticket-corp-title {
-      font-size: 15px;
-    }
+    .shortcuts-bar { display: none; }
+    .ticket-card { padding: 14px; max-width: 94vw; }
+    .ticket-corp-title { font-size: 15px; }
   }
 </style>
 </head>
 <body>
+
+<!-- TRANSITION FLASH MASK -->
+<div class="view-flash-mask" id="viewFlashMask"></div>
 
 <!-- ===================== TOP HEADER BAR ===================== -->
 <header class="header-bar">
@@ -648,6 +669,12 @@
   </div>
 
   <div class="header-right">
+    <!-- VIEW TOGGLE BUTTON (INSIDE / OUTSIDE) -->
+    <button class="view-toggle-btn" id="viewToggleBtn" title="Toggle Inside/Outside View (V)">
+      <i class="fa-solid fa-camera-rotate"></i>
+      <span id="viewToggleLabel">CABIN VIEW</span>
+    </button>
+
     <div class="clock-widget" id="liveClock">22:07 <span>IST</span></div>
     <div class="passenger-badge">
       <div class="live-dot"></div>
@@ -662,11 +689,19 @@
   </div>
 </header>
 
-<!-- ===================== HERO SECTION ===================== -->
-<section class="hero">
-  <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
-    <source src="assets/bus-loop.mp4" type="video/mp4">
-  </video>
+<!-- ===================== HERO SECTION WITH DUAL VIDEO ENGINE ===================== -->
+<section class="hero" id="heroSection">
+  <div class="hero-video-container">
+    <!-- Exterior Bus Loop Video -->
+    <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
+      <source src="assets/bus-loop.mp4" type="video/mp4">
+    </video>
+    <!-- Interior Bus Loop Video (Preloaded) -->
+    <video id="interiorVideo" muted loop playsinline preload="auto">
+      <source src="assets/bus-interior.MP4" type="video/mp4">
+    </video>
+  </div>
+
   <div class="scrim"></div>
   <div class="rain-overlay"></div>
 
@@ -760,6 +795,7 @@
     <span><span class="kbd-key">Space</span> PLAY / PAUSE</span>
     <span><span class="kbd-key">←</span> <span class="kbd-key">→</span> SEEK</span>
     <span><span class="kbd-key">N</span> <span class="kbd-key">P</span> TRACK</span>
+    <span><span class="kbd-key">V</span> VIEW</span>
     <span id="ticketShortcutBtn"><span class="kbd-key">T</span> TICKET</span>
     <span><span class="kbd-key">H</span> HORN</span>
   </div>
@@ -850,7 +886,6 @@ const PLAYLIST = [
   { id: "3nzDp3eLYHY", title: "Bahut Pyaar Karte Hain", artist: "Anuradha Paudwal | Saajan" },
   { id: "8XtXLVylOoU", title: "Saajanji Ghar Aaye", artist: "Alka Yagnik | Kuch Kuch Hota Hai" },
   { id: "pmyyujwe73M", title: "Tu Pyar Hai Kisi Aur Ka", artist: "Kumar Sanu | Dil Hai Ki Manta Nahin" }
-
 ];
 
 let currentTrackIndex = 0;
@@ -859,6 +894,70 @@ let volume = 15;
 let rotationDeg = 0;
 let ytPlayer = null;
 let ytReady = false;
+
+/* 3D CAMERA & VIEW TOGGLE LOGIC */
+let currentView = 'exterior'; // 'exterior' or 'interior'
+let isTransitioning = false;
+
+const heroSection = document.getElementById('heroSection');
+const extVideo = document.getElementById('backgroundVideo');
+const intVideo = document.getElementById('interiorVideo');
+const flashMask = document.getElementById('viewFlashMask');
+const viewToggleBtn = document.getElementById('viewToggleBtn');
+const viewToggleLabel = document.getElementById('viewToggleLabel');
+
+function toggleCabinView() {
+  if (isTransitioning) return;
+  isTransitioning = true;
+
+  if (currentView === 'exterior') {
+    // 1. Phase 1: Camera zoom forward & pan right towards bus window
+    heroSection.classList.add('transition-to-interior');
+
+    // 2. Phase 2: Fade mask flash
+    setTimeout(() => {
+      flashMask.classList.add('active');
+    }, 450);
+
+    // 3. Phase 3: Switch video sources smoothly
+    setTimeout(() => {
+      extVideo.style.opacity = '0';
+      intVideo.style.opacity = '1';
+      intVideo.play().catch(() => {});
+
+      document.body.classList.add('view-interior');
+      currentView = 'interior';
+      viewToggleLabel.textContent = 'HIGHWAY VIEW';
+
+      heroSection.classList.remove('transition-to-interior');
+      flashMask.classList.remove('active');
+      isTransitioning = false;
+    }, 850);
+  } else {
+    // Zoom out transition back to exterior
+    heroSection.classList.add('transition-to-exterior');
+
+    setTimeout(() => {
+      flashMask.classList.add('active');
+    }, 400);
+
+    setTimeout(() => {
+      intVideo.style.opacity = '0';
+      extVideo.style.opacity = '1';
+      extVideo.play().catch(() => {});
+
+      document.body.classList.remove('view-interior');
+      currentView = 'exterior';
+      viewToggleLabel.textContent = 'CABIN VIEW';
+
+      heroSection.classList.remove('transition-to-exterior');
+      flashMask.classList.remove('active');
+      isTransitioning = false;
+    }, 800);
+  }
+}
+
+viewToggleBtn.addEventListener('click', toggleCabinView);
 
 /* DOM ELEMENTS */
 const songTitleEl = document.getElementById('song-title');
@@ -1212,6 +1311,8 @@ document.addEventListener('keydown', (e) => {
     case 'KeyN': document.getElementById('btn-next').click(); break;
     case 'KeyP': document.getElementById('btn-prev').click(); break;
     case 'KeyH': playNextHorn(); break;
+    case 'KeyV':
+    case 'KeyI': toggleCabinView(); break;
     case 'KeyT': openTicketModal(); break;
     case 'Escape': closeTicketModal(); break;
   }

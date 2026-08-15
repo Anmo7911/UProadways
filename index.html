@@ -582,6 +582,66 @@
     margin-right: 2px; font-size: 8px; cursor: pointer;
   }
 
+  /* ===================== BOTTOM LEFT DEVELOPER BADGE ===================== */
+  .developer-badge {
+    position: fixed;
+    bottom: 14px;
+    left: 18px;
+    z-index: 150;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(14, 10, 8, 0.72);
+    border: 1px solid rgba(244, 234, 212, 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 500;
+    color: rgba(244, 234, 212, 0.75);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .developer-badge:hover {
+    background: rgba(20, 14, 10, 0.92);
+    border-color: rgba(217, 164, 65, 0.45);
+    color: #fff;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.75);
+  }
+  .developer-badge .dev-name {
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+  }
+  .x-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(244, 234, 212, 0.7);
+    text-decoration: none;
+    margin-left: 2px;
+    padding: 3px 5px;
+    border-radius: 50%;
+    transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .x-link svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    transition: transform 0.28s ease, fill 0.28s ease;
+  }
+  .x-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.22) rotate(8deg);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+  }
+  .x-link:active {
+    transform: scale(0.95);
+  }
+
   /* ===================== SEAMLESS ONBOARDING BOOKING MODAL ===================== */
   .booking-modal-overlay {
     position: fixed; inset: 0; z-index: 600;
@@ -973,6 +1033,7 @@
     .btn-preset { display: none; }
 
     .shortcuts-bar { display: none; }
+    .developer-badge { bottom: 112px; left: 10px; padding: 3px 8px; font-size: 9.5px; }
     .ticket-card, .booking-card { padding: 16px; max-width: 94vw; }
     .ticket-corp-title { font-size: 15px; }
   }
@@ -983,6 +1044,16 @@
 <!-- TRANSITION FLASH MASK & TOAST -->
 <div class="view-flash-mask" id="viewFlashMask"></div>
 <div class="toast-notify" id="toastNotify">✓ Ticket Copied to Clipboard!</div>
+
+<!-- ===================== BOTTOM LEFT DEVELOPER BADGE ===================== -->
+<div class="developer-badge">
+  <span>Developed by <span class="dev-name">Shashank</span></span>
+  <a href="https://x.com/onemolll" target="_blank" rel="noopener noreferrer" class="x-link" title="Follow on X (@onemolll)">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+    </svg>
+  </a>
+</div>
 
 <!-- ===================== TOP HEADER BAR ===================== -->
 <header class="header-bar">
@@ -1363,7 +1434,8 @@ const CITY_DISTANCES_KM = {
   "Aligarh":    { "Ghazipur": 740, "Lucknow": 410, "Varanasi": 670, "Prayagraj": 550, "Kanpur": 350, "Gorakhpur": 670, "Ayodhya": 540, "Agra": 90,  "Bareilly": 180, "Meerut": 140, "Jhansi": 310, "Mathura": 65 }
 };
 
-let currentTrackIndex = 0;
+/* PICK RANDOM TRACK ON EVERY VISIT */
+let currentTrackIndex = Math.floor(Math.random() * PLAYLIST.length);
 let isPlaying = false;
 let volume = 15;
 let rotationDeg = 0;
@@ -1624,7 +1696,7 @@ setInterval(() => {
   }
 }, 400);
 
-function selectTrack(index) {
+function selectTrack(index, autoPlay = true) {
   currentTrackIndex = index;
   const t = PLAYLIST[currentTrackIndex];
   songTitleEl.textContent = t.title;
@@ -1633,9 +1705,13 @@ function selectTrack(index) {
   document.getElementById('ticketSongArtist').textContent = t.artist;
 
   if (ytReady && ytPlayer) {
-    ytPlayer.loadVideoById({ videoId: t.id, startSeconds: 0 });
-    isPlaying = true;
-    playIcon.className = 'fa-solid fa-pause';
+    if (autoPlay) {
+      ytPlayer.loadVideoById({ videoId: t.id, startSeconds: 0 });
+      isPlaying = true;
+      playIcon.className = 'fa-solid fa-pause';
+    } else {
+      ytPlayer.cueVideoById({ videoId: t.id, startSeconds: 0 });
+    }
   }
   renderPlaylist();
 }
@@ -1653,6 +1729,7 @@ window.onYouTubeIframeAPIReady = function(){
       onReady: () => { 
         ytReady = true; 
         ytPlayer.setVolume((volume / 30) * 100);
+        selectTrack(currentTrackIndex, false);
       },
       onStateChange: onPlayerStateChange,
       onError: () => selectTrack((currentTrackIndex + 1) % PLAYLIST.length)
@@ -1800,7 +1877,6 @@ function calculateLiveFare() {
     return;
   }
 
-  // Base state transport tariff @ ₹1.45/km + ₹30 toll & reservation
   const distance = (CITY_DISTANCES_KM[fromCity] && CITY_DISTANCES_KM[fromCity][toCity]) 
                    ? CITY_DISTANCES_KM[fromCity][toCity] 
                    : (CITY_DISTANCES_KM[toCity] && CITY_DISTANCES_KM[toCity][fromCity]) 
@@ -1833,7 +1909,7 @@ function handleBookingSubmit() {
   document.getElementById('ticketSeatVal').textContent = seatPref;
   document.getElementById('ticketFareVal').textContent = userBooking.fare;
 
-  // Trigger playback synchronously on user gesture
+  // Start playback synchronously on user gesture
   if (ytReady && ytPlayer && !isPlaying) {
     ytPlayer.playVideo();
     isPlaying = true;
@@ -1945,7 +2021,7 @@ document.addEventListener('keydown', (e) => {
 
 /* INIT */
 createEqualizer();
-renderPlaylist();
+selectTrack(currentTrackIndex, false);
 setVolumeLevel(15);
 </script>
 </body>

@@ -394,6 +394,7 @@
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 6px rgba(187, 77, 37, 0.5), inset 0 0 3px #000;
     cursor: ns-resize;
+    touch-action: none;
   }
 
   .volume-knob {
@@ -405,6 +406,7 @@
     position: relative;
     transition: transform 0.08s ease-out;
     display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
   }
 
   .knob-notch {
@@ -1064,7 +1066,7 @@
   <div class="stereo-unit">
     <!-- Left Section: Clamped Rotary Volume Dial Knob -->
     <div class="left-panel">
-      <div class="knob-bezel" id="knob-bezel" title="Scroll Wheel or Click & Drag vertically to adjust Volume">
+      <div class="knob-bezel" id="knob-bezel" title="Scroll Wheel or Drag vertically to adjust Volume">
         <div class="volume-knob" id="knob">
           <div class="knob-notch"></div>
           <span class="knob-text">PUSH SEL</span>
@@ -1129,7 +1131,7 @@
   </div>
 </div>
 
-<!-- ===================== ONBOARDING BOOKING WINDOW MODAL (AUTO 5S FADEUP) ===================== -->
+<!-- ===================== ONBOARDING BOOKING WINDOW MODAL ===================== -->
 <div class="booking-modal-overlay" id="bookingModal">
   <div class="booking-card">
     <div class="booking-header">
@@ -1142,7 +1144,7 @@
       <div class="input-group">
         <label class="input-label"><i class="fa-solid fa-location-dot"></i> FROM (कहाँ से):</label>
         <select class="city-select" id="fromCitySelect" onchange="calculateLiveFare()">
-          <option value="Ghazipur" selected>गाज़ीपुर (Ghazipur)</option>
+          <option value="Ghazipur" selected>गाज़ीपुर (Ghazipur)</option>
           <option value="Lucknow">लखनऊ (Lucknow)</option>
           <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
           <option value="Prayagraj">प्रयागराज (Prayagraj)</option>
@@ -1162,7 +1164,7 @@
         <label class="input-label"><i class="fa-solid fa-flag-checkered"></i> TO (कहाँ तक):</label>
         <select class="city-select" id="toCitySelect" onchange="calculateLiveFare()">
           <option value="Lucknow" selected>लखनऊ (Lucknow)</option>
-          <option value="Ghazipur">गाज़ीपुर (Ghazipur)</option>
+          <option value="Ghazipur">गाज़ीपुर (Ghazipur)</option>
           <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
           <option value="Prayagraj">प्रयागराज (Prayagraj)</option>
           <option value="Kanpur">कानपुर (Kanpur)</option>
@@ -1179,7 +1181,7 @@
 
       <div class="input-group">
         <label class="input-label"><i class="fa-solid fa-chair"></i> SEAT PREFERENCE:</label>
-        <select class="city-select" id="seatSelect" onchange="calculateLiveFare()">
+        <select class="city-select" id="seatSelect">
           <option value="🪟 WINDOW SEAT (#14B)" selected>🪟 Window Seat (#14B)</option>
           <option value="🪟 WINDOW SEAT (#04A)">🪟 Front Window Seat (#04A)</option>
           <option value="🚶 AISLE SEAT (#12C)">🚶 Aisle Seat (#12C)</option>
@@ -1190,7 +1192,7 @@
       <!-- LIVE CALCULATED FARE PREVIEW -->
       <div class="fare-preview-box">
         <span class="fare-label">ESTIMATED FARE (किराया):</span>
-        <span class="fare-amount" id="liveFareAmount">₹ 319.00</span>
+        <span class="fare-amount" id="liveFareAmount">₹ 523.00</span>
       </div>
 
       <button type="submit" class="book-now-btn">
@@ -1230,7 +1232,7 @@
       </div>
       <div class="ticket-row">
         <span class="ticket-label">Fare:</span>
-        <span class="ticket-val" id="ticketFareVal">₹ 319.00 (PAID)</span>
+        <span class="ticket-val" id="ticketFareVal">₹ 523.00 (PAID)</span>
       </div>
 
       <!-- AUDIO GRAPH & CURRENT SONG -->
@@ -1239,10 +1241,10 @@
           <span class="ticket-label">NOW PLAYING STREAM:</span>
         </div>
         <div class="ticket-val" id="ticketSongTitle" style="color:#7a2811; margin-top:3px;">
-          Tumse Milke Dil Ka Jo Haal
+          TRK 04: TUMHEIN DEKHEN MERI AANKHEN
         </div>
         <div class="ticket-label" id="ticketSongArtist" style="margin-top:2px;">
-          Main Hoon Na · Sonu Nigam
+          Alka Yagnik | Kumar Sanu
         </div>
 
         <div class="ticket-waveform">
@@ -1292,7 +1294,7 @@
 <script>
 const PLAYLIST = [
   { id: "d9L37Xv96gU", title: "TRK 04: TUMHEIN DEKHEN MERI AANKHEN", artist: "Alka Yagnik | Kumar Sanu" },
-  { id: "5tfChet8pK0", title: "Ek Dil Hai",                        artist: "Kumar Sanu, Alka Yagnik" }, 
+  { id: "5tfChet8pK0", title: "Ek Dil Hai",                         artist: "Kumar Sanu, Alka Yagnik" }, 
   { id: "pXFvA6X5r_8", title: "Mujhse Mohabbat Ka", artist: "Kumar Sanu" },
   { id: "7xL3kE_1Wms", title: "Jeeta Tha Jiske Liye", artist: "Ajay Devgn" },
   { id: "vK4lP5X8k1g", title: "Tere Dar Par Sanam (Male Version)", artist: "Kumar Sanu" },
@@ -1344,6 +1346,23 @@ const PLAYLIST = [
   { id: "p8r2W1n9Z4e", title: "Tumhein Dekhen Meri Aankhen", artist: "Alka Yagnik" }
 ];
 
+/* REALISTIC HIGHWAY ROAD DISTANCE MATRIX (KM) */
+const CITY_DISTANCES_KM = {
+  "Ghazipur":   { "Lucknow": 340, "Varanasi": 75,  "Prayagraj": 200, "Kanpur": 420, "Gorakhpur": 140, "Ayodhya": 210, "Agra": 670, "Bareilly": 580, "Meerut": 810, "Jhansi": 630, "Mathura": 720, "Aligarh": 740 },
+  "Lucknow":    { "Ghazipur": 340, "Varanasi": 300, "Prayagraj": 200, "Kanpur": 85,  "Gorakhpur": 270, "Ayodhya": 135, "Agra": 335, "Bareilly": 250, "Meerut": 500, "Jhansi": 315, "Mathura": 395, "Aligarh": 410 },
+  "Varanasi":   { "Ghazipur": 75,  "Lucknow": 300, "Prayagraj": 125, "Kanpur": 330, "Gorakhpur": 200, "Ayodhya": 200, "Agra": 600, "Bareilly": 540, "Meerut": 770, "Jhansi": 510, "Mathura": 650, "Aligarh": 670 },
+  "Prayagraj":  { "Ghazipur": 200, "Lucknow": 200, "Varanasi": 125, "Kanpur": 200, "Gorakhpur": 275, "Ayodhya": 165, "Agra": 475, "Bareilly": 440, "Meerut": 670, "Jhansi": 375, "Mathura": 530, "Aligarh": 550 },
+  "Kanpur":     { "Ghazipur": 420, "Lucknow": 85,  "Varanasi": 330, "Prayagraj": 200, "Gorakhpur": 350, "Ayodhya": 220, "Agra": 280, "Bareilly": 270, "Meerut": 440, "Jhansi": 230, "Mathura": 330, "Aligarh": 350 },
+  "Gorakhpur":  { "Ghazipur": 140, "Lucknow": 270, "Varanasi": 200, "Prayagraj": 275, "Kanpur": 350, "Ayodhya": 135, "Agra": 600, "Bareilly": 510, "Meerut": 740, "Jhansi": 580, "Mathura": 650, "Aligarh": 670 },
+  "Ayodhya":    { "Ghazipur": 210, "Lucknow": 135, "Varanasi": 200, "Prayagraj": 165, "Kanpur": 220, "Gorakhpur": 135, "Agra": 470, "Bareilly": 380, "Meerut": 610, "Jhansi": 450, "Mathura": 520, "Aligarh": 540 },
+  "Agra":       { "Ghazipur": 670, "Lucknow": 335, "Varanasi": 600, "Prayagraj": 475, "Kanpur": 280, "Gorakhpur": 600, "Ayodhya": 470, "Bareilly": 220, "Meerut": 240, "Jhansi": 220, "Mathura": 58,  "Aligarh": 90 },
+  "Bareilly":   { "Ghazipur": 580, "Lucknow": 250, "Varanasi": 540, "Prayagraj": 440, "Kanpur": 270, "Gorakhpur": 510, "Ayodhya": 380, "Agra": 220, "Meerut": 225, "Jhansi": 420, "Mathura": 220, "Aligarh": 180 },
+  "Meerut":     { "Ghazipur": 810, "Lucknow": 500, "Varanasi": 770, "Prayagraj": 670, "Kanpur": 440, "Gorakhpur": 740, "Ayodhya": 610, "Agra": 240, "Bareilly": 225, "Jhansi": 460, "Mathura": 190, "Aligarh": 140 },
+  "Jhansi":     { "Ghazipur": 630, "Lucknow": 315, "Varanasi": 510, "Prayagraj": 375, "Kanpur": 230, "Gorakhpur": 580, "Ayodhya": 450, "Agra": 220, "Bareilly": 420, "Meerut": 460, "Mathura": 270, "Aligarh": 310 },
+  "Mathura":    { "Ghazipur": 720, "Lucknow": 395, "Varanasi": 650, "Prayagraj": 530, "Kanpur": 330, "Gorakhpur": 650, "Ayodhya": 520, "Agra": 58,  "Bareilly": 220, "Meerut": 190, "Jhansi": 270, "Aligarh": 65 },
+  "Aligarh":    { "Ghazipur": 740, "Lucknow": 410, "Varanasi": 670, "Prayagraj": 550, "Kanpur": 350, "Gorakhpur": 670, "Ayodhya": 540, "Agra": 90,  "Bareilly": 180, "Meerut": 140, "Jhansi": 310, "Mathura": 65 }
+};
+
 let currentTrackIndex = 0;
 let isPlaying = false;
 let volume = 15;
@@ -1356,7 +1375,7 @@ let userBooking = {
   from: "Ghazipur",
   to: "Lucknow",
   seat: "🪟 WINDOW SEAT (#14B)",
-  fare: "₹ 319.00 (PAID)"
+  fare: "₹ 523.00 (PAID)"
 };
 
 /* 3D CAMERA & SLIDER TOGGLE LOGIC */
@@ -1672,7 +1691,7 @@ document.getElementById('btn-prev').addEventListener('click', () => {
   selectTrack((currentTrackIndex - 1 + PLAYLIST.length) % PLAYLIST.length);
 });
 
-/* ROTARY VOLUME DIAL KNOB CONTROLS (CLAMPED FIXED RANGE) */
+/* ROTARY VOLUME DIAL KNOB CONTROLS */
 function setVolumeLevel(newVol) {
   volume = Math.max(0, Math.min(30, newVol));
   
@@ -1698,6 +1717,7 @@ knobBezel.addEventListener('wheel', (e) => {
 let isDragging = false;
 let startY = 0;
 
+/* Desktop Mouse Handlers */
 knobBezel.addEventListener('mousedown', (e) => {
   isDragging = true;
   startY = e.clientY;
@@ -1707,16 +1727,33 @@ window.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
   const deltaY = startY - e.clientY;
   if (Math.abs(deltaY) > 4) {
-    if (deltaY > 0) {
-      setVolumeLevel(volume + 1);
-    } else {
-      setVolumeLevel(volume - 1);
-    }
+    if (deltaY > 0) setVolumeLevel(volume + 1);
+    else setVolumeLevel(volume - 1);
     startY = e.clientY;
   }
 });
 
 window.addEventListener('mouseup', () => { isDragging = false; });
+
+/* Mobile Touch Handlers */
+knobBezel.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  startY = e.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  if (!isDragging || !e.touches || e.touches.length === 0) return;
+  const currentY = e.touches[0].clientY;
+  const deltaY = startY - currentY;
+  if (Math.abs(deltaY) > 5) {
+    if (deltaY > 0) setVolumeLevel(volume + 1);
+    else setVolumeLevel(volume - 1);
+    startY = currentY;
+  }
+}, { passive: true });
+
+window.addEventListener('touchend', () => { isDragging = false; });
+window.addEventListener('touchcancel', () => { isDragging = false; });
 
 /* PLAYLIST DRAWER LOGIC */
 document.getElementById('btn-playlist').addEventListener('click', () => {
@@ -1753,7 +1790,7 @@ function showToast(msg) {
   setTimeout(() => toastNotify.classList.remove('show'), 2500);
 }
 
-/* DYNAMIC LIVE FARE CALCULATION */
+/* DYNAMIC LIVE FARE CALCULATION BASED ON HIGHWAY DISTANCE */
 function calculateLiveFare() {
   const fromCity = document.getElementById('fromCitySelect').value;
   const toCity = document.getElementById('toCitySelect').value;
@@ -1763,12 +1800,13 @@ function calculateLiveFare() {
     return;
   }
 
-  let hash = 0;
-  const routeKey = fromCity + "➔" + toCity;
-  for (let i = 0; i < routeKey.length; i++) {
-    hash = (hash * 31 + routeKey.charCodeAt(i)) % 300;
-  }
-  const computedFare = 160 + hash;
+  // Base state transport tariff @ ₹1.45/km + ₹30 toll & reservation
+  const distance = (CITY_DISTANCES_KM[fromCity] && CITY_DISTANCES_KM[fromCity][toCity]) 
+                   ? CITY_DISTANCES_KM[fromCity][toCity] 
+                   : (CITY_DISTANCES_KM[toCity] && CITY_DISTANCES_KM[toCity][fromCity]) 
+                   ? CITY_DISTANCES_KM[toCity][fromCity] 
+                   : 250;
+  const computedFare = Math.round(distance * 1.45 + 30);
   document.getElementById('liveFareAmount').textContent = `₹ ${computedFare}.00`;
 }
 
@@ -1791,17 +1829,20 @@ function handleBookingSubmit() {
   };
 
   document.getElementById('headerRouteText').textContent = `NH 19 · ${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
-
   document.getElementById('ticketRouteVal').textContent = `${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
   document.getElementById('ticketSeatVal').textContent = seatPref;
   document.getElementById('ticketFareVal').textContent = userBooking.fare;
 
+  // Trigger playback synchronously on user gesture
+  if (ytReady && ytPlayer && !isPlaying) {
+    ytPlayer.playVideo();
+    isPlaying = true;
+    playIcon.className = 'fa-solid fa-pause';
+  }
+
   bookingModal.classList.remove('open');
   setTimeout(() => {
     openTicketModal();
-    if (ytReady && ytPlayer && !isPlaying) {
-      document.getElementById('btn-play-pause').click();
-    }
   }, 350);
 }
 
@@ -1809,7 +1850,7 @@ function skipBooking() {
   bookingModal.classList.remove('open');
 }
 
-/* 5-6 SECOND DELAYED AUTO FADE-UP FOR TICKET WINDOW ON SITE ENTRY */
+/* 5.5 SECOND DELAYED AUTO FADE-UP FOR TICKET WINDOW ON SITE ENTRY */
 window.addEventListener('load', () => {
   calculateLiveFare();
   setTimeout(() => {

@@ -705,27 +705,27 @@
   /* ===================== SEAMLESS ONBOARDING BOOKING MODAL ===================== */
   .booking-modal-overlay {
     position: fixed; inset: 0; z-index: 600;
-    background: rgba(8, 5, 3, 0.82);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: rgba(8, 5, 3, 0.55);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 16px;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 12px;
   }
   .booking-modal-overlay.open {
     opacity: 1; pointer-events: auto;
   }
 
   .booking-card {
-    background: rgba(24, 16, 11, 0.94);
+    background: rgba(22, 15, 10, 0.96);
     border: 1px solid rgba(217, 164, 65, 0.35);
-    border-radius: 20px;
-    width: 100%; max-width: 440px;
-    padding: 24px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(244,234,212,0.15);
-    transform: translateY(45px) scale(0.95);
+    border-radius: 16px;
+    width: 100%; max-width: 330px;
+    padding: 16px 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(244,234,212,0.15);
+    transform: translateY(20px) scale(0.96);
     opacity: 0;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
   }
   .booking-modal-overlay.open .booking-card {
@@ -734,39 +734,39 @@
   }
 
   .booking-header {
-    text-align: center; margin-bottom: 16px;
+    text-align: center; margin-bottom: 10px;
   }
   .booking-badge {
     background: rgba(217,164,65,0.15); border: 1px solid rgba(217,164,65,0.3);
-    color: var(--mustard); font-family: var(--font-display); font-size: 10px; font-weight: 700;
-    padding: 4px 10px; border-radius: 999px; letter-spacing: 0.15em; display: inline-block; margin-bottom: 6px;
+    color: var(--mustard); font-family: var(--font-display); font-size: 9px; font-weight: 700;
+    padding: 2px 8px; border-radius: 999px; letter-spacing: 0.1em; display: inline-block; margin-bottom: 4px;
   }
   .booking-title {
-    font-family: var(--font-hindi); font-size: 24px; font-weight: 800; color: #fff; margin: 0;
+    font-family: var(--font-hindi); font-size: 19px; font-weight: 800; color: #fff; margin: 0; line-height: 1.1;
   }
   .booking-sub {
-    font-size: 11px; color: rgba(244,234,212,0.65); margin-top: 4px;
+    font-size: 10px; color: rgba(244,234,212,0.65); margin-top: 2px;
   }
 
   .booking-form {
-    display: flex; flex-direction: column; gap: 12px;
+    display: flex; flex-direction: column; gap: 8px;
   }
   .input-group {
-    display: flex; flex-direction: column; gap: 4px;
+    display: flex; flex-direction: column; gap: 2px;
   }
   .input-label {
-    font-family: var(--font-display); font-size: 11px; font-weight: 700;
-    letter-spacing: 0.08em; color: var(--mustard); text-transform: uppercase;
-    display: flex; align-items: center; gap: 5px;
+    font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em; color: var(--mustard); text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
   }
   .city-select {
     background: rgba(14, 9, 6, 0.9);
     border: 1px solid rgba(244,234,212,0.2);
-    border-radius: 8px;
-    padding: 9px 12px;
+    border-radius: 6px;
+    padding: 6px 10px;
     color: var(--cream);
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 11.5px;
     font-weight: 500;
     outline: none;
     cursor: pointer;
@@ -774,7 +774,7 @@
   }
   .city-select:focus {
     border-color: var(--mustard);
-    box-shadow: 0 0 10px rgba(217,164,65,0.3);
+    box-shadow: 0 0 8px rgba(217,164,65,0.3);
   }
   .city-select option {
     background: #140e0a;
@@ -785,46 +785,45 @@
   .fare-preview-box {
     background: rgba(187, 77, 37, 0.15);
     border: 1px dashed rgba(217, 164, 65, 0.4);
-    border-radius: 8px;
-    padding: 8px 12px;
+    border-radius: 6px;
+    padding: 6px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .fare-label {
     font-family: var(--font-display);
-    font-size: 11px; font-weight: 700;
+    font-size: 9.5px; font-weight: 700;
     color: rgba(244,234,212,0.7);
-    letter-spacing: 0.08em; text-transform: uppercase;
+    letter-spacing: 0.05em; text-transform: uppercase;
   }
   .fare-amount {
     font-family: var(--font-display);
-    font-size: 16px; font-weight: 800;
+    font-size: 14px; font-weight: 800;
     color: var(--mustard);
-    letter-spacing: 0.05em;
   }
 
   .book-now-btn {
-    margin-top: 4px;
+    margin-top: 2px;
     background: linear-gradient(135deg, var(--rust), var(--mustard));
     color: #fff;
     border: none;
-    padding: 11px 20px;
-    border-radius: 10px;
+    padding: 8px 14px;
+    border-radius: 8px;
     font-family: var(--font-display);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    box-shadow: 0 8px 25px rgba(187, 77, 37, 0.5);
+    gap: 6px;
+    box-shadow: 0 6px 18px rgba(187, 77, 37, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .book-now-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(217, 164, 65, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(217, 164, 65, 0.5);
   }
   .book-now-btn:active {
     transform: scale(0.97);
@@ -832,109 +831,191 @@
 
   .booking-skip-btn {
     background: none; border: none;
-    color: rgba(244,234,212,0.5);
-    font-size: 11px; font-weight: 500;
-    text-align: center; margin-top: 4px;
+    color: rgba(244,234,212,0.45);
+    font-size: 10px; font-weight: 500;
+    text-align: center; margin-top: 2px;
     text-decoration: underline; cursor: pointer;
   }
   .booking-skip-btn:hover { color: var(--cream); }
 
-  /* ===================== TICKET MODAL ===================== */
+  /* ===================== COMPACT VINTAGE PUNCH BUS TICKET ===================== */
   .ticket-modal-overlay {
     position: fixed; inset: 0; z-index: 550;
-    background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-    padding: 16px;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+    padding: 10px;
   }
   .ticket-modal-overlay.open { opacity: 1; pointer-events: auto; }
 
   .ticket-card {
-    background: #f1e4c3;
-    background-image: radial-gradient(#d6c096 1px, transparent 0);
-    background-size: 12px 12px;
-    color: #2b1d0e;
-    width: 100%; max-width: 400px;
+    background: #fdf5e2;
+    background-image: radial-gradient(#dfcaa0 1.2px, transparent 0);
+    background-size: 10px 10px;
+    color: #1a0f07;
+    width: 100%; max-width: 295px;
     border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    padding: 14px 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(139, 110, 67, 0.25);
     font-family: var(--font-ticket);
     position: relative;
-    border: 2px dashed #8b6e43;
+    border: 1.5px dashed #8b6e43;
     transform: scale(0.92);
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   .ticket-modal-overlay.open .ticket-card { transform: scale(1); }
 
   .ticket-card::before, .ticket-card::after {
     content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-    width: 18px; height: 18px; background: #080503; border-radius: 50%;
+    width: 14px; height: 14px; background: #080503; border-radius: 50%;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
   }
-  .ticket-card::before { left: -10px; }
-  .ticket-card::after { right: -10px; }
+  .ticket-card::before { left: -8px; }
+  .ticket-card::after { right: -8px; }
 
-  .ticket-header { text-align: center; border-bottom: 2px solid #8b6e43; padding-bottom: 10px; margin-bottom: 12px; }
-  .ticket-corp-title { font-family: var(--font-hindi); font-size: 18px; font-weight: 800; letter-spacing: 1px; color: #7a2811; margin: 0; line-height: 1; }
-  .ticket-sub { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.75; margin-top: 3px; }
+  .ticket-header { 
+    text-align: center; 
+    border-bottom: 1.5px solid #8b6e43; 
+    padding-bottom: 6px; 
+    margin-bottom: 8px; 
+  }
+  .ticket-corp-title { 
+    font-family: var(--font-hindi); 
+    font-size: 14px; 
+    font-weight: 800; 
+    letter-spacing: 0.5px; 
+    color: #8e3a1b; 
+    margin: 0; 
+    line-height: 1; 
+  }
+  .ticket-sub { 
+    font-size: 8px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 0.08em; 
+    opacity: 0.75; 
+    margin-top: 2px; 
+  }
 
-  .ticket-body { display: flex; flex-direction: column; gap: 8px; font-size: 11px; }
+  .ticket-body { display: flex; flex-direction: column; gap: 5px; font-size: 10px; }
   .ticket-row { display: flex; justify-content: space-between; align-items: baseline; }
-  .ticket-label { font-size: 9px; opacity: 0.65; text-transform: uppercase; }
+  .ticket-label { font-size: 8px; opacity: 0.65; text-transform: uppercase; font-weight: 700; }
   .ticket-val { font-weight: 700; }
-  .ticket-val-highlight { font-size: 13px; color: #8e3a1b; font-weight: 700; }
+  .ticket-val-highlight { font-size: 11.5px; color: #8e3a1b; font-weight: 700; }
 
-  .ticket-seat-badge { background: #7a2811; color: #f4ead4; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; display: inline-block; text-transform: uppercase; }
+  .ticket-seat-badge { 
+    background: #8e3a1b; 
+    color: #fdf5e2; 
+    padding: 1px 6px; 
+    border-radius: 3px; 
+    font-weight: 700; 
+    font-size: 9px; 
+    display: inline-block; 
+  }
 
-  .ticket-audio-box { margin-top: 10px; padding: 8px; background: rgba(139, 110, 67, 0.12); border: 1px solid rgba(139, 110, 67, 0.3); border-radius: 6px; }
+  .ticket-audio-box { 
+    margin-top: 4px; 
+    padding: 6px 8px; 
+    background: rgba(139, 110, 67, 0.12); 
+    border: 1px solid rgba(139, 110, 67, 0.28); 
+    border-radius: 6px; 
+  }
 
-  .ticket-waveform { display: flex; align-items: flex-end; gap: 3px; height: 20px; margin-top: 6px; justify-content: center; }
-  .wave-bar { width: 3px; background: #8e3a1b; border-radius: 2px; animation: waveBounce 0.8s infinite alternate ease-in-out; }
+  .ticket-audio-title {
+    color: #8e3a1b; 
+    font-weight: 700; 
+    font-size: 10px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 245px;
+    margin-top: 1px;
+  }
+
+  .ticket-audio-artist {
+    font-size: 8px;
+    opacity: 0.8;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    max-width: 245px;
+  }
+
+  .ticket-waveform { 
+    display: flex; 
+    align-items: flex-end; 
+    gap: 2px; 
+    height: 12px; 
+    margin-top: 4px; 
+    justify-content: center; 
+  }
+  .wave-bar { width: 2.5px; background: #8e3a1b; border-radius: 1px; animation: waveBounce 0.8s infinite alternate ease-in-out; }
   .wave-bar:nth-child(2n) { animation-delay: 0.15s; }
   .wave-bar:nth-child(3n) { animation-delay: 0.3s; }
   .wave-bar:nth-child(4n) { animation-delay: 0.45s; }
 
-  @keyframes waveBounce { 0% { height: 4px; } 100% { height: 20px; } }
+  @keyframes waveBounce { 0% { height: 3px; } 100% { height: 12px; } }
 
-  .ticket-barcode { text-align: center; font-family: 'Courier New', monospace; font-size: 22px; letter-spacing: 4px; margin-top: 12px; opacity: 0.8; }
+  .ticket-barcode { 
+    text-align: center; 
+    font-family: 'Courier New', monospace; 
+    font-size: 15px; 
+    letter-spacing: 3px; 
+    margin-top: 6px; 
+    line-height: 1;
+    opacity: 0.75; 
+  }
 
   .ticket-actions {
     display: flex;
     justify-content: center;
-    margin-top: 14px;
+    margin-top: 8px;
   }
   .share-ticket-btn {
-    background: #7a2811;
-    color: #f4ead4;
+    background: #8e3a1b;
+    color: #fdf5e2;
     border: none;
-    padding: 7px 18px;
-    border-radius: 6px;
+    padding: 5px 12px;
+    border-radius: 5px;
     font-family: var(--font-display);
-    font-size: 12px;
+    font-size: 10.5px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
-    gap: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: all 0.2s ease;
+    gap: 5px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    transition: all 0.15s ease;
   }
   .share-ticket-btn:hover {
-    background: #8e3a1b;
+    background: #bb4d25;
     transform: translateY(-1px);
   }
   .share-ticket-btn:active {
     transform: scale(0.96);
   }
 
-  .ticket-close-btn { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 16px; font-weight: 700; color: #8b6e43; cursor: pointer; }
+  .ticket-close-btn { 
+    position: absolute; 
+    top: 5px; 
+    right: 7px; 
+    background: none; 
+    border: none; 
+    font-size: 13px; 
+    font-weight: 700; 
+    color: #8b6e43; 
+    cursor: pointer; 
+    padding: 2px;
+  }
+  .ticket-close-btn:hover { color: #8e3a1b; }
 
   /* ===================== DRIVER & COMMON MODAL CARD STYLES ===================== */
   .driver-modal-overlay {
     position: fixed; inset: 0; z-index: 550;
-    background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(6px);
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-    padding: 16px;
+    padding: 12px;
   }
   .driver-modal-overlay.open { opacity: 1; pointer-events: auto; }
 
@@ -943,55 +1024,55 @@
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(217, 164, 65, 0.3);
     color: var(--cream);
-    width: 100%; max-width: 340px;
-    border-radius: 20px;
-    padding: 24px;
+    width: 100%; max-width: 300px;
+    border-radius: 16px;
+    padding: 18px 20px;
     text-align: center;
     position: relative;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
     transform: scale(0.92);
     transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   .driver-modal-overlay.open .driver-card { transform: scale(1); }
 
   .driver-avatar-large {
-    width: 64px; height: 64px;
+    width: 52px; height: 52px;
     background: linear-gradient(135deg, var(--mustard), var(--rust));
     color: #fff;
     border-radius: 50%;
-    font-size: 26px; font-weight: 800;
+    font-size: 22px; font-weight: 800;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 12px auto;
-    box-shadow: 0 0 20px rgba(217, 164, 65, 0.4);
+    margin: 0 auto 8px auto;
+    box-shadow: 0 0 16px rgba(217, 164, 65, 0.4);
     border: 2px solid rgba(255,255,255,0.2);
   }
 
   .driver-name {
     font-family: var(--font-display);
-    font-size: 18px; font-weight: 700;
+    font-size: 16px; font-weight: 700;
     letter-spacing: 0.05em; color: #fff; margin-bottom: 2px;
   }
   .driver-handle {
-    font-size: 13px; color: var(--mustard); font-weight: 600; margin-bottom: 10px;
+    font-size: 12px; color: var(--mustard); font-weight: 600; margin-bottom: 8px;
   }
   .driver-desc {
-    font-size: 12px; color: rgba(244,234,212,0.7); line-height: 1.4; margin-bottom: 18px;
+    font-size: 11px; color: rgba(244,234,212,0.7); line-height: 1.35; margin-bottom: 14px;
   }
 
   .driver-insta-btn {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: #fff;
     border: none;
-    padding: 10px 22px;
+    padding: 8px 18px;
     border-radius: 999px;
     font-family: var(--font-display);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     text-decoration: none;
-    box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+    box-shadow: 0 5px 16px rgba(220, 39, 67, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .driver-insta-btn:hover {
@@ -1004,36 +1085,36 @@
 
   /* ===================== ANCH POPUP MODAL STYLES ===================== */
   .anch-popup-logo {
-    height: 48px;
+    height: 40px;
     width: auto;
     object-fit: contain;
-    margin: 0 auto 12px auto;
+    margin: 0 auto 8px auto;
     display: block;
-    filter: drop-shadow(0 0 10px rgba(217, 164, 65, 0.5));
+    filter: drop-shadow(0 0 8px rgba(217, 164, 65, 0.5));
   }
 
   .anch-x-btn {
     background: #ffffff;
     color: #000000;
     border: none;
-    padding: 10px 22px;
+    padding: 8px 18px;
     border-radius: 999px;
     font-family: var(--font-display);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     text-decoration: none;
-    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   }
 
   .anch-x-btn:hover {
     background: var(--mustard);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(217, 164, 65, 0.5);
+    box-shadow: 0 6px 20px rgba(217, 164, 65, 0.5);
   }
 
   .anch-x-btn:active {
@@ -1041,14 +1122,14 @@
   }
 
   .x-svg-icon {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     fill: currentColor;
   }
 
   .driver-close-btn {
-    position: absolute; top: 12px; right: 14px;
-    background: none; border: none; font-size: 18px;
+    position: absolute; top: 10px; right: 12px;
+    background: none; border: none; font-size: 16px;
     color: rgba(244,234,212,0.5); cursor: pointer;
   }
   .driver-close-btn:hover { color: #fff; }
@@ -1057,8 +1138,8 @@
   .toast-notify {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-30px);
     background: rgba(18, 12, 8, 0.95); border: 1px solid var(--mustard);
-    color: #fff; padding: 8px 18px; border-radius: 999px; font-family: var(--font-display);
-    font-size: 12px; font-weight: 700; letter-spacing: 0.05em; z-index: 999;
+    color: #fff; padding: 6px 14px; border-radius: 999px; font-family: var(--font-display);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em; z-index: 999;
     opacity: 0; pointer-events: none; transition: all 0.3s ease;
     box-shadow: 0 10px 25px rgba(0,0,0,0.8);
   }
@@ -1138,8 +1219,9 @@
 
     .shortcuts-bar { display: none; }
     .developer-badge { bottom: 112px; left: 10px; padding: 3px 8px; font-size: 9.5px; }
-    .ticket-card, .booking-card, .anch-card { padding: 16px; max-width: 94vw; }
-    .ticket-corp-title { font-size: 15px; }
+    .ticket-card { padding: 12px 14px; max-width: 88vw; }
+    .booking-card { padding: 14px 16px; max-width: 88vw; }
+    .anch-card { padding: 16px; max-width: 88vw; }
   }
 </style>
 </head>
@@ -1320,9 +1402,9 @@
 <div class="booking-modal-overlay" id="bookingModal">
   <div class="booking-card">
     <div class="booking-header">
-      <span class="booking-badge">🚌 TICKET COUNTER · टिकट खिड़की</span>
+      <span class="booking-badge">🚌 TICKET COUNTER</span>
       <h2 class="booking-title">अपनी यात्रा चुनें</h2>
-      <p class="booking-sub">Select your route & board the highway Dhaba radio express.</p>
+      <p class="booking-sub">Choose your route and hop on the Dhaba Express.</p>
     </div>
 
     <form class="booking-form" id="bookingForm" onsubmit="event.preventDefault(); handleBookingSubmit();">
@@ -1376,12 +1458,12 @@
 
       <!-- LIVE CALCULATED FARE PREVIEW -->
       <div class="fare-preview-box">
-        <span class="fare-label">ESTIMATED FARE (किराया):</span>
+        <span class="fare-label">FARE (किराया):</span>
         <span class="fare-amount" id="liveFareAmount">₹ 523.00</span>
       </div>
 
       <button type="submit" class="book-now-btn">
-        <i class="fa-solid fa-ticket"></i> जारी करें · BOARD BUS & GET TICKET
+        <i class="fa-solid fa-ticket"></i> BOARD BUS & GET TICKET
       </button>
 
       <button type="button" class="booking-skip-btn" onclick="skipBooking()">Skip directly to radio</button>
@@ -1389,13 +1471,13 @@
   </div>
 </div>
 
-<!-- ===================== OLD-FASHIONED VINTAGE TICKET MODAL ===================== -->
+<!-- ===================== COMPACT VINTAGE PUNCH BUS TICKET ===================== -->
 <div class="ticket-modal-overlay" id="ticketModal">
   <div class="ticket-card">
     <button class="ticket-close-btn" id="closeTicketBtn">✕</button>
     <div class="ticket-header">
-      <div class="ticket-corp-title">उत्तर प्रदेश राज्य सड़क परिवहन निगम</div>
-      <div class="ticket-sub">PASSENGER BUS TICKET · HIGHWAY RADIO</div>
+      <div class="ticket-corp-title">उ० प्र० राज्य सड़क परिवहन निगम</div>
+      <div class="ticket-sub">PASSENGER TICKET · HIGHWAY RADIO</div>
     </div>
 
     <div class="ticket-body">
@@ -1408,33 +1490,27 @@
         <span class="ticket-val">NH-19 / EXPRESSWAY</span>
       </div>
       <div class="ticket-row">
-        <span class="ticket-label">Seat Allocation:</span>
-        <span class="ticket-seat-badge" id="ticketSeatVal">🪟 WINDOW SEAT (#14B)</span>
+        <span class="ticket-label">Seat:</span>
+        <span class="ticket-seat-badge" id="ticketSeatVal">🪟 WINDOW (#14B)</span>
       </div>
       <div class="ticket-row">
-        <span class="ticket-label">Issued Time:</span>
-        <span class="ticket-val" id="ticketTimeVal">10:19 PM</span>
-      </div>
-      <div class="ticket-row">
-        <span class="ticket-label">Fare:</span>
-        <span class="ticket-val" id="ticketFareVal">₹ 523.00 (PAID)</span>
+        <span class="ticket-label">Issued / Fare:</span>
+        <span class="ticket-val" id="ticketFareTimeVal">10:19 PM · ₹523 (PAID)</span>
       </div>
 
       <!-- AUDIO GRAPH & CURRENT SONG -->
       <div class="ticket-audio-box">
         <div class="ticket-row">
-          <span class="ticket-label">NOW PLAYING STREAM:</span>
+          <span class="ticket-label">NOW PLAYING:</span>
         </div>
-        <div class="ticket-val" id="ticketSongTitle" style="color:#7a2811; margin-top:3px;">
+        <div class="ticket-audio-title" id="ticketSongTitle">
           TRK 04: TUMHEIN DEKHEN MERI AANKHEN
         </div>
-        <div class="ticket-label" id="ticketSongArtist" style="margin-top:2px;">
+        <div class="ticket-audio-artist" id="ticketSongArtist">
           Alka Yagnik | Kumar Sanu
         </div>
 
         <div class="ticket-waveform">
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
           <div class="wave-bar"></div>
           <div class="wave-bar"></div>
           <div class="wave-bar"></div>
@@ -1452,7 +1528,7 @@
     <!-- SHARE TICKET BUTTON -->
     <div class="ticket-actions">
       <button class="share-ticket-btn" id="shareTicketBtn">
-        <i class="fa-solid fa-share-nodes"></i> SHARE YOUR TICKET
+        <i class="fa-solid fa-share-nodes"></i> SHARE TICKET
       </button>
     </div>
   </div>
@@ -1579,8 +1655,8 @@ let ytReady = false;
 let userBooking = {
   from: "Ghazipur",
   to: "Lucknow",
-  seat: "🪟 WINDOW SEAT (#14B)",
-  fare: "₹ 523.00 (PAID)"
+  seat: "🪟 WINDOW (#14B)",
+  fare: "₹523 (PAID)"
 };
 
 /* 3D CAMERA & SLIDER TOGGLE LOGIC */
@@ -2009,7 +2085,7 @@ function calculateLiveFare() {
   const toCity = document.getElementById('toCitySelect').value;
   
   if (fromCity === toCity) {
-    document.getElementById('liveFareAmount').textContent = "₹ 0.00 (Same City)";
+    document.getElementById('liveFareAmount').textContent = "₹ 0.00";
     return;
   }
 
@@ -2043,7 +2119,10 @@ function handleBookingSubmit() {
   document.getElementById('headerRouteText').textContent = `NH 19 · ${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
   document.getElementById('ticketRouteVal').textContent = `${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
   document.getElementById('ticketSeatVal').textContent = seatPref;
-  document.getElementById('ticketFareVal').textContent = userBooking.fare;
+
+  const now = new Date();
+  const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('ticketFareTimeVal').textContent = `${timeString} · ${currentFare} (PAID)`;
 
   // Start playback synchronously on user gesture
   if (ytReady && ytPlayer && !isPlaying) {
@@ -2075,7 +2154,7 @@ window.addEventListener('load', () => {
 function openTicketModal() {
   const now = new Date();
   const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  document.getElementById('ticketTimeVal').textContent = timeString;
+  document.getElementById('ticketFareTimeVal').textContent = `${timeString} · ${userBooking.fare}`;
 
   if (PLAYLIST[currentTrackIndex]) {
     document.getElementById('ticketSongTitle').textContent = PLAYLIST[currentTrackIndex].title;
@@ -2092,7 +2171,7 @@ function closeTicketModal() {
 /* SHARE TICKET HANDLER */
 document.getElementById('shareTicketBtn').addEventListener('click', async () => {
   const currentSong = PLAYLIST[currentTrackIndex] ? PLAYLIST[currentTrackIndex].title : "Highway Hits";
-  const shareText = `🚌 उत्तर प्रदेश परिवहन Passenger Ticket:\nRoute: ${userBooking.from} ➔ ${userBooking.to}\nSeat: ${userBooking.seat}\nFare: ${userBooking.fare}\nNow Playing: ${currentSong}\nTune in at: ${window.location.href}`;
+  const shareText = `🚌 उत्तर प्रदेश परिवहन Ticket:\nRoute: ${userBooking.from} ➔ ${userBooking.to}\nSeat: ${userBooking.seat}\nFare: ${userBooking.fare}\nNow Playing: ${currentSong}\nTune in: ${window.location.href}`;
 
   if (navigator.share) {
     try {

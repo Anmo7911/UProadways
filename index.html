@@ -38,6 +38,12 @@
     pointer-events: auto;
   }
 
+  .company-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
   .credit-badge img.company-logo {
     height: 30px;
     width: auto;
@@ -922,7 +928,7 @@
 
   .ticket-close-btn { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 16px; font-weight: 700; color: #8b6e43; cursor: pointer; }
 
-  /* ===================== DRIVER PROFILE MODAL ===================== */
+  /* ===================== DRIVER & COMMON MODAL CARD STYLES ===================== */
   .driver-modal-overlay {
     position: fixed; inset: 0; z-index: 550;
     background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
@@ -994,6 +1000,50 @@
   }
   .driver-insta-btn:active {
     transform: scale(0.96);
+  }
+
+  /* ===================== ANCH POPUP MODAL STYLES ===================== */
+  .anch-popup-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    margin: 0 auto 12px auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(217, 164, 65, 0.5));
+  }
+
+  .anch-x-btn {
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+
+  .anch-x-btn:hover {
+    background: var(--mustard);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(217, 164, 65, 0.5);
+  }
+
+  .anch-x-btn:active {
+    transform: scale(0.96);
+  }
+
+  .x-svg-icon {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
   }
 
   .driver-close-btn {
@@ -1088,7 +1138,7 @@
 
     .shortcuts-bar { display: none; }
     .developer-badge { bottom: 112px; left: 10px; padding: 3px 8px; font-size: 9.5px; }
-    .ticket-card, .booking-card { padding: 16px; max-width: 94vw; }
+    .ticket-card, .booking-card, .anch-card { padding: 16px; max-width: 94vw; }
     .ticket-corp-title { font-size: 15px; }
   }
 </style>
@@ -1109,46 +1159,16 @@
   </a>
 </div>
 
-  <!-- ===================== BOTTOM RIGHT CREDIT BADGE ===================== -->
 <!-- ===================== BOTTOM RIGHT CREDIT BADGE ===================== -->
-<!-- ===================== ANCH FOLLOW POPUP MODAL ===================== -->
-<div class="driver-modal-overlay" id="anchModal">
-  <div class="driver-card anch-card">
-    <button class="driver-close-btn" id="closeAnchBtn">✕</button>
-    <img src="assets/logon.png" alt="Anch Logo" class="anch-popup-logo">
-    <div class="driver-name">Anch Technologies LTD</div>
-    <div class="driver-handle">@the_anch_</div>
-    <div class="driver-desc">
-      Building innovative digital experiences and open-source retro web audio experiments.
-    </div>
-    <a class="anch-x-btn" href="https://x.com/the_anch_" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" class="x-svg-icon" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-      </svg>
-      Follow THE ANCH on X
-    </a>
-  </div>
+<div class="credit-badge">
+  <span>Made with ❤️ by 
+    <span class="company-logo-wrap" id="anchLogoTrigger" title="Follow Anch Technologies LTD on X">
+      <img src="assets/logon.png" alt="Anch Technologies LTD Logo" class="company-logo">
+    </span> 
+    Anch Technologies LTD
+  </span>
 </div>
 
-  <!-- ===================== ANCH FOLLOW POPUP MODAL ===================== -->
-<div class="driver-modal-overlay" id="anchModal">
-  <div class="driver-card anch-card">
-    <button class="driver-close-btn" id="closeAnchBtn">✕</button>
-    <img src="assets/logon.png" alt="Anch Logo" class="anch-popup-logo">
-    <div class="driver-name">Anch Technologies LTD</div>
-    <div class="driver-handle">@the_anch_</div>
-    <div class="driver-desc">
-      Building innovative digital experiences and open-source retro web audio experiments.
-    </div>
-    <a class="anch-x-btn" href="https://x.com/the_anch_" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" class="x-svg-icon" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-      </svg>
-      Follow THE ANCH on X
-    </a>
-  </div>
-</div>
-  
 <!-- ===================== TOP HEADER BAR ===================== -->
 <header class="header-bar">
   <div class="header-left">
@@ -1450,6 +1470,25 @@
     </div>
     <a class="driver-insta-btn" href="https://instagram.com/onlyanmolll" target="_blank" id="followInstaBtn">
       <i class="fa-brands fa-instagram"></i> Follow on Instagram
+    </a>
+  </div>
+</div>
+
+<!-- ===================== ANCH FOLLOW POPUP MODAL ===================== -->
+<div class="driver-modal-overlay" id="anchModal">
+  <div class="driver-card anch-card">
+    <button class="driver-close-btn" id="closeAnchBtn">✕</button>
+    <img src="assets/logon.png" alt="Anch Logo" class="anch-popup-logo">
+    <div class="driver-name">Anch Technologies LTD</div>
+    <div class="driver-handle">@the_anch_</div>
+    <div class="driver-desc">
+      Building innovative digital experiences and open-source retro web audio experiments.
+    </div>
+    <a class="anch-x-btn" href="https://x.com/the_anch_" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" class="x-svg-icon" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+      </svg>
+      Follow THE ANCH on X
     </a>
   </div>
 </div>
@@ -1953,6 +1992,9 @@ function renderPlaylist() {
 const bookingModal = document.getElementById('bookingModal');
 const ticketModal = document.getElementById('ticketModal');
 const driverModal = document.getElementById('driverModal');
+const anchModal = document.getElementById('anchModal');
+const anchLogoTrigger = document.getElementById('anchLogoTrigger');
+const closeAnchBtn = document.getElementById('closeAnchBtn');
 const toastNotify = document.getElementById('toastNotify');
 
 function showToast(msg) {
@@ -2024,7 +2066,7 @@ function skipBooking() {
 window.addEventListener('load', () => {
   calculateLiveFare();
   setTimeout(() => {
-    if (!ticketModal.classList.contains('open') && !driverModal.classList.contains('open')) {
+    if (!ticketModal.classList.contains('open') && !driverModal.classList.contains('open') && !anchModal.classList.contains('open')) {
       bookingModal.classList.add('open');
     }
   }, 5500);
@@ -2080,6 +2122,21 @@ function closeDriverModal() {
   driverModal.classList.remove('open');
 }
 
+/* ANCH PROFILE MODAL HANDLERS */
+function openAnchModal() {
+  anchModal.classList.add('open');
+}
+
+function closeAnchModal() {
+  anchModal.classList.remove('open');
+}
+
+anchLogoTrigger.addEventListener('click', openAnchModal);
+closeAnchBtn.addEventListener('click', closeAnchModal);
+anchModal.addEventListener('click', (e) => {
+  if (e.target === anchModal) closeAnchModal();
+});
+
 document.getElementById('driverBadgeBtn').addEventListener('click', openDriverModal);
 document.getElementById('closeDriverBtn').addEventListener('click', closeDriverModal);
 driverModal.addEventListener('click', (e) => {
@@ -2109,7 +2166,7 @@ document.addEventListener('keydown', (e) => {
     case 'KeyV':
     case 'KeyI': setView(currentView === 'exterior' ? 'interior' : 'exterior'); break;
     case 'KeyT': openTicketModal(); break;
-    case 'Escape': closeTicketModal(); closeDriverModal(); skipBooking(); break;
+    case 'Escape': closeTicketModal(); closeDriverModal(); closeAnchModal(); skipBooking(); break;
   }
 });
 

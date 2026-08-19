@@ -1156,7 +1156,14 @@
     opacity: 1; transform: translateX(-50%) translateY(0);
   }
 
-  #yt-player { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; }
+ #yt-player {
+  position: fixed;
+  bottom: -200px;
+  right: -200px;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
 
   /* ===================== STRICT MOBILE OVERRIDES ===================== */
   @media (max-width: 600px) {
@@ -2331,6 +2338,22 @@ document.addEventListener('keydown', (e) => {
 createEqualizer();
 selectTrack(currentTrackIndex, false);
 setVolumeLevel(15);
+
+
+  function unlockMobileAudio() {
+  if (ytReady && ytPlayer && !isPlaying) {
+    ytPlayer.playVideo();
+    isPlaying = true;
+    playIcon.className = 'fa-solid fa-pause';
+  }
+  document.removeEventListener('touchstart', unlockMobileAudio);
+  document.removeEventListener('click', unlockMobileAudio);
+}
+
+document.addEventListener('touchstart', unlockMobileAudio, { passive: true });
+document.addEventListener('click', unlockMobileAudio);
+
+  
 </script>
 </body>
 </html>

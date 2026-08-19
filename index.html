@@ -1151,22 +1151,65 @@
 
   /* ===================== STRICT MOBILE OVERRIDES ===================== */
   @media (max-width: 600px) {
-    .header-bar { padding: 8px 10px; }
+    .header-bar { 
+      padding: 10px 10px; 
+      align-items: flex-start;
+      pointer-events: none;
+    }
+    .header-left {
+      pointer-events: auto;
+      max-width: calc(100vw - 120px);
+    }
     .header-brand { font-size: 12px; }
     .header-route { font-size: 7.5px; }
-    .clock-widget { font-size: 13px; }
 
-    .header-ticket-btn {
-      padding: 4px 8px;
-      font-size: 9.5px;
+    /* Vertical stack for Top Right controls on Mobile */
+    .header-right {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      pointer-events: auto;
+      z-index: 25;
+    }
+
+    .clock-widget { 
+      font-size: 11px; 
+      order: 1;
+      padding-right: 2px;
+    }
+    .passenger-badge { 
+      font-size: 8.5px; 
+      order: 2;
+      padding-right: 2px;
     }
 
     .view-slider-switch {
       padding: 2px;
+      order: 3;
     }
     .slider-option {
-      padding: 3px 6px;
-      font-size: 8.5px;
+      padding: 2.5px 6px;
+      font-size: 8px;
+    }
+
+    .header-ticket-btn {
+      padding: 3.5px 8px;
+      font-size: 9px;
+      order: 4;
+    }
+
+    .driver-badge {
+      padding: 3px 8px;
+      font-size: 9px;
+      order: 5;
+    }
+    .driver-avatar {
+      width: 13px;
+      height: 13px;
+      font-size: 7.5px;
     }
 
     .hero-title-wrapper {

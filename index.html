@@ -347,6 +347,12 @@
     white-space: nowrap; will-change: transform, color, text-shadow;
   }
 
+  .heading-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .word-span {
     display: inline-flex; white-space: nowrap; margin: 0 0.18em;
   }
@@ -1212,18 +1218,28 @@
       font-size: 7.5px;
     }
 
+    /* Stack 'उत्तर प्रदेश' and 'परिवहन' vertically and make it larger on Mobile */
     .hero-title-wrapper {
-      top: 18%;
+      top: 16%;
+      width: 90%;
     }
     .track-meta-badge {
       font-size: 8px; letter-spacing: 0.15em;
     }
     .main-heading {
-      font-size: clamp(24px, 7.5vw, 42px);
+      font-size: clamp(38px, 11vw, 54px);
+      flex-direction: column;
+      line-height: 0.95;
+      gap: 2px;
+    }
+    .heading-line {
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
 
     .centered-horn-wrapper {
-      top: 38vh;
+      top: 42vh;
     }
     .floating-horn {
       padding: 6px 14px; font-size: 11px;
@@ -1353,7 +1369,10 @@
 
   <div class="hero-title-wrapper">
     <div class="track-meta-badge">92 TRACKS · NON-STOP HIGHWAY RADIO</div>
-    <h1 class="main-heading" id="mainHeading">उत्तर प्रदेश परिवहन</h1>
+    <h1 class="main-heading" id="mainHeading">
+      <span class="heading-line"><span class="word-span">उत्तर</span><span class="word-span">प्रदेश</span></span>
+      <span class="heading-line"><span class="word-span">परिवहन</span></span>
+    </h1>
   </div>
 
   <!-- FLOATING HORN BUTTON POSITIONED JUST ABOVE BUS BODY (HIGHWAY VIEW) -->
@@ -1817,15 +1836,22 @@ function getGraphemes(text) {
 const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
 const hornAudioObjects = HORN_FILES.map(file => new Audio(file));
 let currentHornIndex = 0;
-const ORIGINAL_TEXT = "उत्तर प्रदेश परिवहन";
+const ORIGINAL_LINES = [["उत्तर", "प्रदेश"], ["परिवहन"]];
 let activeHornAudio = null;
 let activeHornEndHandler = null;
 
-function stopTextAnimation() {
+function renderOriginalHeading() {
   const mainHeading = document.getElementById('mainHeading');
   if (!mainHeading) return;
   mainHeading.className = 'main-heading';
-  mainHeading.textContent = ORIGINAL_TEXT;
+  mainHeading.innerHTML = `
+    <span class="heading-line"><span class="word-span">उत्तर</span><span class="word-span">प्रदेश</span></span>
+    <span class="heading-line"><span class="word-span">परिवहन</span></span>
+  `;
+}
+
+function stopTextAnimation() {
+  renderOriginalHeading();
 
   if (activeHornAudio && activeHornEndHandler) {
     activeHornAudio.removeEventListener('ended', activeHornEndHandler);
@@ -1843,21 +1869,28 @@ function startTextAnimation(hornAudio) {
   const animChoice = Math.floor(Math.random() * 3);
 
   if (animChoice === 0) {
-    const words = ORIGINAL_TEXT.split(' ');
     let globalGraphemeIdx = 0;
-    mainHeading.innerHTML = words.map(word => {
-      const graphemes = getGraphemes(word);
-      const spans = graphemes.map(g => `<span class="anim-char" style="--i: ${globalGraphemeIdx++}">${g}</span>`).join('');
-      return `<span class="word-span">${spans}</span>`;
+    mainHeading.innerHTML = ORIGINAL_LINES.map(lineWords => {
+      const lineSpans = lineWords.map(word => {
+        const graphemes = getGraphemes(word);
+        const spans = graphemes.map(g => `<span class="anim-char" style="--i: ${globalGraphemeIdx++}">${g}</span>`).join('');
+        return `<span class="word-span">${spans}</span>`;
+      }).join('');
+      return `<span class="heading-line">${lineSpans}</span>`;
     }).join('');
   } 
   else if (animChoice === 1) {
-    const words = ORIGINAL_TEXT.split(' ');
-    mainHeading.innerHTML = words.map((word, i) => `<span class="word-span anim-word" style="--i: ${i}">${word}</span>`).join('');
+    let globalWordIdx = 0;
+    mainHeading.innerHTML = ORIGINAL_LINES.map(lineWords => {
+      const lineSpans = lineWords.map(word => {
+        return `<span class="word-span anim-word" style="--i: ${globalWordIdx++}">${word}</span>`;
+      }).join('');
+      return `<span class="heading-line">${lineSpans}</span>`;
+    }).join('');
   } 
   else {
     mainHeading.classList.add('anim-bass-glitch');
-    mainHeading.textContent = ORIGINAL_TEXT;
+    renderOriginalHeading();
   }
 
   activeHornAudio = hornAudio;

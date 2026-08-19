@@ -36,27 +36,30 @@
     color: #ffffff;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
     pointer-events: auto;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   .company-logo-wrap {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
+    line-height: 1;
   }
 
   .credit-badge img.company-logo {
-    height: 30px;
+    height: 18px;
     width: auto;
     object-fit: contain;
-    vertical-align: middle;
-    display: inline-block;
+    display: block;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
                 filter 0.3s ease;
   }
 
   .credit-badge img.company-logo:hover {
-    transform: translateY(-4px) scale(1.15);
+    transform: translateY(-2px) scale(1.15);
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) 
             drop-shadow(0 0 16px rgba(217, 164, 65, 0.8));
   }
@@ -69,7 +72,7 @@
       font-size: 9.5px;
     }
     .credit-badge img.company-logo {
-      height: 18px;
+      height: 14px;
     }
   }
 
@@ -1302,12 +1305,11 @@
 
 <!-- ===================== BOTTOM RIGHT CREDIT BADGE ===================== -->
 <div class="credit-badge">
-  <span>Made with ❤️ by 
-    <span class="company-logo-wrap" id="anchLogoTrigger" title="Follow Anch Technologies LTD on X">
-      <img src="assets/logon.png" alt="Anch Technologies LTD Logo" class="company-logo">
-    </span> 
-    Anch Technologies LTD
+  <span>Made with ❤️ by</span>
+  <span class="company-logo-wrap" id="anchLogoTrigger" title="Follow Anch Technologies LTD on X">
+    <img src="assets/logon.png" alt="Anch Technologies LTD Logo" class="company-logo">
   </span>
+  <span>Anch Technologies LTD</span>
 </div>
 
 <!-- ===================== TOP HEADER BAR ===================== -->

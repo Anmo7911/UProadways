@@ -1,2359 +1,1384 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>उत्तर प्रदेश परिवहन — Nonstop Highway Hindi Hits</title>
-<meta name="description" content="Pull over at Dhaba Radio — nonstop 90s & 2000s Hindi songs.">
-<meta name="theme-color" content="#120c08">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ===================== FONTS & ICONS ===================== -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@800&family=Teko:wght@700&family=Rajdhani:wght@500;600;700&family=Poppins:wght@400;500;600&family=Courier+Prime:wght@400;700&family=VT323&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<title>Consent Signature</title>
 
 <style>
-
-  /* ===================== BOTTOM RIGHT CREDIT BADGE ===================== */
-  .credit-badge {
-    position: fixed;
-    bottom: 14px;
-    right: 18px;
-    z-index: 150;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(14, 10, 8, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 5px 12px;
-    border-radius: 999px;
-    font-family: var(--font-body);
-    font-size: 11.5px;
-    font-weight: 500;
-    color: #ffffff;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-    pointer-events: auto;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
-  .company-logo-wrap {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    line-height: 1;
-  }
-
-  .credit-badge img.company-logo {
-    height: 18px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                filter 0.3s ease;
-  }
-
-  .credit-badge img.company-logo:hover {
-    transform: translateY(-2px) scale(1.15);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) 
-            drop-shadow(0 0 16px rgba(217, 164, 65, 0.8));
-  }
-
-  @media (max-width: 600px) {
-    .credit-badge {
-      bottom: 112px;
-      right: 10px;
-      padding: 3px 8px;
-      font-size: 9.5px;
-    }
-    .credit-badge img.company-logo {
-      height: 14px;
-    }
-  }
-
-  
-  :root{
-    --ink:#120c08;
-    --cream:#f4ead4;
-    --rust:#bb4d25;
-    --rust-dark:#8e3a1b;
-    --mustard:#d9a441;
-    --line:rgba(244,234,212,0.12);
-    --font-display:'Rajdhani', sans-serif;
-    --font-body:'Poppins', sans-serif;
-    --font-hindi:'Anek Devanagari', 'Teko', sans-serif;
-    --font-ticket:'Courier Prime', monospace;
-  }
-
-  *{box-sizing:border-box; margin:0; padding:0; user-select:none;}
-  html, body{
-    width:100%; height:100%;
-    overflow:hidden;
-    background:#080503;
-    color:var(--cream);
-    font-family:var(--font-body);
-    -webkit-font-smoothing:antialiased;
-    perspective: 1200px;
-  }
-
-  button{font-family:inherit;cursor:pointer;}
-
-  /* ===================== 3D CINEMATIC HERO & VIDEO ENGINE ===================== */
-  .hero{
-    position:absolute; inset:0;
-    width:100vw; height:100vh;
-    overflow:hidden;
-    transform-style: preserve-3d;
-    transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .hero.transition-to-interior {
-    transform: scale(2.6) translateZ(200px) rotateY(-10deg) translateX(-18%);
-    filter: brightness(0.6) blur(2px);
-  }
-
-  .hero.transition-to-exterior {
-    transform: scale(0.6) translateZ(-100px) rotateY(10deg);
-    filter: brightness(0.5);
-  }
-
-  .hero-video-container {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-  }
-
-  .hero video{
-    position:absolute; inset:0;
-    width:100%; height:100%; object-fit:cover;
-    object-position: center center;
-    filter:saturate(1.02) contrast(1.05) brightness(0.95);
-    transition: opacity 0.5s ease;
-    z-index:0;
-  }
-
-  #interiorVideo {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .view-flash-mask {
-    position: fixed; inset: 0;
-    background: #000;
-    opacity: 0; pointer-events: none;
-    z-index: 18;
-    transition: opacity 0.35s ease;
-  }
-  .view-flash-mask.active {
-    opacity: 0.9;
-  }
-  
-  .hero .scrim{
-    position:absolute;inset:0;
-    background:
-      radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%),
-      linear-gradient(to bottom, rgba(8, 5, 3, 0.6) 0%, transparent 25%),
-      linear-gradient(to top, rgba(8, 5, 3, 0.8) 0%, rgba(8, 5, 3, 0.2) 35%, transparent 65%);
-    z-index:1;
-    transition: opacity 0.5s ease;
-  }
-
-  .rain-overlay {
-    position: absolute; inset: 0;
-    pointer-events: none; z-index: 2;
-    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px),
-                repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 14px);
-    opacity: 0.5;
-    animation: rainMove 0.8s linear infinite;
-  }
-
-  @keyframes rainMove {
-    0% { transform: translateY(0) translateX(0); }
-    100% { transform: translateY(20px) translateX(-5px); }
-  }
-
-  /* ===================== TOP HEADER BAR ===================== */
-  .header-bar {
-    position: absolute; top: 0; left: 0; right: 0;
-    z-index: 20;
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .bus-badge-icon {
-    width: 32px; height: 32px;
-    background: var(--mustard);
-    color: var(--ink);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 12px rgba(217,164,65,0.4);
-  }
-  .bus-badge-icon svg { width: 18px; height: 18px; fill: currentColor; }
-
-  .header-titles {
-    display: flex; flex-direction: column;
-  }
-  .header-brand {
-    font-family: var(--font-hindi);
-    font-weight: 800; font-size: 15px;
-    line-height: 1; color: #fff;
-  }
-  .header-route {
-    font-family: var(--font-display);
-    font-size: 10px; font-weight: 600;
-    color: rgba(244,234,212,0.6);
-    letter-spacing: 0.1em; text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-display);
-  }
-
-  .header-ticket-btn {
-    background: rgba(217,164,65,0.18);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(217,164,65,0.45);
-    color: var(--mustard);
-    padding: 5px 12px; border-radius: 999px;
-    font-family: var(--font-display); font-size: 11px; font-weight: 700;
-    display: flex; align-items: center; gap: 5px;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    transition: all 0.2s ease;
-  }
-  .header-ticket-btn:hover {
-    background: var(--mustard); color: var(--ink); border-color: var(--mustard); transform: translateY(-1px);
-  }
-  .header-ticket-btn svg { width: 13px; height: 13px; fill: currentColor; }
-
-  .view-slider-switch {
-    background: rgba(18, 12, 8, 0.85);
-    border: 1px solid rgba(217,164,65,0.35);
-    border-radius: 999px;
-    padding: 3px;
-    display: flex;
-    position: relative;
-    cursor: pointer;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
-  }
-
-  .slider-option {
-    padding: 4px 10px;
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    color: rgba(244,234,212,0.6);
-    z-index: 2;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .slider-option.active {
-    color: #000;
-  }
-
-  .slider-thumb {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    bottom: 3px;
-    width: calc(50% - 3px);
-    background: var(--mustard);
-    border-radius: 999px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1;
-  }
-
-  .view-slider-switch.interior-active .slider-thumb {
-    transform: translateX(100%);
-  }
-
-  .clock-widget {
-    font-size: 17px; font-weight: 700;
-    letter-spacing: 0.05em; color: #fff;
-    display: flex; align-items: baseline; gap: 3px;
-  }
-  .clock-widget span { font-size: 10px; opacity: 0.6; }
-
-  .passenger-badge {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.08em; color: rgba(244,234,212,0.85);
-  }
-  .live-dot {
-    width: 7px; height: 7px;
-    background: #ff595e; border-radius: 50%;
-    box-shadow: 0 0 6px #ff595e;
-    animation: livePulse 1.5s infinite alternate;
-  }
-  @keyframes livePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
-
-  .driver-badge {
-    background: rgba(20, 14, 10, 0.7);
-    border: 1px solid rgba(244,234,212,0.18);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 5px 12px; border-radius: 999px;
-    font-size: 11px; font-weight: 600; color: #fff;
-    display: flex; align-items: center; gap: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease;
-  }
-  .driver-badge:hover {
-    background: var(--rust); border-color: var(--rust); transform: translateY(-1px);
-  }
-  .driver-avatar {
-    width: 16px; height: 16px; background: var(--mustard); color: #000;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800;
-  }
-
-  /* ===================== CENTERED DISPLAY TEXT & HERO ===================== */
-  .hero-title-wrapper {
-    position: absolute; top: 14%; left: 50%;
-    transform: translateX(-50%); text-align: center;
-    z-index: 10; width: 95%; max-width: 1200px; pointer-events: none;
-    display: flex; flex-direction: column; align-items: center;
-    transition: opacity 0.4s ease, top 0.4s ease;
-  }
-
-  .track-meta-badge {
-    font-family: var(--font-display); font-size: clamp(9px, 1.2vw, 12px);
-    font-weight: 700; letter-spacing: 0.3em; color: rgba(244, 234, 212, 0.75);
-    text-transform: uppercase; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-  }
-
-  .main-heading {
-    font-family: var(--font-hindi); font-size: clamp(32px, 7.5vw, 110px);
-    font-weight: 800; color: #ffffff; margin: 0; line-height: 1.1; letter-spacing: 0.5px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 10px 40px rgba(0, 0, 0, 0.8);
-    display: flex; flex-wrap: nowrap; justify-content: center; align-items: center;
-    white-space: nowrap; will-change: transform, color, text-shadow;
-  }
-
-  .heading-line {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .word-span {
-    display: inline-flex; white-space: nowrap; margin: 0 0.18em;
-  }
-
-  /* EXTERNAL FLOATING HORN */
-  .centered-horn-wrapper {
-    position: absolute;
-    top: 36vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 15;
-    pointer-events: auto;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-
-  .floating-horn {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(20, 14, 10, 0.88);
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(244,234,212,0.25);
-    color: var(--cream); padding: 8px 18px; border-radius: 999px;
-    font-family: var(--font-hindi); font-size: 13px; font-weight: 700;
-    transition: background 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    white-space: nowrap;
-  }
-  .floating-horn:hover { background: var(--rust); border-color: var(--rust); }
-  .floating-horn:active { transform: scale(0.95); }
-  .floating-horn svg { width: 15px; height: 15px; fill: currentColor; }
-
-  body.view-interior .centered-horn-wrapper {
-    opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.8);
-  }
-  body.view-interior .hero-title-wrapper {
-    top: 10%;
-  }
-
-  /* ===================== ANIMATION STYLES ===================== */
-  .anim-char {
-    display: inline-block;
-    animation: charWaveLoop 0.55s ease-in-out infinite alternate;
-    animation-delay: calc(var(--i) * 0.06s);
-  }
-  @keyframes charWaveLoop {
-    0% { transform: translateY(0) scale(1); color: #ffffff; }
-    100% { transform: translateY(-10px) scale(1.1); color: #fff4a3; text-shadow: 0 0 25px rgba(217, 164, 65, 0.95); }
-  }
-
-  .anim-word {
-    animation: wordPulseLoop 0.45s ease-in-out infinite alternate;
-    animation-delay: calc(var(--i) * 0.12s);
-  }
-  @keyframes wordPulseLoop {
-    0% { transform: scale(1); color: #ffffff; }
-    100% { transform: scale(1.12); color: #ffd166; text-shadow: 0 0 30px rgba(239, 71, 111, 0.9); }
-  }
-
-  .main-heading.anim-bass-glitch {
-    animation: bassGlitchLoop 0.16s infinite alternate ease-in-out;
-  }
-  @keyframes bassGlitchLoop {
-    0% { transform: scale(1); text-shadow: -4px 0 #bb4d25, 4px 0 #d9a441; }
-    100% { transform: scale(1.04); text-shadow: 4px -2px #bb4d25, -4px 2px #d9a441; }
-  }
-
-  /* ===================== RETRO STEREO DECK CONTAINER ===================== */
-  .player-wrapper {
-    position: fixed; bottom: 8px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-  }
-
-  .stereo-unit {
-    width: 480px;
-    height: 120px;
-    background: linear-gradient(180deg, #2c2d30 0%, #151618 15%, #0d0e10 85%, #222326 100%);
-    border: 5px solid #050505;
-    border-radius: 8px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.2);
-    display: flex;
-    padding: 6px 8px;
-    gap: 8px;
-    position: relative;
-  }
-
-  .left-panel {
-    width: 90px;
-    height: 100%;
-    background: linear-gradient(135deg, #1f2023, #111214);
-    border-radius: 4px;
-    border: 1px solid #28292c;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
-  }
-
-  .knob-bezel {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #bb4d25 65%, #8e3a1b 100%);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 6px rgba(187, 77, 37, 0.5), inset 0 0 3px #000;
-    cursor: ns-resize;
-    touch-action: none;
-  }
-
-  .volume-knob {
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #555 0%, #1a1a1b 70%, #050505 100%);
-    border: 2px solid #333;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.7);
-    position: relative;
-    transition: transform 0.08s ease-out;
-    display: flex; align-items: center; justify-content: center;
-    pointer-events: none;
-  }
-
-  .knob-notch {
-    position: absolute; top: 3px;
-    width: 3px; height: 7px;
-    background-color: #33ff00; border-radius: 2px;
-    box-shadow: 0 0 4px #33ff00;
-  }
-
-  .knob-text {
-    position: absolute; bottom: 3px;
-    font-size: 6px; color: #888; font-weight: bold;
-    letter-spacing: 0.5px;
-  }
-
-  .right-panel {
-    flex: 1;
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .lcd-screen {
-    height: 70px;
-    background-color: #040d06;
-    border: 2px solid #1a1a1a;
-    border-radius: 3px;
-    padding: 4px 6px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: inset 0 0 10px rgba(51, 255, 0, 0.15);
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .lcd-screen::after {
-    content: '';
-    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: linear-gradient(45deg, rgba(255,255,255,0) 45%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0) 55%);
-    pointer-events: none;
-  }
-
-  .screen-top {
-    display: flex; justify-content: space-between;
-    color: #226611; font-family: 'VT323', monospace; font-size: 10px;
-    border-bottom: 1px dashed #113300; padding-bottom: 1px;
-  }
-
-  .screen-main {
-    display: flex; justify-content: space-between; align-items: center;
-  }
-
-  .digital-font {
-    font-family: 'VT323', monospace; color: #33ff00;
-    text-shadow: 0 0 5px rgba(51, 255, 0, 0.8), 0 0 12px rgba(51, 255, 0, 0.4);
-  }
-
-  .song-title {
-    font-size: 13px; letter-spacing: 0.5px; white-space: nowrap;
-    text-transform: uppercase; max-width: 210px; overflow: hidden; text-overflow: ellipsis;
-  }
-
-  .time-vol-display {
-    font-size: 11px; color: #ffcc00;
-    text-shadow: 0 0 5px rgba(255, 204, 0, 0.8); margin-top: 1px;
-  }
-
-  .lcd-progress-track {
-    width: 100%;
-    height: 5px;
-    background: #0d2200;
-    border-radius: 3px;
-    margin: 4px 0;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: inset 0 0 4px rgba(0,0,0,0.9);
-  }
-  .lcd-progress-fill {
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 0%;
-    background: #33ff00;
-    box-shadow: 0 0 8px #33ff00;
-  }
-
-  .eq-container {
-    display: flex; gap: 2px; align-items: flex-end; height: 20px;
-  }
-  .eq-bar {
-    width: 3px; height: 100%; display: flex; flex-direction: column-reverse; gap: 1px;
-  }
-  .eq-dot { height: 2px; width: 100%; background-color: #0d2200; }
-  .eq-dot.active-green { background-color: #33ff00; box-shadow: 0 0 2px #33ff00; }
-  .eq-dot.active-yellow { background-color: #ffcc00; box-shadow: 0 0 2px #ffcc00; }
-  .eq-dot.active-red { background-color: #ff2a2a; box-shadow: 0 0 2px #ff2a2a; }
-
-  .bottom-controls { display: flex; gap: 3px; height: 25px; }
-
-  .btn {
-    flex: 1;
-    background: linear-gradient(180deg, #3a3b3e, #1a1b1d);
-    border: 1px solid #48494d; border-radius: 3px; color: #ccc;
-    font-size: 8px; font-weight: bold; display: flex; align-items: center;
-    justify-content: center; cursor: pointer;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 3px rgba(0,0,0,0.7);
-    transition: all 0.08s ease;
-  }
-  .btn:hover { background: linear-gradient(180deg, #4a4b4e, #2a2b2d); color: #fff; }
-  .btn:active { background: #111214; transform: translateY(1px); }
-  .btn-preset-num { color: #ff3333; margin-right: 2px; }
-
-  .playlist-drawer {
-    position: absolute; inset: 0; background: rgba(4, 13, 6, 0.96);
-    border-radius: 4px; z-index: 10; padding: 4px 8px; display: none; flex-direction: column;
-  }
-  .playlist-drawer.open { display: flex; }
-  .playlist-header {
-    display: flex; justify-content: space-between; color: #33ff00;
-    font-family: 'VT323', monospace; font-size: 13px; border-bottom: 1px solid #1a5500;
-    padding-bottom: 2px; margin-bottom: 2px;
-  }
-  .playlist-items { list-style: none; overflow-y: auto; flex: 1; }
-  .playlist-items li {
-    padding: 2px; font-family: 'VT323', monospace; font-size: 13px; color: #1a5500;
-    cursor: pointer; display: flex; justify-content: space-between;
-  }
-  .playlist-items li:hover, .playlist-items li.active {
-    color: #33ff00; text-shadow: 0 0 5px #33ff00; background: rgba(51, 255, 0, 0.05);
-  }
-  .close-playlist { cursor: pointer; color: #ff3333; }
-
-  /* DASHBOARD POSITIONED HORN BUTTON */
-  .dashboard-horn-btn {
-    position: absolute;
-    bottom: 132px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20, 14, 10, 0.88);
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(244,234,212,0.25);
-    color: var(--cream);
-    padding: 7px 18px;
-    border-radius: 999px;
-    font-family: var(--font-hindi);
-    font-size: 13px;
-    font-weight: 700;
-    display: none;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.85);
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    z-index: 10;
-  }
-  .dashboard-horn-btn:hover {
-    background: var(--rust); border-color: var(--rust); transform: translateX(-50%) translateY(-2px);
-  }
-  .dashboard-horn-btn:active { transform: translateX(-50%) scale(0.95); }
-  .dashboard-horn-btn svg { width: 14px; height: 14px; fill: currentColor; }
-
-  body.view-interior .dashboard-horn-btn {
-    display: flex;
-  }
-
-  .shortcuts-bar {
-    display: flex; align-items: center; gap: 12px;
-    font-family: var(--font-display); font-size: 10px; font-weight: 700;
-    letter-spacing: 0.1em; color: rgba(244,234,212,0.5);
-    text-transform: uppercase;
-  }
-  .kbd-key {
-    background: rgba(244,234,212,0.1); border: 1px solid rgba(244,234,212,0.18);
-    color: rgba(244,234,212,0.85); padding: 2px 5px; border-radius: 3px;
-    margin-right: 2px; font-size: 8px; cursor: pointer;
-  }
-
-  /* ===================== BOTTOM LEFT DEVELOPER BADGE ===================== */
-  .developer-badge {
-    position: fixed;
-    bottom: 14px;
-    left: 18px;
-    z-index: 150;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(14, 10, 8, 0.72);
-    border: 1px solid rgba(244, 234, 212, 0.14);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 5px 12px;
-    border-radius: 999px;
-    font-family: var(--font-body);
-    font-size: 11.5px;
-    font-weight: 500;
-    color: rgba(244, 234, 212, 0.75);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .developer-badge:hover {
-    background: rgba(20, 14, 10, 0.92);
-    border-color: rgba(217, 164, 65, 0.45);
-    color: #fff;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.75);
-  }
-  .developer-badge .dev-name {
-    font-weight: 600;
-    color: var(--cream);
-    letter-spacing: 0.02em;
-  }
-  .x-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(244, 234, 212, 0.7);
-    text-decoration: none;
-    margin-left: 2px;
-    padding: 3px 5px;
-    border-radius: 50%;
-    transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .x-link svg {
-    width: 12px;
-    height: 12px;
-    fill: currentColor;
-    transition: transform 0.28s ease, fill 0.28s ease;
-  }
-  .x-link:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.12);
-    transform: scale(1.22) rotate(8deg);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
-  }
-  .x-link:active {
-    transform: scale(0.95);
-  }
-
-  /* ===================== SEAMLESS ONBOARDING BOOKING MODAL ===================== */
-  .booking-modal-overlay {
-    position: fixed; inset: 0; z-index: 600;
-    background: rgba(8, 5, 3, 0.55);
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 12px;
-  }
-  .booking-modal-overlay.open {
-    opacity: 1; pointer-events: auto;
-  }
-
-  .booking-card {
-    background: rgba(22, 15, 10, 0.96);
-    border: 1px solid rgba(217, 164, 65, 0.35);
-    border-radius: 16px;
-    width: 100%; max-width: 330px;
-    padding: 16px 18px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(244,234,212,0.15);
-    transform: translateY(20px) scale(0.96);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-  }
-  .booking-modal-overlay.open .booking-card {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-
-  .booking-header {
-    text-align: center; margin-bottom: 10px;
-  }
-  .booking-badge {
-    background: rgba(217,164,65,0.15); border: 1px solid rgba(217,164,65,0.3);
-    color: var(--mustard); font-family: var(--font-display); font-size: 9px; font-weight: 700;
-    padding: 2px 8px; border-radius: 999px; letter-spacing: 0.1em; display: inline-block; margin-bottom: 4px;
-  }
-  .booking-title {
-    font-family: var(--font-hindi); font-size: 19px; font-weight: 800; color: #fff; margin: 0; line-height: 1.1;
-  }
-  .booking-sub {
-    font-size: 10px; color: rgba(244,234,212,0.65); margin-top: 2px;
-  }
-
-  .booking-form {
-    display: flex; flex-direction: column; gap: 8px;
-  }
-  .input-group {
-    display: flex; flex-direction: column; gap: 2px;
-  }
-  .input-label {
-    font-family: var(--font-display); font-size: 10px; font-weight: 700;
-    letter-spacing: 0.06em; color: var(--mustard); text-transform: uppercase;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .city-select {
-    background: rgba(14, 9, 6, 0.9);
-    border: 1px solid rgba(244,234,212,0.2);
-    border-radius: 6px;
-    padding: 6px 10px;
-    color: var(--cream);
-    font-family: var(--font-body);
-    font-size: 11.5px;
-    font-weight: 500;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .city-select:focus {
-    border-color: var(--mustard);
-    box-shadow: 0 0 8px rgba(217,164,65,0.3);
-  }
-  .city-select option {
-    background: #140e0a;
-    color: #fff;
-  }
-
-  /* LIVE CALCULATED FARE BOX */
-  .fare-preview-box {
-    background: rgba(187, 77, 37, 0.15);
-    border: 1px dashed rgba(217, 164, 65, 0.4);
-    border-radius: 6px;
-    padding: 6px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .fare-label {
-    font-family: var(--font-display);
-    font-size: 9.5px; font-weight: 700;
-    color: rgba(244,234,212,0.7);
-    letter-spacing: 0.05em; text-transform: uppercase;
-  }
-  .fare-amount {
-    font-family: var(--font-display);
-    font-size: 14px; font-weight: 800;
-    color: var(--mustard);
-  }
-
-  .book-now-btn {
-    margin-top: 2px;
-    background: linear-gradient(135deg, var(--rust), var(--mustard));
-    color: #fff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    box-shadow: 0 6px 18px rgba(187, 77, 37, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .book-now-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 22px rgba(217, 164, 65, 0.5);
-  }
-  .book-now-btn:active {
-    transform: scale(0.97);
-  }
-
-  .booking-skip-btn {
-    background: none; border: none;
-    color: rgba(244,234,212,0.45);
-    font-size: 10px; font-weight: 500;
-    text-align: center; margin-top: 2px;
-    text-decoration: underline; cursor: pointer;
-  }
-  .booking-skip-btn:hover { color: var(--cream); }
-
-  /* ===================== COMPACT VINTAGE PUNCH BUS TICKET ===================== */
-  .ticket-modal-overlay {
-    position: fixed; inset: 0; z-index: 550;
-    background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
-    padding: 10px;
-  }
-  .ticket-modal-overlay.open { opacity: 1; pointer-events: auto; }
-
-  .ticket-card {
-    background: #fdf5e2;
-    background-image: radial-gradient(#dfcaa0 1.2px, transparent 0);
-    background-size: 10px 10px;
-    color: #1a0f07;
-    width: 100%; max-width: 295px;
-    border-radius: 12px;
-    padding: 14px 16px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(139, 110, 67, 0.25);
-    font-family: var(--font-ticket);
-    position: relative;
-    border: 1.5px dashed #8b6e43;
-    transform: scale(0.92);
-    transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .ticket-modal-overlay.open .ticket-card { transform: scale(1); }
-
-  .ticket-card::before, .ticket-card::after {
-    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-    width: 14px; height: 14px; background: #080503; border-radius: 50%;
-    box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
-  }
-  .ticket-card::before { left: -8px; }
-  .ticket-card::after { right: -8px; }
-
-  .ticket-header { 
-    text-align: center; 
-    border-bottom: 1.5px solid #8b6e43; 
-    padding-bottom: 6px; 
-    margin-bottom: 8px; 
-  }
-  .ticket-corp-title { 
-    font-family: var(--font-hindi); 
-    font-size: 14px; 
-    font-weight: 800; 
-    letter-spacing: 0.5px; 
-    color: #8e3a1b; 
-    margin: 0; 
-    line-height: 1; 
-  }
-  .ticket-sub { 
-    font-size: 8px; 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    letter-spacing: 0.08em; 
-    opacity: 0.75; 
-    margin-top: 2px; 
-  }
-
-  .ticket-body { display: flex; flex-direction: column; gap: 5px; font-size: 10px; }
-  .ticket-row { display: flex; justify-content: space-between; align-items: baseline; }
-  .ticket-label { font-size: 8px; opacity: 0.65; text-transform: uppercase; font-weight: 700; }
-  .ticket-val { font-weight: 700; }
-  .ticket-val-highlight { font-size: 11.5px; color: #8e3a1b; font-weight: 700; }
-
-  .ticket-seat-badge { 
-    background: #8e3a1b; 
-    color: #fdf5e2; 
-    padding: 1px 6px; 
-    border-radius: 3px; 
-    font-weight: 700; 
-    font-size: 9px; 
-    display: inline-block; 
-  }
-
-  .ticket-audio-box { 
-    margin-top: 4px; 
-    padding: 6px 8px; 
-    background: rgba(139, 110, 67, 0.12); 
-    border: 1px solid rgba(139, 110, 67, 0.28); 
-    border-radius: 6px; 
-  }
-
-  .ticket-audio-title {
-    color: #8e3a1b; 
-    font-weight: 700; 
-    font-size: 10px;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    max-width: 245px;
-    margin-top: 1px;
-  }
-
-  .ticket-audio-artist {
-    font-size: 8px;
-    opacity: 0.8;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    max-width: 245px;
-  }
-
-  .ticket-waveform { 
-    display: flex; 
-    align-items: flex-end; 
-    gap: 2px; 
-    height: 12px; 
-    margin-top: 4px; 
-    justify-content: center; 
-  }
-  .wave-bar { width: 2.5px; background: #8e3a1b; border-radius: 1px; animation: waveBounce 0.8s infinite alternate ease-in-out; }
-  .wave-bar:nth-child(2n) { animation-delay: 0.15s; }
-  .wave-bar:nth-child(3n) { animation-delay: 0.3s; }
-  .wave-bar:nth-child(4n) { animation-delay: 0.45s; }
-
-  @keyframes waveBounce { 0% { height: 3px; } 100% { height: 12px; } }
-
-  .ticket-barcode { 
-    text-align: center; 
-    font-family: 'Courier New', monospace; 
-    font-size: 15px; 
-    letter-spacing: 3px; 
-    margin-top: 6px; 
-    line-height: 1;
-    opacity: 0.75; 
-  }
-
-  .ticket-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 8px;
-  }
-  .share-ticket-btn {
-    background: #8e3a1b;
-    color: #fdf5e2;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 5px;
-    font-family: var(--font-display);
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
-    transition: all 0.15s ease;
-  }
-  .share-ticket-btn:hover {
-    background: #bb4d25;
-    transform: translateY(-1px);
-  }
-  .share-ticket-btn:active {
-    transform: scale(0.96);
-  }
-
-  .ticket-close-btn { 
-    position: absolute; 
-    top: 5px; 
-    right: 7px; 
-    background: none; 
-    border: none; 
-    font-size: 13px; 
-    font-weight: 700; 
-    color: #8b6e43; 
-    cursor: pointer; 
-    padding: 2px;
-  }
-  .ticket-close-btn:hover { color: #8e3a1b; }
-
-  /* ===================== DRIVER & COMMON MODAL CARD STYLES ===================== */
-  .driver-modal-overlay {
-    position: fixed; inset: 0; z-index: 550;
-    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(6px);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-    padding: 12px;
-  }
-  .driver-modal-overlay.open { opacity: 1; pointer-events: auto; }
-
-  .driver-card {
-    background: rgba(20, 14, 10, 0.95);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(217, 164, 65, 0.3);
-    color: var(--cream);
-    width: 100%; max-width: 300px;
-    border-radius: 16px;
-    padding: 18px 20px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-    transform: scale(0.92);
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .driver-modal-overlay.open .driver-card { transform: scale(1); }
-
-  .driver-avatar-large {
-    width: 52px; height: 52px;
-    background: linear-gradient(135deg, var(--mustard), var(--rust));
-    color: #fff;
-    border-radius: 50%;
-    font-size: 22px; font-weight: 800;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 8px auto;
-    box-shadow: 0 0 16px rgba(217, 164, 65, 0.4);
-    border: 2px solid rgba(255,255,255,0.2);
-  }
-
-  .driver-name {
-    font-family: var(--font-display);
-    font-size: 16px; font-weight: 700;
-    letter-spacing: 0.05em; color: #fff; margin-bottom: 2px;
-  }
-  .driver-handle {
-    font-size: 12px; color: var(--mustard); font-weight: 600; margin-bottom: 8px;
-  }
-  .driver-desc {
-    font-size: 11px; color: rgba(244,234,212,0.7); line-height: 1.35; margin-bottom: 14px;
-  }
-
-  .driver-insta-btn {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    color: #fff;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    box-shadow: 0 5px 16px rgba(220, 39, 67, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .driver-insta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(220, 39, 67, 0.6);
-  }
-  .driver-insta-btn:active {
-    transform: scale(0.96);
-  }
-
-  /* ===================== ANCH POPUP MODAL STYLES ===================== */
-  .anch-popup-logo {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-    margin: 0 auto 8px auto;
-    display: block;
-    filter: drop-shadow(0 0 8px rgba(217, 164, 65, 0.5));
-  }
-
-  .anch-x-btn {
-    background: #ffffff;
-    color: #000000;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    text-decoration: none;
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  }
-
-  .anch-x-btn:hover {
-    background: var(--mustard);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(217, 164, 65, 0.5);
-  }
-
-  .anch-x-btn:active {
-    transform: scale(0.96);
-  }
-
-  .x-svg-icon {
-    width: 12px;
-    height: 12px;
-    fill: currentColor;
-  }
-
-  .driver-close-btn {
-    position: absolute; top: 10px; right: 12px;
-    background: none; border: none; font-size: 16px;
-    color: rgba(244,234,212,0.5); cursor: pointer;
-  }
-  .driver-close-btn:hover { color: #fff; }
-
-  /* Toast Notification */
-  .toast-notify {
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-30px);
-    background: rgba(18, 12, 8, 0.95); border: 1px solid var(--mustard);
-    color: #fff; padding: 6px 14px; border-radius: 999px; font-family: var(--font-display);
-    font-size: 11px; font-weight: 700; letter-spacing: 0.05em; z-index: 999;
-    opacity: 0; pointer-events: none; transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-  }
-  .toast-notify.show {
-    opacity: 1; transform: translateX(-50%) translateY(0);
-  }
-
- #yt-player {
-  position: fixed;
-  bottom: -200px;
-  right: -200px;
-  width: 200px;
-  height: 200px;
-  pointer-events: none;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-  /* ===================== STRICT MOBILE OVERRIDES ===================== */
-  @media (max-width: 600px) {
-    .header-bar { 
-      padding: 10px 10px; 
-      align-items: flex-start;
-      pointer-events: none;
-    }
-    .header-left {
-      pointer-events: auto;
-      max-width: calc(100vw - 120px);
-    }
-    .header-brand { font-size: 12px; }
-    .header-route { font-size: 7.5px; }
+body {
+    min-height: 100vh;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-    /* Vertical stack for Top Right controls on Mobile */
-    .header-right {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 5px;
-      pointer-events: auto;
-      z-index: 25;
+    background: #f5f7fb;
+    color: #172033;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.consent-card {
+    width: 100%;
+    max-width: 640px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 15px 45px rgba(20, 30, 50, 0.08);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 30px;
+    font-weight: 750;
+
+    letter-spacing: -0.8px;
+
+    color: #111827;
+}
+
+.header p {
+    margin-top: 7px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   CONSENT TEXT
+========================= */
+
+.consent-text {
+    background: #f7f8fa;
+
+    border-radius: 14px;
+
+    padding: 17px;
+
+    margin-bottom: 23px;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    color: #4b5563;
+}
+
+
+/* =========================
+   SIGNATURE LABEL
+========================= */
+
+.signature-label {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 9px;
+}
+
+.signature-label .main-label {
+    font-size: 14px;
+
+    font-weight: 650;
+
+    color: #273142;
+}
+
+.signature-label .hint {
+    font-size: 12px;
+
+    color: #9ca3af;
+}
+
+
+/* =========================
+   SIGNATURE PAD
+========================= */
+
+.signature-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    height: 220px;
+
+    background: #ffffff;
+
+    border: 1.5px solid #dfe3e8;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.signature-wrapper.active {
+    border-color: #3347a8;
+
+    box-shadow:
+        0 0 0 3px rgba(51, 71, 168, 0.08);
+}
+
+canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    cursor: crosshair;
+
+    touch-action: none;
+}
+
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.placeholder {
+    position: absolute;
+
+    left: 50%;
+    top: 43%;
+
+    transform: translate(-50%, -50%);
+
+    color: #c4c8cf;
+
+    font-size: 14px;
+
+    pointer-events: none;
+
+    white-space: nowrap;
+
+    transition: opacity 0.2s ease;
+}
+
+
+/* =========================
+   SIGNATURE BASE LINE
+========================= */
+
+.signature-line {
+    position: absolute;
+
+    left: 25px;
+    right: 25px;
+
+    bottom: 45px;
+
+    height: 1px;
+
+    background: #e5e7eb;
+
+    pointer-events: none;
+}
+
+.signature-line-text {
+    position: absolute;
+
+    left: 25px;
+    bottom: 24px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+
+    color: #c4c8cf;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 14px;
+}
+
+button {
+    border: none;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.clear-btn,
+.undo-btn {
+    flex: 1;
+
+    height: 46px;
+
+    border-radius: 11px;
+
+    background: #f1f3f6;
+
+    color: #4b5563;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.clear-btn:hover,
+.undo-btn:hover {
+    background: #e7e9ed;
+}
+
+.save-btn {
+    flex: 2;
+
+    height: 46px;
+
+    border-radius: 11px;
+
+    background: #172554;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 650;
+}
+
+.save-btn:hover {
+    background: #1e3a8a;
+
+    transform: translateY(-1px);
+}
+
+.save-btn:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   AGREEMENT
+========================= */
+
+.agreement {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #5f6877;
+
+    cursor: pointer;
+}
+
+.agreement input {
+    width: 17px;
+    height: 17px;
+
+    margin-top: 1px;
+
+    flex-shrink: 0;
+
+    accent-color: #3347a8;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 20px;
+
+    margin-top: 13px;
+
+    font-size: 12px;
+
+    color: #9ca3af;
+}
+
+.status.success {
+    color: #16834b;
+}
+
+.status.error {
+    color: #c24141;
+}
+
+
+/* =========================
+   SAVED SIGNATURE BOX
+========================= */
+
+.saved-signature-box {
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    background: #f5f7fa;
+
+    border: 1px solid #e1e5eb;
+}
+
+.saved-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #16834b;
+
+    margin-bottom: 10px;
+}
+
+.saved-title::before {
+    content: "✓";
+
+    width: 19px;
+    height: 19px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dff5e9;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   LINK ROW
+========================= */
+
+.saved-link-row {
+    display: flex;
+
+    gap: 8px;
+}
+
+.saved-link-row input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 42px;
+
+    padding: 0 11px;
+
+    border: 1px solid #dce1e7;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #687180;
+
+    font-size: 11px;
+}
+
+.saved-link-row input:focus {
+    border-color: #3347a8;
+}
+
+.copy-btn {
+    height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 9px;
+
+    background: #172554;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.copy-btn:hover {
+    background: #1e3a8a;
+}
+
+
+/* =========================
+   OPEN LINK
+========================= */
+
+.open-link {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    color: #3347a8;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.open-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+
+        align-items: flex-start;
+
+        padding-top: 20px;
     }
 
-    .clock-widget { 
-      font-size: 11px; 
-      order: 1;
-      padding-right: 2px;
-    }
-    .passenger-badge { 
-      font-size: 8.5px; 
-      order: 2;
-      padding-right: 2px;
+    .consent-card {
+        padding: 22px;
+
+        border-radius: 18px;
     }
 
-    .view-slider-switch {
-      padding: 2px;
-      order: 3;
-    }
-    .slider-option {
-      padding: 2.5px 6px;
-      font-size: 8px;
+    .header h1 {
+        font-size: 26px;
     }
 
-    .header-ticket-btn {
-      padding: 3.5px 8px;
-      font-size: 9px;
-      order: 4;
+    .signature-wrapper {
+        height: 210px;
     }
 
-    .driver-badge {
-      padding: 3px 8px;
-      font-size: 9px;
-      order: 5;
-    }
-    .driver-avatar {
-      width: 13px;
-      height: 13px;
-      font-size: 7.5px;
+    .actions {
+        gap: 8px;
     }
 
-    /* Stack 'उत्तर प्रदेश' and 'परिवहन' vertically and make it larger on Mobile */
-    .hero-title-wrapper {
-      top: 16%;
-      width: 90%;
+    .clear-btn,
+    .undo-btn,
+    .save-btn {
+        font-size: 13px;
     }
-    .track-meta-badge {
-      font-size: 8px; letter-spacing: 0.15em;
-    }
-    .main-heading {
-      font-size: clamp(38px, 11vw, 54px);
-      flex-direction: column;
-      line-height: 0.95;
-      gap: 2px;
-    }
-    .heading-line {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+}
+
+@media (max-width: 430px) {
+
+    .saved-link-row {
+        flex-direction: column;
     }
 
-    .centered-horn-wrapper {
-      top: 42vh;
+    .copy-btn {
+        width: 100%;
     }
-    .floating-horn {
-      padding: 6px 14px; font-size: 11px;
-    }
-
-    .dashboard-horn-btn {
-      bottom: 114px;
-      padding: 5px 12px;
-      font-size: 10px;
-    }
-
-    .hero video {
-      object-fit: cover;
-      object-position: center 48%;
-    }
-
-    .player-wrapper {
-      bottom: 4px; width: 96vw;
-    }
-    .stereo-unit {
-      width: 100%; height: 105px; padding: 4px; gap: 5px;
-    }
-
-    .left-panel { width: 68px; }
-    .knob-bezel { width: 44px; height: 44px; }
-    .volume-knob { width: 34px; height: 34px; }
-
-    .lcd-screen { height: 58px; padding: 3px 4px; }
-    .song-title { font-size: 11px; max-width: 130px; }
-    .time-vol-display { font-size: 9px; }
-
-    .eq-container { height: 16px; }
-    .bottom-controls { height: 22px; }
-    .btn { font-size: 7px; padding: 0 1px; }
-    .btn-preset { display: none; }
-
-    .shortcuts-bar { display: none; }
-    .developer-badge { bottom: 112px; left: 10px; padding: 3px 8px; font-size: 9.5px; }
-    .ticket-card { padding: 12px 14px; max-width: 88vw; }
-    .booking-card { padding: 14px 16px; max-width: 88vw; }
-    .anch-card { padding: 16px; max-width: 88vw; }
-  }
+}
 </style>
 </head>
+
+
 <body>
 
-<!-- TRANSITION FLASH MASK & TOAST -->
-<div class="view-flash-mask" id="viewFlashMask"></div>
-<div class="toast-notify" id="toastNotify">✓ Ticket Copied to Clipboard!</div>
+<main class="consent-card">
 
-<!-- ===================== BOTTOM LEFT DEVELOPER BADGE ===================== -->
-<div class="developer-badge">
-  <span>Developed by <span class="dev-name">Anmol</span></span>
-  <a href="https://x.com/onemolll" target="_blank" rel="noopener noreferrer" class="x-link" title="Follow on X (@onemolll)">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-    </svg>
-  </a>
-</div>
+    <!-- HEADER -->
 
-<!-- ===================== BOTTOM RIGHT CREDIT BADGE ===================== -->
-<div class="credit-badge">
-  <span>Made with ❤️ by</span>
-  <span class="company-logo-wrap" id="anchLogoTrigger" title="Follow Anch Technologies LTD on X">
-    <img src="assets/logon.png" alt="Anch Technologies LTD Logo" class="company-logo">
-  </span>
-  <span>Anch Technologies LTD</span>
-</div>
+    <div class="header">
 
-<!-- ===================== TOP HEADER BAR ===================== -->
-<header class="header-bar">
-  <div class="header-left">
-    <div class="bus-badge-icon">
-      <svg viewBox="0 0 24 24"><path d="M4 16c0 .88.39 1.67 1 2.22V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h8v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H6V6h12v5z"/></svg>
-    </div>
-    <div class="header-titles">
-      <div class="header-brand">उत्तर प्रदेश परिवहन</div>
-      <div class="header-route" id="headerRouteText">NH 19 · GHAZIPUR ➔ LUCKNOW</div>
-    </div>
-  </div>
+        <h1>Consent</h1>
 
-  <div class="header-right">
-    <!-- TICKET BUTTON IN HEADER -->
-    <button class="header-ticket-btn" id="headerTicketBtn" title="View Your Ticket (T)">
-      <svg viewBox="0 0 24 24"><path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.98-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.98 2-3.46s-.81-2.77-2-3.46V6h16v2.54zM9.5 11h5v2h-5z"/></svg>
-      <span>TICKET</span>
-    </button>
+        <p>
+            Please read the statement below and provide your signature.
+        </p>
 
-    <!-- SLIDER TOGGLE SWITCH (OUTSIDE / CABIN) -->
-    <div class="view-slider-switch" id="viewSliderSwitch" title="Toggle View (V)">
-      <div class="slider-thumb"></div>
-      <div class="slider-option active" id="optOutside"><i class="fa-solid fa-bus"></i> OUT</div>
-      <div class="slider-option" id="optCabin"><i class="fa-solid fa-gauge"></i> CABIN</div>
     </div>
 
-    <div class="clock-widget" id="liveClock">22:07 <span>IST</span></div>
-    <div class="passenger-badge">
-      <div class="live-dot"></div>
-      <span id="passengerCountText">319 ABOARD</span>
+
+    <!-- CONSENT -->
+
+    <div class="consent-text">
+
+        I confirm that I have read and understood the information
+        provided above. I voluntarily give my consent and acknowledge
+        that my signature represents my agreement to the stated terms.
+
     </div>
 
-    <!-- WHO'S DRIVING POPUP TRIGGER -->
-    <div class="driver-badge" id="driverBadgeBtn" title="View Driver Details">
-      <div class="driver-avatar">M</div>
-      <span>Who's driving?</span>
-    </div>
-  </div>
-</header>
 
-<!-- ===================== HERO SECTION WITH DUAL VIDEO ENGINE ===================== -->
-<section class="hero" id="heroSection">
-  <div class="hero-video-container">
-    <!-- Exterior Video: Responsive Source Switching for Mobile & Desktop -->
-    <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" poster="assets/bus-loop-poster.jpg">
-      <source src="assets/bus-mob.MP4" type="video/mp4" media="(max-width: 768px)">
-      <source src="assets/bus-loop.mp4" type="video/mp4">
-    </video>
-    <!-- Interior Bus Loop Video (Preloaded) -->
-    <video id="interiorVideo" muted loop playsinline preload="auto">
-      <source src="assets/bus-interior.MP4" type="video/mp4">
-    </video>
-  </div>
+    <!-- SIGNATURE LABEL -->
 
-  <div class="scrim"></div>
-  <div class="rain-overlay"></div>
+    <div class="signature-label">
 
-  <div class="hero-title-wrapper">
-    <div class="track-meta-badge">92 TRACKS · NON-STOP HIGHWAY RADIO</div>
-    <h1 class="main-heading" id="mainHeading">
-      <span class="heading-line"><span class="word-span">उत्तर</span><span class="word-span">प्रदेश</span></span>
-      <span class="heading-line"><span class="word-span">परिवहन</span></span>
-    </h1>
-  </div>
+        <span class="main-label">
+            Signature
+        </span>
 
-  <!-- FLOATING HORN BUTTON POSITIONED JUST ABOVE BUS BODY (HIGHWAY VIEW) -->
-  <div class="centered-horn-wrapper">
-    <button class="floating-horn" id="hornBtn" title="Blow Horn (H)">
-      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-      <span>हॉर्न ओके प्लीज · HORN OK PLEASE</span>
-    </button>
-  </div>
-</section>
+        <span class="hint">
+            Draw inside the box
+        </span>
 
-<!-- ===================== RETRO CAR STEREO DECK PLAYER ===================== -->
-<div class="player-wrapper">
-  <!-- DASHBOARD HORN BUTTON (ACTIVE IN CABIN VIEW) -->
-  <button class="dashboard-horn-btn" id="dashHornBtn" title="Cabin Horn (H)">
-    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-    <span>हॉर्न HORN</span>
-  </button>
-
-  <div class="stereo-unit">
-    <!-- Left Section: Clamped Rotary Volume Dial Knob -->
-    <div class="left-panel">
-      <div class="knob-bezel" id="knob-bezel" title="Scroll Wheel or Drag vertically to adjust Volume">
-        <div class="volume-knob" id="knob">
-          <div class="knob-notch"></div>
-          <span class="knob-text">PUSH SEL</span>
-        </div>
-      </div>
     </div>
 
-    <!-- Right Section: Digital LCD Screen & Controls -->
-    <div class="right-panel">
-      <div class="lcd-screen">
-        <div class="playlist-drawer" id="playlist-drawer">
-          <div class="playlist-header">
-            <span>-- SELECT TRACK --</span>
-            <span class="close-playlist" id="close-playlist">[X]</span>
-          </div>
-          <ul class="playlist-items" id="playlist-ul"></ul>
+
+    <!-- SIGNATURE PAD -->
+
+    <div
+        class="signature-wrapper"
+        id="signatureWrapper"
+    >
+
+        <canvas id="signatureCanvas"></canvas>
+
+        <div
+            class="placeholder"
+            id="placeholder"
+        >
+            Sign here
         </div>
 
-        <div class="screen-top">
-          <span>HIGH POWER 50Wx4</span>
-          <span>CD/MP3/WMA</span>
+        <div class="signature-line"></div>
+
+        <div class="signature-line-text">
+            SIGNATURE
         </div>
 
-        <div class="screen-main">
-          <div>
-            <div class="digital-font song-title" id="song-title">TRK 01: TUMSE MILKE DIL KA JO HAAL</div>
-            
-            <div class="lcd-progress-track" id="lcdProgressTrack" title="Click to seek track">
-              <div class="lcd-progress-fill" id="lcdProgressFill"></div>
-            </div>
-
-            <div class="digital-font time-vol-display" id="time-display">00:00 / 00:00 &nbsp;&nbsp;VOL 15</div>
-          </div>
-
-          <div class="eq-container" id="eq-container"></div>
-        </div>
-      </div>
-
-      <!-- 4 Quick Presets + Controls -->
-      <div class="bottom-controls">
-        <button class="btn" id="btn-play-pause" title="Play/Pause"><i class="fa-solid fa-play" id="play-icon"></i></button>
-        <button class="btn" id="btn-prev" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
-        <button class="btn" id="btn-next" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
-        <button class="btn" id="btn-playlist" title="Playlist Queue"><i class="fa-solid fa-list"></i></button>
-
-        <button class="btn btn-preset" onclick="selectTrack(0)"><span class="btn-preset-num">1</span> TRK 1</button>
-        <button class="btn btn-preset" onclick="selectTrack(1)"><span class="btn-preset-num">2</span> TRK 2</button>
-        <button class="btn btn-preset" onclick="selectTrack(2)"><span class="btn-preset-num">3</span> TRK 3</button>
-        <button class="btn btn-preset" onclick="selectTrack(3)"><span class="btn-preset-num">4</span> TRK 4</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- KEYBOARD SHORTCUT HELPER LEGEND -->
-  <div class="shortcuts-bar">
-    <span><span class="kbd-key">Space</span> PLAY / PAUSE</span>
-    <span><span class="kbd-key">←</span> <span class="kbd-key">→</span> SEEK</span>
-    <span><span class="kbd-key">N</span> <span class="kbd-key">P</span> TRACK</span>
-    <span><span class="kbd-key">V</span> VIEW</span>
-    <span id="ticketShortcutBtn"><span class="kbd-key">T</span> TICKET</span>
-    <span><span class="kbd-key">H</span> HORN</span>
-  </div>
-</div>
-
-<!-- ===================== ONBOARDING BOOKING WINDOW MODAL ===================== -->
-<div class="booking-modal-overlay" id="bookingModal">
-  <div class="booking-card">
-    <div class="booking-header">
-      <span class="booking-badge">🚌 TICKET COUNTER</span>
-      <h2 class="booking-title">अपनी यात्रा चुनें</h2>
-      <p class="booking-sub">Choose your route and hop on the Dhaba Express.</p>
     </div>
 
-    <form class="booking-form" id="bookingForm" onsubmit="event.preventDefault(); handleBookingSubmit();">
-      <div class="input-group">
-        <label class="input-label"><i class="fa-solid fa-location-dot"></i> FROM (कहाँ से):</label>
-        <select class="city-select" id="fromCitySelect" onchange="calculateLiveFare()">
-          <option value="Ghazipur" selected>गाज़ीपुर (Ghazipur)</option>
-          <option value="Lucknow">लखनऊ (Lucknow)</option>
-          <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
-          <option value="Prayagraj">प्रयागराज (Prayagraj)</option>
-          <option value="Kanpur">कानपुर (Kanpur)</option>
-          <option value="Gorakhpur">गोरखपुर (Gorakhpur)</option>
-          <option value="Ayodhya">अयोध्या धाम (Ayodhya)</option>
-          <option value="Agra">आगरा (Agra)</option>
-          <option value="Bareilly">बरेली (Bareilly)</option>
-          <option value="Meerut">मेरठ (Meerut)</option>
-          <option value="Jhansi">झाँसी (Jhansi)</option>
-          <option value="Mathura">मथुरा (Mathura)</option>
-          <option value="Aligarh">अलीगढ़ (Aligarh)</option>
-        </select>
-      </div>
 
-      <div class="input-group">
-        <label class="input-label"><i class="fa-solid fa-flag-checkered"></i> TO (कहाँ तक):</label>
-        <select class="city-select" id="toCitySelect" onchange="calculateLiveFare()">
-          <option value="Lucknow" selected>लखनऊ (Lucknow)</option>
-          <option value="Ghazipur">गाज़ीपुर (Ghazipur)</option>
-          <option value="Varanasi">वाराणसी / काशी (Varanasi)</option>
-          <option value="Prayagraj">प्रयागराज (Prayagraj)</option>
-          <option value="Kanpur">कानपुर (Kanpur)</option>
-          <option value="Gorakhpur">गोरखपुर (Gorakhpur)</option>
-          <option value="Ayodhya">अयोध्या धाम (Ayodhya)</option>
-          <option value="Agra">आगरा (Agra)</option>
-          <option value="Bareilly">बरेली (Bareilly)</option>
-          <option value="Meerut">मेरठ (Meerut)</option>
-          <option value="Jhansi">झाँसी (Jhansi)</option>
-          <option value="Mathura">मथुरा (Mathura)</option>
-          <option value="Aligarh">अलीगढ़ (Aligarh)</option>
-        </select>
-      </div>
+    <!-- ACTION BUTTONS -->
 
-      <div class="input-group">
-        <label class="input-label"><i class="fa-solid fa-chair"></i> SEAT PREFERENCE:</label>
-        <select class="city-select" id="seatSelect">
-          <option value="🪟 WINDOW SEAT (#14B)" selected>🪟 Window Seat (#14B)</option>
-          <option value="🪟 WINDOW SEAT (#04A)">🪟 Front Window Seat (#04A)</option>
-          <option value="🚶 AISLE SEAT (#12C)">🚶 Aisle Seat (#12C)</option>
-          <option value="👑 DRIVER SIDE SEAT (#02)">👑 Cabin Driver Side (#02)</option>
-        </select>
-      </div>
+    <div class="actions">
 
-      <!-- LIVE CALCULATED FARE PREVIEW -->
-      <div class="fare-preview-box">
-        <span class="fare-label">FARE (किराया):</span>
-        <span class="fare-amount" id="liveFareAmount">₹ 523.00</span>
-      </div>
+        <button
+            class="clear-btn"
+            id="clearBtn"
+            type="button"
+        >
+            Clear
+        </button>
 
-      <button type="submit" class="book-now-btn">
-        <i class="fa-solid fa-ticket"></i> BOARD BUS & GET TICKET
-      </button>
+        <button
+            class="undo-btn"
+            id="undoBtn"
+            type="button"
+        >
+            Undo
+        </button>
 
-      <button type="button" class="booking-skip-btn" onclick="skipBooking()">Skip directly to radio</button>
-    </form>
-  </div>
-</div>
+        <button
+            class="save-btn"
+            id="saveBtn"
+            type="button"
+            disabled
+        >
+            Save Signature
+        </button>
 
-<!-- ===================== COMPACT VINTAGE PUNCH BUS TICKET ===================== -->
-<div class="ticket-modal-overlay" id="ticketModal">
-  <div class="ticket-card">
-    <button class="ticket-close-btn" id="closeTicketBtn">✕</button>
-    <div class="ticket-header">
-      <div class="ticket-corp-title">उ० प्र० राज्य सड़क परिवहन निगम</div>
-      <div class="ticket-sub">PASSENGER TICKET · HIGHWAY RADIO</div>
     </div>
 
-    <div class="ticket-body">
-      <div class="ticket-row">
-        <span class="ticket-label">Route:</span>
-        <span class="ticket-val-highlight" id="ticketRouteVal">GHAZIPUR ➔ LUCKNOW</span>
-      </div>
-      <div class="ticket-row">
-        <span class="ticket-label">Highway:</span>
-        <span class="ticket-val">NH-19 / EXPRESSWAY</span>
-      </div>
-      <div class="ticket-row">
-        <span class="ticket-label">Seat:</span>
-        <span class="ticket-seat-badge" id="ticketSeatVal">🪟 WINDOW (#14B)</span>
-      </div>
-      <div class="ticket-row">
-        <span class="ticket-label">Issued / Fare:</span>
-        <span class="ticket-val" id="ticketFareTimeVal">10:19 PM · ₹523 (PAID)</span>
-      </div>
 
-      <!-- AUDIO GRAPH & CURRENT SONG -->
-      <div class="ticket-audio-box">
-        <div class="ticket-row">
-          <span class="ticket-label">NOW PLAYING:</span>
-        </div>
-        <div class="ticket-audio-title" id="ticketSongTitle">
-          TRK 04: TUMHEIN DEKHEN MERI AANKHEN
-        </div>
-        <div class="ticket-audio-artist" id="ticketSongArtist">
-          Alka Yagnik | Kumar Sanu
+    <!-- AGREEMENT -->
+
+    <label class="agreement">
+
+        <input
+            type="checkbox"
+            id="consentCheckbox"
+        >
+
+        <span>
+            I agree to the above statement and confirm that this
+            signature is provided by me voluntarily.
+        </span>
+
+    </label>
+
+
+    <!-- STATUS -->
+
+    <div
+        class="status"
+        id="status"
+    >
+        Signature required
+    </div>
+
+
+    <!-- SAVED SIGNATURE -->
+
+    <div
+        class="saved-signature-box"
+        id="savedSignatureBox"
+    >
+
+        <div class="saved-title">
+            Signature saved on this device
         </div>
 
-        <div class="ticket-waveform">
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
+        <div class="saved-link-row">
+
+            <input
+                type="text"
+                id="signatureLink"
+                readonly
+                placeholder="Signature link"
+            >
+
+            <button
+                class="copy-btn"
+                id="copyLinkBtn"
+                type="button"
+            >
+                Copy
+            </button>
+
         </div>
-      </div>
+
+        <a
+            href="#"
+            target="_blank"
+            id="openSignatureLink"
+            class="open-link"
+        >
+            Open saved signature ↗
+        </a>
+
     </div>
 
-    <div class="ticket-barcode">|||| | |||||| || | |||||</div>
+</main>
 
-    <!-- SHARE TICKET BUTTON -->
-    <div class="ticket-actions">
-      <button class="share-ticket-btn" id="shareTicketBtn">
-        <i class="fa-solid fa-share-nodes"></i> SHARE TICKET
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== DRIVER PROFILE MODAL ===================== -->
-<div class="driver-modal-overlay" id="driverModal">
-  <div class="driver-card">
-    <button class="driver-close-btn" id="closeDriverBtn">✕</button>
-    <div class="driver-avatar-large">M</div>
-    <div class="driver-name">Captain Anmol</div>
-    <div class="driver-handle">@onlyanmolll</div>
-    <div class="driver-desc">
-      Driving through the midnight rain on NH 19 · Ghazipur to Lucknow Highway Radio.
-    </div>
-    <a class="driver-insta-btn" href="https://instagram.com/onlyanmolll" target="_blank" id="followInstaBtn">
-      <i class="fa-brands fa-instagram"></i> Follow on Instagram
-    </a>
-  </div>
-</div>
-
-<!-- ===================== ANCH FOLLOW POPUP MODAL ===================== -->
-<div class="driver-modal-overlay" id="anchModal">
-  <div class="driver-card anch-card">
-    <button class="driver-close-btn" id="closeAnchBtn">✕</button>
-    <img src="assets/logon.png" alt="Anch Logo" class="anch-popup-logo">
-    <div class="driver-name">Anch Technologies LTD</div>
-    <div class="driver-handle">@the_anch_</div>
-    <div class="driver-desc">
-      Building innovative digital experiences and open-source retro web audio experiments.
-    </div>
-    <a class="anch-x-btn" href="https://x.com/the_anch_" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" class="x-svg-icon" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-      </svg>
-      Follow THE ANCH on X
-    </a>
-  </div>
-</div>
-
-<div id="yt-player"></div>
 
 <script>
-const PLAYLIST = [
-  { id: "d9L37Xv96gU", title: "TRK 04: TUMHEIN DEKHEN MERI AANKHEN", artist: "Alka Yagnik | Kumar Sanu" },
-  { id: "5tfChet8pK0", title: "Ek Dil Hai",                         artist: "Kumar Sanu, Alka Yagnik" }, 
-  { id: "OJherQEDRik", title: "Mujhse Mohabbat Ka", artist: "Kumar Sanu" },
-  { id: "fa5Yzxdh8e4", title: "Jeeta Tha Jiske Liye", artist: "Ajay Devgn" },
-  { id: "05o4kCUY2Ys", title: "Tere Dar Par Sanam (Male Version)", artist: "Kumar Sanu" },
-  { id: "HubRXgH0Erc", title: "Tumsa Koi Pyaara", artist: "Kumar Sanu" },
-  { id: "fBylcT-TWZw", title: "Ek Sanam Chahiye Aashiqui Ke Liye", artist: "Kumar Sanu" },
-  { id: "cBGDDBHN22U", title: "Pehli Pehli Baar Mohabbat Ki Hai", artist: "Kumar Sanu" },
-  { id: "vYGPudMvxvI", title: "Raah Mein Unse Mulaqat", artist: "Kumar Sanu" },
-  { id: "qGOTe3KmCdY", title: "Kitna Haseen Chehra", artist: "Kumar Sanu" },
-  { id: "clp9VpVA8Tg", title: "Kitna Pyaara Hai", artist: "Shravan" },
-  { id: "NYu02wuooNg", title: "Hum Yaar Hai Tumhare", artist: "Udit Narayan" },
-  { id: "T7IZuj5fvYM", title: "Is Tarah Aashiqui Ka (Kumar Sanu Version)", artist: "Kumar Sanu" }, 
-  { id: "oR8Lp4M7c6w", title: "Aapke Pyaar Mein Hum", artist: "Shravan" },
-  { id: "XvK6z8j-W4A", title: "Ae Kash Ke Hum", artist: "Kumar Sanu" },
-  { id: "fH6oN8v3V0g", title: "Chhupana Bhi Nahin Aata", artist: "Pankaj Udhas" },
-  { id: "Q_0fN8-0hRw", title: "Tu Meri Zindagi Hai", artist: "Anuradha Paudwal" },
-  { id: "vG9a1D8u8qI", title: "Jiye To Jiye Kaise", artist: "Sonu Kakkar" },
-  { id: "mXk8W6Y-d4E", title: "Sochenge Tumhe Pyar", artist: "Kumar Sanu" },
-  { id: "dO8V7fG5K2M", title: "Dil Hai Ke Manta Nahin", artist: "Anuradha Paudwal" },
-  { id: "eB6w9Z1O8yI", title: "Barsaat Ke Mausam Mein", artist: "Kumar Sanu" },
-  { id: "aY7v8w9O5tQ", title: "Pehle Kabhi Na Mera Haal", artist: "Udit Narayan" },
-  { id: "Q3L0yX8-Nzg", title: "Tu Pyar Hai Kisi Aur Ka", artist: "Anuradha Paudwal" },
-  { id: "uO7n8v1M3sQ", title: "Deewana Main Tera Deewana", artist: "Kumar Sanu" },
-  { id: "K9b2v8w6j_c", title: "Teri Chunnariya", artist: "Kumar Sanu" },
-  { id: "L0q3V5z1N8M", title: "Humko Sirf Tumse", artist: "Kumar Sanu" },
-  { id: "p9b4R8u1K0Y", title: "Teri Mohabbat Ne Dil", artist: "Alka Yagnik" },
-  { id: "n6r7W4v2Z9o", title: "Kahin Mujhe Pyar Hua Toh Nahin", artist: "Alka Yagnik" },
-  { id: "m4W8q1L0nZ4", title: "Dil Diwana", artist: "Anuradha Paudwal" },
-  { id: "B7x2O9v1W3r", title: "Tum Se Achcha Kaun Hai Chand Tare Phool", artist: "Sameer" },
-  { id: "g1x9P4o8K0M", title: "Woh Ladki Bahut Yaad Aati", artist: "Shravan" },
-  { id: "nQ8k4v9L1wE", title: "Main Duniya Bhula Doonga", artist: "Anuradha Paudwal" },
-  { id: "q8v1O3s9W2r", title: "Tune Zindagi Mein Aake (Duet Version)", artist: "Udit Narayan" },
-  { id: "z8w1P4n2Q0o", title: "Dekhne Walon Ne", artist: "Udit Narayan" },
-  { id: "w8v2Q5z9N0k", title: "Har Dil Jo Pyar Karega", artist: "Udit Narayan" },
-  { id: "b4r9W1s2P8e", title: "Hum Tumko Nigahon Mein", artist: "Udit Narayan" },
-  { id: "x_elT6zkdHc", title: "O O Jaane Jaana", artist: "Kamaal R. Khan" },
-  { id: "fQ6s9r8M1wZ", title: "Odh Li Chunariya Tere Naam Ki", artist: "Kumar Sanu" },
-  { id: "v1n8W4z2R9e", title: "Pyar Dilon Ka Mela Hai", artist: "Alka Yagnik" },
-  { id: "l8q2V9s1W0M", title: "Rab Kare", artist: "Udit Narayan" },
-  { id: "c_V5Z1L6w9c", title: "Saajanji Ghar Aaye", artist: "Kumar Sanu" },
-  { id: "w0s8N4r2Z9o", title: "Taaron Ka Chamakta", artist: "Udit Narayan" },
-  { id: "W5Mh-y_3Ff8", title: "Tere Naam", artist: "Udit Narayan" },
-  { id: "k8r1P5n9W2o", title: "Paas Woh Aane Lage", artist: "Kumar Sanu" },
-  { id: "b8n2W4s1Q9o", title: "Zindagi Ban Gaye Ho Tum", artist: "Alka Yagnik" },
-  { id: "Wffx3W8Z9f4", title: "Dard Karaara", artist: "Anu Malik" },
-  { id: "k2o8Z9w1V4e", title: "Us Ladki Pe Dil Aaya", artist: "Anuradha Paudwal" },
-  { id: "s9r1W4n8Z2e", title: "Bahut Jatate Ho Pyar", artist: "Shravan" },
-  { id: "r2n8P5w1Z9o", title: "Dil Kehta Hai", artist: "Kumar Sanu" },
-  { id: "q8s1W4n9Z2r", title: "Tumse Milne Ki Tamanna Hai", artist: "S. P. Balasubrahmanyam" },
-  { id: "p8r2W1n9Z4e", title: "Tumhein Dekhen Meri Aankhen", artist: "Alka Yagnik" }
-];
 
-/* REALISTIC HIGHWAY ROAD DISTANCE MATRIX (KM) */
-const CITY_DISTANCES_KM = {
-  "Ghazipur":   { "Lucknow": 340, "Varanasi": 75,  "Prayagraj": 200, "Kanpur": 420, "Gorakhpur": 140, "Ayodhya": 210, "Agra": 670, "Bareilly": 580, "Meerut": 810, "Jhansi": 630, "Mathura": 720, "Aligarh": 740 },
-  "Lucknow":    { "Ghazipur": 340, "Varanasi": 300, "Prayagraj": 200, "Kanpur": 85,  "Gorakhpur": 270, "Ayodhya": 135, "Agra": 335, "Bareilly": 250, "Meerut": 500, "Jhansi": 315, "Mathura": 395, "Aligarh": 410 },
-  "Varanasi":   { "Ghazipur": 75,  "Lucknow": 300, "Prayagraj": 125, "Kanpur": 330, "Gorakhpur": 200, "Ayodhya": 200, "Agra": 600, "Bareilly": 540, "Meerut": 770, "Jhansi": 510, "Mathura": 650, "Aligarh": 670 },
-  "Prayagraj":  { "Ghazipur": 200, "Lucknow": 200, "Varanasi": 125, "Kanpur": 200, "Gorakhpur": 275, "Ayodhya": 165, "Agra": 475, "Bareilly": 440, "Meerut": 670, "Jhansi": 375, "Mathura": 530, "Aligarh": 550 },
-  "Kanpur":     { "Ghazipur": 420, "Lucknow": 85,  "Varanasi": 330, "Prayagraj": 200, "Gorakhpur": 350, "Ayodhya": 220, "Agra": 280, "Bareilly": 270, "Meerut": 440, "Jhansi": 230, "Mathura": 330, "Aligarh": 350 },
-  "Gorakhpur":  { "Ghazipur": 140, "Lucknow": 270, "Varanasi": 200, "Prayagraj": 275, "Kanpur": 350, "Ayodhya": 135, "Agra": 600, "Bareilly": 510, "Meerut": 740, "Jhansi": 580, "Mathura": 650, "Aligarh": 670 },
-  "Ayodhya":    { "Ghazipur": 210, "Lucknow": 135, "Varanasi": 200, "Prayagraj": 165, "Kanpur": 220, "Gorakhpur": 135, "Agra": 470, "Bareilly": 380, "Meerut": 610, "Jhansi": 450, "Mathura": 520, "Aligarh": 540 },
-  "Agra":       { "Ghazipur": 670, "Lucknow": 335, "Varanasi": 600, "Prayagraj": 475, "Kanpur": 280, "Gorakhpur": 600, "Ayodhya": 470, "Bareilly": 220, "Meerut": 240, "Jhansi": 220, "Mathura": 58,  "Aligarh": 90 },
-  "Bareilly":   { "Ghazipur": 580, "Lucknow": 250, "Varanasi": 540, "Prayagraj": 440, "Kanpur": 270, "Gorakhpur": 510, "Ayodhya": 380, "Agra": 220, "Meerut": 225, "Jhansi": 420, "Mathura": 220, "Aligarh": 180 },
-  "Meerut":     { "Ghazipur": 810, "Lucknow": 500, "Varanasi": 770, "Prayagraj": 670, "Kanpur": 440, "Gorakhpur": 740, "Ayodhya": 610, "Agra": 240, "Bareilly": 225, "Jhansi": 460, "Mathura": 190, "Aligarh": 140 },
-  "Jhansi":     { "Ghazipur": 630, "Lucknow": 315, "Varanasi": 510, "Prayagraj": 375, "Kanpur": 230, "Gorakhpur": 580, "Ayodhya": 450, "Agra": 220, "Bareilly": 420, "Meerut": 460, "Mathura": 270, "Aligarh": 310 },
-  "Mathura":    { "Ghazipur": 720, "Lucknow": 395, "Varanasi": 650, "Prayagraj": 530, "Kanpur": 330, "Gorakhpur": 650, "Ayodhya": 520, "Agra": 58,  "Bareilly": 220, "Meerut": 190, "Jhansi": 270, "Aligarh": 65 },
-  "Aligarh":    { "Ghazipur": 740, "Lucknow": 410, "Varanasi": 670, "Prayagraj": 550, "Kanpur": 350, "Gorakhpur": 670, "Ayodhya": 540, "Agra": 90,  "Bareilly": 180, "Meerut": 140, "Jhansi": 310, "Mathura": 65 }
-};
+/* ==========================================
+   ELEMENTS
+========================================== */
 
-/* PICK RANDOM TRACK ON EVERY VISIT */
-let currentTrackIndex = Math.floor(Math.random() * PLAYLIST.length);
-let isPlaying = false;
-let volume = 15;
-let rotationDeg = 0;
-let ytPlayer = null;
-let ytReady = false;
+const canvas =
+    document.getElementById("signatureCanvas");
 
-/* ACTIVE BOOKING STATE */
-let userBooking = {
-  from: "Ghazipur",
-  to: "Lucknow",
-  seat: "🪟 WINDOW (#14B)",
-  fare: "₹523 (PAID)"
-};
+const ctx =
+    canvas.getContext("2d");
 
-/* 3D CAMERA & SLIDER TOGGLE LOGIC */
-let currentView = 'exterior';
-let isTransitioning = false;
+const wrapper =
+    document.getElementById("signatureWrapper");
 
-const heroSection = document.getElementById('heroSection');
-const extVideo = document.getElementById('backgroundVideo');
-const intVideo = document.getElementById('interiorVideo');
-const flashMask = document.getElementById('viewFlashMask');
-const sliderSwitch = document.getElementById('viewSliderSwitch');
-const optOutside = document.getElementById('optOutside');
-const optCabin = document.getElementById('optCabin');
+const placeholder =
+    document.getElementById("placeholder");
 
-function setView(targetView) {
-  if (isTransitioning || currentView === targetView) return;
-  isTransitioning = true;
+const clearBtn =
+    document.getElementById("clearBtn");
 
-  if (targetView === 'interior') {
-    sliderSwitch.classList.add('interior-active');
-    optOutside.classList.remove('active');
-    optCabin.classList.add('active');
+const undoBtn =
+    document.getElementById("undoBtn");
 
-    heroSection.classList.add('transition-to-interior');
+const saveBtn =
+    document.getElementById("saveBtn");
 
-    setTimeout(() => {
-      flashMask.classList.add('active');
-    }, 450);
+const checkbox =
+    document.getElementById("consentCheckbox");
 
-    setTimeout(() => {
-      extVideo.style.opacity = '0';
-      intVideo.style.opacity = '1';
-      intVideo.play().catch(() => {});
+const status =
+    document.getElementById("status");
 
-      document.body.classList.add('view-interior');
-      currentView = 'interior';
+const savedSignatureBox =
+    document.getElementById("savedSignatureBox");
 
-      heroSection.classList.remove('transition-to-interior');
-      flashMask.classList.remove('active');
-      isTransitioning = false;
-    }, 850);
-  } else {
-    sliderSwitch.classList.remove('interior-active');
-    optCabin.classList.remove('active');
-    optOutside.classList.add('active');
+const signatureLink =
+    document.getElementById("signatureLink");
 
-    heroSection.classList.add('transition-to-exterior');
+const openSignatureLink =
+    document.getElementById("openSignatureLink");
 
-    setTimeout(() => {
-      flashMask.classList.add('active');
-    }, 400);
+const copyLinkBtn =
+    document.getElementById("copyLinkBtn");
 
-    setTimeout(() => {
-      intVideo.style.opacity = '0';
-      extVideo.style.opacity = '1';
-      extVideo.play().catch(() => {});
 
-      document.body.classList.remove('view-interior');
-      currentView = 'exterior';
+/* ==========================================
+   VARIABLES
+========================================== */
 
-      heroSection.classList.remove('transition-to-exterior');
-      flashMask.classList.remove('active');
-      isTransitioning = false;
-    }, 800);
-  }
-}
+let drawing = false;
 
-sliderSwitch.addEventListener('click', () => {
-  setView(currentView === 'exterior' ? 'interior' : 'exterior');
-});
+let hasSignature = false;
 
-/* DOM ELEMENTS */
-const songTitleEl = document.getElementById('song-title');
-const timeDisplayEl = document.getElementById('time-display');
-const playIcon = document.getElementById('play-icon');
-const knob = document.getElementById('knob');
-const knobBezel = document.getElementById('knob-bezel');
-const eqContainer = document.getElementById('eq-container');
-const playlistDrawer = document.getElementById('playlist-drawer');
-const playlistUl = document.getElementById('playlist-ul');
-const lcdProgressFill = document.getElementById('lcdProgressFill');
-const lcdProgressTrack = document.getElementById('lcdProgressTrack');
+let history = [];
 
-/* REALTIME CLOCK WIDGET */
-function updateClock() {
-  const now = new Date();
-  const hrs = String(now.getHours()).padStart(2, '0');
-  const mins = String(now.getMinutes()).padStart(2, '0');
-  document.getElementById('liveClock').innerHTML = `${hrs}:${mins} <span>IST</span>`;
-}
-setInterval(updateClock, 1000);
-updateClock();
+let currentStroke = [];
 
-/* RANDOM DYNAMIC PASSENGER COUNTER */
-let currentPassengers = 319;
-function updatePassengerCount() {
-  const delta = Math.floor(Math.random() * 7) - 3;
-  currentPassengers = Math.max(305, Math.min(340, currentPassengers + delta));
-  document.getElementById('passengerCountText').textContent = `${currentPassengers} ABOARD`;
-  const nextDelay = Math.floor(Math.random() * 2000) + 2000;
-  setTimeout(updatePassengerCount, nextDelay);
-}
-setTimeout(updatePassengerCount, 2500);
 
-/* DEVANAGARI SEGMENTER */
-function getGraphemes(text) {
-  if (typeof Intl !== 'undefined' && Intl.Segmenter) {
-    const segmenter = new Intl.Segmenter('hi', { granularity: 'grapheme' });
-    return Array.from(segmenter.segment(text), s => s.segment);
-  }
-  return text.match(/[\u0900-\u097F][\u0900-\u094F\u0962-\u0963\u0981]*|./g) || [text];
-}
+/* ==========================================
+   CANVAS SETUP
+========================================== */
 
-/* HORN AUDIO & DYNAMIC ANIMATION */
-const HORN_FILES = ['assets/horn1.mp3', 'assets/horn2.mp3', 'assets/horn3.mp3'];
-const hornAudioObjects = HORN_FILES.map(file => new Audio(file));
-let currentHornIndex = 0;
-const ORIGINAL_LINES = [["उत्तर", "प्रदेश"], ["परिवहन"]];
-let activeHornAudio = null;
-let activeHornEndHandler = null;
+function resizeCanvas() {
 
-function renderOriginalHeading() {
-  const mainHeading = document.getElementById('mainHeading');
-  if (!mainHeading) return;
-  mainHeading.className = 'main-heading';
-  mainHeading.innerHTML = `
-    <span class="heading-line"><span class="word-span">उत्तर</span><span class="word-span">प्रदेश</span></span>
-    <span class="heading-line"><span class="word-span">परिवहन</span></span>
-  `;
-}
+    const rect =
+        canvas.getBoundingClientRect();
 
-function stopTextAnimation() {
-  renderOriginalHeading();
+    const oldImage =
+        hasSignature
+            ? canvas.toDataURL("image/png")
+            : null;
 
-  if (activeHornAudio && activeHornEndHandler) {
-    activeHornAudio.removeEventListener('ended', activeHornEndHandler);
-    activeHornAudio.removeEventListener('pause', activeHornEndHandler);
-    activeHornAudio = null;
-    activeHornEndHandler = null;
-  }
-}
+    const dpr =
+        window.devicePixelRatio || 1;
 
-function startTextAnimation(hornAudio) {
-  const mainHeading = document.getElementById('mainHeading');
-  if (!mainHeading) return;
+    canvas.width =
+        rect.width * dpr;
 
-  stopTextAnimation();
-  const animChoice = Math.floor(Math.random() * 3);
+    canvas.height =
+        rect.height * dpr;
 
-  if (animChoice === 0) {
-    let globalGraphemeIdx = 0;
-    mainHeading.innerHTML = ORIGINAL_LINES.map(lineWords => {
-      const lineSpans = lineWords.map(word => {
-        const graphemes = getGraphemes(word);
-        const spans = graphemes.map(g => `<span class="anim-char" style="--i: ${globalGraphemeIdx++}">${g}</span>`).join('');
-        return `<span class="word-span">${spans}</span>`;
-      }).join('');
-      return `<span class="heading-line">${lineSpans}</span>`;
-    }).join('');
-  } 
-  else if (animChoice === 1) {
-    let globalWordIdx = 0;
-    mainHeading.innerHTML = ORIGINAL_LINES.map(lineWords => {
-      const lineSpans = lineWords.map(word => {
-        return `<span class="word-span anim-word" style="--i: ${globalWordIdx++}">${word}</span>`;
-      }).join('');
-      return `<span class="heading-line">${lineSpans}</span>`;
-    }).join('');
-  } 
-  else {
-    mainHeading.classList.add('anim-bass-glitch');
-    renderOriginalHeading();
-  }
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
 
-  activeHornAudio = hornAudio;
-  activeHornEndHandler = () => stopTextAnimation();
-  hornAudio.addEventListener('ended', activeHornEndHandler);
-  hornAudio.addEventListener('pause', activeHornEndHandler);
-}
+    ctx.lineCap = "round";
 
-function playNextHorn() {
-  const horn = hornAudioObjects[currentHornIndex];
-  horn.currentTime = 0;
-  startTextAnimation(horn);
-  horn.play().catch(err => {
-    console.log('Horn audio play blocked:', err);
-    stopTextAnimation();
-  });
-  currentHornIndex = (currentHornIndex + 1) % HORN_FILES.length;
-}
+    ctx.lineJoin = "round";
 
-/* BUILD RETRO LED EQUALIZER BARS */
-function createEqualizer() {
-  eqContainer.innerHTML = '';
-  for (let i = 0; i < 8; i++) {
-    const bar = document.createElement('div');
-    bar.className = 'eq-bar';
-    for (let j = 0; j < 6; j++) {
-      const dot = document.createElement('div');
-      dot.className = 'eq-dot';
-      bar.appendChild(dot);
+    ctx.lineWidth = 2.2;
+
+    ctx.strokeStyle = "#172033";
+
+
+    if (oldImage) {
+
+        const img =
+            new Image();
+
+        img.onload = () => {
+
+            ctx.drawImage(
+                img,
+                0,
+                0,
+                rect.width,
+                rect.height
+            );
+
+        };
+
+        img.src = oldImage;
     }
-    eqContainer.appendChild(bar);
-  }
-}
 
-function animateEqualizer() {
-  const bars = document.querySelectorAll('.eq-bar');
-  bars.forEach(bar => {
-    const dots = bar.querySelectorAll('.eq-dot');
-    const activeHeight = isPlaying ? Math.floor(Math.random() * 6) + 1 : 0;
-    
-    dots.forEach((dot, index) => {
-      dot.className = 'eq-dot';
-      if (index < activeHeight) {
-        if (index < 3) dot.classList.add('active-green');
-        else if (index < 5) dot.classList.add('active-yellow');
-        else dot.classList.add('active-red');
-      }
-    });
-  });
-}
+    else {
 
-function fmtSecs(sec) {
-  if (!isFinite(sec) || sec < 0) sec = 0;
-  const m = Math.floor(sec / 60).toString().padStart(2, '0');
-  const s = Math.floor(sec % 60).toString().padStart(2, '0');
-  return `${m}:${s}`;
-}
+        redraw();
 
-function updateDisplay() {
-  let cur = 0;
-  let dur = 0;
-  if (ytPlayer && ytPlayer.getCurrentTime && ytPlayer.getDuration) {
-    cur = ytPlayer.getCurrentTime();
-    dur = ytPlayer.getDuration();
-  }
-  
-  const pct = dur ? (cur / dur) * 100 : 0;
-  lcdProgressFill.style.width = `${pct}%`;
-
-  const volFormatted = String(volume).padStart(2, '0');
-  timeDisplayEl.innerHTML = `${fmtSecs(cur)} / ${fmtSecs(dur)} &nbsp;&nbsp;VOL ${volFormatted}`;
-}
-
-/* CLICKABLE TIMELINE SEEK */
-lcdProgressTrack.addEventListener('click', (e) => {
-  if (!ytPlayer || !ytPlayer.getDuration) return;
-  const rect = lcdProgressTrack.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  const targetTime = ytPlayer.getDuration() * pct;
-  ytPlayer.seekTo(targetTime, true);
-  updateDisplay();
-});
-
-setInterval(() => {
-  if (isPlaying) {
-    updateDisplay();
-    animateEqualizer();
-  }
-}, 400);
-
-function selectTrack(index, autoPlay = true) {
-  currentTrackIndex = index;
-  const t = PLAYLIST[currentTrackIndex];
-  songTitleEl.textContent = t.title;
-
-  document.getElementById('ticketSongTitle').textContent = t.title;
-  document.getElementById('ticketSongArtist').textContent = t.artist;
-
-  if (ytReady && ytPlayer) {
-    if (autoPlay) {
-      ytPlayer.loadVideoById({ videoId: t.id, startSeconds: 0 });
-      isPlaying = true;
-      playIcon.className = 'fa-solid fa-pause';
-    } else {
-      ytPlayer.cueVideoById({ videoId: t.id, startSeconds: 0 });
     }
-  }
-  renderPlaylist();
 }
 
-/* YOUTUBE IFRAME INTEGRATION */
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-document.body.appendChild(tag);
 
-window.onYouTubeIframeAPIReady = function(){
-  ytPlayer = new YT.Player('yt-player', {
-    height: '200', width: '200',
-    playerVars: { autoplay: 0, controls: 0, disablekb: 1, playsinline: 1, enablejsapi: 1, origin: window.location.origin || '*' },
-    events: {
-      onReady: () => { 
-        ytReady = true; 
-        ytPlayer.setVolume((volume / 30) * 100);
-        selectTrack(currentTrackIndex, false);
-      },
-      onStateChange: onPlayerStateChange,
-      onError: () => selectTrack((currentTrackIndex + 1) % PLAYLIST.length)
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* ==========================================
+   GET POINTER POSITION
+========================================== */
+
+function getPosition(event) {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    return {
+
+        x:
+            event.clientX -
+            rect.left,
+
+        y:
+            event.clientY -
+            rect.top
+    };
+}
+
+
+/* ==========================================
+   POINTER DOWN
+========================================== */
+
+canvas.addEventListener(
+    "pointerdown",
+    event => {
+
+        event.preventDefault();
+
+        drawing = true;
+
+        canvas.setPointerCapture(
+            event.pointerId
+        );
+
+        currentStroke = [];
+
+        const point =
+            getPosition(event);
+
+        currentStroke.push(point);
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            point.x,
+            point.y
+        );
+
+        wrapper.classList.add(
+            "active"
+        );
+
+        placeholder.style.opacity =
+            "0";
+
+        hasSignature = true;
+
+        updateState();
     }
-  });
-};
+);
 
-function onPlayerStateChange(e){
-  if (e.data === YT.PlayerState.PLAYING){
-    isPlaying = true;
-    playIcon.className = 'fa-solid fa-pause';
-  } else if (e.data === YT.PlayerState.PAUSED){
-    isPlaying = false;
-    playIcon.className = 'fa-solid fa-play';
-    animateEqualizer();
-  } else if (e.data === YT.PlayerState.ENDED){
-    selectTrack((currentTrackIndex + 1) % PLAYLIST.length);
-  }
-}
 
-/* PLAY / PAUSE CONTROLS */
-document.getElementById('btn-play-pause').addEventListener('click', () => {
-  if (!ytReady || !ytPlayer) return;
-  if (isPlaying) {
-    ytPlayer.pauseVideo();
-  } else {
-    ytPlayer.playVideo();
-  }
-});
+/* ==========================================
+   POINTER MOVE
+========================================== */
 
-document.getElementById('btn-next').addEventListener('click', () => {
-  selectTrack((currentTrackIndex + 1) % PLAYLIST.length);
-});
+canvas.addEventListener(
+    "pointermove",
+    event => {
 
-document.getElementById('btn-prev').addEventListener('click', () => {
-  selectTrack((currentTrackIndex - 1 + PLAYLIST.length) % PLAYLIST.length);
-});
+        if (!drawing) return;
 
-/* ROTARY VOLUME DIAL KNOB CONTROLS */
-function setVolumeLevel(newVol) {
-  volume = Math.max(0, Math.min(30, newVol));
-  
-  if (ytReady && ytPlayer) {
-    ytPlayer.setVolume((volume / 30) * 100);
-  }
-  
-  rotationDeg = -140 + (volume / 30) * 280;
-  knob.style.transform = `rotate(${rotationDeg}deg)`;
-  
-  updateDisplay();
-}
+        event.preventDefault();
 
-knobBezel.addEventListener('wheel', (e) => {
-  e.preventDefault();
-  if (e.deltaY < 0) {
-    setVolumeLevel(volume + 1);
-  } else {
-    setVolumeLevel(volume - 1);
-  }
-});
+        const point =
+            getPosition(event);
 
-let isDragging = false;
-let startY = 0;
+        currentStroke.push(point);
 
-/* Desktop Mouse Handlers */
-knobBezel.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  startY = e.clientY;
-});
+        ctx.lineTo(
+            point.x,
+            point.y
+        );
 
-window.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
-  const deltaY = startY - e.clientY;
-  if (Math.abs(deltaY) > 4) {
-    if (deltaY > 0) setVolumeLevel(volume + 1);
-    else setVolumeLevel(volume - 1);
-    startY = e.clientY;
-  }
-});
+        ctx.stroke();
 
-window.addEventListener('mouseup', () => { isDragging = false; });
+        ctx.beginPath();
 
-/* Mobile Touch Handlers */
-knobBezel.addEventListener('touchstart', (e) => {
-  isDragging = true;
-  startY = e.touches[0].clientY;
-}, { passive: true });
-
-window.addEventListener('touchmove', (e) => {
-  if (!isDragging || !e.touches || e.touches.length === 0) return;
-  const currentY = e.touches[0].clientY;
-  const deltaY = startY - currentY;
-  if (Math.abs(deltaY) > 5) {
-    if (deltaY > 0) setVolumeLevel(volume + 1);
-    else setVolumeLevel(volume - 1);
-    startY = currentY;
-  }
-}, { passive: true });
-
-window.addEventListener('touchend', () => { isDragging = false; });
-window.addEventListener('touchcancel', () => { isDragging = false; });
-
-/* PLAYLIST DRAWER LOGIC */
-document.getElementById('btn-playlist').addEventListener('click', () => {
-  playlistDrawer.classList.add('open');
-});
-
-document.getElementById('close-playlist').addEventListener('click', () => {
-  playlistDrawer.classList.remove('open');
-});
-
-function renderPlaylist() {
-  playlistUl.innerHTML = '';
-  PLAYLIST.forEach((track, i) => {
-    const li = document.createElement('li');
-    if (i === currentTrackIndex) li.className = 'active';
-    li.innerHTML = `<span>${track.title}</span>`;
-    li.addEventListener('click', () => {
-      selectTrack(i);
-      playlistDrawer.classList.remove('open');
-    });
-    playlistUl.appendChild(li);
-  });
-}
-
-/* ===================== BOOKING, FARE CALCULATION & MODALS ===================== */
-const bookingModal = document.getElementById('bookingModal');
-const ticketModal = document.getElementById('ticketModal');
-const driverModal = document.getElementById('driverModal');
-const anchModal = document.getElementById('anchModal');
-const anchLogoTrigger = document.getElementById('anchLogoTrigger');
-const closeAnchBtn = document.getElementById('closeAnchBtn');
-const toastNotify = document.getElementById('toastNotify');
-
-function showToast(msg) {
-  toastNotify.textContent = msg;
-  toastNotify.classList.add('show');
-  setTimeout(() => toastNotify.classList.remove('show'), 2500);
-}
-
-/* DYNAMIC LIVE FARE CALCULATION BASED ON HIGHWAY DISTANCE */
-function calculateLiveFare() {
-  const fromCity = document.getElementById('fromCitySelect').value;
-  const toCity = document.getElementById('toCitySelect').value;
-  
-  if (fromCity === toCity) {
-    document.getElementById('liveFareAmount').textContent = "₹ 0.00";
-    return;
-  }
-
-  const distance = (CITY_DISTANCES_KM[fromCity] && CITY_DISTANCES_KM[fromCity][toCity]) 
-                   ? CITY_DISTANCES_KM[fromCity][toCity] 
-                   : (CITY_DISTANCES_KM[toCity] && CITY_DISTANCES_KM[toCity][fromCity]) 
-                   ? CITY_DISTANCES_KM[toCity][fromCity] 
-                   : 250;
-  const computedFare = Math.round(distance * 1.45 + 30);
-  document.getElementById('liveFareAmount').textContent = `₹ ${computedFare}.00`;
-}
-
-function handleBookingSubmit() {
-  const fromCity = document.getElementById('fromCitySelect').value;
-  const toCity = document.getElementById('toCitySelect').value;
-  const seatPref = document.getElementById('seatSelect').value;
-
-  if (fromCity === toCity) {
-    showToast('⚠️ Please select different origin & destination cities.');
-    return;
-  }
-
-  const currentFare = document.getElementById('liveFareAmount').textContent;
-  userBooking = {
-    from: fromCity,
-    to: toCity,
-    seat: seatPref,
-    fare: `${currentFare} (PAID)`
-  };
-
-  document.getElementById('headerRouteText').textContent = `NH 19 · ${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
-  document.getElementById('ticketRouteVal').textContent = `${fromCity.toUpperCase()} ➔ ${toCity.toUpperCase()}`;
-  document.getElementById('ticketSeatVal').textContent = seatPref;
-
-  const now = new Date();
-  const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  document.getElementById('ticketFareTimeVal').textContent = `${timeString} · ${currentFare} (PAID)`;
-
-  // Start playback synchronously on user gesture
-  if (ytReady && ytPlayer && !isPlaying) {
-    ytPlayer.playVideo();
-    isPlaying = true;
-    playIcon.className = 'fa-solid fa-pause';
-  }
-
-  bookingModal.classList.remove('open');
-  setTimeout(() => {
-    openTicketModal();
-  }, 350);
-}
-
-function skipBooking() {
-  bookingModal.classList.remove('open');
-}
-
-/* 5.5 SECOND DELAYED AUTO FADE-UP FOR TICKET WINDOW ON SITE ENTRY */
-window.addEventListener('load', () => {
-  calculateLiveFare();
-  setTimeout(() => {
-    if (!ticketModal.classList.contains('open') && !driverModal.classList.contains('open') && !anchModal.classList.contains('open')) {
-      bookingModal.classList.add('open');
+        ctx.moveTo(
+            point.x,
+            point.y
+        );
     }
-  }, 5500);
-});
+);
 
-function openTicketModal() {
-  const now = new Date();
-  const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  document.getElementById('ticketFareTimeVal').textContent = `${timeString} · ${userBooking.fare}`;
 
-  if (PLAYLIST[currentTrackIndex]) {
-    document.getElementById('ticketSongTitle').textContent = PLAYLIST[currentTrackIndex].title;
-    document.getElementById('ticketSongArtist').textContent = PLAYLIST[currentTrackIndex].artist;
-  }
+/* ==========================================
+   STOP DRAWING
+========================================== */
 
-  ticketModal.classList.add('open');
-}
+function stopDrawing() {
 
-function closeTicketModal() {
-  ticketModal.classList.remove('open');
-}
+    if (!drawing) return;
 
-/* SHARE TICKET HANDLER */
-document.getElementById('shareTicketBtn').addEventListener('click', async () => {
-  const currentSong = PLAYLIST[currentTrackIndex] ? PLAYLIST[currentTrackIndex].title : "Highway Hits";
-  const shareText = `🚌 उत्तर प्रदेश परिवहन Ticket:\nRoute: ${userBooking.from} ➔ ${userBooking.to}\nSeat: ${userBooking.seat}\nFare: ${userBooking.fare}\nNow Playing: ${currentSong}\nTune in: ${window.location.href}`;
+    drawing = false;
 
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: 'उत्तर प्रदेश परिवहन Bus Ticket',
-        text: shareText,
-        url: window.location.href
-      });
-    } catch (err) {
-      console.log('Share dismissed');
+    wrapper.classList.remove(
+        "active"
+    );
+
+    if (currentStroke.length > 0) {
+
+        history.push(
+            [...currentStroke]
+        );
+
     }
-  } else {
-    navigator.clipboard.writeText(shareText).then(() => {
-      showToast('✓ Ticket Copied to Clipboard!');
-    }).catch(() => {
-      showToast('✓ Ticket Link Copied!');
-    });
-  }
-});
 
-/* DRIVER PROFILE MODAL HANDLERS */
-function openDriverModal() {
-  driverModal.classList.add('open');
+    currentStroke = [];
+
+    redraw();
+
+    updateState();
 }
 
-function closeDriverModal() {
-  driverModal.classList.remove('open');
+
+canvas.addEventListener(
+    "pointerup",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "pointercancel",
+    stopDrawing
+);
+
+
+/* ==========================================
+   REDRAW
+========================================== */
+
+function redraw() {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    ctx.clearRect(
+        0,
+        0,
+        rect.width,
+        rect.height
+    );
+
+    ctx.lineWidth = 2.2;
+
+    ctx.lineCap = "round";
+
+    ctx.lineJoin = "round";
+
+    ctx.strokeStyle =
+        "#172033";
+
+
+    history.forEach(
+        stroke => {
+
+            if (!stroke.length) {
+                return;
+            }
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                stroke[0].x,
+                stroke[0].y
+            );
+
+            for (
+                let i = 1;
+                i < stroke.length;
+                i++
+            ) {
+
+                ctx.lineTo(
+                    stroke[i].x,
+                    stroke[i].y
+                );
+
+            }
+
+            ctx.stroke();
+        }
+    );
 }
 
-/* ANCH PROFILE MODAL HANDLERS */
-function openAnchModal() {
-  anchModal.classList.add('open');
+
+/* ==========================================
+   CLEAR
+========================================== */
+
+clearBtn.addEventListener(
+    "click",
+    () => {
+
+        history = [];
+
+        currentStroke = [];
+
+        hasSignature = false;
+
+        const rect =
+            canvas.getBoundingClientRect();
+
+        ctx.clearRect(
+            0,
+            0,
+            rect.width,
+            rect.height
+        );
+
+        placeholder.style.opacity =
+            "1";
+
+        savedSignatureBox.style.display =
+            "none";
+
+        localStorage.removeItem(
+            "savedConsentSignature"
+        );
+
+        updateState();
+    }
+);
+
+
+/* ==========================================
+   UNDO
+========================================== */
+
+undoBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!history.length) {
+            return;
+        }
+
+        history.pop();
+
+        hasSignature =
+            history.length > 0;
+
+        redraw();
+
+        placeholder.style.opacity =
+            hasSignature
+                ? "0"
+                : "1";
+
+        updateState();
+    }
+);
+
+
+/* ==========================================
+   CHECKBOX
+========================================== */
+
+checkbox.addEventListener(
+    "change",
+    updateState
+);
+
+
+/* ==========================================
+   UPDATE STATE
+========================================== */
+
+function updateState() {
+
+    const valid =
+        hasSignature &&
+        checkbox.checked;
+
+    saveBtn.disabled =
+        !valid;
+
+
+    if (!hasSignature) {
+
+        status.textContent =
+            "Signature required";
+
+        status.className =
+            "status";
+
+    }
+
+    else if (!checkbox.checked) {
+
+        status.textContent =
+            "Please confirm your consent";
+
+        status.className =
+            "status";
+
+    }
+
+    else {
+
+        status.textContent =
+            "Ready to save";
+
+        status.className =
+            "status success";
+
+    }
 }
 
-function closeAnchModal() {
-  anchModal.classList.remove('open');
-}
 
-anchLogoTrigger.addEventListener('click', openAnchModal);
-closeAnchBtn.addEventListener('click', closeAnchModal);
-anchModal.addEventListener('click', (e) => {
-  if (e.target === anchModal) closeAnchModal();
-});
+/* ==========================================
+   SAVE SIGNATURE
+========================================== */
 
-document.getElementById('driverBadgeBtn').addEventListener('click', openDriverModal);
-document.getElementById('closeDriverBtn').addEventListener('click', closeDriverModal);
-driverModal.addEventListener('click', (e) => {
-  if (e.target === driverModal) closeDriverModal();
-});
+saveBtn.addEventListener(
+    "click",
+    () => {
 
-document.getElementById('closeTicketBtn').addEventListener('click', closeTicketModal);
-document.getElementById('headerTicketBtn').addEventListener('click', openTicketModal);
-document.getElementById('ticketShortcutBtn').addEventListener('click', openTicketModal);
-ticketModal.addEventListener('click', (e) => {
-  if (e.target === ticketModal) closeTicketModal();
-});
-
-document.getElementById('hornBtn').addEventListener('click', playNextHorn);
-document.getElementById('dashHornBtn').addEventListener('click', playNextHorn);
-
-/* KEYBOARD SHORTCUTS */
-document.addEventListener('keydown', (e) => {
-  if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
-  switch(e.code){
-    case 'Space': e.preventDefault(); document.getElementById('btn-play-pause').click(); break;
-    case 'ArrowRight': if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(ytPlayer.getCurrentTime() + 5, true); break;
-    case 'ArrowLeft': if (ytPlayer && ytPlayer.getCurrentTime) ytPlayer.seekTo(Math.max(0, ytPlayer.getCurrentTime() - 5), true); break;
-    case 'KeyN': document.getElementById('btn-next').click(); break;
-    case 'KeyP': document.getElementById('btn-prev').click(); break;
-    case 'KeyH': playNextHorn(); break;
-    case 'KeyV':
-    case 'KeyI': setView(currentView === 'exterior' ? 'interior' : 'exterior'); break;
-    case 'KeyT': openTicketModal(); break;
-    case 'Escape': closeTicketModal(); closeDriverModal(); closeAnchModal(); skipBooking(); break;
-  }
-});
-
-/* INIT */
-createEqualizer();
-selectTrack(currentTrackIndex, false);
-setVolumeLevel(15);
+        if (
+            !hasSignature ||
+            !checkbox.checked
+        ) {
+            return;
+        }
 
 
-  function unlockMobileAudio() {
-  if (ytReady && ytPlayer && !isPlaying) {
-    ytPlayer.playVideo();
-    isPlaying = true;
-    playIcon.className = 'fa-solid fa-pause';
-  }
-  document.removeEventListener('touchstart', unlockMobileAudio);
-  document.removeEventListener('click', unlockMobileAudio);
-}
+        /* Convert canvas to PNG */
 
-document.addEventListener('touchstart', unlockMobileAudio, { passive: true });
-document.addEventListener('click', unlockMobileAudio);
+        const image =
+            canvas.toDataURL(
+                "image/png"
+            );
 
-  
+
+        /* Save inside browser/device */
+
+        localStorage.setItem(
+            "savedConsentSignature",
+            image
+        );
+
+
+        /* Put the data URL into link field */
+
+        signatureLink.value =
+            image;
+
+        openSignatureLink.href =
+            image;
+
+
+        /* Show saved section */
+
+        savedSignatureBox.style.display =
+            "block";
+
+
+        /* Download PNG */
+
+        const download =
+            document.createElement("a");
+
+        download.href =
+            image;
+
+        download.download =
+            "consent-signature-" +
+            Date.now() +
+            ".png";
+
+        document.body.appendChild(
+            download
+        );
+
+        download.click();
+
+        document.body.removeChild(
+            download
+        );
+
+
+        /* Update status */
+
+        status.textContent =
+            "Signature saved successfully";
+
+        status.className =
+            "status success";
+
+
+        /* Scroll to link */
+
+        setTimeout(() => {
+
+            savedSignatureBox.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+        }, 100);
+
+    }
+);
+
+
+/* ==========================================
+   COPY LINK
+========================================== */
+
+copyLinkBtn.addEventListener(
+    "click",
+    async () => {
+
+        const value =
+            signatureLink.value;
+
+        if (!value) return;
+
+
+        try {
+
+            await navigator.clipboard.writeText(
+                value
+            );
+
+            copyLinkBtn.textContent =
+                "Copied ✓";
+
+            setTimeout(() => {
+
+                copyLinkBtn.textContent =
+                    "Copy";
+
+            }, 1600);
+
+        }
+
+        catch (error) {
+
+            signatureLink.select();
+
+            document.execCommand(
+                "copy"
+            );
+
+            copyLinkBtn.textContent =
+                "Copied ✓";
+
+            setTimeout(() => {
+
+                copyLinkBtn.textContent =
+                    "Copy";
+
+            }, 1600);
+        }
+    }
+);
+
+
+/* ==========================================
+   LOAD SAVED SIGNATURE
+========================================== */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        const saved =
+            localStorage.getItem(
+                "savedConsentSignature"
+            );
+
+        if (!saved) return;
+
+
+        signatureLink.value =
+            saved;
+
+        openSignatureLink.href =
+            saved;
+
+        savedSignatureBox.style.display =
+            "block";
+    }
+);
+
+
+/* ==========================================
+   INITIAL STATE
+========================================== */
+
+updateState();
+
 </script>
+
 </body>
 </html>
+```

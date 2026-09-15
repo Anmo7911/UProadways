@@ -102,6 +102,50 @@ body {
     color: #4b5563;
 }
 
+.consent-text p {
+    margin: 0 0 12px;
+}
+
+.consent-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================
+   NAME SELECT
+========================= */
+
+.name-select-group {
+    margin-bottom: 16px;
+}
+
+.name-select-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 650;
+    color: #273142;
+}
+
+.name-select {
+    width: 100%;
+    height: 46px;
+    padding: 0 40px 0 13px;
+    border: 1.5px solid #dfe3e8;
+    border-radius: 11px;
+    outline: none;
+    background: #ffffff;
+    color: #273142;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.name-select:focus {
+    border-color: #3347a8;
+    box-shadow: 0 0 0 3px rgba(51, 71, 168, 0.08);
+}
+
 
 /* =========================
    SIGNATURE LABEL
@@ -584,10 +628,29 @@ button {
 
     <div class="consent-text">
 
-        I confirm that I have read and understood the information
-        provided above. I voluntarily give my consent and acknowledge
-        that my signature represents my agreement to the stated terms.
+        <p>I hereby agree to participate in the team trip mentioned above.</p>
 
+        <p>I understand that I am expected to follow all trip rules, safety guidelines,
+        and instructions shared by the trip Coordinator.</p>
+
+        <p>The total trip budget of ₹5,000 (exclude emergency fund) for 3
+        members (i.e No. 1,2 and 4) covers travel, accommodation, and basic expenses.
+        Budget is not refundable since remaining balance will add in Wallet.</p>
+
+    </div>
+
+
+    <!-- NAME SELECTION -->
+
+    <div class="name-select-group">
+        <label for="nameSelect">Select your name</label>
+        <select class="name-select" id="nameSelect">
+            <option value="">Select name</option>
+            <option value="Piyush">Piyush</option>
+            <option value="Anmol">Anmol</option>
+            <option value="Ambuj">Ambuj</option>
+            <option value="Pritam">Pritam</option>
+        </select>
     </div>
 
 
@@ -760,6 +823,9 @@ const undoBtn =
 
 const saveBtn =
     document.getElementById("saveBtn");
+
+const nameSelect =
+    document.getElementById("nameSelect");
 
 const checkbox =
     document.getElementById("consentCheckbox");
@@ -1104,6 +1170,12 @@ clearBtn.addEventListener(
             "savedConsentSignature"
         );
 
+        localStorage.removeItem(
+            "savedConsentName"
+        );
+
+        nameSelect.value = "";
+
         updateState();
     }
 );
@@ -1142,6 +1214,11 @@ undoBtn.addEventListener(
    CHECKBOX
 ========================================== */
 
+nameSelect.addEventListener(
+    "change",
+    updateState
+);
+
 checkbox.addEventListener(
     "change",
     updateState
@@ -1155,6 +1232,7 @@ checkbox.addEventListener(
 function updateState() {
 
     const valid =
+        nameSelect.value &&
         hasSignature &&
         checkbox.checked;
 
@@ -1162,7 +1240,17 @@ function updateState() {
         !valid;
 
 
-    if (!hasSignature) {
+    if (!nameSelect.value) {
+
+        status.textContent =
+            "Please select your name";
+
+        status.className =
+            "status";
+
+    }
+
+    else if (!hasSignature) {
 
         status.textContent =
             "Signature required";
@@ -1203,6 +1291,7 @@ saveBtn.addEventListener(
     () => {
 
         if (
+            !nameSelect.value ||
             !hasSignature ||
             !checkbox.checked
         ) {
@@ -1223,6 +1312,11 @@ saveBtn.addEventListener(
         localStorage.setItem(
             "savedConsentSignature",
             image
+        );
+
+        localStorage.setItem(
+            "savedConsentName",
+            nameSelect.value
         );
 
 
@@ -1355,6 +1449,15 @@ window.addEventListener(
             localStorage.getItem(
                 "savedConsentSignature"
             );
+
+        const savedName =
+            localStorage.getItem(
+                "savedConsentName"
+            );
+
+        if (savedName) {
+            nameSelect.value = savedName;
+        }
 
         if (!saved) return;
 

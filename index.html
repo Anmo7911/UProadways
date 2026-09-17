@@ -241,8 +241,13 @@
 </head>
 <body>
 
+  <!-- Audio Element -->
+  <audio id="celebrationAudio" preload="auto">
+    <source src="https://mp3tourl.com/audio/1789653067748-e6492cbe-e47e-4cc4-bda4-501f30d42f54.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="card">
-    <!-- Updated Profile Image Link -->
+    <!-- Profile Image -->
     <div class="profile-wrap">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5lwwFiATsaDq40n1iMny8lRMvCVU35kfD3vglJjS9BGeO9BeLgOlJL09n&s=10" alt="Profile Photo" id="modiImg">
     </div>
@@ -294,17 +299,24 @@
       const diya = document.getElementById('diyaStage');
       const msg = document.getElementById('msgBox');
       const btn = document.getElementById('wishBtn');
+      const audio = document.getElementById('celebrationAudio');
+
+      // Play Sound
+      audio.currentTime = 0;
+      audio.play().catch(err => {
+        console.log("Audio playback was blocked or failed:", err);
+      });
 
       // Light up the Diya
       diya.classList.add('lit');
 
-      // Display the Hindi message
+      // Display Hindi confirmation message
       msg.style.display = 'block';
 
       // Confetti burst
       triggerConfetti();
 
-      // Disable button
+      // Update button state
       btn.innerText = '✨ बधाई भेजी जा चुकी है';
       btn.disabled = true;
     }

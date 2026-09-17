@@ -1,1487 +1,313 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Consent Signature</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    min-height: 100vh;
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background: #f5f7fb;
-    color: #172033;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
-}
-
-/* =========================
-   MAIN CARD
-========================= */
-
-.consent-card {
-    width: 100%;
-    max-width: 640px;
-
-    background: #ffffff;
-
-    border-radius: 22px;
-
-    padding: 30px;
-
-    box-shadow:
-        0 15px 45px rgba(20, 30, 50, 0.08);
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    margin-bottom: 24px;
-}
-
-.header h1 {
-    font-size: 30px;
-    font-weight: 750;
-
-    letter-spacing: -0.8px;
-
-    color: #111827;
-}
-
-.header p {
-    margin-top: 7px;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-    color: #6b7280;
-}
-
-
-/* =========================
-   CONSENT TEXT
-========================= */
-
-.consent-text {
-    background: #f7f8fa;
-
-    border-radius: 14px;
-
-    padding: 17px;
-
-    margin-bottom: 23px;
-
-    font-size: 14px;
-
-    line-height: 1.65;
-
-    color: #4b5563;
-}
-
-.consent-text p {
-    margin: 0 0 12px;
-}
-
-.consent-text p:last-child {
-    margin-bottom: 0;
-}
-
-/* =========================
-   NAME SELECT
-========================= */
-
-.name-select-group {
-    margin-bottom: 16px;
-}
-
-.name-select-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 650;
-    color: #273142;
-}
-
-.name-select {
-    width: 100%;
-    height: 46px;
-    padding: 0 40px 0 13px;
-    border: 1.5px solid #dfe3e8;
-    border-radius: 11px;
-    outline: none;
-    background: #ffffff;
-    color: #273142;
-    font-family: inherit;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.name-select:focus {
-    border-color: #3347a8;
-    box-shadow: 0 0 0 3px rgba(51, 71, 168, 0.08);
-}
-
-
-/* =========================
-   SIGNATURE LABEL
-========================= */
-
-.signature-label {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 9px;
-}
-
-.signature-label .main-label {
-    font-size: 14px;
-
-    font-weight: 650;
-
-    color: #273142;
-}
-
-.signature-label .hint {
-    font-size: 12px;
-
-    color: #9ca3af;
-}
-
-
-/* =========================
-   SIGNATURE PAD
-========================= */
-
-.signature-wrapper {
-    position: relative;
-
-    width: 100%;
-
-    height: 220px;
-
-    background: #ffffff;
-
-    border: 1.5px solid #dfe3e8;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.signature-wrapper.active {
-    border-color: #3347a8;
-
-    box-shadow:
-        0 0 0 3px rgba(51, 71, 168, 0.08);
-}
-
-canvas {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    cursor: crosshair;
-
-    touch-action: none;
-}
-
-
-/* =========================
-   PLACEHOLDER
-========================= */
-
-.placeholder {
-    position: absolute;
-
-    left: 50%;
-    top: 43%;
-
-    transform: translate(-50%, -50%);
-
-    color: #c4c8cf;
-
-    font-size: 14px;
-
-    pointer-events: none;
-
-    white-space: nowrap;
-
-    transition: opacity 0.2s ease;
-}
-
-
-/* =========================
-   SIGNATURE BASE LINE
-========================= */
-
-.signature-line {
-    position: absolute;
-
-    left: 25px;
-    right: 25px;
-
-    bottom: 45px;
-
-    height: 1px;
-
-    background: #e5e7eb;
-
-    pointer-events: none;
-}
-
-.signature-line-text {
-    position: absolute;
-
-    left: 25px;
-    bottom: 24px;
-
-    font-size: 9px;
-
-    letter-spacing: 0.5px;
-
-    color: #c4c8cf;
-
-    pointer-events: none;
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-.actions {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 14px;
-}
-
-button {
-    border: none;
-
-    cursor: pointer;
-
-    font-family: inherit;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        opacity 0.2s ease;
-}
-
-.clear-btn,
-.undo-btn {
-    flex: 1;
-
-    height: 46px;
-
-    border-radius: 11px;
-
-    background: #f1f3f6;
-
-    color: #4b5563;
-
-    font-size: 14px;
-
-    font-weight: 600;
-}
-
-.clear-btn:hover,
-.undo-btn:hover {
-    background: #e7e9ed;
-}
-
-.save-btn {
-    flex: 2;
-
-    height: 46px;
-
-    border-radius: 11px;
-
-    background: #172554;
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    font-weight: 650;
-}
-
-.save-btn:hover {
-    background: #1e3a8a;
-
-    transform: translateY(-1px);
-}
-
-.save-btn:disabled {
-    opacity: 0.4;
-
-    cursor: not-allowed;
-
-    transform: none;
-}
-
-
-/* =========================
-   AGREEMENT
-========================= */
-
-.agreement {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 10px;
-
-    margin-top: 20px;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    color: #5f6877;
-
-    cursor: pointer;
-}
-
-.agreement input {
-    width: 17px;
-    height: 17px;
-
-    margin-top: 1px;
-
-    flex-shrink: 0;
-
-    accent-color: #3347a8;
-
-    cursor: pointer;
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-.status {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    min-height: 20px;
-
-    margin-top: 13px;
-
-    font-size: 12px;
-
-    color: #9ca3af;
-}
-
-.status.success {
-    color: #16834b;
-}
-
-.status.error {
-    color: #c24141;
-}
-
-
-/* =========================
-   SAVED SIGNATURE BOX
-========================= */
-
-.saved-signature-box {
-    display: none;
-
-    margin-top: 18px;
-
-    padding: 16px;
-
-    border-radius: 14px;
-
-    background: #f5f7fa;
-
-    border: 1px solid #e1e5eb;
-}
-
-.saved-title {
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    color: #16834b;
-
-    margin-bottom: 10px;
-}
-
-.saved-title::before {
-    content: "✓";
-
-    width: 19px;
-    height: 19px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #dff5e9;
-
-    font-size: 11px;
-}
-
-
-/* =========================
-   LINK ROW
-========================= */
-
-.saved-link-row {
-    display: flex;
-
-    gap: 8px;
-}
-
-.saved-link-row input {
-    flex: 1;
-
-    min-width: 0;
-
-    height: 42px;
-
-    padding: 0 11px;
-
-    border: 1px solid #dce1e7;
-
-    border-radius: 9px;
-
-    outline: none;
-
-    background: #ffffff;
-
-    color: #687180;
-
-    font-size: 11px;
-}
-
-.saved-link-row input:focus {
-    border-color: #3347a8;
-}
-
-.copy-btn {
-    height: 42px;
-
-    padding: 0 16px;
-
-    border-radius: 9px;
-
-    background: #172554;
-
-    color: #ffffff;
-
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-.copy-btn:hover {
-    background: #1e3a8a;
-}
-
-
-/* =========================
-   OPEN LINK
-========================= */
-
-.open-link {
-    display: inline-block;
-
-    margin-top: 10px;
-
-    color: #3347a8;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    text-decoration: none;
-}
-
-.open-link:hover {
-    text-decoration: underline;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>जन्मदिन की शुभकामनाएं - भगवान नरेंद्र मोदी</title>
+  <!-- Google Fonts for crisp Hindi typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at center, #241442 0%, #0d061f 100%);
+      --gold: #f4c042;
+      --glow-color: rgba(255, 179, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-        padding: 12px;
-
-        align-items: flex-start;
-
-        padding-top: 20px;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    .consent-card {
-        padding: 22px;
-
-        border-radius: 18px;
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      border-radius: 28px;
+      padding: 36px 28px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
-    .header h1 {
-        font-size: 26px;
+    /* Top Profile Image */
+    .profile-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 16px;
     }
 
-    .signature-wrapper {
-        height: 210px;
+    .profile-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--gold);
+      box-shadow: 0 0 20px var(--glow-color);
+      transition: transform 0.3s ease;
     }
 
-    .actions {
-        gap: 8px;
+    .profile-wrap:hover img {
+      transform: scale(1.05);
     }
 
-    .clear-btn,
-    .undo-btn,
-    .save-btn {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 430px) {
-
-    .saved-link-row {
-        flex-direction: column;
+    .name-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
     }
 
-    .copy-btn {
-        width: 100%;
+    .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      color: #dfd5ec;
+      margin-bottom: 25px;
+      text-transform: uppercase;
     }
-}
-</style>
+
+    /* Diya Stage */
+    .diya-stage {
+      height: 160px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 25px;
+    }
+
+    /* Flame */
+    .flame-container {
+      position: absolute;
+      bottom: 45px;
+      opacity: 0;
+      transform: scale(0.2);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .flame {
+      width: 26px;
+      height: 60px;
+      background: radial-gradient(circle, #fff 10%, #ffde59 40%, #ff5722 80%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      filter: drop-shadow(0 0 12px #ff9800) drop-shadow(0 0 25px #ff5722);
+    }
+
+    /* Diya Base */
+    .diya-base {
+      position: relative;
+      width: 140px;
+      height: 48px;
+      background: linear-gradient(180deg, #d35400 0%, #8b2500 100%);
+      border-radius: 0 0 100px 100px;
+      box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.4), 0 8px 18px rgba(0, 0, 0, 0.6);
+      border-top: 3px solid #f39c12;
+    }
+
+    .diya-rim {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 16px;
+      background: #e67e22;
+      border-radius: 50%;
+      border: 2px solid #f1c40f;
+    }
+
+    /* Ambient Glow behind Diya */
+    .diya-glow {
+      position: absolute;
+      bottom: 20px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(255, 193, 7, 0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    /* Lit state animations */
+    .diya-stage.lit .flame-container {
+      opacity: 1;
+      transform: scale(1);
+      animation: flicker 1.8s infinite alternate ease-in-out;
+    }
+
+    .diya-stage.lit .diya-glow {
+      opacity: 1;
+      animation: pulseGlow 2.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-1deg); }
+      25% { transform: scale(1.04, 0.96) rotate(1.5deg); }
+      50% { transform: scale(0.97, 1.03) rotate(-1deg); }
+      75% { transform: scale(1.02, 0.98) rotate(1deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(1.35); opacity: 0.85; }
+    }
+
+    /* Interactive Button */
+    .btn-light {
+      background: linear-gradient(45deg, #f39c12, #e74c3c);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-light:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+    }
+
+    .btn-light:active {
+      transform: translateY(1px);
+    }
+
+    .btn-light:disabled {
+      background: #444;
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+
+    /* Celebration Banner */
+    .greeting-message {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 16px;
+      display: none;
+      animation: fadeInUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .greeting-message p {
+      font-size: 1.15rem;
+      color: #ffeaa7;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
-
-
 <body>
 
-<main class="consent-card">
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-        <h1>Consent</h1>
-
-        <p>
-            Please read the statement below and provide your signature.
-        </p>
-
+  <div class="card">
+    <!-- Person Image with Base64 URI -->
+    <div class="profile-wrap">
+      <img src="data:image/jpeg;base64,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" alt="Profile Photo" id="modiImg">
     </div>
 
+    <h2 class="name-title">भगवान नरेंद्र मोदी</h2>
+    <p class="subtitle">Happy Birthday Celebration</p>
 
-    <!-- CONSENT -->
-
-    <div class="consent-text">
-
-        <p>I hereby agree to participate in the team trip mentioned above.</p>
-
-        <p>I understand that I am expected to follow all trip rules, safety guidelines,
-        and instructions shared by the trip Coordinator.</p>
-
-        <p>The total trip budget of ₹5,000 (exclude emergency fund) for 3
-        members (i.e No. 1,2 and 4) covers travel, accommodation, and basic expenses.
-        Budget is not refundable since remaining balance will add in Wallet.</p>
-
+    <!-- Diya Component -->
+    <div class="diya-stage" id="diyaStage">
+      <div class="diya-glow"></div>
+      <div class="flame-container">
+        <div class="flame"></div>
+      </div>
+      <div class="diya-base">
+        <div class="diya-rim"></div>
+      </div>
     </div>
 
+    <!-- Action Button -->
+    <button class="btn-light" id="wishBtn" onclick="lightDiya()">
+      🪔 दिया जलाएं और बधाई दें
+    </button>
 
-    <!-- NAME SELECTION -->
-
-    <div class="name-select-group">
-        <label for="nameSelect">Select your name</label>
-        <select class="name-select" id="nameSelect">
-            <option value="">Select name</option>
-            <option value="Piyush">Piyush</option>
-            <option value="Anmol">Anmol</option>
-            <option value="Ambuj">Ambuj</option>
-            <option value="Pritam">Pritam</option>
-        </select>
+    <!-- Wishes Confirmation Message -->
+    <div class="greeting-message" id="msgBox">
+      <p>✨ आपने भगवान नरेंद्र मोदी को जन्मदिन की बधाई दे दी! 🎉🎂</p>
     </div>
-
-
-    <!-- SIGNATURE LABEL -->
-
-    <div class="signature-label">
-
-        <span class="main-label">
-            Signature
-        </span>
-
-        <span class="hint">
-            Draw inside the box
-        </span>
-
-    </div>
-
-
-    <!-- SIGNATURE PAD -->
-
-    <div
-        class="signature-wrapper"
-        id="signatureWrapper"
-    >
-
-        <canvas id="signatureCanvas"></canvas>
-
-        <div
-            class="placeholder"
-            id="placeholder"
-        >
-            Sign here
-        </div>
-
-        <div class="signature-line"></div>
-
-        <div class="signature-line-text">
-            SIGNATURE
-        </div>
-
-    </div>
-
-
-    <!-- ACTION BUTTONS -->
-
-    <div class="actions">
-
-        <button
-            class="clear-btn"
-            id="clearBtn"
-            type="button"
-        >
-            Clear
-        </button>
-
-        <button
-            class="undo-btn"
-            id="undoBtn"
-            type="button"
-        >
-            Undo
-        </button>
-
-        <button
-            class="save-btn"
-            id="saveBtn"
-            type="button"
-            disabled
-        >
-            Save Signature
-        </button>
-
-    </div>
-
-
-    <!-- AGREEMENT -->
-
-    <label class="agreement">
-
-        <input
-            type="checkbox"
-            id="consentCheckbox"
-        >
-
-        <span>
-            I agree to the above statement and confirm that this
-            signature is provided by me voluntarily.
-        </span>
-
-    </label>
-
-
-    <!-- STATUS -->
-
-    <div
-        class="status"
-        id="status"
-    >
-        Signature required
-    </div>
-
-
-    <!-- SAVED SIGNATURE -->
-
-    <div
-        class="saved-signature-box"
-        id="savedSignatureBox"
-    >
-
-        <div class="saved-title">
-            Signature saved on this device
-        </div>
-
-        <div class="saved-link-row">
-
-            <input
-                type="text"
-                id="signatureLink"
-                readonly
-                placeholder="Signature link"
-            >
-
-            <button
-                class="copy-btn"
-                id="copyLinkBtn"
-                type="button"
-            >
-                Copy
-            </button>
-
-        </div>
-
-        <a
-            href="#"
-            target="_blank"
-            id="openSignatureLink"
-            class="open-link"
-        >
-            Open saved signature ↗
-        </a>
-
-    </div>
-
-</main>
-
-
-<script>
-
-/* ==========================================
-   ELEMENTS
-========================================== */
-
-const canvas =
-    document.getElementById("signatureCanvas");
-
-const ctx =
-    canvas.getContext("2d");
-
-const wrapper =
-    document.getElementById("signatureWrapper");
-
-const placeholder =
-    document.getElementById("placeholder");
-
-const clearBtn =
-    document.getElementById("clearBtn");
-
-const undoBtn =
-    document.getElementById("undoBtn");
-
-const saveBtn =
-    document.getElementById("saveBtn");
-
-const nameSelect =
-    document.getElementById("nameSelect");
-
-const checkbox =
-    document.getElementById("consentCheckbox");
-
-const status =
-    document.getElementById("status");
-
-const savedSignatureBox =
-    document.getElementById("savedSignatureBox");
-
-const signatureLink =
-    document.getElementById("signatureLink");
-
-const openSignatureLink =
-    document.getElementById("openSignatureLink");
-
-const copyLinkBtn =
-    document.getElementById("copyLinkBtn");
-
-
-/* ==========================================
-   VARIABLES
-========================================== */
-
-let drawing = false;
-
-let hasSignature = false;
-
-let history = [];
-
-let currentStroke = [];
-
-
-/* ==========================================
-   CANVAS SETUP
-========================================== */
-
-function resizeCanvas() {
-
-    const rect =
-        canvas.getBoundingClientRect();
-
-    const oldImage =
-        hasSignature
-            ? canvas.toDataURL("image/png")
-            : null;
-
-    const dpr =
-        window.devicePixelRatio || 1;
-
-    canvas.width =
-        rect.width * dpr;
-
-    canvas.height =
-        rect.height * dpr;
-
-    ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-    );
-
-    ctx.lineCap = "round";
-
-    ctx.lineJoin = "round";
-
-    ctx.lineWidth = 2.2;
-
-    ctx.strokeStyle = "#172033";
-
-
-    if (oldImage) {
-
-        const img =
-            new Image();
-
-        img.onload = () => {
-
-            ctx.drawImage(
-                img,
-                0,
-                0,
-                rect.width,
-                rect.height
-            );
-
-        };
-
-        img.src = oldImage;
+  </div>
+
+  <script>
+    function triggerConfetti() {
+      const count = 200;
+      const defaults = { origin: { y: 0.7 } };
+
+      function fire(particleRatio, opts) {
+        confetti(Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio)
+        }));
+      }
+
+      fire(0.25, { spread: 26, startVelocity: 55 });
+      fire(0.2, { spread: 60 });
+      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+      fire(0.1, { spread: 120, startVelocity: 45 });
     }
 
-    else {
+    function lightDiya() {
+      const diya = document.getElementById('diyaStage');
+      const msg = document.getElementById('msgBox');
+      const btn = document.getElementById('wishBtn');
 
-        redraw();
+      // Light up the Diya
+      diya.classList.add('lit');
 
+      // Display the Hindi confirmation message
+      msg.style.display = 'block';
+
+      // Launch Confetti celebration
+      triggerConfetti();
+
+      // Update button state
+      btn.innerText = '✨ बधाई भेजी जा चुकी है';
+      btn.disabled = true;
     }
-}
-
-
-resizeCanvas();
-
-window.addEventListener(
-    "resize",
-    resizeCanvas
-);
-
-
-/* ==========================================
-   GET POINTER POSITION
-========================================== */
-
-function getPosition(event) {
-
-    const rect =
-        canvas.getBoundingClientRect();
-
-    return {
-
-        x:
-            event.clientX -
-            rect.left,
-
-        y:
-            event.clientY -
-            rect.top
-    };
-}
-
-
-/* ==========================================
-   POINTER DOWN
-========================================== */
-
-canvas.addEventListener(
-    "pointerdown",
-    event => {
-
-        event.preventDefault();
-
-        drawing = true;
-
-        canvas.setPointerCapture(
-            event.pointerId
-        );
-
-        currentStroke = [];
-
-        const point =
-            getPosition(event);
-
-        currentStroke.push(point);
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            point.x,
-            point.y
-        );
-
-        wrapper.classList.add(
-            "active"
-        );
-
-        placeholder.style.opacity =
-            "0";
-
-        hasSignature = true;
-
-        updateState();
-    }
-);
-
-
-/* ==========================================
-   POINTER MOVE
-========================================== */
-
-canvas.addEventListener(
-    "pointermove",
-    event => {
-
-        if (!drawing) return;
-
-        event.preventDefault();
-
-        const point =
-            getPosition(event);
-
-        currentStroke.push(point);
-
-        ctx.lineTo(
-            point.x,
-            point.y
-        );
-
-        ctx.stroke();
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            point.x,
-            point.y
-        );
-    }
-);
-
-
-/* ==========================================
-   STOP DRAWING
-========================================== */
-
-function stopDrawing() {
-
-    if (!drawing) return;
-
-    drawing = false;
-
-    wrapper.classList.remove(
-        "active"
-    );
-
-    if (currentStroke.length > 0) {
-
-        history.push(
-            [...currentStroke]
-        );
-
-    }
-
-    currentStroke = [];
-
-    redraw();
-
-    updateState();
-}
-
-
-canvas.addEventListener(
-    "pointerup",
-    stopDrawing
-);
-
-canvas.addEventListener(
-    "pointercancel",
-    stopDrawing
-);
-
-
-/* ==========================================
-   REDRAW
-========================================== */
-
-function redraw() {
-
-    const rect =
-        canvas.getBoundingClientRect();
-
-    ctx.clearRect(
-        0,
-        0,
-        rect.width,
-        rect.height
-    );
-
-    ctx.lineWidth = 2.2;
-
-    ctx.lineCap = "round";
-
-    ctx.lineJoin = "round";
-
-    ctx.strokeStyle =
-        "#172033";
-
-
-    history.forEach(
-        stroke => {
-
-            if (!stroke.length) {
-                return;
-            }
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                stroke[0].x,
-                stroke[0].y
-            );
-
-            for (
-                let i = 1;
-                i < stroke.length;
-                i++
-            ) {
-
-                ctx.lineTo(
-                    stroke[i].x,
-                    stroke[i].y
-                );
-
-            }
-
-            ctx.stroke();
-        }
-    );
-}
-
-
-/* ==========================================
-   CLEAR
-========================================== */
-
-clearBtn.addEventListener(
-    "click",
-    () => {
-
-        history = [];
-
-        currentStroke = [];
-
-        hasSignature = false;
-
-        const rect =
-            canvas.getBoundingClientRect();
-
-        ctx.clearRect(
-            0,
-            0,
-            rect.width,
-            rect.height
-        );
-
-        placeholder.style.opacity =
-            "1";
-
-        savedSignatureBox.style.display =
-            "none";
-
-        localStorage.removeItem(
-            "savedConsentSignature"
-        );
-
-        localStorage.removeItem(
-            "savedConsentName"
-        );
-
-        nameSelect.value = "";
-
-        updateState();
-    }
-);
-
-
-/* ==========================================
-   UNDO
-========================================== */
-
-undoBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!history.length) {
-            return;
-        }
-
-        history.pop();
-
-        hasSignature =
-            history.length > 0;
-
-        redraw();
-
-        placeholder.style.opacity =
-            hasSignature
-                ? "0"
-                : "1";
-
-        updateState();
-    }
-);
-
-
-/* ==========================================
-   CHECKBOX
-========================================== */
-
-nameSelect.addEventListener(
-    "change",
-    updateState
-);
-
-checkbox.addEventListener(
-    "change",
-    updateState
-);
-
-
-/* ==========================================
-   UPDATE STATE
-========================================== */
-
-function updateState() {
-
-    const valid =
-        nameSelect.value &&
-        hasSignature &&
-        checkbox.checked;
-
-    saveBtn.disabled =
-        !valid;
-
-
-    if (!nameSelect.value) {
-
-        status.textContent =
-            "Please select your name";
-
-        status.className =
-            "status";
-
-    }
-
-    else if (!hasSignature) {
-
-        status.textContent =
-            "Signature required";
-
-        status.className =
-            "status";
-
-    }
-
-    else if (!checkbox.checked) {
-
-        status.textContent =
-            "Please confirm your consent";
-
-        status.className =
-            "status";
-
-    }
-
-    else {
-
-        status.textContent =
-            "Ready to save";
-
-        status.className =
-            "status success";
-
-    }
-}
-
-
-/* ==========================================
-   SAVE SIGNATURE
-========================================== */
-
-saveBtn.addEventListener(
-    "click",
-    () => {
-
-        if (
-            !nameSelect.value ||
-            !hasSignature ||
-            !checkbox.checked
-        ) {
-            return;
-        }
-
-
-        /* Convert canvas to PNG */
-
-        const image =
-            canvas.toDataURL(
-                "image/png"
-            );
-
-
-        /* Save inside browser/device */
-
-        localStorage.setItem(
-            "savedConsentSignature",
-            image
-        );
-
-        localStorage.setItem(
-            "savedConsentName",
-            nameSelect.value
-        );
-
-
-        /* Put the data URL into link field */
-
-        signatureLink.value =
-            image;
-
-        openSignatureLink.href =
-            image;
-
-
-        /* Show saved section */
-
-        savedSignatureBox.style.display =
-            "block";
-
-
-        /* Download PNG */
-
-        const download =
-            document.createElement("a");
-
-        download.href =
-            image;
-
-        download.download =
-            "consent-signature-" +
-            Date.now() +
-            ".png";
-
-        document.body.appendChild(
-            download
-        );
-
-        download.click();
-
-        document.body.removeChild(
-            download
-        );
-
-
-        /* Update status */
-
-        status.textContent =
-            "Signature saved successfully";
-
-        status.className =
-            "status success";
-
-
-        /* Scroll to link */
-
-        setTimeout(() => {
-
-            savedSignatureBox.scrollIntoView({
-                behavior: "smooth",
-                block: "nearest"
-            });
-
-        }, 100);
-
-    }
-);
-
-
-/* ==========================================
-   COPY LINK
-========================================== */
-
-copyLinkBtn.addEventListener(
-    "click",
-    async () => {
-
-        const value =
-            signatureLink.value;
-
-        if (!value) return;
-
-
-        try {
-
-            await navigator.clipboard.writeText(
-                value
-            );
-
-            copyLinkBtn.textContent =
-                "Copied ✓";
-
-            setTimeout(() => {
-
-                copyLinkBtn.textContent =
-                    "Copy";
-
-            }, 1600);
-
-        }
-
-        catch (error) {
-
-            signatureLink.select();
-
-            document.execCommand(
-                "copy"
-            );
-
-            copyLinkBtn.textContent =
-                "Copied ✓";
-
-            setTimeout(() => {
-
-                copyLinkBtn.textContent =
-                    "Copy";
-
-            }, 1600);
-        }
-    }
-);
-
-
-/* ==========================================
-   LOAD SAVED SIGNATURE
-========================================== */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        const saved =
-            localStorage.getItem(
-                "savedConsentSignature"
-            );
-
-        const savedName =
-            localStorage.getItem(
-                "savedConsentName"
-            );
-
-        if (savedName) {
-            nameSelect.value = savedName;
-        }
-
-        if (!saved) return;
-
-
-        signatureLink.value =
-            saved;
-
-        openSignatureLink.href =
-            saved;
-
-        savedSignatureBox.style.display =
-            "block";
-    }
-);
-
-
-/* ==========================================
-   INITIAL STATE
-========================================== */
-
-updateState();
-
-</script>
-
+  </script>
 </body>
 </html>
-

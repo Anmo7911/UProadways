@@ -1,324 +1,1080 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>जन्मदिन की शुभकामनाएं - भगवान नरेंद्र मोदी</title>
-  <!-- Google Fonts for crisp typography -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAINT G | Luxury Women's Clothing & Leatherwear</title>
+
+  <!-- Typography & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Canvas Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#121212',
+              card: '#FBFBFB',
+              border: '#E8E8E8',
+              muted: '#707070',
+              accent: '#C5A880'
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
 
   <style>
-    :root {
-      --bg-gradient: radial-gradient(circle at center, #241442 0%, #0d061f 100%);
-      --gold: #f4c042;
-      --glow-color: rgba(255, 179, 0, 0.6);
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background: var(--bg-gradient);
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 215, 0, 0.25);
-      border-radius: 28px;
-      padding: 36px 28px;
-      width: 100%;
-      max-width: 440px;
-      text-align: center;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-
-    /* Top Profile Image */
-    .profile-wrap {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 16px;
-    }
-
-    .profile-wrap img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--gold);
-      box-shadow: 0 0 20px var(--glow-color);
-      transition: transform 0.3s ease;
-    }
-
-    .profile-wrap:hover img {
-      transform: scale(1.05);
-    }
-
-    .name-title {
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .subtitle {
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      color: #dfd5ec;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-    }
-
-    /* Diya Stage */
-    .diya-stage {
-      height: 160px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      margin-bottom: 25px;
-    }
-
-    /* Flame */
-    .flame-container {
-      position: absolute;
-      bottom: 45px;
-      opacity: 0;
-      transform: scale(0.2);
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      pointer-events: none;
-    }
-
-    .flame {
-      width: 26px;
-      height: 60px;
-      background: radial-gradient(circle, #fff 10%, #ffde59 40%, #ff5722 80%);
-      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-      filter: drop-shadow(0 0 12px #ff9800) drop-shadow(0 0 25px #ff5722);
-    }
-
-    /* Diya Base */
-    .diya-base {
-      position: relative;
-      width: 140px;
-      height: 48px;
-      background: linear-gradient(180deg, #d35400 0%, #8b2500 100%);
-      border-radius: 0 0 100px 100px;
-      box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.4), 0 8px 18px rgba(0, 0, 0, 0.6);
-      border-top: 3px solid #f39c12;
-    }
-
-    .diya-rim {
-      position: absolute;
-      top: -9px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 16px;
-      background: #e67e22;
-      border-radius: 50%;
-      border: 2px solid #f1c40f;
-    }
-
-    /* Ambient Glow behind Diya */
-    .diya-glow {
-      position: absolute;
-      bottom: 20px;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(255, 193, 7, 0.4) 0%, transparent 70%);
-      border-radius: 50%;
-      opacity: 0;
-      transition: opacity 0.8s ease;
-      pointer-events: none;
-    }
-
-    /* Lit state animations */
-    .diya-stage.lit .flame-container {
-      opacity: 1;
-      transform: scale(1);
-      animation: flicker 1.8s infinite alternate ease-in-out;
-    }
-
-    .diya-stage.lit .diya-glow {
-      opacity: 1;
-      animation: pulseGlow 2.5s infinite alternate ease-in-out;
-    }
-
-    @keyframes flicker {
-      0% { transform: scale(1) rotate(-1deg); }
-      25% { transform: scale(1.04, 0.96) rotate(1.5deg); }
-      50% { transform: scale(0.97, 1.03) rotate(-1deg); }
-      75% { transform: scale(1.02, 0.98) rotate(1deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(1); opacity: 0.5; }
-      100% { transform: scale(1.35); opacity: 0.85; }
-    }
-
-    /* Interactive Button */
-    .btn-light {
-      background: linear-gradient(45deg, #f39c12, #e74c3c);
-      color: #fff;
-      font-size: 1.05rem;
-      font-weight: 600;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-      transition: all 0.25s ease;
+    .animate-marquee {
       display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      white-space: nowrap;
+      animation: marquee 24s linear infinite;
     }
-
-    .btn-light:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+    .animate-marquee:hover {
+      animation-play-state: paused;
     }
-
-    .btn-light:active {
-      transform: translateY(1px);
-    }
-
-    .btn-light:disabled {
-      background: #444;
-      cursor: not-allowed;
-      box-shadow: none;
-      opacity: 0.6;
-    }
-
-    /* Celebration Banner */
-    .greeting-message {
-      margin-top: 24px;
-      padding: 16px 20px;
-      background: rgba(255, 215, 0, 0.12);
-      border: 1px solid rgba(255, 215, 0, 0.35);
-      border-radius: 16px;
+    .no-scrollbar::-webkit-scrollbar {
       display: none;
-      animation: fadeInUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
-
-    .greeting-message p {
-      font-size: 1.15rem;
-      color: #ffeaa7;
-      font-weight: 600;
-      line-height: 1.6;
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .carousel-slide {
+      transition: opacity 0.7s ease-in-out;
     }
   </style>
 </head>
-<body>
+<body class="bg-white text-brand-black font-sans antialiased selection:bg-black selection:text-white">
 
-  <!-- Audio Element -->
-  <audio id="celebrationAudio" preload="auto">
-    <source src="https://mp3tourl.com/audio/1789653276834-a8cec5c7-c800-4322-9f2b-056fad3cf3f3.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="card">
-    <!-- Profile Image -->
-    <div class="profile-wrap">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5lwwFiATsaDq40n1iMny8lRMvCVU35kfD3vglJjS9BGeO9BeLgOlJL09n&s=10" alt="Profile Photo" id="modiImg">
-    </div>
-
-    <h2 class="name-title">भगवान नरेंद्र मोदी</h2>
-    <p class="subtitle">Happy Birthday Celebration</p>
-
-    <!-- Diya Stage -->
-    <div class="diya-stage" id="diyaStage">
-      <div class="diya-glow"></div>
-      <div class="flame-container">
-        <div class="flame"></div>
-      </div>
-      <div class="diya-base">
-        <div class="diya-rim"></div>
-      </div>
-    </div>
-
-    <!-- Action Button -->
-    <button class="btn-light" id="wishBtn" onclick="lightDiya()">
-      🪔 दिया जलाएं और बधाई दें
-    </button>
-
-    <!-- Greeting Message Box -->
-    <div class="greeting-message" id="msgBox">
-      <p>✨ आपने भगवान नरेंद्र मोदी को जन्मदिन की बधाई दे दी! 🎉🎂</p>
+  <!-- 1. TOP ANNOUNCEMENT TICKER -->
+  <div class="bg-brand-black text-white py-2 overflow-hidden text-[11px] font-medium tracking-widest uppercase border-b border-neutral-800">
+    <div class="animate-marquee flex gap-12 items-center">
+      <span>✦ FLAT 10% OFF ON YOUR FIRST ORDER | CODE: <strong>SAINT10</strong></span>
+      <span>✦ COMPLIMENTARY EXPRESS AIR DELIVERY ACROSS INDIA</span>
+      <span>✦ 7-DAY HASSLE-FREE DOORSTEP EXCHANGE</span>
+      <span>✦ CASH ON DELIVERY AVAILABLE NATIONWIDE</span>
+      <span>✦ FLAT 10% OFF ON YOUR FIRST ORDER | CODE: <strong>SAINT10</strong></span>
+      <span>✦ COMPLIMENTARY EXPRESS AIR DELIVERY ACROSS INDIA</span>
+      <span>✦ 7-DAY HASSLE-FREE DOORSTEP EXCHANGE</span>
+      <span>✦ CASH ON DELIVERY AVAILABLE NATIONWIDE</span>
     </div>
   </div>
 
+  <!-- 2. STICKY HEADER -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Left: Search & Filter Drawer Toggle -->
+        <div class="flex items-center gap-4">
+          <button onclick="toggleFilterDrawer(true)" class="p-2 hover:opacity-70 transition flex items-center gap-2 text-xs tracking-wider uppercase font-semibold">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Filters</span>
+          </button>
+          <div class="relative hidden md:block w-48 lg:w-64">
+            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"></i>
+            <input type="text" id="searchInput" placeholder="Search dresses, jackets..." oninput="handleSearch(this.value)" class="w-full bg-neutral-100/70 text-xs pl-9 pr-3 py-2 border-b border-transparent focus:border-black focus:outline-none placeholder:text-neutral-400">
+          </div>
+        </div>
+
+        <!-- Center: Saint G Wordmark Brand -->
+        <div class="text-center">
+          <a href="#" onclick="filterCategory('All'); return false;" class="inline-block">
+            <h1 class="font-serif text-2xl sm:text-3xl tracking-[0.25em] font-bold text-black uppercase">SAINT G</h1>
+            <p class="text-[9px] tracking-[0.3em] uppercase text-neutral-500 font-medium -mt-1">WOMEN'S APPAREL • NEW DELHI</p>
+          </a>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3 sm:gap-5">
+          <button onclick="openAuthModal()" class="p-2 hover:opacity-60 transition text-neutral-700" title="Account">
+            <i data-lucide="user" class="w-5 h-5"></i>
+          </button>
+          <button onclick="openWishlistToast()" class="p-2 hover:opacity-60 transition text-neutral-700 relative" title="Wishlist">
+            <i data-lucide="heart" class="w-5 h-5"></i>
+            <span id="wishlistCount" class="absolute top-1 right-1 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+          </button>
+          <button onclick="toggleCart(true)" class="p-2 hover:opacity-60 transition text-neutral-700 relative" title="Shopping Bag">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span id="cartCount" class="absolute top-1 right-1 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Categories Navigation -->
+      <nav class="hidden md:flex justify-center items-center gap-8 py-2.5 border-t border-neutral-100 text-[11px] uppercase tracking-widest font-medium text-neutral-600">
+        <button onclick="filterCategory('All')" class="hover:text-black transition">All Apparel</button>
+        <button onclick="filterCategory('Dresses')" class="hover:text-black transition">Dresses</button>
+        <button onclick="filterCategory('Shirts & Tops')" class="hover:text-black transition">Shirts & Tops</button>
+        <button onclick="filterCategory('Trousers & Co-ords')" class="hover:text-black transition">Trousers & Co-ords</button>
+        <button onclick="filterCategory('Leather Apparel')" class="hover:text-black transition">Leather Apparel</button>
+        <button onclick="filterCategory('Sale')" class="text-rose-600 font-semibold hover:text-rose-700 transition">Sale: Up to 40% Off</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 3. INTERACTIVE HERO CAROUSEL -->
+  <section class="relative bg-neutral-900 text-white h-[72vh] min-h-[500px] overflow-hidden select-none">
+    
+    <!-- Carousel Slides -->
+    <div id="carouselContainer" class="relative w-full h-full">
+      <!-- Slide 1 -->
+      <div class="carousel-slide absolute inset-0 opacity-100 flex items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1800&auto=format&fit=crop" alt="Runway Edition" class="absolute inset-0 w-full h-full object-cover object-center opacity-70">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40"></div>
+        <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span class="text-xs uppercase tracking-[0.4em] font-semibold text-neutral-300 block mb-3">AUTUMN / WINTER 2026 EDITION</span>
+          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl tracking-wide uppercase font-medium mb-6 leading-tight">Architectural Elegance</h2>
+          <p class="text-sm md:text-base text-neutral-200 font-light mb-8 max-w-xl mx-auto">Handcrafted Italian lambskin leather and tailored eveningwear engineered for the modern woman.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#catalog" onclick="filterCategory('All')" class="px-8 py-3.5 bg-white text-black text-xs font-semibold uppercase tracking-widest hover:bg-neutral-200 transition">Shop Collection</a>
+            <button onclick="filterCategory('Leather Apparel')" class="px-8 py-3.5 bg-transparent border border-white text-white text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition">Leather Silhouettes</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-slide absolute inset-0 opacity-0 pointer-events-none flex items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1800&auto=format&fit=crop" alt="Silk & Linen Dresses" class="absolute inset-0 w-full h-full object-cover object-center opacity-65">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40"></div>
+        <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span class="text-xs uppercase tracking-[0.4em] font-semibold text-neutral-300 block mb-3">RESORTWEAR & EVENING</span>
+          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl tracking-wide uppercase font-medium mb-6 leading-tight">Mulberry Silk & Linen</h2>
+          <p class="text-sm md:text-base text-neutral-200 font-light mb-8 max-w-xl mx-auto">Flowing fluid silhouettes designed for unconstrained freedom and effortless sophistication.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#catalog" onclick="filterCategory('Dresses')" class="px-8 py-3.5 bg-white text-black text-xs font-semibold uppercase tracking-widest hover:bg-neutral-200 transition">Explore Dresses</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-slide absolute inset-0 opacity-0 pointer-events-none flex items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1800&auto=format&fit=crop" alt="Tailored Co-ords" class="absolute inset-0 w-full h-full object-cover object-center opacity-70">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40"></div>
+        <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span class="text-xs uppercase tracking-[0.4em] font-semibold text-neutral-300 block mb-3">HIGH-SUMMER PRIVATE SALE</span>
+          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl tracking-wide uppercase font-medium mb-6 leading-tight">Seasonal Privileges</h2>
+          <p class="text-sm md:text-base text-neutral-200 font-light mb-8 max-w-xl mx-auto">Enjoy up to 40% privilege pricing across our limited batch shirts, trousers, and trench jackets.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#catalog" onclick="filterCategory('Sale')" class="px-8 py-3.5 bg-rose-600 text-white text-xs font-semibold uppercase tracking-widest hover:bg-rose-700 transition">Shop Privé Sale</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Arrow Buttons -->
+    <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/40 hover:bg-black/80 text-white flex items-center justify-center transition backdrop-blur-sm" title="Previous Slide">
+      <i data-lucide="chevron-left" class="w-6 h-6"></i>
+    </button>
+    <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/40 hover:bg-black/80 text-white flex items-center justify-center transition backdrop-blur-sm" title="Next Slide">
+      <i data-lucide="chevron-right" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Carousel Dots -->
+    <div class="absolute bottom-6 inset-x-0 z-20 flex justify-center items-center gap-2.5">
+      <button onclick="goToSlide(0)" class="carousel-dot w-8 h-1 bg-white transition-all duration-300"></button>
+      <button onclick="goToSlide(1)" class="carousel-dot w-2 h-1 bg-white/40 hover:bg-white/70 transition-all duration-300"></button>
+      <button onclick="goToSlide(2)" class="carousel-dot w-2 h-1 bg-white/40 hover:bg-white/70 transition-all duration-300"></button>
+    </div>
+  </section>
+
+  <!-- 4. PRODUCT CATALOG -->
+  <main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    
+    <!-- Meta Bar -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-brand-border gap-4">
+      <div>
+        <p class="text-xs text-neutral-500 uppercase tracking-widest">Women's Collection / <span id="currentCatLabel" class="text-black font-semibold">All Items</span></p>
+        <h3 id="categoryHeading" class="font-serif text-xl sm:text-2xl font-bold uppercase tracking-wider mt-1">All Garments (<span id="productCounter">0</span>)</h3>
+      </div>
+      <div class="flex items-center gap-3">
+        <label for="sortSelect" class="text-xs uppercase tracking-wider text-neutral-500">Sort By:</label>
+        <select id="sortSelect" onchange="handleSort(this.value)" class="text-xs font-medium border border-neutral-300 px-3 py-2 focus:outline-none focus:border-black bg-white uppercase">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="discount">Biggest Discount</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-12 mt-8">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- 5. FILTER DRAWER -->
+  <div id="filterDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300">
+    <div id="filterOverlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 pointer-events-none" onclick="toggleFilterDrawer(false)"></div>
+    <div id="filterPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white p-6 overflow-y-auto no-scrollbar shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-neutral-200">
+          <h4 class="font-serif text-lg font-bold tracking-widest uppercase">Filter Garments</h4>
+          <button onclick="toggleFilterDrawer(false)" class="p-2 hover:opacity-50">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Categories -->
+        <div class="py-6 border-b border-neutral-100">
+          <h5 class="text-xs font-bold uppercase tracking-wider mb-3">Garment Category</h5>
+          <div class="space-y-2 text-xs">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="catFilter" value="All" checked onchange="filterCategory('All')" class="accent-black">
+              <span>All Styles</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="catFilter" value="Dresses" onchange="filterCategory('Dresses')" class="accent-black">
+              <span>Dresses (Midi & Maxi)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="catFilter" value="Shirts & Tops" onchange="filterCategory('Shirts & Tops')" class="accent-black">
+              <span>Shirts & Embroidered Tops</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="catFilter" value="Trousers & Co-ords" onchange="filterCategory('Trousers & Co-ords')" class="accent-black">
+              <span>Structured Trousers & Co-ords</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="catFilter" value="Leather Apparel" onchange="filterCategory('Leather Apparel')" class="accent-black">
+              <span>Handcrafted Leather Jackets</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Sizes -->
+        <div class="py-6 border-b border-neutral-100">
+          <h5 class="text-xs font-bold uppercase tracking-wider mb-3">Filter by Size</h5>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <button onclick="filterBySize('XS')" class="w-10 h-10 border border-neutral-300 hover:border-black font-medium transition">XS</button>
+            <button onclick="filterBySize('S')" class="w-10 h-10 border border-neutral-300 hover:border-black font-medium transition">S</button>
+            <button onclick="filterBySize('M')" class="w-10 h-10 border border-neutral-300 hover:border-black font-medium transition">M</button>
+            <button onclick="filterBySize('L')" class="w-10 h-10 border border-neutral-300 hover:border-black font-medium transition">L</button>
+            <button onclick="filterBySize('XL')" class="w-10 h-10 border border-neutral-300 hover:border-black font-medium transition">XL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6">
+        <button onclick="resetFilters()" class="w-full py-3 bg-neutral-100 text-xs font-semibold uppercase tracking-widest hover:bg-neutral-200 transition mb-2">
+          Reset All Filters
+        </button>
+        <button onclick="toggleFilterDrawer(false)" class="w-full py-3 bg-black text-white text-xs font-semibold uppercase tracking-widest hover:bg-neutral-800 transition">
+          View Results
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SLIDE-OUT CART -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300">
+    <div id="cartOverlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 pointer-events-none" onclick="toggleCart(false)"></div>
+    <div id="cartPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white p-6 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto">
+      
+      <!-- Cart Header & Free Delivery Meter -->
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-neutral-200">
+          <h4 class="font-serif text-lg font-bold tracking-widest uppercase">Shopping Bag (<span id="cartDrawerCount">0</span>)</h4>
+          <button onclick="toggleCart(false)" class="p-2 hover:opacity-50">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div class="bg-neutral-100 p-3 mt-3 text-xs">
+          <p id="freeShippingText" class="font-medium text-neutral-800 mb-1.5">Add ₹10,000.00 to unlock FREE EXPRESS SHIPPING</p>
+          <div class="w-full bg-neutral-300 h-1.5 rounded-full overflow-hidden">
+            <div id="freeShippingBar" class="bg-black h-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Cart Items Container -->
+        <div id="cartItemsList" class="divide-y divide-neutral-100 max-h-[46vh] overflow-y-auto no-scrollbar mt-4 pr-1">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Cart Totals & Checkout -->
+      <div class="border-t border-neutral-200 pt-4 bg-white">
+        <div class="flex gap-2 mb-3">
+          <input type="text" id="couponInput" placeholder="Try code: SAINT10" class="uppercase text-xs border border-neutral-300 px-3 py-2 flex-grow focus:outline-none focus:border-black">
+          <button onclick="applyCoupon()" class="bg-neutral-900 text-white text-xs font-semibold px-4 py-2 uppercase hover:bg-black transition">Apply</button>
+        </div>
+        <p id="couponSuccessMsg" class="text-[11px] text-emerald-600 font-semibold mb-3 hidden"></p>
+
+        <div class="space-y-1.5 text-xs text-neutral-600 mb-4">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span id="cartSubtotal" class="font-medium text-black">₹0.00</span>
+          </div>
+          <div class="flex justify-between" id="discountRow" style="display: none;">
+            <span class="text-emerald-700">Privilege Coupon (10%)</span>
+            <span id="cartDiscount" class="text-emerald-700 font-medium">-₹0.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Express Courier</span>
+            <span id="cartShipping" class="font-medium text-black">Calculated</span>
+          </div>
+          <div class="flex justify-between text-sm font-bold text-black border-t border-neutral-200 pt-2 mt-2">
+            <span>Estimated Total</span>
+            <span id="cartTotal">₹0.00</span>
+          </div>
+        </div>
+
+        <button onclick="openCheckoutModal()" class="w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-neutral-800 transition flex items-center justify-center gap-2 shadow-lg">
+          <i data-lucide="lock" class="w-4 h-4"></i>
+          <span>Proceed To Checkout</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. QUICK VIEW MODAL WITH PINCODE CHECK -->
+  <div id="quickViewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60" onclick="closeQuickView()"></div>
+    <div class="relative bg-white w-full max-w-3xl overflow-hidden shadow-2xl z-10 grid grid-cols-1 md:grid-cols-2">
+      <button onclick="closeQuickView()" class="absolute right-4 top-4 z-20 bg-white/80 p-2 rounded-full hover:bg-white transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="h-72 md:h-[480px] bg-neutral-100 relative">
+        <img id="modalImg" src="" alt="" class="w-full h-full object-cover">
+      </div>
+
+      <div class="p-6 md:p-8 flex flex-col justify-between overflow-y-auto max-h-[480px] no-scrollbar">
+        <div>
+          <span id="modalCategory" class="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold block mb-1">DRESSES</span>
+          <h3 id="modalTitle" class="font-serif text-xl font-bold uppercase text-black mb-2 leading-snug">Product Title</h3>
+          
+          <div class="flex items-baseline gap-3 mb-4">
+            <span id="modalPrice" class="text-base font-bold text-black">₹0.00</span>
+            <span id="modalOldPrice" class="text-xs text-neutral-400 line-through">₹0.00</span>
+            <span id="modalDiscountTag" class="text-[11px] font-semibold text-rose-600 bg-rose-50 px-2 py-0.5">SAVE 20%</span>
+          </div>
+
+          <p id="modalDesc" class="text-xs text-neutral-600 leading-relaxed mb-6 font-light">
+            Luxury crafted garment with artisan finishing.
+          </p>
+
+          <div class="mb-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-black block mb-2">Select Size</span>
+            <div class="flex gap-2" id="modalSizeContainer">
+              <!-- Sizes injected -->
+            </div>
+          </div>
+
+          <div class="bg-neutral-50 p-3 border border-neutral-200 mb-6">
+            <label class="text-[10px] uppercase font-bold tracking-wider text-neutral-700 block mb-1">Check Doorstep Delivery</label>
+            <div class="flex gap-2">
+              <input type="text" id="pincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode" class="text-xs border border-neutral-300 px-2.5 py-1.5 w-full focus:outline-none focus:border-black">
+              <button onclick="checkPincode()" class="bg-neutral-900 text-white text-[11px] uppercase font-semibold px-3 py-1.5 hover:bg-black transition">Check</button>
+            </div>
+            <p id="pincodeStatus" class="text-[10px] mt-1 text-neutral-500">Free delivery to metro locations within 48-72 hours.</p>
+          </div>
+        </div>
+
+        <button id="modalAddBtn" class="w-full py-3.5 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-neutral-800 transition">
+          Add To Bag
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CHECKOUT MODAL -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60" onclick="closeCheckoutModal()"></div>
+    <div class="relative bg-white w-full max-w-xl p-6 md:p-8 shadow-2xl z-10 max-h-[90vh] overflow-y-auto no-scrollbar">
+      <div class="flex justify-between items-center pb-4 border-b border-neutral-200 mb-5">
+        <div>
+          <h4 class="font-serif text-lg font-bold uppercase tracking-wider">Fast Checkout</h4>
+          <p class="text-xs text-neutral-500">Express dispatch via BlueDart & Delhivery Air</p>
+        </div>
+        <button onclick="closeCheckoutModal()" class="p-2 hover:opacity-50">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="orderForm" onsubmit="handlePlaceOrder(event)" class="space-y-4">
+        <div>
+          <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">Full Name</label>
+          <input type="text" required placeholder="e.g. Ananya Mehra" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">Mobile Number</label>
+            <input type="tel" required placeholder="+91 98765 43210" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+          </div>
+          <div>
+            <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">Email Address</label>
+            <input type="email" required placeholder="ananya@example.com" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">Delivery Address</label>
+          <input type="text" required placeholder="Apartment / Suite, Landmark, Sector" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">City</label>
+            <input type="text" required placeholder="New Delhi" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+          </div>
+          <div>
+            <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">State</label>
+            <input type="text" required placeholder="Delhi" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+          </div>
+          <div>
+            <label class="text-xs uppercase font-semibold text-neutral-700 block mb-1">Pincode</label>
+            <input type="text" maxlength="6" required placeholder="110001" class="w-full border border-neutral-300 text-xs px-3 py-2.5 focus:outline-none focus:border-black">
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <label class="text-xs uppercase font-bold text-neutral-800 block mb-2">Select Payment Method</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="border border-black bg-neutral-50 p-3 cursor-pointer flex flex-col justify-between">
+              <div class="flex items-center gap-2">
+                <input type="radio" name="paymentOption" value="UPI" checked class="accent-black">
+                <span class="text-xs font-bold uppercase">UPI / Cards</span>
+              </div>
+              <span class="text-[10px] text-neutral-500 mt-1">Instant via Razorpay</span>
+            </label>
+            <label class="border border-neutral-200 p-3 cursor-pointer flex flex-col justify-between hover:border-black">
+              <div class="flex items-center gap-2">
+                <input type="radio" name="paymentOption" value="COD" class="accent-black">
+                <span class="text-xs font-bold uppercase">Cash On Delivery</span>
+              </div>
+              <span class="text-[10px] text-neutral-500 mt-1">Verified OTP upon delivery</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="border-t border-neutral-200 pt-4 mt-6">
+          <button type="submit" class="w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-neutral-800 transition">
+            Confirm & Place Order (<span id="checkoutFinalAmount">₹0.00</span>)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 9. ORDER CONFIRMATION MODAL -->
+  <div id="orderSuccessModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative bg-white w-full max-w-lg p-6 md:p-8 shadow-2xl z-10 text-center">
+      <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-serif text-2xl font-bold uppercase tracking-wider mb-2">Order Confirmed</h3>
+      <p class="text-xs text-neutral-600 mb-4">Your order is received and forwarded to our tailoring atelier.</p>
+      
+      <div class="bg-neutral-50 border border-neutral-200 p-4 text-left text-xs mb-6 space-y-1.5">
+        <div class="flex justify-between font-semibold">
+          <span>Order Number:</span>
+          <span id="confirmedOrderId" class="font-mono text-black font-bold">#SG-2026-9042</span>
+        </div>
+        <div class="flex justify-between">
+          <span>AWB Consignment:</span>
+          <span class="font-mono text-neutral-700 font-medium">BLUEDART-849204928</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Courier Partner:</span>
+          <span class="font-medium text-neutral-800">BlueDart Express Air</span>
+        </div>
+      </div>
+
+      <button onclick="closeOrderSuccessModal()" class="w-full py-3.5 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-neutral-800 transition">
+        Continue Browsing
+      </button>
+    </div>
+  </div>
+
+  <!-- 10. AUTH MODAL -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60" onclick="closeAuthModal()"></div>
+    <div class="relative bg-white w-full max-w-sm p-6 shadow-2xl z-10">
+      <div class="flex justify-between items-center pb-3 border-b border-neutral-200 mb-4">
+        <h4 class="font-serif text-base font-bold uppercase tracking-wider">Client Sign In</h4>
+        <button onclick="closeAuthModal()" class="p-1 hover:opacity-50">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="text-[11px] uppercase font-semibold text-neutral-700 block mb-1">Email</label>
+          <input type="email" placeholder="client@saintg.in" class="w-full border border-neutral-300 text-xs px-3 py-2 focus:outline-none focus:border-black">
+        </div>
+        <div>
+          <label class="text-[11px] uppercase font-semibold text-neutral-700 block mb-1">Password</label>
+          <input type="password" placeholder="••••••••" class="w-full border border-neutral-300 text-xs px-3 py-2 focus:outline-none focus:border-black">
+        </div>
+        <button onclick="alert('Client authenticated successfully.') ; closeAuthModal()" class="w-full py-3 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-neutral-800 transition mt-2">
+          Sign In
+        </button>
+        <p class="text-center text-[10px] text-neutral-400 pt-2 uppercase tracking-widest">Secured by Supabase Auth</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    function triggerConfetti() {
-      const count = 200;
-      const defaults = { origin: { y: 0.7 } };
-
-      function fire(particleRatio, opts) {
-        confetti(Object.assign({}, defaults, opts, {
-          particleCount: Math.floor(count * particleRatio)
-        }));
+    // 1. DATA SOURCE
+    const products = [
+      {
+        id: 1,
+        name: "Saint Charlotte Rhinestone White Poplin Shirt",
+        category: "Shirts & Tops",
+        price: 8500,
+        originalPrice: 10500,
+        discount: 19,
+        image1: "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1551163943-3f6a855d1153?q=80&w=900&auto=format&fit=crop",
+        description: "100% fine Egyptian cotton poplin tailored with delicate handcrafted rhinestone fringe across shoulders and notched lapels.",
+        sizes: ["XS", "S", "M", "L", "XL"]
+      },
+      {
+        id: 2,
+        name: "Saint Delfina Off-Shoulder Mulberry Silk Maxi Dress",
+        category: "Dresses",
+        price: 18500,
+        originalPrice: 22000,
+        discount: 16,
+        image1: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=900&auto=format&fit=crop",
+        description: "Fluid silhouette cut from heavy mulberry satin silk with internal corsetry boning for flawless sculpted drape.",
+        sizes: ["XS", "S", "M", "L"]
+      },
+      {
+        id: 3,
+        name: "Saint Valetta Lambskin Leather Moto Jacket",
+        category: "Leather Apparel",
+        price: 24500,
+        originalPrice: 32000,
+        discount: 23,
+        image1: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1520975661595-6453be3f7070?q=80&w=900&auto=format&fit=crop",
+        description: "Handcrafted from 100% supple Italian nappa lambskin with polished silver gunmetal hardware and quilted arm panels.",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: 4,
+        name: "Saint Sienna Pleated Linen High-Rise Trousers",
+        category: "Trousers & Co-ords",
+        price: 7900,
+        originalPrice: 9500,
+        discount: 17,
+        image1: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=900&auto=format&fit=crop",
+        description: "Relaxed wide-leg trousers crafted in French Normandy pure linen with double inverted front pleats and tailored waist extension.",
+        sizes: ["XS", "S", "M", "L"]
+      },
+      {
+        id: 5,
+        name: "Saint Genevieve Noir Structured Crepe Midi Dress",
+        category: "Dresses",
+        price: 14200,
+        originalPrice: 17500,
+        discount: 19,
+        image1: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=900&auto=format&fit=crop",
+        description: "Sharp architectural tailoring meets feminine curves in dense Japanese crepe featuring an asymmetric side slit.",
+        sizes: ["XS", "S", "M", "L", "XL"]
+      },
+      {
+        id: 6,
+        name: "Saint Ravenna Cropped Leather Trench Jacket",
+        category: "Leather Apparel",
+        price: 28900,
+        originalPrice: 35000,
+        discount: 17,
+        image1: "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=900&auto=format&fit=crop",
+        description: "A fresh iteration of the timeless trench silhouette cropped at the natural waist with double-breasted horn buttons.",
+        sizes: ["S", "M", "L"]
+      },
+      {
+        id: 7,
+        name: "Saint Camille Organza Embroidered Sheer Blouse",
+        category: "Shirts & Tops",
+        price: 9200,
+        originalPrice: 11000,
+        discount: 16,
+        image1: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?q=80&w=900&auto=format&fit=crop",
+        description: "Semi-sheer silk organza shirt with tonal floral thread embroidery and dramatic French cuff balloon sleeves.",
+        sizes: ["XS", "S", "M"]
+      },
+      {
+        id: 8,
+        name: "Saint Paloma Terracotta Blazer & Shorts Set",
+        category: "Trousers & Co-ords",
+        price: 16500,
+        originalPrice: 21000,
+        discount: 21,
+        image1: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=900&auto=format&fit=crop",
+        image2: "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=900&auto=format&fit=crop",
+        description: "Two-piece summer co-ord featuring a relaxed peaked-lapel blazer paired with high-waisted pleated tailored shorts.",
+        sizes: ["XS", "S", "M", "L"]
       }
+    ];
 
-      fire(0.25, { spread: 26, startVelocity: 55 });
-      fire(0.2, { spread: 60 });
-      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-      fire(0.1, { spread: 120, startVelocity: 45 });
-    }
+    // State
+    let cart = [];
+    let wishlist = [];
+    let currentCategory = 'All';
+    let discountApplied = false;
+    let selectedQuickProduct = null;
+    let currentSlide = 0;
+    let carouselTimer = null;
 
-    function lightDiya() {
-      const diya = document.getElementById('diyaStage');
-      const msg = document.getElementById('msgBox');
-      const btn = document.getElementById('wishBtn');
-      const audio = document.getElementById('celebrationAudio');
+    // 2. INITIALIZATION
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      renderProducts(products);
+      startCarouselAutoPlay();
+    });
 
-      // Play Sound
-      audio.currentTime = 0;
-      audio.play().catch(err => {
-        console.log("Audio playback was blocked or failed:", err);
+    // 3. CAROUSEL ENGINE
+    function updateSlideDisplay() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      
+      slides.forEach((slide, idx) => {
+        if (idx === currentSlide) {
+          slide.classList.remove('opacity-0', 'pointer-events-none');
+          slide.classList.add('opacity-100');
+        } else {
+          slide.classList.remove('opacity-100');
+          slide.classList.add('opacity-0', 'pointer-events-none');
+        }
       });
 
-      // Light up the Diya
-      diya.classList.add('lit');
+      dots.forEach((dot, idx) => {
+        if (idx === currentSlide) {
+          dot.className = "carousel-dot w-8 h-1 bg-white transition-all duration-300";
+        } else {
+          dot.className = "carousel-dot w-2 h-1 bg-white/40 hover:bg-white/70 transition-all duration-300";
+        }
+      });
+    }
 
-      // Display Hindi confirmation message
-      msg.style.display = 'block';
+    function nextSlide() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlideDisplay();
+      resetCarouselTimer();
+    }
 
-      // Confetti burst
-      triggerConfetti();
+    function prevSlide() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlideDisplay();
+      resetCarouselTimer();
+    }
 
-      // Update button state
-      btn.innerText = '✨ बधाई भेजी जा चुकी है';
-      btn.disabled = true;
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlideDisplay();
+      resetCarouselTimer();
+    }
+
+    function startCarouselAutoPlay() {
+      carouselTimer = setInterval(nextSlide, 5500);
+    }
+
+    function resetCarouselTimer() {
+      clearInterval(carouselTimer);
+      startCarouselAutoPlay();
+    }
+
+    // 4. PRODUCT RENDERING & DUAL HOVER
+    function renderProducts(items) {
+      const grid = document.getElementById("productGrid");
+      const counter = document.getElementById("productCounter");
+      grid.innerHTML = "";
+      counter.innerText = items.length;
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-16 text-center text-neutral-400 font-serif">No luxury garments found matching your criteria.</div>`;
+        return;
+      }
+
+      items.forEach(p => {
+        const isWish = wishlist.includes(p.id);
+        const card = document.createElement("div");
+        card.className = "group relative flex flex-col";
+        card.innerHTML = `
+          <div class="relative w-full aspect-[3/4] bg-neutral-100 overflow-hidden cursor-pointer">
+            <img src="${p.image1}" alt="${p.name}" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="${p.image2}" alt="${p.name}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+
+            <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+              <span class="bg-black text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5">SAVE ${p.discount}%</span>
+            </div>
+
+            <button onclick="toggleWishlist(${p.id}, event)" class="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/80 hover:bg-white text-black transition">
+              <i data-lucide="heart" class="w-4 h-4 ${isWish ? 'fill-black text-black' : 'text-neutral-700'}"></i>
+            </button>
+
+            <!-- Quick Add Size dock on Hover -->
+            <div class="absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-sm p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10 flex flex-col gap-1.5 border-t border-neutral-100">
+              <span class="text-[9px] uppercase tracking-wider font-bold text-center text-neutral-500">Quick Select Size</span>
+              <div class="flex justify-center gap-1.5">
+                ${p.sizes.map(s => `
+                  <button onclick="quickAddToCart(${p.id}, '${s}', event)" class="w-7 h-7 border border-neutral-300 hover:border-black hover:bg-black hover:text-white text-[10px] font-medium transition flex items-center justify-center">
+                    ${s}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 flex flex-col flex-grow">
+            <span class="text-[10px] uppercase tracking-widest text-neutral-400 font-medium">${p.category}</span>
+            <h4 onclick="openQuickView(${p.id})" class="text-xs sm:text-sm font-semibold text-black tracking-tight mt-0.5 hover:underline cursor-pointer line-clamp-1">
+              ${p.name}
+            </h4>
+            <div class="flex items-center gap-2 mt-1.5">
+              <span class="text-xs sm:text-sm font-bold text-black">₹${p.price.toLocaleString('en-IN')}.00</span>
+              <span class="text-[11px] text-neutral-400 line-through">₹${p.originalPrice.toLocaleString('en-IN')}.00</span>
+            </div>
+            
+            <button onclick="openQuickView(${p.id})" class="mt-2 text-[11px] uppercase tracking-widest font-semibold text-neutral-700 hover:text-black text-left flex items-center gap-1">
+              <span>View Silhouette</span>
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // 5. FILTER & SEARCH HANDLERS
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.getElementById("currentCatLabel").innerText = cat;
+      document.getElementById("categoryHeading").innerHTML = `${cat === 'All' ? 'All Garments' : cat} (<span id="productCounter">0</span>)`;
+      
+      let filtered = products;
+      if (cat === 'Sale') {
+        filtered = products.filter(p => p.discount >= 20);
+      } else if (cat !== 'All') {
+        filtered = products.filter(p => p.category === cat);
+      }
+      renderProducts(filtered);
+      toggleFilterDrawer(false);
+    }
+
+    function filterBySize(size) {
+      const filtered = products.filter(p => p.sizes.includes(size));
+      renderProducts(filtered);
+      toggleFilterDrawer(false);
+    }
+
+    function resetFilters() {
+      currentCategory = 'All';
+      document.getElementById("searchInput").value = "";
+      renderProducts(products);
+      toggleFilterDrawer(false);
+    }
+
+    function handleSearch(val) {
+      const q = val.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+      renderProducts(filtered);
+    }
+
+    function handleSort(criteria) {
+      let sorted = [...products];
+      if (currentCategory !== 'All' && currentCategory !== 'Sale') {
+        sorted = sorted.filter(p => p.category === currentCategory);
+      }
+      if (criteria === 'price-low') sorted.sort((a,b) => a.price - b.price);
+      if (criteria === 'price-high') sorted.sort((a,b) => b.price - a.price);
+      if (criteria === 'discount') sorted.sort((a,b) => b.discount - a.discount);
+      renderProducts(sorted);
+    }
+
+    // 6. CART SYSTEM
+    function quickAddToCart(productId, size, event) {
+      if(event) event.stopPropagation();
+      const prod = products.find(p => p.id === productId);
+      const existing = cart.find(i => i.id === productId && i.size === size);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id: prod.id,
+          name: prod.name,
+          price: prod.price,
+          image: prod.image1,
+          size: size,
+          qty: 1
+        });
+      }
+      updateCartUI();
+      toggleCart(true);
+    }
+
+    function updateCartUI() {
+      const list = document.getElementById("cartItemsList");
+      const countEl = document.getElementById("cartCount");
+      const drawerCountEl = document.getElementById("cartDrawerCount");
+      const subtotalEl = document.getElementById("cartSubtotal");
+      const totalEl = document.getElementById("cartTotal");
+      const discountRow = document.getElementById("discountRow");
+      const discountEl = document.getElementById("cartDiscount");
+      const shippingEl = document.getElementById("cartShipping");
+      const freeBar = document.getElementById("freeShippingBar");
+      const freeText = document.getElementById("freeShippingText");
+
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      countEl.innerText = totalItems;
+      drawerCountEl.innerText = totalItems;
+
+      if (cart.length === 0) {
+        list.innerHTML = `<div class="py-12 text-center text-xs text-neutral-400 font-light">Your shopping bag is currently empty.</div>`;
+        subtotalEl.innerText = "₹0.00";
+        totalEl.innerText = "₹0.00";
+        shippingEl.innerText = "Calculated";
+        freeBar.style.width = "0%";
+        freeText.innerText = "Add ₹10,000.00 to unlock FREE EXPRESS SHIPPING";
+        return;
+      }
+
+      list.innerHTML = "";
+      let subtotal = 0;
+
+      cart.forEach((item, idx) => {
+        subtotal += (item.price * item.qty);
+        const itemRow = document.createElement("div");
+        itemRow.className = "flex gap-3 py-3 items-center";
+        itemRow.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover bg-neutral-100 flex-shrink-0">
+          <div class="flex-grow">
+            <h5 class="text-xs font-semibold text-black line-clamp-1">${item.name}</h5>
+            <p class="text-[10px] text-neutral-500 uppercase mt-0.5">Size: <strong class="text-black">${item.size}</strong></p>
+            <p class="text-xs font-bold text-black mt-1">₹${item.price.toLocaleString('en-IN')}.00</p>
+            
+            <div class="flex items-center gap-3 mt-2">
+              <div class="flex items-center border border-neutral-200">
+                <button onclick="changeQty(${idx}, -1)" class="w-6 h-6 text-xs flex items-center justify-center hover:bg-neutral-100">-</button>
+                <span class="w-6 h-6 text-xs flex items-center justify-center font-bold">${item.qty}</span>
+                <button onclick="changeQty(${idx}, 1)" class="w-6 h-6 text-xs flex items-center justify-center hover:bg-neutral-100">+</button>
+              </div>
+              <button onclick="removeFromCart(${idx})" class="text-[11px] text-neutral-400 hover:text-black underline">Remove</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(itemRow);
+      });
+
+      const threshold = 10000;
+      const progress = Math.min((subtotal / threshold) * 100, 100);
+      freeBar.style.width = `${progress}%`;
+      
+      if (subtotal >= threshold) {
+        freeText.innerHTML = "✦ You have unlocked <strong>FREE EXPRESS AIR DELIVERY</strong>";
+        shippingEl.innerText = "FREE";
+      } else {
+        const remaining = threshold - subtotal;
+        freeText.innerText = `Add ₹${remaining.toLocaleString('en-IN')}.00 more to unlock FREE EXPRESS SHIPPING`;
+        shippingEl.innerText = "₹350.00";
+      }
+
+      let discountAmount = 0;
+      if (discountApplied) {
+        discountAmount = subtotal * 0.10;
+        discountRow.style.display = "flex";
+        discountEl.innerText = `-₹${discountAmount.toLocaleString('en-IN')}.00`;
+      } else {
+        discountRow.style.display = "none";
+      }
+
+      const shippingCost = (subtotal >= threshold) ? 0 : 350;
+      const finalTotal = subtotal - discountAmount + shippingCost;
+
+      subtotalEl.innerText = `₹${subtotal.toLocaleString('en-IN')}.00`;
+      totalEl.innerText = `₹${finalTotal.toLocaleString('en-IN')}.00`;
+      document.getElementById("checkoutFinalAmount").innerText = `₹${finalTotal.toLocaleString('en-IN')}.00`;
+    }
+
+    function changeQty(idx, delta) {
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      updateCartUI();
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      updateCartUI();
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById("couponInput").value.trim().toUpperCase();
+      const msg = document.getElementById("couponSuccessMsg");
+      if (code === "SAINT10") {
+        discountApplied = true;
+        msg.innerText = "Privilege Code 'SAINT10' applied (10% OFF)";
+        msg.classList.remove("hidden");
+        updateCartUI();
+      } else {
+        alert("Invalid Voucher Code. Please enter: SAINT10");
+      }
+    }
+
+    // 7. QUICK VIEW MODAL & PINCODE ESTIMATION
+    function openQuickView(id) {
+      selectedQuickProduct = products.find(p => p.id === id);
+      document.getElementById("modalImg").src = selectedQuickProduct.image1;
+      document.getElementById("modalCategory").innerText = selectedQuickProduct.category;
+      document.getElementById("modalTitle").innerText = selectedQuickProduct.name;
+      document.getElementById("modalPrice").innerText = `₹${selectedQuickProduct.price.toLocaleString('en-IN')}.00`;
+      document.getElementById("modalOldPrice").innerText = `₹${selectedQuickProduct.originalPrice.toLocaleString('en-IN')}.00`;
+      document.getElementById("modalDiscountTag").innerText = `SAVE ${selectedQuickProduct.discount}%`;
+      document.getElementById("modalDesc").innerText = selectedQuickProduct.description;
+
+      const sizeContainer = document.getElementById("modalSizeContainer");
+      sizeContainer.innerHTML = selectedQuickProduct.sizes.map((s, idx) => `
+        <button onclick="selectModalSize(this, '${s}')" class="size-btn w-9 h-9 border ${idx === 0 ? 'border-black bg-black text-white' : 'border-neutral-300'} text-xs font-semibold hover:border-black">
+          ${s}
+        </button>
+      `).join('');
+
+      let chosenSize = selectedQuickProduct.sizes[0];
+      document.getElementById("modalAddBtn").onclick = () => {
+        quickAddToCart(selectedQuickProduct.id, chosenSize);
+        closeQuickView();
+      };
+
+      document.getElementById("quickViewModal").classList.remove("hidden");
+    }
+
+    function selectModalSize(btn, size) {
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.className = "size-btn w-9 h-9 border border-neutral-300 text-xs font-semibold hover:border-black";
+      });
+      btn.className = "size-btn w-9 h-9 border border-black bg-black text-white text-xs font-semibold";
+      document.getElementById("modalAddBtn").onclick = () => {
+        quickAddToCart(selectedQuickProduct.id, size);
+        closeQuickView();
+      };
+    }
+
+    function closeQuickView() {
+      document.getElementById("quickViewModal").classList.add("hidden");
+    }
+
+    function checkPincode() {
+      const pin = document.getElementById("pincodeInput").value.trim();
+      const st = document.getElementById("pincodeStatus");
+      if (pin.length === 6 && !isNaN(pin)) {
+        st.innerHTML = `<span class="text-emerald-700 font-semibold">✓ Express courier delivery available for pincode ${pin}. Delivery in 48-72 hours.</span>`;
+      } else {
+        st.innerHTML = `<span class="text-rose-600 font-semibold">Please provide a valid 6-digit postal pincode.</span>`;
+      }
+    }
+
+    // 8. WISHLIST TOGGLE
+    function toggleWishlist(id, e) {
+      if (e) e.stopPropagation();
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(x => x !== id);
+      } else {
+        wishlist.push(id);
+      }
+      document.getElementById("wishlistCount").innerText = wishlist.length;
+      renderProducts(products);
+    }
+
+    function openWishlistToast() {
+      alert(`Wishlist contains ${wishlist.length} saved garment(s).`);
+    }
+
+    // 9. ANIMATED DRAWERS
+    function toggleCart(open) {
+      const overlay = document.getElementById("cartOverlay");
+      const panel = document.getElementById("cartPanel");
+      if (open) {
+        overlay.classList.remove("opacity-0", "pointer-events-none");
+        overlay.classList.add("opacity-100", "pointer-events-auto");
+        panel.classList.remove("translate-x-full");
+      } else {
+        overlay.classList.remove("opacity-100", "pointer-events-auto");
+        overlay.classList.add("opacity-0", "pointer-events-none");
+        panel.classList.add("translate-x-full");
+      }
+    }
+
+    function toggleFilterDrawer(open) {
+      const overlay = document.getElementById("filterOverlay");
+      const panel = document.getElementById("filterPanel");
+      if (open) {
+        overlay.classList.remove("opacity-0", "pointer-events-none");
+        overlay.classList.add("opacity-100", "pointer-events-auto");
+        panel.classList.remove("translate-x-full");
+      } else {
+        overlay.classList.remove("opacity-100", "pointer-events-auto");
+        overlay.classList.add("opacity-0", "pointer-events-none");
+        panel.classList.add("translate-x-full");
+      }
+    }
+
+    // 10. CHECKOUT & ORDER CONFIRMATION
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert("Your shopping bag is empty.");
+        return;
+      }
+      toggleCart(false);
+      document.getElementById("checkoutModal").classList.remove("hidden");
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById("checkoutModal").classList.add("hidden");
+    }
+
+    function handlePlaceOrder(e) {
+      e.preventDefault();
+      const generatedId = "#SG-2026-" + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById("confirmedOrderId").innerText = generatedId;
+      closeCheckoutModal();
+      cart = [];
+      updateCartUI();
+      document.getElementById("orderSuccessModal").classList.remove("hidden");
+    }
+
+    function closeOrderSuccessModal() {
+      document.getElementById("orderSuccessModal").classList.add("hidden");
+    }
+
+    // 11. AUTH MODAL
+    function openAuthModal() {
+      document.getElementById("authModal").classList.remove("hidden");
+    }
+    function closeAuthModal() {
+      document.getElementById("authModal").classList.add("hidden");
     }
   </script>
 </body>

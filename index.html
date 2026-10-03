@@ -1,1459 +1,1519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>ZAYA | Luxury Women's Pret & Couture</title>
-
-<style>
-/* --- CSS RESET & THEME VARIABLES --- */
-:root {
---bg: #FBF9F6;
---surface: #FFFFFF;
---noir: #181615;
---noir-light: #2D2A28;
---accent: #A86B58;
---accent-soft: #F6EDE8;
---gold-star: #F5A623;
---muted: #78726D;
---border: #E8E2D9;
---border-light: #F2ECE5;
---wa-green: #25D366;
---wa-dark: #1EBE5B;
---radius-sm: 6px;
---radius-md: 12px;
---radius-full: 9999px;
---font-serif: Georgia, 'Times New Roman', serif;
---font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
---shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-}
-
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
--webkit-tap-highlight-color: transparent;
-}
-
-body {
-background: var(--bg);
-color: var(--noir);
-font-family: var(--font-sans);
-line-height: 1.45;
-overflow-x: hidden;
-min-height: 100vh;
-}
-
-button {
-font-family: inherit;
-cursor: pointer;
-border: none;
-background: none;
-transition: all 0.2s ease;
-}
-
-img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-object-position: top center;
-display: block;
-}
-
-/* --- TOP ANNOUNCEMENT & HEADER --- */
-.top-bar {
-background: var(--noir);
-color: #fff;
-font-size: 0.72rem;
-text-transform: uppercase;
-letter-spacing: 0.12em;
-text-align: center;
-padding: 8px 12px;
-}
-.top-bar strong { color: #E0B2A3; }
-
-.header {
-position: sticky;
-top: 0;
-z-index: 50;
-background: rgba(251, 249, 246, 0.96);
-backdrop-filter: blur(10px);
-border-bottom: 1px solid var(--border);
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 12px 18px;
-}
-
-.brand-logo {
-font-family: var(--font-serif);
-font-size: 1.8rem;
-font-weight: 700;
-letter-spacing: 0.12em;
-cursor: pointer;
-text-transform: uppercase;
-}
-
-.bag-btn {
-background: var(--noir);
-color: #fff;
-padding: 8px 14px;
-border-radius: var(--radius-full);
-display: flex;
-align-items: center;
-gap: 6px;
-font-size: 0.8rem;
-font-weight: 600;
-}
-
-.badge-count {
-background: var(--accent);
-color: #fff;
-font-size: 0.7rem;
-font-weight: 700;
-min-width: 18px;
-height: 18px;
-border-radius: var(--radius-full);
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 0 4px;
-}
-
-/* --- VIEW TOGGLE --- */
-.view-container { display: none; }
-.view-container.active { display: block; }
-
-/* --- HERO BANNER --- */
-.hero-card {
-margin: 14px 14px 20px;
-background: linear-gradient(135deg, #2A2523, #151312);
-color: #fff;
-border-radius: var(--radius-md);
-padding: 32px 18px;
-text-align: center;
-}
-.hero-tag {
-font-size: 0.7rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: #E0B2A3;
-font-weight: 600;
-margin-bottom: 6px;
-}
-.hero-title {
-font-family: var(--font-serif);
-font-size: 2.1rem;
-font-weight: normal;
-font-style: italic;
-margin-bottom: 8px;
-line-height: 1.2;
-}
-.hero-desc {
-font-size: 0.84rem;
-color: #CBC5BE;
-max-width: 440px;
-margin: 0 auto;
-}
-
-/* --- CATEGORY FILTERS --- */
-.cat-scroll {
-display: flex;
-gap: 8px;
-padding: 0 16px 16px;
-overflow-x: auto;
-scrollbar-width: none;
-}
-.cat-scroll::-webkit-scrollbar { display: none; }
-
-.cat-pill {
-white-space: nowrap;
-padding: 7px 16px;
-border-radius: var(--radius-full);
-font-size: 0.8rem;
-font-weight: 500;
-background: var(--surface);
-border: 1px solid var(--border);
-color: var(--muted);
-}
-.cat-pill.active {
-background: var(--noir);
-color: #fff;
-border-color: var(--noir);
-font-weight: 600;
-}
-
-/* --- RESPONSIVE PRODUCT GRID --- */
-.main-wrap {
-max-width: 1200px;
-margin: 0 auto;
-padding: 0 12px 60px;
-}
-
-.grid-layout {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 12px;
-}
-
-@media (min-width: 768px) {
-.grid-layout {
-grid-template-columns: repeat(3, 1fr);
-gap: 20px;
-}
-}
-@media (min-width: 1024px) {
-.grid-layout {
-grid-template-columns: repeat(4, 1fr);
-gap: 24px;
-}
-}
-
-.prod-card {
-background: var(--surface);
-border: 1px solid var(--border);
-border-radius: var(--radius-md);
-box-shadow: var(--shadow);
-display: flex;
-flex-direction: column;
-height: 100%;
-overflow: hidden;
-}
-
-/* --- PROPORTIONED AUTO-CAROUSEL --- */
-.carousel-box {
-position: relative;
-width: 100%;
-aspect-ratio: 3 / 4;
-background: #EFEBE5;
-overflow: hidden;
-cursor: pointer;
-}
-
-.carousel-track {
-display: flex;
-width: 100%;
-height: 100%;
-transition: transform 0.45s ease;
-}
-
-.carousel-slide {
-min-width: 100%;
-height: 100%;
-flex-shrink: 0;
-}
-
-.carousel-dots {
-position: absolute;
-bottom: 8px;
-left: 50%;
-transform: translateX(-50%);
-display: flex;
-gap: 4px;
-z-index: 5;
-}
-
-.c-dot {
-width: 5px;
-height: 5px;
-border-radius: var(--radius-full);
-background: rgba(255, 255, 255, 0.55);
-transition: all 0.25s ease;
-}
-.c-dot.active {
-width: 14px;
-background: #FFFFFF;
-}
-
-.tag-chip {
-position: absolute;
-top: 8px;
-left: 8px;
-background: rgba(255, 255, 255, 0.95);
-padding: 3px 7px;
-border-radius: var(--radius-sm);
-font-size: 0.62rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.05em;
-color: var(--accent);
-z-index: 6;
-}
-
-/* --- CARD DETAILS --- */
-.prod-info {
-padding: 12px 10px 10px;
-display: flex;
-flex-direction: column;
-flex-grow: 1;
-}
-
-.rating-row {
-display: flex;
-align-items: center;
-gap: 4px;
-font-size: 0.72rem;
-margin-bottom: 4px;
-}
-.rating-stars {
-color: var(--gold-star);
-font-weight: 700;
-font-size: 0.75rem;
-}
-.rating-count {
-color: var(--muted);
-font-size: 0.68rem;
-}
-
-.bought-badge {
-font-size: 0.68rem;
-color: #B45309;
-background: #FEF3C7;
-padding: 2px 6px;
-border-radius: var(--radius-sm);
-display: inline-block;
-width: fit-content;
-margin-bottom: 6px;
-font-weight: 600;
-}
-
-.prod-cat {
-font-size: 0.65rem;
-text-transform: uppercase;
-color: var(--muted);
-letter-spacing: 0.06em;
-margin-bottom: 2px;
-}
-
-.prod-name {
-font-size: 0.88rem;
-font-weight: 600;
-color: var(--noir);
-line-height: 1.3;
-margin-bottom: 6px;
-height: 2.6em; /* Exactly 2 lines */
-overflow: hidden;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
-word-break: break-word;
-}
-
-.prod-price-row {
-display: flex;
-align-items: baseline;
-gap: 6px;
-margin-bottom: 10px;
-flex-wrap: wrap;
-}
-
-.val-sale {
-font-weight: 700;
-font-size: 0.98rem;
-color: var(--noir);
-}
-.val-mrp {
-font-size: 0.76rem;
-color: var(--muted);
-text-decoration: line-through;
-}
-.val-off {
-font-size: 0.68rem;
-color: #2E7D32;
-font-weight: 700;
-}
-
-.btn-add-cart-single {
-margin-top: auto;
-width: 100%;
-background: var(--noir);
-border: 1px solid var(--noir);
-border-radius: var(--radius-sm);
-padding: 10px 8px;
-font-size: 0.8rem;
-font-weight: 600;
-color: #fff;
-text-align: center;
-}
-.btn-add-cart-single:hover { background: var(--noir-light); }
-
-/* --- DEDICATED PRODUCT DETAILS PAGE (PDP) --- */
-.pdp-container {
-max-width: 980px;
-margin: 0 auto;
-padding: 12px 16px 50px;
-}
-
-.back-nav {
-display: inline-flex;
-align-items: center;
-gap: 6px;
-font-size: 0.84rem;
-font-weight: 600;
-cursor: pointer;
-margin-bottom: 16px;
-color: var(--noir);
-}
-
-.pdp-split {
-display: flex;
-flex-direction: column;
-gap: 20px;
-}
-
-@media (min-width: 768px) {
-.pdp-split {
-flex-direction: row;
-gap: 32px;
-align-items: flex-start;
-}
-.pdp-media-pane { width: 50%; }
-.pdp-info-pane { width: 50%; }
-}
-
-.pdp-large-preview {
-width: 100%;
-aspect-ratio: 3 / 4;
-border-radius: var(--radius-md);
-overflow: hidden;
-background: #EFEBE5;
-}
-
-.thumb-tray {
-display: flex;
-gap: 8px;
-margin-top: 10px;
-}
-
-.thumb-item {
-width: 65px;
-height: 80px;
-border-radius: var(--radius-sm);
-border: 2px solid transparent;
-overflow: hidden;
-cursor: pointer;
-opacity: 0.6;
-}
-.thumb-item.active {
-border-color: var(--noir);
-opacity: 1;
-}
-
-.pdp-heading {
-font-family: var(--font-serif);
-font-size: 1.85rem;
-font-weight: normal;
-margin: 6px 0 6px;
-line-height: 1.25;
-}
-
-.pdp-rating-strip {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 12px;
-}
-
-.pdp-price-box {
-display: flex;
-align-items: baseline;
-gap: 10px;
-margin-bottom: 16px;
-}
-
-/* COLOR SWATCH STYLES */
-.color-section {
-margin-bottom: 16px;
-}
-.section-label {
-font-size: 0.78rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-margin-bottom: 8px;
-}
-.color-swatches {
-display: flex;
-gap: 10px;
-align-items: center;
-}
-.color-swatch-btn {
-width: 34px;
-height: 34px;
-border-radius: 50%;
-border: 2px solid #FFFFFF;
-outline: 1px solid var(--border);
-cursor: pointer;
-transition: transform 0.2s ease, outline 0.2s ease;
-position: relative;
-}
-.color-swatch-btn.selected {
-outline: 2px solid var(--noir);
-transform: scale(1.1);
-}
-
-/* SIZES: S, M, L, XL, XXL */
-.sizes-flex {
-display: flex;
-gap: 8px;
-margin-bottom: 20px;
-}
-
-.size-btn-pill {
-flex: 1;
-height: 42px;
-border: 1px solid var(--border);
-border-radius: var(--radius-sm);
-font-weight: 600;
-font-size: 0.85rem;
-background: var(--surface);
-}
-.size-btn-pill.selected {
-background: var(--noir);
-color: #fff;
-border-color: var(--noir);
-}
-
-/* NATURAL INLINE BUTTON (BELOW SIZES & COLORS) */
-.btn-pdp-add-inline {
-width: 100%;
-background: var(--noir);
-color: #fff;
-padding: 14px;
-border-radius: var(--radius-sm);
-font-size: 0.92rem;
-font-weight: 600;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-margin-bottom: 20px;
-}
-.btn-pdp-add-inline:hover { background: var(--noir-light); }
-
-.pdp-block {
-border-top: 1px solid var(--border);
-padding: 12px 0;
-font-size: 0.84rem;
-}
-.pdp-block h4 { font-weight: 600; margin-bottom: 3px; }
-.pdp-block p { color: var(--muted); font-size: 0.8rem; }
-
-/* --- BAG & WHATSAPP CHECKOUT DRAWER --- */
-.drawer-scrim {
-position: fixed;
-inset: 0;
-background: rgba(0, 0, 0, 0.5);
-z-index: 100;
-opacity: 0;
-visibility: hidden;
-transition: all 0.3s ease;
-}
-.drawer-scrim.open { opacity: 1; visibility: visible; }
-
-.bag-pane {
-position: fixed;
-top: 0;
-right: 0;
-width: 100%;
-max-width: 420px;
-height: 100%;
-background: var(--surface);
-z-index: 110;
-box-shadow: -8px 0 30px rgba(0,0,0,0.15);
-transform: translateX(100%);
-transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-display: flex;
-flex-direction: column;
-}
-.bag-pane.open { transform: translateX(0); }
-
-.bag-header {
-padding: 16px 20px;
-border-bottom: 1px solid var(--border);
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.bag-title {
-font-family: var(--font-serif);
-font-size: 1.35rem;
-font-weight: 700;
-}
-
-.bag-items-scroll {
-flex: 1;
-overflow-y: auto;
-padding: 16px 20px;
-display: flex;
-flex-direction: column;
-gap: 12px;
-}
-
-.bag-row {
-display: flex;
-gap: 12px;
-border-bottom: 1px solid var(--border);
-padding-bottom: 12px;
-}
-
-.bag-row-thumb {
-width: 60px;
-height: 75px;
-border-radius: var(--radius-sm);
-overflow: hidden;
-flex-shrink: 0;
-background: #EFEBE5;
-}
-
-.bag-row-info {
-flex: 1;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-}
-
-.qty-wrap {
-display: flex;
-align-items: center;
-gap: 8px;
-}
-
-.step-btn {
-width: 24px;
-height: 24px;
-border: 1px solid var(--border);
-border-radius: 4px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: 600;
-font-size: 0.8rem;
-}
-
-/* FOOTER & COUPONS */
-.bag-footer {
-border-top: 1px solid var(--border);
-padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
-background: var(--bg);
-}
-
-.coupon-section {
-background: var(--surface);
-border: 1px dashed var(--border);
-border-radius: var(--radius-sm);
-padding: 12px;
-margin-bottom: 12px;
-}
-
-.coupon-row {
-display: flex;
-gap: 6px;
-margin-top: 6px;
-}
-
-.coupon-box-input {
-flex: 1;
-border: 1px solid var(--border);
-padding: 8px 10px;
-border-radius: var(--radius-sm);
-font-size: 0.8rem;
-text-transform: uppercase;
-font-weight: 600;
-outline: none;
-}
-
-.btn-apply {
-background: var(--noir);
-color: #fff;
-padding: 8px 14px;
-border-radius: var(--radius-sm);
-font-size: 0.78rem;
-font-weight: 600;
-}
-
-.pills-group {
-display: flex;
-gap: 6px;
-flex-wrap: wrap;
-margin-top: 6px;
-}
-
-.chip-code {
-font-size: 0.68rem;
-background: var(--accent-soft);
-color: var(--accent);
-padding: 3px 8px;
-border-radius: var(--radius-full);
-font-weight: 700;
-cursor: pointer;
-}
-
-.cust-group {
-display: flex;
-flex-direction: column;
-gap: 6px;
-margin-bottom: 12px;
-}
-
-.cust-field {
-background: #fff;
-border: 1px solid var(--border);
-padding: 8px 10px;
-border-radius: var(--radius-sm);
-font-size: 0.8rem;
-outline: none;
-}
-
-.price-ledger {
-font-size: 0.82rem;
-margin-bottom: 12px;
-}
-
-.ledger-row {
-display: flex;
-justify-content: space-between;
-color: var(--muted);
-margin-bottom: 4px;
-}
-
-.ledger-row.total {
-font-size: 1.1rem;
-font-weight: 700;
-color: var(--noir);
-border-top: 1px dashed var(--border);
-padding-top: 8px;
-margin-top: 6px;
-}
-
-/* FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) */
-.btn-wa-order {
-width: 100%;
-background: var(--wa-green);
-color: #fff;
-padding: 14px;
-border-radius: var(--radius-sm);
-font-size: 0.94rem;
-font-weight: 700;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-}
-.btn-wa-order:hover { background: var(--wa-dark); }
-
-/* TOAST */
-.toast {
-position: fixed;
-bottom: 24px;
-left: 50%;
-transform: translateX(-50%) translateY(80px);
-background: var(--noir);
-color: #fff;
-padding: 10px 18px;
-border-radius: var(--radius-full);
-font-size: 0.82rem;
-font-weight: 500;
-z-index: 300;
-transition: transform 0.3s ease;
-pointer-events: none;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ZAYA | Women's Pret & Couture</title>
+  
+  <style>
+    /* --- CSS RESET & THEME VARIABLES --- */
+    :root {
+      --bg: #FBF9F6;
+      --surface: #FFFFFF;
+      --noir: #181615;
+      --noir-light: #2D2A28;
+      --accent: #A86B58;
+      --accent-soft: #F6EDE8;
+      --gold-star: #F5A623;
+      --muted: #78726D;
+      --border: #E8E2D9;
+      --border-light: #F2ECE5;
+      --wa-green: #25D366;
+      --wa-dark: #1EBE5B;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-full: 9999px;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--noir);
+      font-family: var(--font-sans);
+      line-height: 1.45;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: all 0.2s ease;
+    }
+
+    /* --- TOP ANNOUNCEMENT & HEADER --- */
+    .top-bar {
+      background: var(--noir);
+      color: #fff;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: center;
+      padding: 8px 12px;
+    }
+    .top-bar strong { color: #E0B2A3; }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 249, 246, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+    }
+
+    .brand-logo {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .bag-btn {
+      background: var(--noir);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-count {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+
+    /* --- VIEW TOGGLE --- */
+    .view-container { display: none; }
+    .view-container.active { display: block; }
+
+    /* --- HERO BANNER --- */
+    .hero-card {
+      margin: 14px 14px 20px;
+      background: linear-gradient(135deg, #2A2523, #151312);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 32px 18px;
+      text-align: center;
+    }
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #E0B2A3;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: normal;
+      font-style: italic;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .hero-desc {
+      font-size: 0.84rem;
+      color: #CBC5BE;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* --- CATEGORY FILTERS --- */
+    .cat-scroll {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-scroll::-webkit-scrollbar { display: none; }
+
+    .cat-pill {
+      white-space: nowrap;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .cat-pill.active {
+      background: var(--noir);
+      color: #fff;
+      border-color: var(--noir);
+      font-weight: 600;
+    }
+
+    /* --- RESPONSIVE PRODUCT GRID --- */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 12px 60px;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .grid-layout {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .grid-layout {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+    }
+
+    .prod-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* ----------------------------------------------------
+       IMAGE SCALING LOGIC (MOBILE VS DESKTOP)
+    ---------------------------------------------------- */
+    .carousel-box {
+      position: relative;
+      width: 100%;
+      background: #F3EFEA;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* MOBILE SCALE: Uses 'contain' so images NEVER zoom or crop awkward parts */
+    @media (max-width: 767px) {
+      .carousel-box {
+        aspect-ratio: 4 / 5;
+      }
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        padding: 4px;
+        display: block;
+      }
+      .pdp-large-preview {
+        aspect-ratio: 4 / 5;
+        background: #F3EFEA;
+      }
+      .pdp-large-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        padding: 6px;
+        display: block;
+      }
+    }
+
+    /* DESKTOP SCALE: Full editorial framed cover */
+    @media (min-width: 768px) {
+      .carousel-box {
+        aspect-ratio: 3 / 4;
+      }
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+      }
+      .pdp-large-preview {
+        aspect-ratio: 3 / 4;
+        background: #F3EFEA;
+      }
+      .pdp-large-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+      }
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      z-index: 5;
+    }
+
+    .c-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.25);
+      transition: all 0.25s ease;
+    }
+    .c-dot.active {
+      width: 14px;
+      background: var(--noir);
+    }
+
+    .tag-chip {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3px 7px;
+      border-radius: var(--radius-sm);
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      z-index: 6;
+    }
+
+    /* --- CARD DETAILS --- */
+    .prod-info {
+      padding: 12px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      margin-bottom: 4px;
+    }
+    .rating-stars {
+      color: var(--gold-star);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    .rating-count {
+      color: var(--muted);
+      font-size: 0.68rem;
+    }
+
+    .bought-badge {
+      font-size: 0.68rem;
+      color: #B45309;
+      background: #FEF3C7;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .prod-cat {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+
+    .prod-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--noir);
+      line-height: 1.3;
+      margin-bottom: 6px;
+      height: 2.6em; /* Exactly 2 lines */
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      word-break: break-word;
+    }
+
+    .prod-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .val-sale {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--noir);
+    }
+    .val-mrp {
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+    .val-off {
+      font-size: 0.68rem;
+      color: #2E7D32;
+      font-weight: 700;
+    }
+
+    .btn-add-cart-single {
+      margin-top: auto;
+      width: 100%;
+      background: var(--noir);
+      border: 1px solid var(--noir);
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+    }
+    .btn-add-cart-single:hover { background: var(--noir-light); }
+
+    /* --- DEDICATED PRODUCT DETAILS PAGE (PDP) --- */
+    .pdp-container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 16px 50px;
+    }
+
+    .back-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 16px;
+      color: var(--noir);
+    }
+
+    .pdp-split {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .pdp-split {
+        flex-direction: row;
+        gap: 32px;
+        align-items: flex-start;
+      }
+      .pdp-media-pane { width: 50%; }
+      .pdp-info-pane { width: 50%; }
+    }
+
+    .pdp-large-preview {
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thumb-tray {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .thumb-item {
+      width: 65px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+      border: 2px solid transparent;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.6;
+      background: #F3EFEA;
+    }
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumb-item.active {
+      border-color: var(--noir);
+      opacity: 1;
+    }
+
+    .pdp-heading {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: normal;
+      margin: 6px 0 6px;
+      line-height: 1.25;
+    }
+
+    .pdp-rating-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .pdp-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* COLOR SWATCHES */
+    .color-section {
+      margin-bottom: 16px;
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .color-swatch-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      outline: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.2s ease, outline 0.2s ease;
+      position: relative;
+    }
+    .color-swatch-btn.selected {
+      outline: 2px solid var(--noir);
+      transform: scale(1.1);
+    }
+
+    /* SIZES: S, M, L, XL, XXL */
+    .sizes-flex {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .size-btn-pill {
+      flex: 1;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      background: var(--surface);
+    }
+    .size-btn-pill.selected {
+      background: var(--noir);
+      color: #fff;
+      border-color: var(--noir);
+    }
+
+    /* INLINE ADD TO BAG BUTTON (BELOW SIZES & COLORS) */
+    .btn-pdp-add-inline {
+      width: 100%;
+      background: var(--noir);
+      color: #fff;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .btn-pdp-add-inline:hover { background: var(--noir-light); }
+
+    .pdp-block {
+      border-top: 1px solid var(--border);
+      padding: 12px 0;
+      font-size: 0.84rem;
+    }
+    .pdp-block h4 { font-weight: 600; margin-bottom: 3px; }
+    .pdp-block p { color: var(--muted); font-size: 0.8rem; }
+
+    /* --- BAG & WHATSAPP CHECKOUT DRAWER --- */
+    .drawer-scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .drawer-scrim.open { opacity: 1; visibility: visible; }
+
+    .bag-pane {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: var(--surface);
+      z-index: 110;
+      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .bag-pane.open { transform: translateX(0); }
+
+    .bag-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bag-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .bag-items-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bag-row {
+      display: flex;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .bag-row-thumb {
+      width: 60px;
+      height: 75px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #EFEBE5;
+    }
+    .bag-row-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bag-row-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .qty-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-btn {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    /* FOOTER & COUPONS */
+    .bag-footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+      background: var(--bg);
+    }
+
+    .coupon-section {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .coupon-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .coupon-box-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .btn-apply {
+      background: var(--noir);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .pills-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .chip-code {
+      font-size: 0.68rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cust-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .cust-field {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .price-ledger {
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+
+    .ledger-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .ledger-row.total {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--noir);
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      margin-top: 6px;
+    }
+
+    /* FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) */
+    .btn-wa-order {
+      width: 100%;
+      background: var(--wa-green);
+      color: #fff;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.94rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-wa-order:hover { background: var(--wa-dark); }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--noir);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 500;
+      z-index: 300;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
 </head>
 <body>
 
-<!-- Top Announcement Bar -->
-<div class="top-bar">
-Festive Pret Collection • Use Code <strong>FESTIVE20</strong> for 20% Off
-</div>
-
-<!-- Sticky Header -->
-<header class="header">
-<div class="brand-logo" onclick="openHomeView()">ZAYA</div>
-<button class="bag-btn" id="openBagTrigger">
-<span>🛍️ Bag</span>
-<span class="badge-count" id="headerBagCount">0</span>
-</button>
-</header>
-
-<!-- =========================================
-VIEW 1: CATALOG VIEW
-========================================== -->
-<section id="catalogView" class="view-container active">
-<div class="hero-card">
-<div class="hero-tag">New Season '26</div>
-<h1 class="hero-title">Timeless Grace & Modern Pret</h1>
-<p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to customize your color & size, and order on WhatsApp.</p>
-</div>
-
-<!-- Category Filters -->
-<div class="cat-scroll">
-<button class="cat-pill active" onclick="setCategory('All')">All Pieces</button>
-<button class="cat-pill" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
-<button class="cat-pill" onclick="setCategory('Dresses')">Western Dresses</button>
-<button class="cat-pill" onclick="setCategory('Co-ords')">Co-ord Sets</button>
-<button class="cat-pill" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
-</div>
-
-<!-- Product Grid -->
-<main class="main-wrap">
-<div class="grid-layout" id="productGrid">
-<!-- Products Injected Here -->
-</div>
-</main>
-</section>
-
-<!-- =========================================
-VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
-========================================== -->
-<section id="pdpView" class="view-container">
-<div class="pdp-container">
-<div class="back-nav" onclick="openHomeView()">
-<span>← Back to All Pieces</span>
-</div>
-
-<div class="pdp-split">
-<!-- Media Gallery -->
-<div class="pdp-media-pane">
-<div class="pdp-large-preview">
-<img id="pdpMainImg" src="" alt="Selected Product Preview">
-</div>
-<div class="thumb-tray" id="pdpThumbs">
-<!-- Thumbnails Injected Here -->
-</div>
-</div>
-
-<!-- Product Details -->
-<div class="pdp-info-pane">
-<div style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.08em;" id="pdpCatName"></div>
-<h1 class="pdp-heading" id="pdpItemTitle"></h1>
-
-<!-- Ratings & Monthly Bought Badge -->
-<div class="pdp-rating-strip">
-<span class="rating-stars" id="pdpRatingStars">★ 4.9</span>
-<span class="rating-count" id="pdpRatingReviews">(184 Reviews)</span>
-<span class="bought-badge" id="pdpBoughtStats">🔥 420+ bought this month</span>
-</div>
-
-<div class="pdp-price-box">
-<span style="font-size: 1.45rem; font-weight: 700;" id="pdpPriceVal"></span>
-<span style="font-size: 0.95rem; color: var(--muted); text-decoration: line-through;" id="pdpMrpVal"></span>
-<span style="background: #E8F5E9; color: #2E7D32; font-size: 0.74rem; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm);" id="pdpOffVal"></span>
-</div>
-
-<!-- Color Swatches Section -->
-<div class="color-section">
-<div class="section-label">Select Color: <span id="pdpSelectedColorName" style="color: var(--accent); text-transform: none;"></span></div>
-<div class="color-swatches" id="pdpColorsGroup">
-<!-- Swatches Injected Here -->
-</div>
-</div>
-
-<!-- Size Selector: Strictly S, M, L, XL, XXL -->
-<div class="section-label">Select Size:</div>
-<div class="sizes-flex" id="pdpSizesGroup">
-<button class="size-btn-pill selected" onclick="pickPdpSize('S')">S</button>
-<button class="size-btn-pill" onclick="pickPdpSize('M')">M</button>
-<button class="size-btn-pill" onclick="pickPdpSize('L')">L</button>
-<button class="size-btn-pill" onclick="pickPdpSize('XL')">XL</button>
-<button class="size-btn-pill" onclick="pickPdpSize('XXL')">XXL</button>
-</div>
-
-<!-- INLINE ADD TO BAG BUTTON (Positioned below sizes, not floating over the screen) -->
-<button class="btn-pdp-add-inline" onclick="addCurrentPdp()">
-🛍️ Add to Shopping Bag
-</button>
-
-<!-- Specifications -->
-<div class="pdp-block">
-<h4>Description</h4>
-<p id="pdpItemDesc"></p>
-</div>
-<div class="pdp-block">
-<h4>Fabric & Care</h4>
-<p>100% sustainably sourced breathable fabric. Gentle hand wash or dry clean recommended to preserve resham weave.</p>
-</div>
-<div class="pdp-block">
-<h4>Shipping & Delivery</h4>
-<p>Complimentary express dispatch across India within 24–48 hours.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- =========================================
-SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
-========================================== -->
-<div class="drawer-scrim" id="drawerScrim" onclick="toggleBagDrawer(false)"></div>
-<aside class="bag-pane" id="bagDrawer">
-<div class="bag-header">
-<h3 class="bag-title">Shopping Bag (<span id="drawerCount">0</span>)</h3>
-<button onclick="toggleBagDrawer(false)" style="font-size: 1.4rem;">✕</button>
-</div>
-
-<div class="bag-items-scroll" id="bagItemsContainer">
-<!-- Items dynamically populated -->
-</div>
-
-<!-- Checkout Footer -->
-<div class="bag-footer" id="bagFooter">
-<!-- Coupon Section -->
-<div class="coupon-section">
-<div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Promo / Coupon Code</div>
-<div class="coupon-row">
-<input type="text" id="couponInput" class="coupon-box-input" placeholder="e.g. FESTIVE20" />
-<button class="btn-apply" onclick="applyCoupon()">Apply</button>
-</div>
-<div class="pills-group">
-<span class="chip-code" onclick="quickCoupon('FESTIVE20')">FESTIVE20 (20% OFF)</span>
-<span class="chip-code" onclick="quickCoupon('WELCOME10')">WELCOME10 (10% OFF)</span>
-<span class="chip-code" onclick="quickCoupon('FLAT500')">FLAT500</span>
-</div>
-<div id="couponStatus" style="font-size: 0.72rem; margin-top: 4px; font-weight: 600;"></div>
-</div>
-
-<!-- Shipping Information -->
-<div class="cust-group">
-<input type="text" id="custName" class="cust-field" placeholder="Full Name" />
-<input type="text" id="custAddress" class="cust-field" placeholder="City & Pincode" />
-</div>
-
-<!-- Ledger -->
-<div class="price-ledger">
-<div class="ledger-row">
-<span>Bag Subtotal:</span>
-<span id="ledgerSubtotal">₹0</span>
-</div>
-<div class="ledger-row" id="ledgerDiscountRow" style="display: none; color: #2E7D32; font-weight: 600;">
-<span id="ledgerDiscountLabel">Discount:</span>
-<span id="ledgerDiscountVal">-₹0</span>
-</div>
-<div class="ledger-row">
-<span>Shipping:</span>
-<span style="color: #2E7D32; font-weight: 600;">FREE</span>
-</div>
-<div class="ledger-row total">
-<span>Total Payable:</span>
-<span id="ledgerTotal">₹0</span>
-</div>
-</div>
-
-<!-- FINAL ORDER BUTTON (WHATSAPP ONLY) -->
-<button class="btn-wa-order" onclick="submitOrderToWhatsApp()">
-Order on WhatsApp
-</button>
-</div>
-</aside>
-
-<!-- Interactive Toast Notification -->
-<div class="toast" id="toastNotice">Item added to your shopping bag!</div>
-
-<!-- =========================================
-JAVASCRIPT LOGIC
-========================================== -->
-<script>
-// 1. STORE CONFIGURATION
-const WHATSAPP_PHONE = "919876543210"; // Enter your WhatsApp phone number with country code
-const CURRENCY = "₹";
-
-// 2. PRODUCT DATABASE (High Quality Real Fashion Images + Color Options)
-const products = [
-{
-id: "ZY-101",
-title: "Mulmul Embroidered Anarkali Set",
-category: "Kurtas",
-price: 2499,
-mrp: 3499,
-tag: "Bestseller",
-rating: "4.9",
-reviews: "328",
-boughtThisMonth: "640+ bought this month",
-images: [
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80"
-],
-colors: [
-{ name: "Sage Green", hex: "#8A9A86" },
-{ name: "Blush Pink", hex: "#E8C5C8" },
-{ name: "Ivory Cream", hex: "#FDFBF7" }
-],
-description: "Handcrafted pure mulmul cotton kurta with delicate hand chikankari embroidery, paired with relaxed pants and matching dupatta."
-},
-{
-id: "ZY-102",
-title: "Micro-Pleated Satin Evening Slip Dress",
-category: "Dresses",
-price: 2799,
-mrp: 3899,
-tag: "Trending",
-rating: "4.8",
-reviews: "214",
-boughtThisMonth: "420+ bought this month",
-images: [
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
-],
-colors: [
-{ name: "Champagne Gold", hex: "#E6D3B3" },
-{ name: "Midnight Noir", hex: "#1C1B1A" },
-{ name: "Rose Wine", hex: "#8E4A49" }
-],
-description: "Fluid champagne satin evening slip dress featuring fine micro-pleating, square cowl neckline, and adjustable shoulder straps."
-},
-{
-id: "ZY-103",
-title: "Belgian Linen Blazer & Trouser Co-ord",
-category: "Co-ords",
-price: 3299,
-mrp: 4499,
-tag: "New",
-rating: "4.7",
-reviews: "186",
-boughtThisMonth: "310+ bought this month",
-images: [
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80"
-],
-colors: [
-{ name: "Warm Oatmeal", hex: "#D6C7B2" },
-{ name: "Earthy Olive", hex: "#686D5A" },
-{ name: "Charcoal Slate", hex: "#3A3D40" }
-],
-description: "Two-piece premium linen set with an oversized single-breasted blazer and matching high-waisted pleated trousers."
-},
-{
-id: "ZY-104",
-title: "Hand-Painted Floral Organza Saree",
-category: "Sarees",
-price: 4499,
-mrp: 5999,
-tag: "Exclusive",
-rating: "5.0",
-reviews: "92",
-boughtThisMonth: "190+ bought this month",
-images: [
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80"
-],
-colors: [
-{ name: "Powder Pink", hex: "#F3D3D9" },
-{ name: "Sky Lavender", hex: "#DCD0E8" },
-{ name: "Mint Whisper", hex: "#D1E7DD" }
-],
-description: "Pure organza silk saree hand-painted with pastel botanical blooms and finished with a fine scalloped golden zari border."
-},
-{
-id: "ZY-105",
-title: "Tissue Chanderi Straight Kurta Set",
-category: "Kurtas",
-price: 2999,
-mrp: 3999,
-tag: "Festive Edit",
-rating: "4.8",
-reviews: "155",
-boughtThisMonth: "280+ bought this month",
-images: [
-"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80"
-],
-colors: [
-{ name: "Emerald Mint", hex: "#7DA591" },
-{ name: "Golden Ochre", hex: "#C79D4C" },
-{ name: "Royal Peach", hex: "#E8B298" }
-],
-description: "Lustrous sage green tissue chanderi kurta detailed with fine silver tilla work along the neckline and cuffs. Paired with pants."
-},
-{
-id: "ZY-106",
-title: "Tiered Bohemian Floral Maxi Dress",
-category: "Dresses",
-price: 2199,
-mrp: 2999,
-tag: "Must-Have",
-rating: "4.7",
-reviews: "260",
-boughtThisMonth: "520+ bought this month",
-images: [
-"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80"
-],
-colors: [
-{ name: "Floral Meadow", hex: "#D9822B" },
-{ name: "Rust Terracotta", hex: "#A94A42" },
-{ name: "Indigo Dusk", hex: "#2C3E50" }
-],
-description: "Breathable tiered georgette midi with flutter sleeves and elasticated waist. Ideal for relaxed day outings."
-}
-];
-
-// COUPONS
-const COUPONS = {
-"FESTIVE20": { type: "percent", val: 20, min: 0, desc: "20% Discount" },
-"WELCOME10": { type: "percent", val: 10, min: 0, desc: "10% Discount" },
-"FLAT500": { type: "flat", val: 500, min: 2000, desc: "₹500 Off (Min ₹2,000)" }
-};
-
-// STATE
-let currentCategory = "All";
-let cart = [];
-let appliedCoupon = null;
-let currentProduct = null;
-let currentSize = "S";
-let currentColor = null;
-let carouselTimers = {};
-
-// 3. RENDER CATALOG (AUTO-CAROUSEL PER CARD)
-function renderCatalog() {
-Object.values(carouselTimers).forEach(clearInterval);
-carouselTimers = {};
-
-const list = currentCategory === "All"
-? products
-: products.filter(p => p.category === currentCategory);
-
-const grid = document.getElementById("productGrid");
-grid.innerHTML = list.map(item => {
-const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
-return `
-<article class="prod-card">
-<div class="carousel-box" onclick="showProductDetails('${item.id}')">
-${item.tag ? `<span class="tag-chip">${item.tag}</span>` : ''}
-
-<div class="carousel-track" id="track-${item.id}">
-${item.images.map(imgUrl => `
-<div class="carousel-slide">
-<img src="${imgUrl}" alt="${item.title}" loading="lazy">
-</div>
-`).join("")}
-</div>
-
-<div class="carousel-dots" id="dots-${item.id}">
-${item.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></span>`).join("")}
-</div>
-</div>
-
-<div class="prod-info">
-<!-- Rating & Buyers -->
-<div class="rating-row">
-<span class="rating-stars">★ ${item.rating}</span>
-<span class="rating-count">(${item.reviews})</span>
-</div>
-<div class="bought-badge">🔥 ${item.boughtThisMonth}</div>
-
-<span class="prod-cat">${item.category}</span>
-<h3 class="prod-name" title="${item.title}">${item.title}</h3>
-
-<div class="prod-price-row">
-<span class="val-sale">${CURRENCY}${item.price.toLocaleString('en-IN')}</span>
-<span class="val-mrp">${CURRENCY}${item.mrp.toLocaleString('en-IN')}</span>
-<span class="val-off">${offPct}% OFF</span>
-</div>
-
-<!-- SINGLE MERGED ADD TO CART BUTTON -->
-<button class="btn-add-cart-single" onclick="showProductDetails('${item.id}')">
-Add to Cart
-</button>
-</div>
-</article>
-`;
-}).join("");
-
-list.forEach(item => {
-startCardSlideLoop(item.id, item.images.length);
-});
-}
-
-function startCardSlideLoop(id, count) {
-let activeIndex = 0;
-const track = document.getElementById(`track-${id}`);
-const dotsContainer = document.getElementById(`dots-${id}`);
-
-if (!track || count <= 1) return;
-
-const timer = setInterval(() => {
-activeIndex = (activeIndex + 1) % count;
-track.style.transform = `translateX(-${activeIndex * 100}%)`;
-
-if (dotsContainer) {
-const dots = dotsContainer.querySelectorAll(".c-dot");
-dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
-}
-}, 3200 + Math.random() * 800);
-
-carouselTimers[id] = timer;
-}
-
-// 4. CATEGORY SELECTION
-function setCategory(cat) {
-currentCategory = cat;
-document.querySelectorAll(".cat-pill").forEach(btn => {
-btn.classList.toggle("active", btn.textContent.includes(cat) || (cat === "All" && btn.textContent.includes("All")));
-});
-renderCatalog();
-}
-
-// 5. DEDICATED PRODUCT DETAILS PAGE (PDP)
-function showProductDetails(id) {
-const item = products.find(p => p.id === id);
-if (!item) return;
-
-currentProduct = item;
-currentSize = "S";
-currentColor = item.colors[0].name;
-
-document.getElementById("pdpCatName").textContent = item.category;
-document.getElementById("pdpItemTitle").textContent = item.title;
-document.getElementById("pdpRatingStars").textContent = `★ ${item.rating}`;
-document.getElementById("pdpRatingReviews").textContent = `(${item.reviews} Reviews)`;
-document.getElementById("pdpBoughtStats").textContent = `🔥 ${item.boughtThisMonth}`;
-
-document.getElementById("pdpPriceVal").textContent = `${CURRENCY}${item.price.toLocaleString('en-IN')}`;
-document.getElementById("pdpMrpVal").textContent = `${CURRENCY}${item.mrp.toLocaleString('en-IN')}`;
-
-const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
-document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
-document.getElementById("pdpItemDesc").textContent = item.description;
-
-// Main image & thumbs
-const mainImg = document.getElementById("pdpMainImg");
-mainImg.src = item.images[0];
-
-const thumbTray = document.getElementById("pdpThumbs");
-thumbTray.innerHTML = item.images.map((img, idx) => `
-<div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="setPdpPhoto('${img}', this)">
-<img src="${img}" alt="Thumbnail">
-</div>
-`).join("");
-
-// Colors group
-const colorGroup = document.getElementById("pdpColorsGroup");
-document.getElementById("pdpSelectedColorName").textContent = currentColor;
-colorGroup.innerHTML = item.colors.map((c, idx) => `
-<button
-class="color-swatch-btn ${idx === 0 ? 'selected' : ''}"
-style="background-color: ${c.hex};"
-title="${c.name}"
-onclick="pickPdpColor('${c.name}', this)">
-</button>
-`).join("");
-
-// Reset sizes to S
-pickPdpSize("S");
-
-// Switch views
-document.getElementById("catalogView").classList.remove("active");
-document.getElementById("pdpView").classList.add("active");
-window.scrollTo({ top: 0, behavior: "smooth" });
-window.location.hash = `item-${id}`;
-}
-
-function setPdpPhoto(src, thumbElement) {
-document.getElementById("pdpMainImg").src = src;
-document.querySelectorAll(".thumb-item").forEach(t => t.classList.remove("active"));
-thumbElement.classList.add("active");
-}
-
-function pickPdpColor(colorName, btnElement) {
-currentColor = colorName;
-document.getElementById("pdpSelectedColorName").textContent = colorName;
-document.querySelectorAll(".color-swatch-btn").forEach(b => b.classList.remove("selected"));
-btnElement.classList.add("selected");
-}
-
-function pickPdpSize(sz) {
-currentSize = sz;
-document.querySelectorAll(".size-btn-pill").forEach(b => {
-b.classList.toggle("selected", b.textContent === sz);
-});
-}
-
-function openHomeView() {
-document.getElementById("pdpView").classList.remove("active");
-document.getElementById("catalogView").classList.add("active");
-window.location.hash = "";
-window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-window.addEventListener("hashchange", () => {
-if (!window.location.hash) openHomeView();
-});
-
-// 6. CART MANAGEMENT
-function addCurrentPdp() {
-if (currentProduct) {
-addToBag(currentProduct, currentSize, currentColor);
-}
-}
-
-function addToBag(item, size, color) {
-const match = cart.find(c => c.id === item.id && c.size === size && c.color === color);
-if (match) {
-match.qty += 1;
-} else {
-cart.push({ ...item, size, color, qty: 1 });
-}
-showToast(`Added: ${item.title} (${color} / ${size})`);
-updateBagDisplay();
-toggleBagDrawer(true);
-}
-
-function changeQty(idx, delta) {
-cart[idx].qty += delta;
-if (cart[idx].qty <= 0) cart.splice(idx, 1);
-updateBagDisplay();
-}
-
-function toggleBagDrawer(open) {
-document.getElementById("bagDrawer").classList.toggle("open", open);
-document.getElementById("drawerScrim").classList.toggle("open", open);
-document.body.style.overflow = open ? "hidden" : "auto";
-}
-
-document.getElementById("openBagTrigger").addEventListener("click", () => toggleBagDrawer(true));
-
-// 7. COUPON LOGIC
-function quickCoupon(code) {
-document.getElementById("couponInput").value = code;
-applyCoupon();
-}
-
-function applyCoupon() {
-const input = document.getElementById("couponInput");
-const code = input.value.trim().toUpperCase();
-const status = document.getElementById("couponStatus");
-const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-if (!code) {
-status.style.color = "#D9534F";
-status.textContent = "Please enter a code.";
-return;
-}
-
-if (!COUPONS[code]) {
-status.style.color = "#D9534F";
-status.textContent = "Invalid code. Try FESTIVE20 or WELCOME10.";
-appliedCoupon = null;
-updateBagDisplay();
-return;
-}
-
-const rule = COUPONS[code];
-if (subtotal < rule.min) {
-status.style.color = "#D9534F";
-status.textContent = `Requires minimum bag value of ${CURRENCY}${rule.min}.`;
-appliedCoupon = null;
-updateBagDisplay();
-return;
-}
-
-appliedCoupon = { code, ...rule };
-status.style.color = "#2E7D32";
-status.textContent = `✓ Code '${code}' applied! (${rule.desc})`;
-updateBagDisplay();
-}
-
-// 8. UPDATE CART DISPLAY
-function updateBagDisplay() {
-const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
-const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-
-document.getElementById("headerBagCount").textContent = totalCount;
-document.getElementById("drawerCount").textContent = totalCount;
-document.getElementById("ledgerSubtotal").textContent = `${CURRENCY}${subtotal.toLocaleString('en-IN')}`;
-
-// Calculate discount
-let discountAmount = 0;
-if (appliedCoupon && subtotal > 0) {
-discountAmount = appliedCoupon.type === "percent"
-? Math.round((subtotal * appliedCoupon.val) / 100)
-: appliedCoupon.val;
-}
-
-const discountRow = document.getElementById("ledgerDiscountRow");
-if (discountAmount > 0) {
-discountRow.style.display = "flex";
-document.getElementById("ledgerDiscountLabel").textContent = `Discount (${appliedCoupon.code}):`;
-document.getElementById("ledgerDiscountVal").textContent = `-${CURRENCY}${discountAmount.toLocaleString('en-IN')}`;
-} else {
-discountRow.style.display = "none";
-}
-
-const totalPayable = Math.max(0, subtotal - discountAmount);
-document.getElementById("ledgerTotal").textContent = `${CURRENCY}${totalPayable.toLocaleString('en-IN')}`;
-
-const container = document.getElementById("bagItemsContainer");
-const footer = document.getElementById("bagFooter");
-
-if (cart.length === 0) {
-container.innerHTML = `
-<div style="text-align:center; padding: 50px 10px; color: var(--muted);">
-<div style="font-size: 2rem; margin-bottom: 6px;">🛍️</div>
-<div style="font-size: 0.95rem; font-weight: 600; color: var(--noir);">Your shopping bag is empty</div>
-<div style="font-size: 0.8rem; margin-top: 4px;">Explore our pieces and add your favorites.</div>
-</div>
-`;
-footer.style.display = "none";
-return;
-}
-
-footer.style.display = "block";
-container.innerHTML = cart.map((item, idx) => `
-<div class="bag-row">
-<div class="bag-row-thumb">
-<img src="${item.images[0]}" alt="${item.title}">
-</div>
-<div class="bag-row-info">
-<div>
-<div style="font-size: 0.84rem; font-weight: 600;">${item.title}</div>
-<div style="font-size: 0.72rem; color: var(--muted); margin: 2px 0;">
-Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong>
-</div>
-</div>
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4px;">
-<span style="font-weight:700; font-size: 0.88rem;">${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}</span>
-<div class="qty-wrap">
-<button class="step-btn" onclick="changeQty(${idx}, -1)">−</button>
-<span style="font-size:0.85rem; font-weight:600;">${item.qty}</span>
-<button class="step-btn" onclick="changeQty(${idx}, 1)">+</button>
-</div>
-</div>
-</div>
-</div>
-`).join("");
-}
-
-// 9. FINAL STEP: ORDER ON WHATSAPP ONLY
-function submitOrderToWhatsApp() {
-if (cart.length === 0) {
-alert("Your shopping bag is empty.");
-return;
-}
-
-const name = document.getElementById("custName").value.trim() || "Customer";
-const address = document.getElementById("custAddress").value.trim() || "Not specified";
-
-const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-let discount = 0;
-if (appliedCoupon && subtotal > 0) {
-discount = appliedCoupon.type === "percent"
-? Math.round((subtotal * appliedCoupon.val) / 100)
-: appliedCoupon.val;
-}
-const payable = Math.max(0, subtotal - discount);
-
-const itemsSummary = cart.map((item, i) =>
-`${i + 1}. *${item.title}*\n Color: ${item.color} | Size: ${item.size} | Qty: ${item.qty} | Price: ${CURRENCY}${item.price * item.qty}`
-).join("\n\n");
-
-const message =
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    Festive Pret Collection • Use Code <strong>FESTIVE20</strong> for 20% Off
+  </div>
+
+  <!-- Sticky Header -->
+  <header class="header">
+    <div class="brand-logo" onclick="openHomeView()">ZAYA</div>
+    <button class="bag-btn" id="openBagTrigger">
+      <span>🛍️ Bag</span>
+      <span class="badge-count" id="headerBagCount">0</span>
+    </button>
+  </header>
+
+  <!-- =========================================
+       VIEW 1: CATALOG VIEW
+  ========================================== -->
+  <section id="catalogView" class="view-container active">
+    <div class="hero-card">
+      <div class="hero-tag">New Season '26</div>
+      <h1 class="hero-title">Timeless Grace & Modern Pret</h1>
+      <p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to customize your color & size, and order on WhatsApp.</p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="cat-scroll">
+      <button class="cat-pill active" onclick="setCategory('All')">All Pieces</button>
+      <button class="cat-pill" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
+      <button class="cat-pill" onclick="setCategory('Dresses')">Western Dresses</button>
+      <button class="cat-pill" onclick="setCategory('Co-ords')">Co-ord Sets</button>
+      <button class="cat-pill" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
+    </div>
+
+    <!-- Product Grid -->
+    <main class="main-wrap">
+      <div class="grid-layout" id="productGrid">
+        <!-- Products Injected Here -->
+      </div>
+    </main>
+  </section>
+
+  <!-- =========================================
+       VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
+  ========================================== -->
+  <section id="pdpView" class="view-container">
+    <div class="pdp-container">
+      <div class="back-nav" onclick="openHomeView()">
+        <span>← Back to All Pieces</span>
+      </div>
+
+      <div class="pdp-split">
+        <!-- Media Gallery -->
+        <div class="pdp-media-pane">
+          <div class="pdp-large-preview">
+            <img id="pdpMainImg" src="" alt="Selected Product Preview">
+          </div>
+          <div class="thumb-tray" id="pdpThumbs">
+            <!-- Thumbnails Injected Here -->
+          </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="pdp-info-pane">
+          <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.08em;" id="pdpCatName"></div>
+          <h1 class="pdp-heading" id="pdpItemTitle"></h1>
+
+          <!-- Ratings & Monthly Bought Badge -->
+          <div class="pdp-rating-strip">
+            <span class="rating-stars" id="pdpRatingStars">★ 4.9</span>
+            <span class="rating-count" id="pdpRatingReviews">(184 Reviews)</span>
+            <span class="bought-badge" id="pdpBoughtStats">🔥 420+ bought this month</span>
+          </div>
+
+          <div class="pdp-price-box">
+            <span style="font-size: 1.45rem; font-weight: 700;" id="pdpPriceVal"></span>
+            <span style="font-size: 0.95rem; color: var(--muted); text-decoration: line-through;" id="pdpMrpVal"></span>
+            <span style="background: #E8F5E9; color: #2E7D32; font-size: 0.74rem; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm);" id="pdpOffVal"></span>
+          </div>
+
+          <!-- Color Swatches Section -->
+          <div class="color-section">
+            <div class="section-label">Select Color: <span id="pdpSelectedColorName" style="color: var(--accent); text-transform: none;"></span></div>
+            <div class="color-swatches" id="pdpColorsGroup">
+              <!-- Swatches Injected Here -->
+            </div>
+          </div>
+
+          <!-- Size Selector: Strictly S, M, L, XL, XXL -->
+          <div class="section-label">Select Size:</div>
+          <div class="sizes-flex" id="pdpSizesGroup">
+            <button class="size-btn-pill selected" onclick="pickPdpSize('S')">S</button>
+            <button class="size-btn-pill" onclick="pickPdpSize('M')">M</button>
+            <button class="size-btn-pill" onclick="pickPdpSize('L')">L</button>
+            <button class="size-btn-pill" onclick="pickPdpSize('XL')">XL</button>
+            <button class="size-btn-pill" onclick="pickPdpSize('XXL')">XXL</button>
+          </div>
+
+          <!-- INLINE ADD TO BAG BUTTON (Placed inside page flow, no floating popup) -->
+          <button class="btn-pdp-add-inline" onclick="addCurrentPdp()">
+            🛍️ Add to Shopping Bag
+          </button>
+
+          <!-- Specifications -->
+          <div class="pdp-block">
+            <h4>Description</h4>
+            <p id="pdpItemDesc"></p>
+          </div>
+          <div class="pdp-block">
+            <h4>Fabric & Care</h4>
+            <p>100% sustainably sourced breathable fabric. Gentle hand wash or dry clean recommended to preserve resham weave.</p>
+          </div>
+          <div class="pdp-block">
+            <h4>Shipping & Delivery</h4>
+            <p>Complimentary express dispatch across India within 24–48 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
+  ========================================== -->
+  <div class="drawer-scrim" id="drawerScrim" onclick="toggleBagDrawer(false)"></div>
+  <aside class="bag-pane" id="bagDrawer">
+    <div class="bag-header">
+      <h3 class="bag-title">Shopping Bag (<span id="drawerCount">0</span>)</h3>
+      <button onclick="toggleBagDrawer(false)" style="font-size: 1.4rem;">✕</button>
+    </div>
+
+    <div class="bag-items-scroll" id="bagItemsContainer">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <!-- Checkout Footer -->
+    <div class="bag-footer" id="bagFooter">
+      <!-- Coupon Section -->
+      <div class="coupon-section">
+        <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Promo / Coupon Code</div>
+        <div class="coupon-row">
+          <input type="text" id="couponInput" class="coupon-box-input" placeholder="e.g. FESTIVE20" />
+          <button class="btn-apply" onclick="applyCoupon()">Apply</button>
+        </div>
+        <div class="pills-group">
+          <span class="chip-code" onclick="quickCoupon('FESTIVE20')">FESTIVE20 (20% OFF)</span>
+          <span class="chip-code" onclick="quickCoupon('WELCOME10')">WELCOME10 (10% OFF)</span>
+          <span class="chip-code" onclick="quickCoupon('FLAT500')">FLAT500</span>
+        </div>
+        <div id="couponStatus" style="font-size: 0.72rem; margin-top: 4px; font-weight: 600;"></div>
+      </div>
+
+      <!-- Shipping Information -->
+      <div class="cust-group">
+        <input type="text" id="custName" class="cust-field" placeholder="Full Name" />
+        <input type="text" id="custAddress" class="cust-field" placeholder="City & Pincode" />
+      </div>
+
+      <!-- Ledger -->
+      <div class="price-ledger">
+        <div class="ledger-row">
+          <span>Bag Subtotal:</span>
+          <span id="ledgerSubtotal">₹0</span>
+        </div>
+        <div class="ledger-row" id="ledgerDiscountRow" style="display: none; color: #2E7D32; font-weight: 600;">
+          <span id="ledgerDiscountLabel">Discount:</span>
+          <span id="ledgerDiscountVal">-₹0</span>
+        </div>
+        <div class="ledger-row">
+          <span>Shipping:</span>
+          <span style="color: #2E7D32; font-weight: 600;">FREE</span>
+        </div>
+        <div class="ledger-row total">
+          <span>Total Payable:</span>
+          <span id="ledgerTotal">₹0</span>
+        </div>
+      </div>
+
+      <!-- FINAL ORDER BUTTON (WHATSAPP ONLY) -->
+      <button class="btn-wa-order" onclick="submitOrderToWhatsApp()">
+        Order on WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- Interactive Toast Notification -->
+  <div class="toast" id="toastNotice">Item added to your shopping bag!</div>
+
+  <!-- =========================================
+       JAVASCRIPT LOGIC
+  ========================================== -->
+  <script>
+    // 1. STORE CONFIGURATION
+    const WHATSAPP_PHONE = "919876543210"; // Enter your WhatsApp phone number with country code
+    const CURRENCY = "₹";
+
+    // 2. PRODUCT DATABASE (Formatted 3:4 Portrait URLs for Crisp Display)
+    const products = [
+      {
+        id: "ZY-101",
+        title: "Mulmul Embroidered Anarkali Set",
+        category: "Kurtas",
+        price: 2499,
+        mrp: 3499,
+        tag: "Bestseller",
+        rating: "4.9",
+        reviews: "328",
+        boughtThisMonth: "640+ bought this month",
+        images: [
+          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&h=800&q=80"
+        ],
+        colors: [
+          { name: "Sage Green", hex: "#8A9A86" },
+          { name: "Blush Pink", hex: "#E8C5C8" },
+          { name: "Ivory Cream", hex: "#FDFBF7" }
+        ],
+        description: "Handcrafted pure mulmul cotton kurta with delicate hand chikankari embroidery, paired with relaxed pants and matching dupatta."
+      },
+      {
+        id: "ZY-102",
+        title: "Micro-Pleated Satin Evening Slip Dress",
+        category: "Dresses",
+        price: 2799,
+        mrp: 3899,
+        tag: "Trending",
+        rating: "4.8",
+        reviews: "214",
+        boughtThisMonth: "420+ bought this month",
+        images: [
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&h=800&q=80"
+        ],
+        colors: [
+          { name: "Champagne Gold", hex: "#E6D3B3" },
+          { name: "Midnight Noir", hex: "#1C1B1A" },
+          { name: "Rose Wine", hex: "#8E4A49" }
+        ],
+        description: "Fluid champagne satin evening slip dress featuring fine micro-pleating, square cowl neckline, and adjustable shoulder straps."
+      },
+      {
+        id: "ZY-103",
+        title: "Belgian Linen Blazer & Trouser Co-ord",
+        category: "Co-ords",
+        price: 3299,
+        mrp: 4499,
+        tag: "New",
+        rating: "4.7",
+        reviews: "186",
+        boughtThisMonth: "310+ bought this month",
+        images: [
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80"
+        ],
+        colors: [
+          { name: "Warm Oatmeal", hex: "#D6C7B2" },
+          { name: "Earthy Olive", hex: "#686D5A" },
+          { name: "Charcoal Slate", hex: "#3A3D40" }
+        ],
+        description: "Two-piece premium linen set with an oversized single-breasted blazer and matching high-waisted pleated trousers."
+      },
+      {
+        id: "ZY-104",
+        title: "Hand-Painted Floral Organza Saree",
+        category: "Sarees",
+        price: 4499,
+        mrp: 5999,
+        tag: "Exclusive",
+        rating: "5.0",
+        reviews: "92",
+        boughtThisMonth: "190+ bought this month",
+        images: [
+          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&h=800&q=80"
+        ],
+        colors: [
+          { name: "Powder Pink", hex: "#F3D3D9" },
+          { name: "Sky Lavender", hex: "#DCD0E8" },
+          { name: "Mint Whisper", hex: "#D1E7DD" }
+        ],
+        description: "Pure organza silk saree hand-painted with pastel botanical blooms and finished with a fine scalloped golden zari border."
+      },
+      {
+        id: "ZY-105",
+        title: "Tissue Chanderi Straight Kurta Set",
+        category: "Kurtas",
+        price: 2999,
+        mrp: 3999,
+        tag: "Festive Edit",
+        rating: "4.8",
+        reviews: "155",
+        boughtThisMonth: "280+ bought this month",
+        images: [
+          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&h=800&q=80"
+        ],
+        colors: [
+          { name: "Emerald Mint", hex: "#7DA591" },
+          { name: "Golden Ochre", hex: "#C79D4C" },
+          { name: "Royal Peach", hex: "#E8B298" }
+        ],
+        description: "Lustrous sage green tissue chanderi kurta detailed with fine silver tilla work along the neckline and cuffs. Paired with pants."
+      },
+      {
+        id: "ZY-106",
+        title: "Tiered Bohemian Floral Maxi Dress",
+        category: "Dresses",
+        price: 2199,
+        mrp: 2999,
+        tag: "Must-Have",
+        rating: "4.7",
+        reviews: "260",
+        boughtThisMonth: "520+ bought this month",
+        images: [
+          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&h=800&q=80",
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80"
+        ],
+        colors: [
+          { name: "Floral Meadow", hex: "#D9822B" },
+          { name: "Rust Terracotta", hex: "#A94A42" },
+          { name: "Indigo Dusk", hex: "#2C3E50" }
+        ],
+        description: "Breathable tiered georgette midi with flutter sleeves and elasticated waist. Ideal for relaxed day outings."
+      }
+    ];
+
+    // COUPONS
+    const COUPONS = {
+      "FESTIVE20": { type: "percent", val: 20, min: 0, desc: "20% Discount" },
+      "WELCOME10": { type: "percent", val: 10, min: 0, desc: "10% Discount" },
+      "FLAT500":   { type: "flat", val: 500, min: 2000, desc: "₹500 Off (Min ₹2,000)" }
+    };
+
+    // APP STATE
+    let currentCategory = "All";
+    let cart = [];
+    let appliedCoupon = null;
+    let currentProduct = null;
+    let currentSize = "S";
+    let currentColor = null;
+    let carouselTimers = {};
+
+    // 3. RENDER CATALOG WITH AUTO-CAROUSEL & RATINGS
+    function renderCatalog() {
+      Object.values(carouselTimers).forEach(clearInterval);
+      carouselTimers = {};
+
+      const list = currentCategory === "All"
+        ? products
+        : products.filter(p => p.category === currentCategory);
+
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = list.map(item => {
+        const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
+        return `
+          <article class="prod-card">
+            <div class="carousel-box" onclick="showProductDetails('${item.id}')">
+              ${item.tag ? `<span class="tag-chip">${item.tag}</span>` : ''}
+              
+              <div class="carousel-track" id="track-${item.id}">
+                ${item.images.map(imgUrl => `
+                  <div class="carousel-slide">
+                    <img src="${imgUrl}" alt="${item.title}" loading="lazy">
+                  </div>
+                `).join("")}
+              </div>
+
+              <div class="carousel-dots" id="dots-${item.id}">
+                ${item.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></span>`).join("")}
+              </div>
+            </div>
+
+            <div class="prod-info">
+              <!-- Rating & Buyers -->
+              <div class="rating-row">
+                <span class="rating-stars">★ ${item.rating}</span>
+                <span class="rating-count">(${item.reviews})</span>
+              </div>
+              <div class="bought-badge">🔥 ${item.boughtThisMonth}</div>
+
+              <span class="prod-cat">${item.category}</span>
+              <h3 class="prod-name" title="${item.title}">${item.title}</h3>
+              
+              <div class="prod-price-row">
+                <span class="val-sale">${CURRENCY}${item.price.toLocaleString('en-IN')}</span>
+                <span class="val-mrp">${CURRENCY}${item.mrp.toLocaleString('en-IN')}</span>
+                <span class="val-off">${offPct}% OFF</span>
+              </div>
+
+              <!-- SINGLE MERGED ADD TO CART BUTTON -->
+              <button class="btn-add-cart-single" onclick="showProductDetails('${item.id}')">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      list.forEach(item => {
+        startCardSlideLoop(item.id, item.images.length);
+      });
+    }
+
+    function startCardSlideLoop(id, count) {
+      let activeIndex = 0;
+      const track = document.getElementById(`track-${id}`);
+      const dotsContainer = document.getElementById(`dots-${id}`);
+
+      if (!track || count <= 1) return;
+
+      const timer = setInterval(() => {
+        activeIndex = (activeIndex + 1) % count;
+        track.style.transform = `translateX(-${activeIndex * 100}%)`;
+
+        if (dotsContainer) {
+          const dots = dotsContainer.querySelectorAll(".c-dot");
+          dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+        }
+      }, 3200 + Math.random() * 800);
+
+      carouselTimers[id] = timer;
+    }
+
+    // 4. CATEGORY SELECTION
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll(".cat-pill").forEach(btn => {
+        btn.classList.toggle("active", btn.textContent.includes(cat) || (cat === "All" && btn.textContent.includes("All")));
+      });
+      renderCatalog();
+    }
+
+    // 5. DEDICATED PRODUCT DETAILS PAGE (PDP)
+    function showProductDetails(id) {
+      const item = products.find(p => p.id === id);
+      if (!item) return;
+
+      currentProduct = item;
+      currentSize = "S";
+      currentColor = item.colors[0].name;
+
+      document.getElementById("pdpCatName").textContent = item.category;
+      document.getElementById("pdpItemTitle").textContent = item.title;
+      document.getElementById("pdpRatingStars").textContent = `★ ${item.rating}`;
+      document.getElementById("pdpRatingReviews").textContent = `(${item.reviews} Reviews)`;
+      document.getElementById("pdpBoughtStats").textContent = `🔥 ${item.boughtThisMonth}`;
+
+      document.getElementById("pdpPriceVal").textContent = `${CURRENCY}${item.price.toLocaleString('en-IN')}`;
+      document.getElementById("pdpMrpVal").textContent = `${CURRENCY}${item.mrp.toLocaleString('en-IN')}`;
+      
+      const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
+      document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
+      document.getElementById("pdpItemDesc").textContent = item.description;
+
+      // Main image & thumbnails
+      const mainImg = document.getElementById("pdpMainImg");
+      mainImg.src = item.images[0];
+
+      const thumbTray = document.getElementById("pdpThumbs");
+      thumbTray.innerHTML = item.images.map((img, idx) => `
+        <div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="setPdpPhoto('${img}', this)">
+          <img src="${img}" alt="Thumbnail">
+        </div>
+      `).join("");
+
+      // Colors group
+      const colorGroup = document.getElementById("pdpColorsGroup");
+      document.getElementById("pdpSelectedColorName").textContent = currentColor;
+      colorGroup.innerHTML = item.colors.map((c, idx) => `
+        <button 
+          class="color-swatch-btn ${idx === 0 ? 'selected' : ''}" 
+          style="background-color: ${c.hex};" 
+          title="${c.name}"
+          onclick="pickPdpColor('${c.name}', this)">
+        </button>
+      `).join("");
+
+      // Reset sizes to S
+      pickPdpSize("S");
+
+      // Switch views
+      document.getElementById("catalogView").classList.remove("active");
+      document.getElementById("pdpView").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.location.hash = `item-${id}`;
+    }
+
+    function setPdpPhoto(src, thumbElement) {
+      document.getElementById("pdpMainImg").src = src;
+      document.querySelectorAll(".thumb-item").forEach(t => t.classList.remove("active"));
+      thumbElement.classList.add("active");
+    }
+
+    function pickPdpColor(colorName, btnElement) {
+      currentColor = colorName;
+      document.getElementById("pdpSelectedColorName").textContent = colorName;
+      document.querySelectorAll(".color-swatch-btn").forEach(b => b.classList.remove("selected"));
+      btnElement.classList.add("selected");
+    }
+
+    function pickPdpSize(sz) {
+      currentSize = sz;
+      document.querySelectorAll(".size-btn-pill").forEach(b => {
+        b.classList.toggle("selected", b.textContent === sz);
+      });
+    }
+
+    function openHomeView() {
+      document.getElementById("pdpView").classList.remove("active");
+      document.getElementById("catalogView").classList.add("active");
+      window.location.hash = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.addEventListener("hashchange", () => {
+      if (!window.location.hash) openHomeView();
+    });
+
+    // 6. CART MANAGEMENT
+    function addCurrentPdp() {
+      if (currentProduct) {
+        addToBag(currentProduct, currentSize, currentColor);
+      }
+    }
+
+    function addToBag(item, size, color) {
+      const match = cart.find(c => c.id === item.id && c.size === size && c.color === color);
+      if (match) {
+        match.qty += 1;
+      } else {
+        cart.push({ ...item, size, color, qty: 1 });
+      }
+      showToast(`Added: ${item.title} (${color} / ${size})`);
+      updateBagDisplay();
+      toggleBagDrawer(true);
+    }
+
+    function changeQty(idx, delta) {
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      updateBagDisplay();
+    }
+
+    function toggleBagDrawer(open) {
+      document.getElementById("bagDrawer").classList.toggle("open", open);
+      document.getElementById("drawerScrim").classList.toggle("open", open);
+      document.body.style.overflow = open ? "hidden" : "auto";
+    }
+
+    document.getElementById("openBagTrigger").addEventListener("click", () => toggleBagDrawer(true));
+
+    // 7. COUPON LOGIC
+    function quickCoupon(code) {
+      document.getElementById("couponInput").value = code;
+      applyCoupon();
+    }
+
+    function applyCoupon() {
+      const input = document.getElementById("couponInput");
+      const code = input.value.trim().toUpperCase();
+      const status = document.getElementById("couponStatus");
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      if (!code) {
+        status.style.color = "#D9534F";
+        status.textContent = "Please enter a code.";
+        return;
+      }
+
+      if (!COUPONS[code]) {
+        status.style.color = "#D9534F";
+        status.textContent = "Invalid code. Try FESTIVE20 or WELCOME10.";
+        appliedCoupon = null;
+        updateBagDisplay();
+        return;
+      }
+
+      const rule = COUPONS[code];
+      if (subtotal < rule.min) {
+        status.style.color = "#D9534F";
+        status.textContent = `Requires minimum bag value of ${CURRENCY}${rule.min}.`;
+        appliedCoupon = null;
+        updateBagDisplay();
+        return;
+      }
+
+      appliedCoupon = { code, ...rule };
+      status.style.color = "#2E7D32";
+      status.textContent = `✓ Code '${code}' applied! (${rule.desc})`;
+      updateBagDisplay();
+    }
+
+    // 8. UPDATE CART DISPLAY
+    function updateBagDisplay() {
+      const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+      document.getElementById("headerBagCount").textContent = totalCount;
+      document.getElementById("drawerCount").textContent = totalCount;
+      document.getElementById("ledgerSubtotal").textContent = `${CURRENCY}${subtotal.toLocaleString('en-IN')}`;
+
+      // Calculate discount
+      let discountAmount = 0;
+      if (appliedCoupon && subtotal > 0) {
+        discountAmount = appliedCoupon.type === "percent"
+          ? Math.round((subtotal * appliedCoupon.val) / 100)
+          : appliedCoupon.val;
+      }
+
+      const discountRow = document.getElementById("ledgerDiscountRow");
+      if (discountAmount > 0) {
+        discountRow.style.display = "flex";
+        document.getElementById("ledgerDiscountLabel").textContent = `Discount (${appliedCoupon.code}):`;
+        document.getElementById("ledgerDiscountVal").textContent = `-${CURRENCY}${discountAmount.toLocaleString('en-IN')}`;
+      } else {
+        discountRow.style.display = "none";
+      }
+
+      const totalPayable = Math.max(0, subtotal - discountAmount);
+      document.getElementById("ledgerTotal").textContent = `${CURRENCY}${totalPayable.toLocaleString('en-IN')}`;
+
+      const container = document.getElementById("bagItemsContainer");
+      const footer = document.getElementById("bagFooter");
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 50px 10px; color: var(--muted);">
+            <div style="font-size: 2rem; margin-bottom: 6px;">🛍️</div>
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--noir);">Your shopping bag is empty</div>
+            <div style="font-size: 0.8rem; margin-top: 4px;">Explore our pieces and add your favorites.</div>
+          </div>
+        `;
+        footer.style.display = "none";
+        return;
+      }
+
+      footer.style.display = "block";
+      container.innerHTML = cart.map((item, idx) => `
+        <div class="bag-row">
+          <div class="bag-row-thumb">
+            <img src="${item.images[0]}" alt="${item.title}">
+          </div>
+          <div class="bag-row-info">
+            <div>
+              <div style="font-size: 0.84rem; font-weight: 600;">${item.title}</div>
+              <div style="font-size: 0.72rem; color: var(--muted); margin: 2px 0;">
+                Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4px;">
+              <span style="font-weight:700; font-size: 0.88rem;">${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}</span>
+              <div class="qty-wrap">
+                <button class="step-btn" onclick="changeQty(${idx}, -1)">−</button>
+                <span style="font-size:0.85rem; font-weight:600;">${item.qty}</span>
+                <button class="step-btn" onclick="changeQty(${idx}, 1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // 9. FINAL STEP: ORDER ON WHATSAPP ONLY
+    function submitOrderToWhatsApp() {
+      if (cart.length === 0) {
+        alert("Your shopping bag is empty.");
+        return;
+      }
+
+      const name = document.getElementById("custName").value.trim() || "Customer";
+      const address = document.getElementById("custAddress").value.trim() || "Not specified";
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      let discount = 0;
+      if (appliedCoupon && subtotal > 0) {
+        discount = appliedCoupon.type === "percent"
+          ? Math.round((subtotal * appliedCoupon.val) / 100)
+          : appliedCoupon.val;
+      }
+      const payable = Math.max(0, subtotal - discount);
+
+      const itemsSummary = cart.map((item, i) => 
+        `${i + 1}. *${item.title}*\n   Color: ${item.color} | Size: ${item.size} | Qty: ${item.qty} | Price: ${CURRENCY}${item.price * item.qty}`
+      ).join("\n\n");
+
+      const message = 
 `✨ *NEW ORDER — ZAYA BOUTIQUE* ✨
 
 *Customer Name:* ${name}
@@ -1470,21 +1530,21 @@ ${appliedCoupon ? `*Coupon Discount (${appliedCoupon.code}):* -${CURRENCY}${disc
 
 Please share UPI details / payment link to confirm my order.`;
 
-const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
-window.open(waUrl, "_blank");
-}
+      const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, "_blank");
+    }
 
-// 10. TOAST NOTIFICATION
-function showToast(msg) {
-const toast = document.getElementById("toastNotice");
-toast.textContent = `✓ ${msg}`;
-toast.classList.add("show");
-setTimeout(() => toast.classList.remove("show"), 2200);
-}
+    // 10. TOAST NOTIFICATION
+    function showToast(msg) {
+      const toast = document.getElementById("toastNotice");
+      toast.textContent = `✓ ${msg}`;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
 
-// INITIAL RENDER
-renderCatalog();
-updateBagDisplay();
-</script>
+    // INITIAL RENDER
+    renderCatalog();
+    updateBagDisplay();
+  </script>
 </body>
 </html>

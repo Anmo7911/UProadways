@@ -3,37 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>ZAYA ATELIER | Luxury Women's Pret & Couture</title>
-
-<!-- Premium Editorial Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>ZAYA | Women's Pret & Couture</title>
 
 <style>
-/* -------------------------------------------
-ROOT PALETTE & RESET
-------------------------------------------- */
+/* --- CSS RESET & THEME VARIABLES --- */
 :root {
---bg-cream: #FAF8F5;
---bg-surface: #FFFFFF;
+--bg: #FBF9F6;
+--surface: #FFFFFF;
 --noir: #181615;
---noir-soft: #2E2B29;
---rose-gold: #A86B58;
---rose-gold-light: #F6EDE8;
---text-muted: #78726D;
---border-subtle: #E8E3DC;
+--noir-light: #2D2A28;
+--accent: #A86B58;
+--accent-soft: #F6EDE8;
+--gold-star: #F5A623;
+--muted: #78726D;
+--border: #E8E2D9;
 --border-light: #F2ECE5;
 --wa-green: #25D366;
 --wa-dark: #1EBE5B;
 --radius-sm: 6px;
 --radius-md: 12px;
---radius-lg: 20px;
 --radius-full: 9999px;
---font-serif: 'Cormorant Garamond', Georgia, serif;
---font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
---shadow-sm: 0 4px 16px rgba(24, 22, 21, 0.05);
---shadow-md: 0 12px 32px rgba(24, 22, 21, 0.09);
+--font-serif: Georgia, 'Times New Roman', serif;
+--font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+--shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -44,7 +36,7 @@ padding: 0;
 }
 
 body {
-background-color: var(--bg-cream);
+background: var(--bg);
 color: var(--noir);
 font-family: var(--font-sans);
 line-height: 1.45;
@@ -60,72 +52,56 @@ background: none;
 transition: all 0.2s ease;
 }
 
-img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-}
-
-/* -------------------------------------------
-TOP MARQUEE & NAVBAR
-------------------------------------------- */
-.promo-banner {
+/* --- TOP ANNOUNCEMENT & HEADER --- */
+.top-bar {
 background: var(--noir);
 color: #fff;
 font-size: 0.72rem;
-letter-spacing: 0.12em;
 text-transform: uppercase;
+letter-spacing: 0.12em;
 text-align: center;
 padding: 8px 12px;
-font-weight: 500;
 }
+.top-bar strong { color: #E0B2A3; }
 
-.promo-banner strong {
-color: #D9A08D;
-}
-
-.navbar {
+.header {
 position: sticky;
 top: 0;
 z-index: 50;
-background: rgba(250, 248, 245, 0.94);
-backdrop-filter: blur(12px);
--webkit-backdrop-filter: blur(12px);
-border-bottom: 1px solid var(--border-subtle);
+background: rgba(251, 249, 246, 0.96);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid var(--border);
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 12px 18px;
 }
 
-.brand-title {
+.brand-logo {
 font-family: var(--font-serif);
-font-size: 1.9rem;
+font-size: 1.8rem;
 font-weight: 700;
 letter-spacing: 0.12em;
-color: var(--noir);
-text-transform: uppercase;
 cursor: pointer;
+text-transform: uppercase;
 }
 
-.bag-trigger {
-position: relative;
+.bag-btn {
 background: var(--noir);
-color: white;
+color: #fff;
 padding: 8px 14px;
 border-radius: var(--radius-full);
 display: flex;
 align-items: center;
-gap: 8px;
-font-size: 0.78rem;
+gap: 6px;
+font-size: 0.8rem;
 font-weight: 600;
 }
 
-.bag-badge {
-background: var(--rose-gold);
-color: white;
-font-size: 0.68rem;
+.badge-count {
+background: var(--accent);
+color: #fff;
+font-size: 0.7rem;
 font-weight: 700;
 min-width: 18px;
 height: 18px;
@@ -136,140 +112,112 @@ justify-content: center;
 padding: 0 4px;
 }
 
-/* -------------------------------------------
-PAGE VIEWS (CATALOG VS PRODUCT PAGE)
-------------------------------------------- */
-.view-section {
-display: none;
-animation: fadeIn 0.3s ease;
-}
+/* --- VIEW TOGGLE --- */
+.view-container { display: none; }
+.view-container.active { display: block; }
 
-.view-section.active-view {
-display: block;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(6px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-/* -------------------------------------------
-HERO BANNER
-------------------------------------------- */
-.hero {
+/* --- HERO BANNER --- */
+.hero-card {
 margin: 14px 14px 20px;
-background: linear-gradient(135deg, #24201E 0%, #161413 100%);
-color: white;
-border-radius: var(--radius-lg);
-padding: 38px 20px;
+background: linear-gradient(135deg, #2A2523, #151312);
+color: #fff;
+border-radius: var(--radius-md);
+padding: 32px 18px;
 text-align: center;
-position: relative;
-overflow: hidden;
 }
-
-.hero-eyebrow {
-font-size: 0.72rem;
+.hero-tag {
+font-size: 0.7rem;
+letter-spacing: 0.2em;
 text-transform: uppercase;
-letter-spacing: 0.22em;
-color: #D9A08D;
+color: #E0B2A3;
 font-weight: 600;
 margin-bottom: 6px;
 }
-
 .hero-title {
 font-family: var(--font-serif);
-font-size: 2.3rem;
+font-size: 2.1rem;
+font-weight: normal;
 font-style: italic;
-font-weight: 500;
-line-height: 1.18;
-margin-bottom: 10px;
+margin-bottom: 8px;
+line-height: 1.2;
 }
-
-.hero-subtitle {
-font-size: 0.86rem;
-color: #CCC4BC;
-max-width: 460px;
+.hero-desc {
+font-size: 0.84rem;
+color: #CBC5BE;
+max-width: 440px;
 margin: 0 auto;
-font-weight: 300;
 }
 
-/* -------------------------------------------
-CATEGORY PILLS
-------------------------------------------- */
-.category-bar {
+/* --- CATEGORY FILTERS --- */
+.cat-scroll {
 display: flex;
 gap: 8px;
-padding: 0 16px 18px;
+padding: 0 16px 16px;
 overflow-x: auto;
 scrollbar-width: none;
 }
-.category-bar::-webkit-scrollbar { display: none; }
+.cat-scroll::-webkit-scrollbar { display: none; }
 
-.cat-btn {
+.cat-pill {
 white-space: nowrap;
 padding: 7px 16px;
 border-radius: var(--radius-full);
 font-size: 0.8rem;
 font-weight: 500;
-background: var(--bg-surface);
-border: 1px solid var(--border-subtle);
-color: var(--text-muted);
+background: var(--surface);
+border: 1px solid var(--border);
+color: var(--muted);
 }
-
-.cat-btn.active {
+.cat-pill.active {
 background: var(--noir);
 color: #fff;
 border-color: var(--noir);
 font-weight: 600;
 }
 
-/* -------------------------------------------
-PRODUCT GRID & RESPONSIVE CARDS
-------------------------------------------- */
-.container {
+/* --- RESPONSIVE PRODUCT GRID --- */
+.main-wrap {
 max-width: 1200px;
 margin: 0 auto;
-padding: 0 12px 50px;
+padding: 0 12px 60px;
 }
 
-.product-grid {
+.grid-layout {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 gap: 12px;
 }
 
 @media (min-width: 768px) {
-.product-grid {
+.grid-layout {
 grid-template-columns: repeat(3, 1fr);
-gap: 22px;
+gap: 20px;
 }
 }
-
 @media (min-width: 1024px) {
-.product-grid {
+.grid-layout {
 grid-template-columns: repeat(4, 1fr);
 gap: 24px;
 }
 }
 
-.product-card {
-background: var(--bg-surface);
+.prod-card {
+background: var(--surface);
+border: 1px solid var(--border);
 border-radius: var(--radius-md);
-border: 1px solid var(--border-subtle);
-box-shadow: var(--shadow-sm);
-overflow: hidden;
+box-shadow: var(--shadow);
 display: flex;
 flex-direction: column;
 height: 100%;
-position: relative;
+overflow: hidden;
 }
 
-/* AUTO CAROUSEL ON CARD */
-.carousel-container {
+/* --- PROPERLY PROPORTIONED CAROUSEL (NO ZOOM/CLIPPING) --- */
+.carousel-box {
 position: relative;
 width: 100%;
-aspect-ratio: 3/4;
-background: #F0ECE6;
+aspect-ratio: 4/5; /* Natural, non-zoomed proportion */
+background: #F4EFEA;
 overflow: hidden;
 cursor: pointer;
 }
@@ -278,16 +226,39 @@ cursor: pointer;
 display: flex;
 width: 100%;
 height: 100%;
-transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+transition: transform 0.4s ease;
 }
 
-.carousel-slide {
+.carousel-item {
 min-width: 100%;
 height: 100%;
-flex-shrink: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 16px;
+user-select: none;
 }
 
-.carousel-dots {
+.slide-bg-1 { background: linear-gradient(135deg, #EAD8D0, #CDB4AB); }
+.slide-bg-2 { background: linear-gradient(135deg, #DFD9D1, #BDB4A8); }
+.slide-bg-3 { background: linear-gradient(135deg, #E6DDD8, #C4B7AF); }
+
+.slide-label {
+font-size: 0.74rem;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: #383431;
+font-weight: 700;
+}
+.slide-sub {
+font-size: 0.65rem;
+color: #5A5450;
+margin-top: 3px;
+}
+
+.carousel-indicator-bar {
 position: absolute;
 bottom: 8px;
 left: 50%;
@@ -297,57 +268,87 @@ gap: 4px;
 z-index: 5;
 }
 
-.c-dot {
-width: 5px;
-height: 5px;
-border-radius: var(--radius-full);
-background: rgba(255, 255, 255, 0.55);
+.c-bar {
+width: 6px;
+height: 3px;
+border-radius: 2px;
+background: rgba(0, 0, 0, 0.2);
 transition: all 0.25s ease;
 }
-
-.c-dot.active {
-width: 14px;
-background: #FFFFFF;
+.c-bar.active {
+width: 16px;
+background: var(--noir);
 }
 
-.card-badge-chip {
+.tag-chip {
 position: absolute;
 top: 8px;
 left: 8px;
-background: rgba(255, 255, 255, 0.94);
-backdrop-filter: blur(4px);
-padding: 3px 8px;
+background: rgba(255, 255, 255, 0.95);
+padding: 3px 7px;
 border-radius: var(--radius-sm);
 font-size: 0.62rem;
 font-weight: 700;
 text-transform: uppercase;
-letter-spacing: 0.06em;
-color: var(--rose-gold);
+letter-spacing: 0.05em;
+color: var(--accent);
 z-index: 6;
 }
 
-.card-details {
+/* --- CARD INFO & RATINGS --- */
+.prod-info {
 padding: 12px 10px 10px;
 display: flex;
 flex-direction: column;
 flex-grow: 1;
 }
 
-.card-category {
+.rating-row {
+display: flex;
+align-items: center;
+gap: 4px;
+font-size: 0.72rem;
+margin-bottom: 4px;
+}
+
+.rating-stars {
+color: var(--gold-star);
+font-weight: 700;
+font-size: 0.75rem;
+}
+
+.rating-count {
+color: var(--muted);
+font-size: 0.68rem;
+}
+
+.bought-badge {
+font-size: 0.68rem;
+color: #B45309;
+background: #FEF3C7;
+padding: 2px 6px;
+border-radius: var(--radius-sm);
+display: inline-block;
+width: fit-content;
+margin-bottom: 6px;
+font-weight: 600;
+}
+
+.prod-cat {
 font-size: 0.65rem;
 text-transform: uppercase;
-letter-spacing: 0.08em;
-color: var(--text-muted);
+color: var(--muted);
+letter-spacing: 0.06em;
 margin-bottom: 2px;
 }
 
-.card-name {
+.prod-name {
 font-size: 0.88rem;
 font-weight: 600;
 color: var(--noir);
 line-height: 1.3;
 margin-bottom: 6px;
-height: 2.6em; /* Exactly 2 lines without truncating */
+height: 2.6em; /* Exactly 2 balanced lines without clipping */
 overflow: hidden;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -355,270 +356,179 @@ display: -webkit-box;
 word-break: break-word;
 }
 
-.card-pricing {
+.prod-price-row {
 display: flex;
 align-items: baseline;
-gap: 5px;
+gap: 6px;
 margin-bottom: 10px;
 flex-wrap: wrap;
 }
 
-.price-sale {
+.val-sale {
 font-weight: 700;
 font-size: 0.98rem;
 color: var(--noir);
 }
-
-.price-mrp {
+.val-mrp {
 font-size: 0.76rem;
-color: var(--text-muted);
+color: var(--muted);
 text-decoration: line-through;
 }
-
-.price-off {
+.val-off {
 font-size: 0.68rem;
 color: #2E7D32;
-font-weight: 600;
+font-weight: 700;
 }
 
-/* CARD ACTION BUTTONS (EVEN MOBILE ALIGNMENT) */
-.card-btns-row {
+/* SINGLE MERGED "ADD TO CART" BUTTON */
+.btn-add-cart-single {
 margin-top: auto;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 6px;
-}
-
-.btn-view-card {
-background: var(--bg-cream);
-border: 1px solid var(--border-subtle);
-border-radius: var(--radius-sm);
-padding: 8px 4px;
-font-size: 0.74rem;
-font-weight: 600;
-color: var(--noir);
-text-align: center;
-}
-
-.btn-quick-add {
+width: 100%;
 background: var(--noir);
 border: 1px solid var(--noir);
 border-radius: var(--radius-sm);
-padding: 8px 4px;
-font-size: 0.74rem;
+padding: 10px 8px;
+font-size: 0.8rem;
 font-weight: 600;
 color: #fff;
 text-align: center;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 3px;
+gap: 6px;
+}
+.btn-add-cart-single:hover {
+background: var(--noir-light);
 }
 
-/* -------------------------------------------
-DEDICATED PRODUCT DETAILS PAGE
-------------------------------------------- */
-.pdp-wrapper {
-max-width: 1040px;
+/* --- DEDICATED PRODUCT DETAILS PAGE (PDP) --- */
+.pdp-container {
+max-width: 980px;
 margin: 0 auto;
-padding: 10px 16px 90px;
+padding: 12px 16px 50px;
 }
 
-.pdp-back-bar {
-display: flex;
+.back-nav {
+display: inline-flex;
 align-items: center;
 gap: 6px;
-padding: 10px 0 16px;
-font-size: 0.82rem;
+font-size: 0.84rem;
 font-weight: 600;
-color: var(--noir);
 cursor: pointer;
+margin-bottom: 16px;
+color: var(--noir);
 }
 
-.pdp-layout {
+.pdp-split {
 display: flex;
 flex-direction: column;
-gap: 24px;
+gap: 20px;
 }
 
 @media (min-width: 768px) {
-.pdp-layout {
+.pdp-split {
 flex-direction: row;
-gap: 36px;
+gap: 32px;
 align-items: flex-start;
 }
-.pdp-gallery-col {
-width: 52%;
-position: sticky;
-top: 80px;
-}
-.pdp-info-col {
-width: 48%;
-}
+.pdp-media-pane { width: 50%; }
+.pdp-info-pane { width: 50%; }
 }
 
-.pdp-main-img-box {
+.pdp-large-preview {
 width: 100%;
-aspect-ratio: 3/4;
-background: #EFEBE5;
+aspect-ratio: 4/5;
 border-radius: var(--radius-md);
 overflow: hidden;
-position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 20px;
+background: linear-gradient(135deg, #EAD8D0, #CDB4AB);
 }
 
-.pdp-thumb-strip {
+.thumb-tray {
 display: flex;
 gap: 8px;
 margin-top: 10px;
-overflow-x: auto;
 }
 
-.pdp-thumb {
-width: 65px;
-height: 85px;
+.thumb-item {
+flex: 1;
+height: 70px;
 border-radius: var(--radius-sm);
-overflow: hidden;
 border: 2px solid transparent;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.7rem;
+font-weight: 700;
 cursor: pointer;
-flex-shrink: 0;
 opacity: 0.6;
-transition: all 0.2s ease;
 }
-
-.pdp-thumb.active {
+.thumb-item.active {
 border-color: var(--noir);
 opacity: 1;
 }
 
-.pdp-title {
+.pdp-heading {
 font-family: var(--font-serif);
 font-size: 1.85rem;
-font-weight: 600;
+font-weight: normal;
+margin: 6px 0 6px;
 line-height: 1.25;
-margin: 6px 0 8px;
 }
 
-.pdp-price-row {
+.pdp-rating-strip {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 12px;
+}
+
+.pdp-price-box {
 display: flex;
 align-items: baseline;
 gap: 10px;
 margin-bottom: 16px;
 }
 
-.pdp-sale-price {
-font-size: 1.45rem;
-font-weight: 700;
-color: var(--noir);
-}
-
-.pdp-mrp {
-font-size: 0.95rem;
-color: var(--text-muted);
-text-decoration: line-through;
-}
-
-.pdp-discount-pill {
-background: #E8F5E9;
-color: #2E7D32;
-font-size: 0.74rem;
-font-weight: 700;
-padding: 3px 8px;
-border-radius: var(--radius-sm);
-}
-
-.size-guide-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin: 16px 0 8px;
-}
-
-.size-guide-label {
+.size-title {
 font-size: 0.78rem;
 font-weight: 700;
 text-transform: uppercase;
 letter-spacing: 0.08em;
+margin-bottom: 8px;
 }
 
-.size-pills-row {
+.sizes-flex {
 display: flex;
 gap: 8px;
-margin-bottom: 20px;
+margin-bottom: 16px;
 }
 
-.size-pill-btn {
+.size-btn-pill {
 flex: 1;
-height: 44px;
-border: 1px solid var(--border-subtle);
-background: var(--bg-surface);
+height: 42px;
+border: 1px solid var(--border);
 border-radius: var(--radius-sm);
 font-weight: 600;
 font-size: 0.85rem;
-display: flex;
-align-items: center;
-justify-content: center;
+background: var(--surface);
 }
-
-.size-pill-btn.active {
+.size-btn-pill.selected {
 background: var(--noir);
-color: white;
+color: #fff;
 border-color: var(--noir);
 }
 
-.pdp-accordion {
-border-top: 1px solid var(--border-subtle);
-padding: 14px 0;
-font-size: 0.85rem;
-}
-
-.accordion-title {
-font-weight: 600;
-margin-bottom: 4px;
-}
-
-.accordion-desc {
-color: var(--text-muted);
-font-size: 0.82rem;
-line-height: 1.5;
-}
-
-/* MOBILE STICKY BOTTOM BAR FOR PDP */
-.mobile-sticky-action {
-position: fixed;
-bottom: 0;
-left: 0;
+/* PDP MAIN ADD TO BAG BUTTON (PLACED BELOW SIZE SELECTION IN PAGE FLOW) */
+.btn-pdp-add-inline {
 width: 100%;
-background: var(--bg-surface);
-border-top: 1px solid var(--border-subtle);
-padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
-box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06);
-display: flex;
-align-items: center;
-gap: 12px;
-z-index: 45;
-}
-
-.sticky-price-col {
-display: flex;
-flex-direction: column;
-}
-
-.sticky-price-label {
-font-size: 0.65rem;
-color: var(--text-muted);
-text-transform: uppercase;
-}
-
-.sticky-price-val {
-font-size: 1.15rem;
-font-weight: 700;
-}
-
-.btn-sticky-add {
-flex: 1;
 background: var(--noir);
 color: #fff;
-height: 48px;
+padding: 14px;
 border-radius: var(--radius-sm);
 font-size: 0.92rem;
 font-weight: 600;
@@ -626,111 +536,110 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 8px;
+margin-bottom: 20px;
+}
+.btn-pdp-add-inline:hover {
+background: var(--noir-light);
 }
 
-/* -------------------------------------------
-SHOPPING BAG & WHATSAPP CHECKOUT DRAWER
-------------------------------------------- */
-.drawer-overlay {
+.pdp-block {
+border-top: 1px solid var(--border);
+padding: 12px 0;
+font-size: 0.84rem;
+}
+.pdp-block h4 { font-weight: 600; margin-bottom: 3px; }
+.pdp-block p { color: var(--muted); font-size: 0.8rem; }
+
+/* --- BAG & WHATSAPP CHECKOUT DRAWER --- */
+.drawer-scrim {
 position: fixed;
 inset: 0;
-background: rgba(20, 18, 17, 0.55);
+background: rgba(0, 0, 0, 0.5);
 z-index: 100;
 opacity: 0;
 visibility: hidden;
 transition: all 0.3s ease;
 }
-.drawer-overlay.open {
-opacity: 1;
-visibility: visible;
-}
+.drawer-scrim.open { opacity: 1; visibility: visible; }
 
-.bag-drawer {
+.bag-pane {
 position: fixed;
 top: 0;
 right: 0;
 width: 100%;
 max-width: 420px;
 height: 100%;
-background: var(--bg-surface);
+background: var(--surface);
 z-index: 110;
-box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+box-shadow: -8px 0 30px rgba(0,0,0,0.15);
 transform: translateX(100%);
 transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 display: flex;
 flex-direction: column;
 }
-.bag-drawer.open {
-transform: translateX(0);
-}
+.bag-pane.open { transform: translateX(0); }
 
-.drawer-top {
+.bag-header {
 padding: 16px 20px;
-border-bottom: 1px solid var(--border-subtle);
+border-bottom: 1px solid var(--border);
 display: flex;
 justify-content: space-between;
 align-items: center;
 }
-
-.drawer-top-title {
+.bag-title {
 font-family: var(--font-serif);
-font-size: 1.4rem;
+font-size: 1.35rem;
 font-weight: 700;
 }
 
-.drawer-scroll-items {
+.bag-items-scroll {
 flex: 1;
 overflow-y: auto;
 padding: 16px 20px;
 display: flex;
 flex-direction: column;
-gap: 14px;
+gap: 12px;
 }
 
-.bag-item-card {
+.bag-row {
 display: flex;
 gap: 12px;
-border-bottom: 1px solid var(--border-light);
+border-bottom: 1px solid var(--border);
 padding-bottom: 12px;
 }
 
-.bag-item-thumb {
-width: 65px;
-height: 85px;
+.bag-row-thumb {
+width: 60px;
+height: 75px;
 border-radius: var(--radius-sm);
-overflow: hidden;
+background: #E8E0D9;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.65rem;
+font-weight: 700;
+text-transform: uppercase;
+color: #4D4642;
 flex-shrink: 0;
 }
 
-.bag-item-info {
+.bag-row-info {
 flex: 1;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 }
 
-.bag-item-title {
-font-size: 0.85rem;
-font-weight: 600;
-line-height: 1.3;
-}
-
-.bag-item-size {
-font-size: 0.72rem;
-color: var(--text-muted);
-margin: 2px 0;
-}
-
-.bag-qty-bar {
+.qty-wrap {
 display: flex;
 align-items: center;
 gap: 8px;
 }
 
-.qty-step-btn {
+.step-btn {
 width: 24px;
 height: 24px;
-border: 1px solid var(--border-subtle);
+border: 1px solid var(--border);
 border-radius: 4px;
 display: flex;
 align-items: center;
@@ -739,30 +648,30 @@ font-weight: 600;
 font-size: 0.8rem;
 }
 
-/* COUPONS & CHECKOUT FOOTER */
-.drawer-bottom-footer {
-border-top: 1px solid var(--border-subtle);
+/* FOOTER & COUPONS */
+.bag-footer {
+border-top: 1px solid var(--border);
 padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
-background: var(--bg-cream);
+background: var(--bg);
 }
 
-.coupon-card {
-background: var(--bg-surface);
-border: 1px dashed var(--border-subtle);
+.coupon-section {
+background: var(--surface);
+border: 1px dashed var(--border);
 border-radius: var(--radius-sm);
 padding: 12px;
 margin-bottom: 12px;
 }
 
-.coupon-flex {
+.coupon-row {
 display: flex;
 gap: 6px;
 margin-top: 6px;
 }
 
-.coupon-text-field {
+.coupon-box-input {
 flex: 1;
-border: 1px solid var(--border-subtle);
+border: 1px solid var(--border);
 padding: 8px 10px;
 border-radius: var(--radius-sm);
 font-size: 0.8rem;
@@ -771,16 +680,16 @@ font-weight: 600;
 outline: none;
 }
 
-.coupon-btn {
+.btn-apply {
 background: var(--noir);
-color: white;
+color: #fff;
 padding: 8px 14px;
 border-radius: var(--radius-sm);
 font-size: 0.78rem;
 font-weight: 600;
 }
 
-.chip-tags {
+.pills-group {
 display: flex;
 gap: 6px;
 flex-wrap: wrap;
@@ -789,55 +698,56 @@ margin-top: 6px;
 
 .chip-code {
 font-size: 0.68rem;
-background: var(--rose-gold-light);
-color: var(--rose-gold);
+background: var(--accent-soft);
+color: var(--accent);
 padding: 3px 8px;
 border-radius: var(--radius-full);
 font-weight: 700;
 cursor: pointer;
 }
 
-.customer-fields {
+.cust-group {
 display: flex;
 flex-direction: column;
 gap: 6px;
 margin-bottom: 12px;
 }
 
-.cust-inp {
+.cust-field {
 background: #fff;
-border: 1px solid var(--border-subtle);
+border: 1px solid var(--border);
 padding: 8px 10px;
 border-radius: var(--radius-sm);
 font-size: 0.8rem;
 outline: none;
 }
 
-.price-breakdown {
+.price-ledger {
 font-size: 0.82rem;
 margin-bottom: 12px;
 }
 
-.price-row {
+.ledger-row {
 display: flex;
 justify-content: space-between;
-color: var(--text-muted);
+color: var(--muted);
 margin-bottom: 4px;
 }
 
-.price-row.grand-total {
+.ledger-row.total {
 font-size: 1.1rem;
 font-weight: 700;
 color: var(--noir);
-border-top: 1px dashed var(--border-subtle);
+border-top: 1px dashed var(--border);
 padding-top: 8px;
 margin-top: 6px;
 }
 
-.btn-final-whatsapp {
+/* FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) */
+.btn-wa-order {
 width: 100%;
 background: var(--wa-green);
-color: white;
+color: #fff;
 padding: 14px;
 border-radius: var(--radius-sm);
 font-size: 0.94rem;
@@ -846,244 +756,221 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 8px;
-box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
 }
+.btn-wa-order:hover { background: var(--wa-dark); }
 
-.btn-final-whatsapp:hover {
-background: var(--wa-dark);
-}
-
-/* TOAST */
-.toast-popup {
+/* TOAST NOTIFICATION */
+.toast {
 position: fixed;
 bottom: 24px;
 left: 50%;
 transform: translateX(-50%) translateY(80px);
 background: var(--noir);
-color: white;
+color: #fff;
 padding: 10px 18px;
 border-radius: var(--radius-full);
 font-size: 0.82rem;
 font-weight: 500;
 z-index: 300;
 transition: transform 0.3s ease;
-box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 pointer-events: none;
 }
-.toast-popup.show {
-transform: translateX(-50%) translateY(0);
-}
+.toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- Announcement Bar -->
-<div class="promo-banner">
-Handcrafted Luxury • Use Code <strong>FESTIVE20</strong> for 20% Off
+<!-- Top Announcement Bar -->
+<div class="top-bar">
+Festive Pret Collection • Use Code <strong>FESTIVE20</strong> for 20% Off
 </div>
 
-<!-- Global Sticky Navbar -->
-<header class="navbar">
-<div class="brand-title" onclick="navigateToHome()">ZAYA</div>
-<button class="bag-trigger" id="openBagBtn" aria-label="Open Shopping Bag">
-<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-<line x1="3" y1="6" x2="21" y2="6"></line>
-<path d="M16 10a4 4 0 0 1-8 0"></path>
-</svg>
-<span>Bag</span>
-<span class="bag-badge" id="bagCountBadge">0</span>
+<!-- Main Sticky Header -->
+<header class="header">
+<div class="brand-logo" onclick="openHomeView()">ZAYA</div>
+<button class="bag-btn" id="openBagTrigger">
+<span>🛍️ Bag</span>
+<span class="badge-count" id="headerBagCount">0</span>
 </button>
 </header>
 
 <!-- =========================================
-VIEW 1: PRODUCT CATALOG & HOME
+VIEW 1: CATALOG VIEW
 ========================================== -->
-<div id="catalogView" class="view-section active-view">
-
-<!-- Hero Banner -->
-<section class="hero">
-<div class="hero-eyebrow">The Pret & Festive Collection</div>
-<h1 class="hero-title">Timeless Grace & Modern Cut</h1>
-<p class="hero-subtitle">Bespoke kurtis, structured linen sets, and flowing silk dresses tailored for modern elegance.</p>
-</section>
-
-<!-- Category Filters -->
-<div class="category-bar">
-<button class="cat-btn active" onclick="filterCatalog('All')">All Pieces</button>
-<button class="cat-btn" onclick="filterCatalog('Kurtas')">Kurtas & Sets</button>
-<button class="cat-btn" onclick="filterCatalog('Dresses')">Western Dresses</button>
-<button class="cat-btn" onclick="filterCatalog('Co-ords')">Co-ord Sets</button>
-<button class="cat-btn" onclick="filterCatalog('Sarees')">Pure Silk & Sarees</button>
+<section id="catalogView" class="view-container active">
+<div class="hero-card">
+<div class="hero-tag">New Season '26</div>
+<h1 class="hero-title">Timeless Grace & Modern Pret</h1>
+<p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to pick your size and checkout via WhatsApp.</p>
 </div>
 
-<!-- Product Grid -->
-<main class="container">
-<div class="product-grid" id="productGrid">
-<!-- Rendered via JS -->
+<!-- Category Filter Bar -->
+<div class="cat-scroll">
+<button class="cat-pill active" onclick="setCategory('All')">All Pieces</button>
+<button class="cat-pill" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
+<button class="cat-pill" onclick="setCategory('Dresses')">Western Dresses</button>
+<button class="cat-pill" onclick="setCategory('Co-ords')">Co-ord Sets</button>
+<button class="cat-pill" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
+</div>
+
+<!-- Responsive Product Grid -->
+<main class="main-wrap">
+<div class="grid-layout" id="productGrid">
+<!-- Products Injected Here -->
 </div>
 </main>
-</div>
+</section>
 
 <!-- =========================================
 VIEW 2: DEDICATED PRODUCT DETAILS PAGE
 ========================================== -->
-<div id="productDetailView" class="view-section">
-<div class="pdp-wrapper">
-<div class="pdp-back-bar" onclick="navigateToHome()">
-<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<line x1="19" y1="12" x2="5" y2="12"></line>
-<polyline points="12 19 5 12 12 5"></polyline>
-</svg>
-<span>Back to All Pieces</span>
+<section id="pdpView" class="view-container">
+<div class="pdp-container">
+<div class="back-nav" onclick="openHomeView()">
+<span>← Back to All Pieces</span>
 </div>
 
-<div class="pdp-layout">
-<!-- Gallery Column with Thumbnails -->
-<div class="pdp-gallery-col">
-<div class="pdp-main-img-box">
-<img id="pdpMainImg" src="" alt="Product View">
+<div class="pdp-split">
+<!-- Media Gallery -->
+<div class="pdp-media-pane">
+<div class="pdp-large-preview" id="pdpLargePreview">
+<div>
+<div style="font-size: 1.1rem; font-weight: 700; color: #383431;" id="pdpLargeLabel">Front View</div>
+<div style="font-size: 0.8rem; color: #5A5450; margin-top: 4px;">ZAYA Couture Studio</div>
 </div>
-<div class="pdp-thumb-strip" id="pdpThumbStrip">
-<!-- Injected by JS -->
+</div>
+<div class="thumb-tray" id="pdpThumbs">
+<!-- Thumbnails Injected Here -->
 </div>
 </div>
 
-<!-- Product Info Column -->
-<div class="pdp-info-col">
-<div style="font-size: 0.72rem; text-transform: uppercase; color: var(--rose-gold); font-weight: 700; letter-spacing: 0.08em;" id="pdpCategory"></div>
-<h1 class="pdp-title" id="pdpTitle"></h1>
+<!-- Product Information -->
+<div class="pdp-info-pane">
+<div style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.08em;" id="pdpCatName"></div>
+<h1 class="pdp-heading" id="pdpItemTitle"></h1>
 
-<div class="pdp-price-row">
-<span class="pdp-sale-price" id="pdpPrice"></span>
-<span class="pdp-mrp" id="pdpMrp"></span>
-<span class="pdp-discount-pill" id="pdpDiscount"></span>
+<!-- Rating & Bought Stats on PDP -->
+<div class="pdp-rating-strip">
+<span class="rating-stars" id="pdpRatingStars">★ 4.9</span>
+<span class="rating-count" id="pdpRatingReviews">(184 Reviews)</span>
+<span class="bought-badge" id="pdpBoughtStats">🔥 420+ bought this month</span>
+</div>
+
+<div class="pdp-price-box">
+<span style="font-size: 1.45rem; font-weight: 700;" id="pdpPriceVal"></span>
+<span style="font-size: 0.95rem; color: var(--muted); text-decoration: line-through;" id="pdpMrpVal"></span>
+<span style="background: #E8F5E9; color: #2E7D32; font-size: 0.74rem; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm);" id="pdpOffVal"></span>
 </div>
 
 <!-- Size Selector -->
-<div class="size-guide-header">
-<span class="size-guide-label">Select Your Size:</span>
-<span style="font-size: 0.75rem; color: var(--rose-gold); font-weight: 600; cursor: pointer;">True to size</span>
-</div>
-<div class="size-pills-row" id="pdpSizes">
-<button class="size-pill-btn" onclick="selectPdpSize('XS')">XS</button>
-<button class="size-pill-btn active" onclick="selectPdpSize('S')">S</button>
-<button class="size-pill-btn" onclick="selectPdpSize('M')">M</button>
-<button class="size-pill-btn" onclick="selectPdpSize('L')">L</button>
-<button class="size-pill-btn" onclick="selectPdpSize('XL')">XL</button>
+<div class="size-title">Select Your Size:</div>
+<div class="sizes-flex" id="pdpSizesGroup">
+<button class="size-btn-pill" onclick="pickPdpSize('XS')">XS</button>
+<button class="size-btn-pill selected" onclick="pickPdpSize('S')">S</button>
+<button class="size-btn-pill" onclick="pickPdpSize('M')">M</button>
+<button class="size-btn-pill" onclick="pickPdpSize('L')">L</button>
+<button class="size-btn-pill" onclick="pickPdpSize('XL')">XL</button>
 </div>
 
-<!-- Product Details Accordions -->
-<div class="pdp-accordion">
-<div class="accordion-title">Description & Silhouette</div>
-<div class="accordion-desc" id="pdpDesc"></div>
-</div>
-<div class="pdp-accordion">
-<div class="accordion-title">Fabric & Artisan Care</div>
-<div class="accordion-desc">100% sustainably sourced breathable fabric. Gentle hand wash or dry clean recommended to preserve delicate resham threads.</div>
-</div>
-<div class="pdp-accordion">
-<div class="accordion-title">Complimentary Delivery</div>
-<div class="accordion-desc">Dispatches within 24-48 hours. Fast express shipping across India.</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Mobile Sticky Add-to-Bag Bar -->
-<div class="mobile-sticky-action">
-<div class="sticky-price-col">
-<span class="sticky-price-label">Price:</span>
-<span class="sticky-price-val" id="stickyPriceVal"></span>
-</div>
-<button class="btn-sticky-add" onclick="addCurrentPdpToBag()">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-<line x1="3" y1="6" x2="21" y2="6"></line>
-</svg>
-Add to Shopping Bag
+<!-- NATURAL INLINE BUTTON (PLACED BELOW SIZES, NOT FLOATING OVER SCREEN) -->
+<button class="btn-pdp-add-inline" onclick="addCurrentPdp()">
+🛍️ Add to Shopping Bag
 </button>
+
+<!-- Specifications -->
+<div class="pdp-block">
+<h4>Description</h4>
+<p id="pdpItemDesc"></p>
+</div>
+<div class="pdp-block">
+<h4>Fabric & Care</h4>
+<p>100% sustainably sourced breathable fabric. Gentle hand wash or dry clean recommended to preserve resham weave.</p>
+</div>
+<div class="pdp-block">
+<h4>Shipping & Delivery</h4>
+<p>Complimentary express dispatch across India within 24–48 hours.</p>
 </div>
 </div>
+</div>
+</div>
+</section>
 
 <!-- =========================================
 SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
 ========================================== -->
-<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
-<aside class="bag-drawer" id="bagDrawer">
-<div class="drawer-top">
-<h3 class="drawer-top-title">Shopping Bag (<span id="drawerBagCount">0</span>)</h3>
-<button onclick="toggleDrawer(false)" style="font-size: 1.5rem; color: var(--noir);">&times;</button>
+<div class="drawer-scrim" id="drawerScrim" onclick="toggleBagDrawer(false)"></div>
+<aside class="bag-pane" id="bagDrawer">
+<div class="bag-header">
+<h3 class="bag-title">Shopping Bag (<span id="drawerCount">0</span>)</h3>
+<button onclick="toggleBagDrawer(false)" style="font-size: 1.4rem;">✕</button>
 </div>
 
-<div class="drawer-scroll-items" id="bagItemsList">
+<div class="bag-items-scroll" id="bagItemsContainer">
 <!-- Items dynamically populated -->
 </div>
 
-<div class="drawer-bottom-footer" id="drawerFooter">
-<!-- Coupon Section -->
-<div class="coupon-card">
-<div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Have a Coupon Code?</div>
-<div class="coupon-flex">
-<input type="text" id="couponField" class="coupon-text-field" placeholder="E.G. FESTIVE20" />
-<button class="coupon-btn" onclick="applyPromoCode()">Apply</button>
+<!-- Checkout Footer -->
+<div class="bag-footer" id="bagFooter">
+<!-- Coupon Box -->
+<div class="coupon-section">
+<div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Promo / Coupon Code</div>
+<div class="coupon-row">
+<input type="text" id="couponInput" class="coupon-box-input" placeholder="e.g. FESTIVE20" />
+<button class="btn-apply" onclick="applyCoupon()">Apply</button>
 </div>
-<div class="chip-tags">
-<span class="chip-code" onclick="quickApply('FESTIVE20')">FESTIVE20 (20% OFF)</span>
-<span class="chip-code" onclick="quickApply('WELCOME10')">WELCOME10 (10% OFF)</span>
-<span class="chip-code" onclick="quickApply('FLAT500')">FLAT500</span>
+<div class="pills-group">
+<span class="chip-code" onclick="quickCoupon('FESTIVE20')">FESTIVE20 (20% OFF)</span>
+<span class="chip-code" onclick="quickCoupon('WELCOME10')">WELCOME10 (10% OFF)</span>
+<span class="chip-code" onclick="quickCoupon('FLAT500')">FLAT500</span>
 </div>
 <div id="couponStatus" style="font-size: 0.72rem; margin-top: 4px; font-weight: 600;"></div>
 </div>
 
-<!-- Shipping / Customer Information -->
-<div class="customer-fields">
-<input type="text" id="custFullName" class="cust-inp" placeholder="Your Name" />
-<input type="text" id="custLocation" class="cust-inp" placeholder="Delivery City & Pincode" />
+<!-- Shipping Information -->
+<div class="cust-group">
+<input type="text" id="custName" class="cust-field" placeholder="Full Name" />
+<input type="text" id="custAddress" class="cust-field" placeholder="City & Pincode" />
 </div>
 
-<!-- Price Breakdown -->
-<div class="price-breakdown">
-<div class="price-row">
-<span>Items Subtotal:</span>
-<span id="subtotalFigure">₹0</span>
+<!-- Ledger -->
+<div class="price-ledger">
+<div class="ledger-row">
+<span>Bag Subtotal:</span>
+<span id="ledgerSubtotal">₹0</span>
 </div>
-<div class="price-row" id="couponDeductionRow" style="display: none; color: #2E7D32; font-weight: 600;">
-<span id="couponDeductionLabel">Discount:</span>
-<span id="couponDeductionVal">-₹0</span>
+<div class="ledger-row" id="ledgerDiscountRow" style="display: none; color: #2E7D32; font-weight: 600;">
+<span id="ledgerDiscountLabel">Discount:</span>
+<span id="ledgerDiscountVal">-₹0</span>
 </div>
-<div class="price-row">
+<div class="ledger-row">
 <span>Shipping:</span>
 <span style="color: #2E7D32; font-weight: 600;">FREE</span>
 </div>
-<div class="price-row grand-total">
+<div class="ledger-row total">
 <span>Total Payable:</span>
-<span id="grandTotalFigure">₹0</span>
+<span id="ledgerTotal">₹0</span>
 </div>
 </div>
 
-<!-- FINAL ORDER ON WHATSAPP BUTTON -->
-<button class="btn-final-whatsapp" onclick="checkoutOnWhatsApp()">
-<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.824 2.791.824h.005c3.18 0 5.767-2.586 5.768-5.766.001-3.181-2.586-5.77-5.768-5.77zm3.385 8.163c-.145.411-.849.791-1.189.843-.328.051-.735.084-2.316-.575-1.921-.799-3.13-2.776-3.226-2.905-.095-.129-.773-1.03-.773-1.966 0-.936.491-1.396.666-1.587.175-.191.381-.239.508-.239s.254.005.365.011c.117.006.273-.044.427.327.16.381.547 1.332.595 1.428.048.096.079.208.016.334-.064.126-.095.205-.191.317-.095.111-.202.249-.288.334-.096.095-.197.199-.085.39.111.191.495.817 1.062 1.321.73.649 1.346.85 1.537.945.191.096.302.08.414-.048.111-.127.476-.556.603-.746.127-.191.254-.159.428-.095.175.064 1.111.524 1.302.619.191.096.317.143.365.223.048.079.048.459-.097.87z"/>
-</svg>
+<!-- FINAL ORDER BUTTON (WHATSAPP ONLY) -->
+<button class="btn-wa-order" onclick="submitOrderToWhatsApp()">
 Order on WhatsApp
 </button>
 </div>
 </aside>
 
-<!-- Interactive Toast -->
-<div class="toast-popup" id="globalToast">Item added to your shopping bag!</div>
+<!-- Interactive Toast Notification -->
+<div class="toast" id="toastNotice">Item added to your shopping bag!</div>
 
 <!-- =========================================
-JAVASCRIPT LOGIC & CAROUSEL ENGINE
+JAVASCRIPT LOGIC
 ========================================== -->
 <script>
-// 1. STORE CONFIG
-const WHATSAPP_PHONE = "919876543210"; // Replace with your WhatsApp phone number
+// 1. STORE CONFIGURATION
+const WHATSAPP_PHONE = "919876543210"; // Put your WhatsApp number with country code
 const CURRENCY = "₹";
 
-// 2. PRODUCT DATABASE (Each with 3-4 images)
+// 2. PRODUCT DATABASE (With Ratings & Monthly Bought Numbers)
 const products = [
 {
 id: "ZY-101",
@@ -1092,12 +979,15 @@ category: "Kurtas",
 price: 2499,
 mrp: 3499,
 tag: "Bestseller",
-images: [
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80"
+rating: "4.9",
+reviews: "328",
+boughtThisMonth: "640+ bought this month",
+slides: [
+{ label: "Front Profile", bg: "slide-bg-1" },
+{ label: "Embroidery Detail", bg: "slide-bg-2" },
+{ label: "Dupatta Drape", bg: "slide-bg-3" }
 ],
-description: "Handcrafted pure mulmul cotton kurta with delicate hand chikankari embroidery, paired with relaxed pants and a matching organza dupatta."
+description: "Handcrafted pure mulmul cotton kurta with delicate hand chikankari embroidery, paired with relaxed pants and matching dupatta."
 },
 {
 id: "ZY-102",
@@ -1106,40 +996,49 @@ category: "Dresses",
 price: 2799,
 mrp: 3899,
 tag: "Trending",
-images: [
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80"
+rating: "4.8",
+reviews: "214",
+boughtThisMonth: "420+ bought this month",
+slides: [
+{ label: "Full Silhouette", bg: "slide-bg-2" },
+{ label: "Micro-Pleat Texture", bg: "slide-bg-3" },
+{ label: "Back Straps View", bg: "slide-bg-1" }
 ],
-description: "Fluid champagne satin evening slip dress featuring exquisite micro-pleating, square cowl neckline, and adjustable shoulder straps."
+description: "Fluid champagne satin evening slip dress featuring fine micro-pleating, square cowl neckline, and adjustable shoulder straps."
 },
 {
 id: "ZY-103",
-title: "Tailored Belgian Linen Blazer & Trouser Co-ord",
+title: "Belgian Linen Blazer & Trouser Co-ord",
 category: "Co-ords",
 price: 3299,
 mrp: 4499,
 tag: "New",
-images: [
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80"
+rating: "4.7",
+reviews: "186",
+boughtThisMonth: "310+ bought this month",
+slides: [
+{ label: "Tailored Ensemble", bg: "slide-bg-3" },
+{ label: "Linen Weave Close-up", bg: "slide-bg-1" },
+{ label: "Trouser Fit", bg: "slide-bg-2" }
 ],
-description: "Two-piece premium linen set with an oversized silhouette single-breasted blazer and matching high-waisted pleated trousers."
+description: "Two-piece premium linen set with an oversized single-breasted blazer and matching high-waisted pleated trousers."
 },
 {
 id: "ZY-104",
-title: "Hand-Painted Floral Organza Silk Saree",
+title: "Hand-Painted Floral Organza Saree",
 category: "Sarees",
 price: 4499,
 mrp: 5999,
 tag: "Exclusive",
-images: [
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80"
+rating: "5.0",
+reviews: "92",
+boughtThisMonth: "190+ bought this month",
+slides: [
+{ label: "Pallu Drape", bg: "slide-bg-1" },
+{ label: "Hand-Painted Motif", bg: "slide-bg-2" },
+{ label: "Zari Border Detail", bg: "slide-bg-3" }
 ],
-description: "Light-as-air pure organza silk saree hand-painted with pastel botanical blooms and finished with a fine scalloped golden zari border."
+description: "Pure organza silk saree hand-painted with pastel botanical blooms and finished with a fine scalloped golden zari border."
 },
 {
 id: "ZY-105",
@@ -1148,10 +1047,13 @@ category: "Kurtas",
 price: 2999,
 mrp: 3999,
 tag: "Festive Edit",
-images: [
-"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80"
+rating: "4.8",
+reviews: "155",
+boughtThisMonth: "280+ bought this month",
+slides: [
+{ label: "Kurta & Pant Set", bg: "slide-bg-2" },
+{ label: "Silver Tilla Work", bg: "slide-bg-3" },
+{ label: "Neckline Embroidery", bg: "slide-bg-1" }
 ],
 description: "Lustrous sage green tissue chanderi kurta detailed with fine silver tilla work along the neckline and cuffs. Paired with pants."
 },
@@ -1162,17 +1064,20 @@ category: "Dresses",
 price: 2199,
 mrp: 2999,
 tag: "Must-Have",
-images: [
-"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80"
+rating: "4.7",
+reviews: "260",
+boughtThisMonth: "520+ bought this month",
+slides: [
+{ label: "Flowy Tier View", bg: "slide-bg-3" },
+{ label: "Botanical Print", bg: "slide-bg-1" },
+{ label: "Flutter Sleeve Detail", bg: "slide-bg-2" }
 ],
-description: "Breathable tiered georgette midi with flutter sleeves and elasticated waist. Ideal for relaxed summer escapes."
+description: "Breathable tiered georgette midi with flutter sleeves and elasticated waist. Ideal for relaxed day outings."
 }
 ];
 
 // COUPONS
-const PROMO_CODES = {
+const COUPONS = {
 "FESTIVE20": { type: "percent", val: 20, min: 0, desc: "20% Discount" },
 "WELCOME10": { type: "percent", val: 10, min: 0, desc: "10% Discount" },
 "FLAT500": { type: "flat", val: 500, min: 2000, desc: "₹500 Off (Min ₹2,000)" }
@@ -1181,212 +1086,215 @@ const PROMO_CODES = {
 // STATE
 let currentCategory = "All";
 let cart = [];
-let appliedPromo = null;
-let currentPdpProduct = null;
-let selectedPdpSize = "S";
-let carouselIntervals = {};
+let appliedCoupon = null;
+let currentProduct = null;
+let currentSize = "S";
+let carouselTimers = {};
 
-// 3. RENDER CATALOG WITH AUTO-CAROUSEL
+// 3. RENDER CATALOG WITH AUTO-CAROUSEL & RATINGS
 function renderCatalog() {
-// Clear previous carousel timers
-Object.values(carouselIntervals).forEach(clearInterval);
-carouselIntervals = {};
+// Clear old intervals
+Object.values(carouselTimers).forEach(clearInterval);
+carouselTimers = {};
 
-const filtered = currentCategory === "All"
+const list = currentCategory === "All"
 ? products
 : products.filter(p => p.category === currentCategory);
 
 const grid = document.getElementById("productGrid");
-grid.innerHTML = filtered.map(prod => {
-const discountPct = Math.round(((prod.mrp - prod.price) / prod.mrp) * 100);
+grid.innerHTML = list.map(item => {
+const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
 return `
-<article class="product-card" id="card-${prod.id}">
-<div class="carousel-container" onclick="openProductPage('${prod.id}')">
-${prod.tag ? `<span class="card-badge-chip">${prod.tag}</span>` : ''}
+<article class="prod-card">
+<div class="carousel-box" onclick="showProductDetails('${item.id}')">
+${item.tag ? `<span class="tag-chip">${item.tag}</span>` : ''}
 
-<div class="carousel-track" id="track-${prod.id}">
-${prod.images.map(imgUrl => `
-<div class="carousel-slide">
-<img src="${imgUrl}" alt="${prod.title}" loading="lazy">
+<div class="carousel-track" id="track-${item.id}">
+${item.slides.map((s, idx) => `
+<div class="carousel-item ${s.bg}">
+<div class="slide-label">${s.label}</div>
+<div class="slide-sub">View ${idx + 1} of${item.slides.length}</div>
 </div>
 `).join("")}
 </div>
 
-<div class="carousel-dots" id="dots-${prod.id}">
-${prod.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></span>`).join("")}
+<div class="carousel-indicator-bar" id="bars-${item.id}">
+${item.slides.map((_, i) => `<span class="c-bar ${i === 0 ? 'active' : ''}"></span>`).join("")}
 </div>
 </div>
 
-<div class="card-details">
-<span class="card-category">${prod.category}</span>
-<h3 class="card-name" title="${prod.title}">${prod.title}</h3>
+<div class="prod-info">
+<!-- Rating & Buyers Count -->
+<div class="rating-row">
+<span class="rating-stars">★ ${item.rating}</span>
+<span class="rating-count">(${item.reviews})</span>
+</div>
+<div class="bought-badge">🔥 ${item.boughtThisMonth}</div>
 
-<div class="card-pricing">
-<span class="price-sale">${CURRENCY}${prod.price.toLocaleString('en-IN')}</span>
-<span class="price-mrp">${CURRENCY}${prod.mrp.toLocaleString('en-IN')}</span>
-<span class="price-off">${discountPct}% OFF</span>
+<span class="prod-cat">${item.category}</span>
+<h3 class="prod-name" title="${item.title}">${item.title}</h3>
+
+<div class="prod-price-row">
+<span class="val-sale">${CURRENCY}${item.price.toLocaleString('en-IN')}</span>
+<span class="val-mrp">${CURRENCY}${item.mrp.toLocaleString('en-IN')}</span>
+<span class="val-off">${offPct}% OFF</span>
 </div>
 
-<div class="card-btns-row">
-<button class="btn-view-card" onclick="openProductPage('${prod.id}')">View</button>
-<button class="btn-quick-add" onclick="quickAddFromCard('${prod.id}')">+ Bag</button>
-</div>
+<!-- SINGLE MERGED ADD TO CART BUTTON -->
+<button class="btn-add-cart-single" onclick="showProductDetails('${item.id}')">
+Add to Cart
+</button>
 </div>
 </article>
 `;
 }).join("");
 
-// Start Auto Carousel for each card
-filtered.forEach(prod => {
-startCardCarousel(prod.id, prod.images.length);
+// Start auto carousels
+list.forEach(item => {
+startCardSlideLoop(item.id, item.slides.length);
 });
 }
 
-// AUTO CAROUSEL LOGIC
-function startCardCarousel(productId, totalSlides) {
-let currentSlide = 0;
-const track = document.getElementById(`track-${productId}`);
-const dots = document.getElementById(`dots-${productId}`);
+function startCardSlideLoop(id, count) {
+let activeIndex = 0;
+const track = document.getElementById(`track-${id}`);
+const barsContainer = document.getElementById(`bars-${id}`);
 
-if (!track || totalSlides <= 1) return;
+if (!track || count <= 1) return;
 
-const interval = setInterval(() => {
-currentSlide = (currentSlide + 1) % totalSlides;
-track.style.transform = `translateX(-${currentSlide * 100}%)`;
+const timer = setInterval(() => {
+activeIndex = (activeIndex + 1) % count;
+track.style.transform = `translateX(-${activeIndex * 100}%)`;
 
-if (dots) {
-const dotElements = dots.querySelectorAll(".c-dot");
-dotElements.forEach((d, idx) => d.classList.toggle("active", idx === currentSlide));
+if (barsContainer) {
+const bars = barsContainer.querySelectorAll(".c-bar");
+bars.forEach((b, i) => b.classList.toggle("active", i === activeIndex));
 }
-}, 3200 + Math.random() * 800); // Stagger intervals slightly for smooth UX
+}, 3200 + Math.random() * 800);
 
-carouselIntervals[productId] = interval;
+carouselTimers[id] = timer;
 }
 
-// 4. CATEGORY FILTER
-function filterCatalog(category) {
-currentCategory = category;
-document.querySelectorAll(".cat-btn").forEach(btn => {
-btn.classList.toggle("active", btn.textContent.includes(category) || (category === "All" && btn.textContent.includes("All")));
+// 4. CATEGORY SELECTION
+function setCategory(cat) {
+currentCategory = cat;
+document.querySelectorAll(".cat-pill").forEach(btn => {
+btn.classList.toggle("active", btn.textContent.includes(cat) || (cat === "All" && btn.textContent.includes("All")));
 });
 renderCatalog();
 }
 
-// 5. NAVIGATION (CATALOG <-> DEDICATED PRODUCT DETAILS PAGE)
-function openProductPage(productId) {
-const product = products.find(p => p.id === productId);
-if (!product) return;
+// 5. SEPARATE PAGE NAVIGATION (CATALOG <-> PRODUCT DETAILS)
+function showProductDetails(id) {
+const item = products.find(p => p.id === id);
+if (!item) return;
 
-currentPdpProduct = product;
-selectedPdpSize = "S";
+currentProduct = item;
+currentSize = "S";
 
-// Populate PDP fields
-document.getElementById("pdpCategory").textContent = product.category;
-document.getElementById("pdpTitle").textContent = product.title;
-document.getElementById("pdpPrice").textContent = `${CURRENCY}${product.price.toLocaleString('en-IN')}`;
-document.getElementById("pdpMrp").textContent = `${CURRENCY}${product.mrp.toLocaleString('en-IN')}`;
-document.getElementById("stickyPriceVal").textContent = `${CURRENCY}${product.price.toLocaleString('en-IN')}`;
+document.getElementById("pdpCatName").textContent = item.category;
+document.getElementById("pdpItemTitle").textContent = item.title;
+document.getElementById("pdpRatingStars").textContent = `★ ${item.rating}`;
+document.getElementById("pdpRatingReviews").textContent = `(${item.reviews} Reviews)`;
+document.getElementById("pdpBoughtStats").textContent = `🔥 ${item.boughtThisMonth}`;
 
-const pct = Math.round(((product.mrp - product.price) / product.mrp) * 100);
-document.getElementById("pdpDiscount").textContent = `${pct}% OFF`;
-document.getElementById("pdpDesc").textContent = product.description;
+document.getElementById("pdpPriceVal").textContent = `${CURRENCY}${item.price.toLocaleString('en-IN')}`;
+document.getElementById("pdpMrpVal").textContent = `${CURRENCY}${item.mrp.toLocaleString('en-IN')}`;
 
-// Set main image & thumbnails
-const mainImg = document.getElementById("pdpMainImg");
-mainImg.src = product.images[0];
+const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
+document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
+document.getElementById("pdpItemDesc").textContent = item.description;
 
-const thumbStrip = document.getElementById("pdpThumbStrip");
-thumbStrip.innerHTML = product.images.map((img, index) => `
-<div class="pdp-thumb ${index === 0 ? 'active' : ''}" onclick="setPdpImage('${img}', this)">
-<img src="${img}" alt="Thumbnail">
+// Populate preview & thumbnails
+setPdpPreview(item.slides[0]);
+
+const tray = document.getElementById("pdpThumbs");
+tray.innerHTML = item.slides.map((s, idx) => `
+<div class="thumb-item ${s.bg} ${idx === 0 ? 'active' : ''}" onclick="selectPdpThumb(${idx}, this)">
+${s.label}
 </div>
 `).join("");
 
-// Reset size chips
-selectPdpSize("S");
+pickPdpSize("S");
 
 // Switch views
-document.getElementById("catalogView").classList.remove("active-view");
-document.getElementById("productDetailView").classList.add("active-view");
+document.getElementById("catalogView").classList.remove("active");
+document.getElementById("pdpView").classList.add("active");
 window.scrollTo({ top: 0, behavior: "smooth" });
-window.location.hash = `product-${productId}`;
+window.location.hash = `item-${id}`;
 }
 
-function setPdpImage(src, thumbElement) {
-document.getElementById("pdpMainImg").src = src;
-document.querySelectorAll(".pdp-thumb").forEach(t => t.classList.remove("active"));
-thumbElement.classList.add("active");
+function setPdpPreview(slide) {
+const preview = document.getElementById("pdpLargePreview");
+preview.className = `pdp-large-preview ${slide.bg}`;
+document.getElementById("pdpLargeLabel").textContent = slide.label;
 }
 
-function selectPdpSize(size) {
-selectedPdpSize = size;
-document.querySelectorAll(".size-pill-btn").forEach(btn => {
-btn.classList.toggle("active", btn.textContent === size);
+function selectPdpThumb(index, element) {
+setPdpPreview(currentProduct.slides[index]);
+document.querySelectorAll(".thumb-item").forEach(t => t.classList.remove("active"));
+element.classList.add("active");
+}
+
+function pickPdpSize(sz) {
+currentSize = sz;
+document.querySelectorAll(".size-btn-pill").forEach(b => {
+b.classList.toggle("selected", b.textContent === sz);
 });
 }
 
-function navigateToHome() {
-document.getElementById("productDetailView").classList.remove("active-view");
-document.getElementById("catalogView").classList.add("active-view");
+function openHomeView() {
+document.getElementById("pdpView").classList.remove("active");
+document.getElementById("catalogView").classList.add("active");
 window.location.hash = "";
 window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Handle Hardware Back Button
 window.addEventListener("hashchange", () => {
-if (!window.location.hash || window.location.hash === "#") {
-navigateToHome();
-}
+if (!window.location.hash) openHomeView();
 });
 
 // 6. CART MANAGEMENT
-function quickAddFromCard(productId) {
-const prod = products.find(p => p.id === productId);
-addToCart(prod, "S");
-}
-
-function addCurrentPdpToBag() {
-if (currentPdpProduct) {
-addToCart(currentPdpProduct, selectedPdpSize);
+function addCurrentPdp() {
+if (currentProduct) {
+addToBag(currentProduct, currentSize);
 }
 }
 
-function addToCart(product, size) {
-const match = cart.find(c => c.id === product.id && c.size === size);
+function addToBag(item, size) {
+const match = cart.find(c => c.id === item.id && c.size === size);
 if (match) {
 match.qty += 1;
 } else {
-cart.push({ ...product, size, qty: 1 });
+cart.push({ ...item, size, qty: 1 });
 }
-showToastNotification(`Added: ${product.title} (${size})`);
-updateBagUI();
-toggleDrawer(true);
-}
-
-function updateItemQty(index, delta) {
-cart[index].qty += delta;
-if (cart[index].qty <= 0) {
-cart.splice(index, 1);
-}
-updateBagUI();
+showToast(`Added: ${item.title} (${size})`);
+updateBagDisplay();
+toggleBagDrawer(true);
 }
 
-function toggleDrawer(isOpen) {
-document.getElementById("bagDrawer").classList.toggle("open", isOpen);
-document.getElementById("drawerOverlay").classList.toggle("open", isOpen);
-document.body.style.overflow = isOpen ? "hidden" : "auto";
+function changeQty(idx, delta) {
+cart[idx].qty += delta;
+if (cart[idx].qty <= 0) cart.splice(idx, 1);
+updateBagDisplay();
 }
 
-document.getElementById("openBagBtn").addEventListener("click", () => toggleDrawer(true));
-
-// 7. COUPON CODE ENGINE
-function quickApply(code) {
-document.getElementById("couponField").value = code;
-applyPromoCode();
+function toggleBagDrawer(open) {
+document.getElementById("bagDrawer").classList.toggle("open", open);
+document.getElementById("drawerScrim").classList.toggle("open", open);
+document.body.style.overflow = open ? "hidden" : "auto";
 }
 
-function applyPromoCode() {
-const input = document.getElementById("couponField");
+document.getElementById("openBagTrigger").addEventListener("click", () => toggleBagDrawer(true));
+
+// 7. COUPON LOGIC
+function quickCoupon(code) {
+document.getElementById("couponInput").value = code;
+applyCoupon();
+}
+
+function applyCoupon() {
+const input = document.getElementById("couponInput");
 const code = input.value.trim().toUpperCase();
 const status = document.getElementById("couponStatus");
 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
@@ -1397,68 +1305,66 @@ status.textContent = "Please enter a code.";
 return;
 }
 
-if (!PROMO_CODES[code]) {
+if (!COUPONS[code]) {
 status.style.color = "#D9534F";
 status.textContent = "Invalid code. Try FESTIVE20 or WELCOME10.";
-appliedPromo = null;
-updateBagUI();
+appliedCoupon = null;
+updateBagDisplay();
 return;
 }
 
-const rule = PROMO_CODES[code];
+const rule = COUPONS[code];
 if (subtotal < rule.min) {
 status.style.color = "#D9534F";
 status.textContent = `Requires minimum bag value of ${CURRENCY}${rule.min}.`;
-appliedPromo = null;
-updateBagUI();
+appliedCoupon = null;
+updateBagDisplay();
 return;
 }
 
-appliedPromo = { code, ...rule };
+appliedCoupon = { code, ...rule };
 status.style.color = "#2E7D32";
-status.textContent = `✓ Coupon '${code}' applied! (${rule.desc})`;
-updateBagUI();
+status.textContent = `✓ Code '${code}' applied! (${rule.desc})`;
+updateBagDisplay();
 }
 
 // 8. UPDATE CART DISPLAY
-function updateBagUI() {
+function updateBagDisplay() {
 const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
 const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
 
-document.getElementById("bagCountBadge").textContent = totalCount;
-document.getElementById("drawerBagCount").textContent = totalCount;
-document.getElementById("subtotalFigure").textContent = `${CURRENCY}${subtotal.toLocaleString('en-IN')}`;
+document.getElementById("headerBagCount").textContent = totalCount;
+document.getElementById("drawerCount").textContent = totalCount;
+document.getElementById("ledgerSubtotal").textContent = `${CURRENCY}${subtotal.toLocaleString('en-IN')}`;
 
-// Calculate Discount
+// Calculate discount
 let discountAmount = 0;
-if (appliedPromo && subtotal > 0) {
-if (appliedPromo.type === "percent") {
-discountAmount = Math.round((subtotal * appliedPromo.val) / 100);
-} else if (appliedPromo.type === "flat") {
-discountAmount = appliedPromo.val;
-}
+if (appliedCoupon && subtotal > 0) {
+discountAmount = appliedCoupon.type === "percent"
+? Math.round((subtotal * appliedCoupon.val) / 100)
+: appliedCoupon.val;
 }
 
-const discountRow = document.getElementById("couponDeductionRow");
+const discountRow = document.getElementById("ledgerDiscountRow");
 if (discountAmount > 0) {
 discountRow.style.display = "flex";
-document.getElementById("couponDeductionLabel").textContent = `Discount (${appliedPromo.code}):`;
-document.getElementById("couponDeductionVal").textContent = `-${CURRENCY}${discountAmount.toLocaleString('en-IN')}`;
+document.getElementById("ledgerDiscountLabel").textContent = `Discount (${appliedCoupon.code}):`;
+document.getElementById("ledgerDiscountVal").textContent = `-${CURRENCY}${discountAmount.toLocaleString('en-IN')}`;
 } else {
 discountRow.style.display = "none";
 }
 
-const grandTotal = Math.max(0, subtotal - discountAmount);
-document.getElementById("grandTotalFigure").textContent = `${CURRENCY}${grandTotal.toLocaleString('en-IN')}`;
+const totalPayable = Math.max(0, subtotal - discountAmount);
+document.getElementById("ledgerTotal").textContent = `${CURRENCY}${totalPayable.toLocaleString('en-IN')}`;
 
-const listContainer = document.getElementById("bagItemsList");
-const footer = document.getElementById("drawerFooter");
+const container = document.getElementById("bagItemsContainer");
+const footer = document.getElementById("bagFooter");
 
 if (cart.length === 0) {
-listContainer.innerHTML = `
-<div style="text-align:center; padding: 60px 10px; color: var(--text-muted);">
-<div style="font-size: 2.5rem; margin-bottom: 8px;">🛍️</div>
-<div style="font-size: 1rem; font-weight: 600; color: var(--noir);">Your shopping bag is empty</div>
+container.innerHTML = `
+<div style="text-align:center; padding: 50px 10px; color: var(--muted);">
+<div style="font-size: 2rem; margin-bottom: 6px;">🛍️</div>
+<div style="font-size: 0.95rem; font-weight: 600; color: var(--noir);">Your shopping bag is empty</div>
 <div style="font-size: 0.8rem; margin-top: 4px;">Explore our pieces and add your favorites.</div>
 </div>
 `;
@@ -1467,22 +1373,20 @@ return;
 }
 
 footer.style.display = "block";
-listContainer.innerHTML = cart.map((item, idx) => `
-<div class="bag-item-card">
-<div class="bag-item-thumb">
-<img src="${item.images[0]}" alt="${item.title}">
-</div>
-<div class="bag-item-info">
+container.innerHTML = cart.map((item, idx) => `
+<div class="bag-row">
+<div class="bag-row-thumb">ZAYA</div>
+<div class="bag-row-info">
 <div>
-<div class="bag-item-title">${item.title}</div>
-<div class="bag-item-size">Size: <strong>${item.size}</strong></div>
+<div style="font-size: 0.84rem; font-weight: 600;">${item.title}</div>
+<div style="font-size: 0.72rem; color: var(--muted); margin: 2px 0;">Size: <strong>${item.size}</strong></div>
 </div>
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-<span style="font-weight:700; font-size:0.9rem;">${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}</span>
-<div class="bag-qty-bar">
-<button class="qty-step-btn" onclick="updateItemQty(${idx}, -1)">−</button>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4px;">
+<span style="font-weight:700; font-size: 0.88rem;">${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}</span>
+<div class="qty-wrap">
+<button class="step-btn" onclick="changeQty(${idx}, -1)">−</button>
 <span style="font-size:0.85rem; font-weight:600;">${item.qty}</span>
-<button class="qty-step-btn" onclick="updateItemQty(${idx}, 1)">+</button>
+<button class="step-btn" onclick="changeQty(${idx}, 1)">+</button>
 </div>
 </div>
 </div>
@@ -1490,22 +1394,22 @@ listContainer.innerHTML = cart.map((item, idx) => `
 `).join("");
 }
 
-// 9. FINAL STEP: ORDER ONLY ON WHATSAPP
-function checkoutOnWhatsApp() {
+// 9. FINAL STEP: ORDER ON WHATSAPP ONLY
+function submitOrderToWhatsApp() {
 if (cart.length === 0) {
-alert("Your bag is empty.");
+alert("Your shopping bag is empty.");
 return;
 }
 
-const name = document.getElementById("custFullName").value.trim() || "Customer";
-const city = document.getElementById("custLocation").value.trim() || "Not specified";
+const name = document.getElementById("custName").value.trim() || "Customer";
+const address = document.getElementById("custAddress").value.trim() || "Not specified";
 
 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 let discount = 0;
-if (appliedPromo && subtotal > 0) {
-discount = appliedPromo.type === "percent"
-? Math.round((subtotal * appliedPromo.val) / 100)
-: appliedPromo.val;
+if (appliedCoupon && subtotal > 0) {
+discount = appliedCoupon.type === "percent"
+? Math.round((subtotal * appliedCoupon.val) / 100)
+: appliedCoupon.val;
 }
 const payable = Math.max(0, subtotal - discount);
 
@@ -1514,10 +1418,10 @@ const itemsSummary = cart.map((item, i) =>
 ).join("\n\n");
 
 const message =
-`✨ *NEW ORDER — ZAYA ATELIER* ✨
+`✨ *NEW ORDER — ZAYA BOUTIQUE* ✨
 
 *Customer Name:* ${name}
-*Delivery City / Pincode:* ${city}
+*Delivery City / Pincode:* ${address}
 
 ------------------------------------
 *ORDER SUMMARY:*
@@ -1525,7 +1429,7 @@ ${itemsSummary}
 ------------------------------------
 
 *Subtotal:* ${CURRENCY}${subtotal.toLocaleString('en-IN')}
-${appliedPromo ? `*Coupon Discount (${appliedPromo.code}):* -${CURRENCY}${discount.toLocaleString('en-IN')}\n` : ""}*Shipping:* FREE (Standard Express)
+${appliedCoupon ? `*Coupon Discount (${appliedCoupon.code}):* -${CURRENCY}${discount.toLocaleString('en-IN')}\n` : ""}*Shipping:* FREE (Standard Express)
 *Grand Total Payable:* ${CURRENCY}${payable.toLocaleString('en-IN')}
 
 Please share UPI details / payment link to confirm my order.`;
@@ -1534,17 +1438,17 @@ const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message
 window.open(waUrl, "_blank");
 }
 
-// 10. TOAST POPUP
-function showToastNotification(msg) {
-const toast = document.getElementById("globalToast");
-toast.textContent = `✨ ${msg}`;
+// 10. TOAST NOTIFICATION
+function showToast(msg) {
+const toast = document.getElementById("toastNotice");
+toast.textContent = `✓ ${msg}`;
 toast.classList.add("show");
-setTimeout(() => toast.classList.remove("show"), 2200);
+setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
 // INITIAL RENDER
 renderCatalog();
-updateBagUI();
+updateBagDisplay();
 </script>
 </body>
 </html>

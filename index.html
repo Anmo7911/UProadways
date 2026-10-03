@@ -213,12 +213,13 @@
     }
 
     /* ----------------------------------------------------
-       IMAGE SCALING LOGIC (MOBILE VS DESKTOP)
+       CAROUSEL: FULL-BLEED, EVEN & PRECISE SNAPPING
     ---------------------------------------------------- */
     .carousel-box {
       position: relative;
       width: 100%;
-      background: #F3EFEA;
+      aspect-ratio: 3 / 4; /* Standard portrait luxury ratio */
+      background: #EAE6DF;
       overflow: hidden;
       cursor: pointer;
     }
@@ -227,68 +228,24 @@
       display: flex;
       width: 100%;
       height: 100%;
-      transition: transform 0.45s ease;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
     }
 
     .carousel-slide {
+      flex: 0 0 100%;
+      width: 100%;
       min-width: 100%;
+      max-width: 100%;
       height: 100%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    /* MOBILE SCALE: Uses 'contain' so images NEVER zoom or crop awkward parts */
-    @media (max-width: 767px) {
-      .carousel-box {
-        aspect-ratio: 4 / 5;
-      }
-      .carousel-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-        padding: 4px;
-        display: block;
-      }
-      .pdp-large-preview {
-        aspect-ratio: 4 / 5;
-        background: #F3EFEA;
-      }
-      .pdp-large-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-        padding: 6px;
-        display: block;
-      }
-    }
-
-    /* DESKTOP SCALE: Full editorial framed cover */
-    @media (min-width: 768px) {
-      .carousel-box {
-        aspect-ratio: 3 / 4;
-      }
-      .carousel-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top center;
-        display: block;
-      }
-      .pdp-large-preview {
-        aspect-ratio: 3 / 4;
-        background: #F3EFEA;
-      }
-      .pdp-large-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top center;
-        display: block;
-      }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
     }
 
     .carousel-dots {
@@ -299,18 +256,22 @@
       display: flex;
       gap: 4px;
       z-index: 5;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 3px 6px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(4px);
     }
 
     .c-dot {
       width: 5px;
       height: 5px;
       border-radius: var(--radius-full);
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(255, 255, 255, 0.5);
       transition: all 0.25s ease;
     }
     .c-dot.active {
       width: 14px;
-      background: var(--noir);
+      background: #FFFFFF;
     }
 
     .tag-chip {
@@ -326,6 +287,7 @@
       letter-spacing: 0.05em;
       color: var(--accent);
       z-index: 6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     /* --- CARD DETAILS --- */
@@ -379,7 +341,7 @@
       color: var(--noir);
       line-height: 1.3;
       margin-bottom: 6px;
-      height: 2.6em; /* Exactly 2 lines */
+      height: 2.6em; /* Exactly 2 balanced lines */
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -461,11 +423,17 @@
 
     .pdp-large-preview {
       width: 100%;
+      aspect-ratio: 3 / 4;
       border-radius: var(--radius-md);
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #EAE6DF;
+    }
+    .pdp-large-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
     }
 
     .thumb-tray {
@@ -476,18 +444,20 @@
 
     .thumb-item {
       width: 65px;
-      height: 80px;
+      height: 85px;
       border-radius: var(--radius-sm);
       border: 2px solid transparent;
       overflow: hidden;
       cursor: pointer;
       opacity: 0.6;
-      background: #F3EFEA;
+      background: #EAE6DF;
     }
     .thumb-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
+      display: block;
     }
     .thumb-item.active {
       border-color: var(--noir);
@@ -569,7 +539,7 @@
       border-color: var(--noir);
     }
 
-    /* INLINE ADD TO BAG BUTTON (BELOW SIZES & COLORS) */
+    /* INLINE ADD TO BAG BUTTON */
     .btn-pdp-add-inline {
       width: 100%;
       background: var(--noir);
@@ -658,12 +628,13 @@
       border-radius: var(--radius-sm);
       overflow: hidden;
       flex-shrink: 0;
-      background: #EFEBE5;
+      background: #EAE6DF;
     }
     .bag-row-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
     }
 
     .bag-row-info {
@@ -920,7 +891,7 @@
             <button class="size-btn-pill" onclick="pickPdpSize('XXL')">XXL</button>
           </div>
 
-          <!-- INLINE ADD TO BAG BUTTON (Placed inside page flow, no floating popup) -->
+          <!-- INLINE ADD TO BAG BUTTON -->
           <button class="btn-pdp-add-inline" onclick="addCurrentPdp()">
             🛍️ Add to Shopping Bag
           </button>
@@ -1000,7 +971,7 @@
         </div>
       </div>
 
-      <!-- FINAL ORDER BUTTON (WHATSAPP ONLY) -->
+      <!-- FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) -->
       <button class="btn-wa-order" onclick="submitOrderToWhatsApp()">
         Order on WhatsApp
       </button>
@@ -1018,7 +989,7 @@
     const WHATSAPP_PHONE = "919876543210"; // Enter your WhatsApp phone number with country code
     const CURRENCY = "₹";
 
-    // 2. PRODUCT DATABASE (Formatted 3:4 Portrait URLs for Crisp Display)
+    // 2. PRODUCT DATABASE
     const products = [
       {
         id: "ZY-101",
@@ -1031,9 +1002,9 @@
         reviews: "328",
         boughtThisMonth: "640+ bought this month",
         images: [
-          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&h=800&q=80"
+          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&h=933&q=80"
         ],
         colors: [
           { name: "Sage Green", hex: "#8A9A86" },
@@ -1053,9 +1024,9 @@
         reviews: "214",
         boughtThisMonth: "420+ bought this month",
         images: [
-          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&h=800&q=80"
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=933&q=80"
         ],
         colors: [
           { name: "Champagne Gold", hex: "#E6D3B3" },
@@ -1075,9 +1046,9 @@
         reviews: "186",
         boughtThisMonth: "310+ bought this month",
         images: [
-          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80"
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&h=933&q=80"
         ],
         colors: [
           { name: "Warm Oatmeal", hex: "#D6C7B2" },
@@ -1097,9 +1068,9 @@
         reviews: "92",
         boughtThisMonth: "190+ bought this month",
         images: [
-          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&h=800&q=80"
+          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&h=933&q=80"
         ],
         colors: [
           { name: "Powder Pink", hex: "#F3D3D9" },
@@ -1119,9 +1090,9 @@
         reviews: "155",
         boughtThisMonth: "280+ bought this month",
         images: [
-          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&h=800&q=80"
+          "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&h=933&q=80"
         ],
         colors: [
           { name: "Emerald Mint", hex: "#7DA591" },
@@ -1141,9 +1112,9 @@
         reviews: "260",
         boughtThisMonth: "520+ bought this month",
         images: [
-          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&h=800&q=80",
-          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80"
+          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=933&q=80",
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&h=933&q=80"
         ],
         colors: [
           { name: "Floral Meadow", hex: "#D9822B" },
@@ -1170,7 +1141,7 @@
     let currentColor = null;
     let carouselTimers = {};
 
-    // 3. RENDER CATALOG WITH AUTO-CAROUSEL & RATINGS
+    // 3. RENDER CATALOG (FULL-WIDTH 100% EVEN CARDS)
     function renderCatalog() {
       Object.values(carouselTimers).forEach(clearInterval);
       carouselTimers = {};
@@ -1231,6 +1202,7 @@
       });
     }
 
+    // ACCURATE 100% WIDTH CAROUSEL TRANSITION
     function startCardSlideLoop(id, count) {
       let activeIndex = 0;
       const track = document.getElementById(`track-${id}`);
@@ -1246,7 +1218,7 @@
           const dots = dotsContainer.querySelectorAll(".c-dot");
           dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
         }
-      }, 3200 + Math.random() * 800);
+      }, 3400);
 
       carouselTimers[id] = timer;
     }

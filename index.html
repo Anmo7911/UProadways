@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>ZAYA | Women's Pret & Couture</title>
+<title>ZAYA | Luxury Women's Pret & Couture</title>
 
 <style>
 /* --- CSS RESET & THEME VARIABLES --- */
@@ -50,6 +50,14 @@ cursor: pointer;
 border: none;
 background: none;
 transition: all 0.2s ease;
+}
+
+img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: top center;
+display: block;
 }
 
 /* --- TOP ANNOUNCEMENT & HEADER --- */
@@ -212,12 +220,12 @@ height: 100%;
 overflow: hidden;
 }
 
-/* --- PROPERLY PROPORTIONED CAROUSEL (NO ZOOM/CLIPPING) --- */
+/* --- PROPORTIONED AUTO-CAROUSEL --- */
 .carousel-box {
 position: relative;
 width: 100%;
-aspect-ratio: 4/5; /* Natural, non-zoomed proportion */
-background: #F4EFEA;
+aspect-ratio: 3 / 4;
+background: #EFEBE5;
 overflow: hidden;
 cursor: pointer;
 }
@@ -226,39 +234,16 @@ cursor: pointer;
 display: flex;
 width: 100%;
 height: 100%;
-transition: transform 0.4s ease;
+transition: transform 0.45s ease;
 }
 
-.carousel-item {
+.carousel-slide {
 min-width: 100%;
 height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-padding: 16px;
-user-select: none;
+flex-shrink: 0;
 }
 
-.slide-bg-1 { background: linear-gradient(135deg, #EAD8D0, #CDB4AB); }
-.slide-bg-2 { background: linear-gradient(135deg, #DFD9D1, #BDB4A8); }
-.slide-bg-3 { background: linear-gradient(135deg, #E6DDD8, #C4B7AF); }
-
-.slide-label {
-font-size: 0.74rem;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-color: #383431;
-font-weight: 700;
-}
-.slide-sub {
-font-size: 0.65rem;
-color: #5A5450;
-margin-top: 3px;
-}
-
-.carousel-indicator-bar {
+.carousel-dots {
 position: absolute;
 bottom: 8px;
 left: 50%;
@@ -268,16 +253,16 @@ gap: 4px;
 z-index: 5;
 }
 
-.c-bar {
-width: 6px;
-height: 3px;
-border-radius: 2px;
-background: rgba(0, 0, 0, 0.2);
+.c-dot {
+width: 5px;
+height: 5px;
+border-radius: var(--radius-full);
+background: rgba(255, 255, 255, 0.55);
 transition: all 0.25s ease;
 }
-.c-bar.active {
-width: 16px;
-background: var(--noir);
+.c-dot.active {
+width: 14px;
+background: #FFFFFF;
 }
 
 .tag-chip {
@@ -295,7 +280,7 @@ color: var(--accent);
 z-index: 6;
 }
 
-/* --- CARD INFO & RATINGS --- */
+/* --- CARD DETAILS --- */
 .prod-info {
 padding: 12px 10px 10px;
 display: flex;
@@ -310,13 +295,11 @@ gap: 4px;
 font-size: 0.72rem;
 margin-bottom: 4px;
 }
-
 .rating-stars {
 color: var(--gold-star);
 font-weight: 700;
 font-size: 0.75rem;
 }
-
 .rating-count {
 color: var(--muted);
 font-size: 0.68rem;
@@ -348,7 +331,7 @@ font-weight: 600;
 color: var(--noir);
 line-height: 1.3;
 margin-bottom: 6px;
-height: 2.6em; /* Exactly 2 balanced lines without clipping */
+height: 2.6em; /* Exactly 2 lines */
 overflow: hidden;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -380,7 +363,6 @@ color: #2E7D32;
 font-weight: 700;
 }
 
-/* SINGLE MERGED "ADD TO CART" BUTTON */
 .btn-add-cart-single {
 margin-top: auto;
 width: 100%;
@@ -392,14 +374,8 @@ font-size: 0.8rem;
 font-weight: 600;
 color: #fff;
 text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
 }
-.btn-add-cart-single:hover {
-background: var(--noir-light);
-}
+.btn-add-cart-single:hover { background: var(--noir-light); }
 
 /* --- DEDICATED PRODUCT DETAILS PAGE (PDP) --- */
 .pdp-container {
@@ -437,15 +413,10 @@ align-items: flex-start;
 
 .pdp-large-preview {
 width: 100%;
-aspect-ratio: 4/5;
+aspect-ratio: 3 / 4;
 border-radius: var(--radius-md);
 overflow: hidden;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-padding: 20px;
-background: linear-gradient(135deg, #EAD8D0, #CDB4AB);
+background: #EFEBE5;
 }
 
 .thumb-tray {
@@ -455,15 +426,11 @@ margin-top: 10px;
 }
 
 .thumb-item {
-flex: 1;
-height: 70px;
+width: 65px;
+height: 80px;
 border-radius: var(--radius-sm);
 border: 2px solid transparent;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 0.7rem;
-font-weight: 700;
+overflow: hidden;
 cursor: pointer;
 opacity: 0.6;
 }
@@ -494,18 +461,42 @@ gap: 10px;
 margin-bottom: 16px;
 }
 
-.size-title {
+/* COLOR SWATCH STYLES */
+.color-section {
+margin-bottom: 16px;
+}
+.section-label {
 font-size: 0.78rem;
 font-weight: 700;
 text-transform: uppercase;
 letter-spacing: 0.08em;
 margin-bottom: 8px;
 }
+.color-swatches {
+display: flex;
+gap: 10px;
+align-items: center;
+}
+.color-swatch-btn {
+width: 34px;
+height: 34px;
+border-radius: 50%;
+border: 2px solid #FFFFFF;
+outline: 1px solid var(--border);
+cursor: pointer;
+transition: transform 0.2s ease, outline 0.2s ease;
+position: relative;
+}
+.color-swatch-btn.selected {
+outline: 2px solid var(--noir);
+transform: scale(1.1);
+}
 
+/* SIZES: S, M, L, XL, XXL */
 .sizes-flex {
 display: flex;
 gap: 8px;
-margin-bottom: 16px;
+margin-bottom: 20px;
 }
 
 .size-btn-pill {
@@ -523,7 +514,7 @@ color: #fff;
 border-color: var(--noir);
 }
 
-/* PDP MAIN ADD TO BAG BUTTON (PLACED BELOW SIZE SELECTION IN PAGE FLOW) */
+/* NATURAL INLINE BUTTON (BELOW SIZES & COLORS) */
 .btn-pdp-add-inline {
 width: 100%;
 background: var(--noir);
@@ -538,9 +529,7 @@ justify-content: center;
 gap: 8px;
 margin-bottom: 20px;
 }
-.btn-pdp-add-inline:hover {
-background: var(--noir-light);
-}
+.btn-pdp-add-inline:hover { background: var(--noir-light); }
 
 .pdp-block {
 border-top: 1px solid var(--border);
@@ -612,15 +601,9 @@ padding-bottom: 12px;
 width: 60px;
 height: 75px;
 border-radius: var(--radius-sm);
-background: #E8E0D9;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 0.65rem;
-font-weight: 700;
-text-transform: uppercase;
-color: #4D4642;
+overflow: hidden;
 flex-shrink: 0;
+background: #EFEBE5;
 }
 
 .bag-row-info {
@@ -759,7 +742,7 @@ gap: 8px;
 }
 .btn-wa-order:hover { background: var(--wa-dark); }
 
-/* TOAST NOTIFICATION */
+/* TOAST */
 .toast {
 position: fixed;
 bottom: 24px;
@@ -785,7 +768,7 @@ pointer-events: none;
 Festive Pret Collection • Use Code <strong>FESTIVE20</strong> for 20% Off
 </div>
 
-<!-- Main Sticky Header -->
+<!-- Sticky Header -->
 <header class="header">
 <div class="brand-logo" onclick="openHomeView()">ZAYA</div>
 <button class="bag-btn" id="openBagTrigger">
@@ -801,10 +784,10 @@ VIEW 1: CATALOG VIEW
 <div class="hero-card">
 <div class="hero-tag">New Season '26</div>
 <h1 class="hero-title">Timeless Grace & Modern Pret</h1>
-<p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to pick your size and checkout via WhatsApp.</p>
+<p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to customize your color & size, and order on WhatsApp.</p>
 </div>
 
-<!-- Category Filter Bar -->
+<!-- Category Filters -->
 <div class="cat-scroll">
 <button class="cat-pill active" onclick="setCategory('All')">All Pieces</button>
 <button class="cat-pill" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
@@ -813,7 +796,7 @@ VIEW 1: CATALOG VIEW
 <button class="cat-pill" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
 </div>
 
-<!-- Responsive Product Grid -->
+<!-- Product Grid -->
 <main class="main-wrap">
 <div class="grid-layout" id="productGrid">
 <!-- Products Injected Here -->
@@ -822,7 +805,7 @@ VIEW 1: CATALOG VIEW
 </section>
 
 <!-- =========================================
-VIEW 2: DEDICATED PRODUCT DETAILS PAGE
+VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
 ========================================== -->
 <section id="pdpView" class="view-container">
 <div class="pdp-container">
@@ -833,23 +816,20 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE
 <div class="pdp-split">
 <!-- Media Gallery -->
 <div class="pdp-media-pane">
-<div class="pdp-large-preview" id="pdpLargePreview">
-<div>
-<div style="font-size: 1.1rem; font-weight: 700; color: #383431;" id="pdpLargeLabel">Front View</div>
-<div style="font-size: 0.8rem; color: #5A5450; margin-top: 4px;">ZAYA Couture Studio</div>
-</div>
+<div class="pdp-large-preview">
+<img id="pdpMainImg" src="" alt="Selected Product Preview">
 </div>
 <div class="thumb-tray" id="pdpThumbs">
 <!-- Thumbnails Injected Here -->
 </div>
 </div>
 
-<!-- Product Information -->
+<!-- Product Details -->
 <div class="pdp-info-pane">
 <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.08em;" id="pdpCatName"></div>
 <h1 class="pdp-heading" id="pdpItemTitle"></h1>
 
-<!-- Rating & Bought Stats on PDP -->
+<!-- Ratings & Monthly Bought Badge -->
 <div class="pdp-rating-strip">
 <span class="rating-stars" id="pdpRatingStars">★ 4.9</span>
 <span class="rating-count" id="pdpRatingReviews">(184 Reviews)</span>
@@ -862,17 +842,25 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE
 <span style="background: #E8F5E9; color: #2E7D32; font-size: 0.74rem; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm);" id="pdpOffVal"></span>
 </div>
 
-<!-- Size Selector -->
-<div class="size-title">Select Your Size:</div>
+<!-- Color Swatches Section -->
+<div class="color-section">
+<div class="section-label">Select Color: <span id="pdpSelectedColorName" style="color: var(--accent); text-transform: none;"></span></div>
+<div class="color-swatches" id="pdpColorsGroup">
+<!-- Swatches Injected Here -->
+</div>
+</div>
+
+<!-- Size Selector: Strictly S, M, L, XL, XXL -->
+<div class="section-label">Select Size:</div>
 <div class="sizes-flex" id="pdpSizesGroup">
-<button class="size-btn-pill" onclick="pickPdpSize('XS')">XS</button>
 <button class="size-btn-pill selected" onclick="pickPdpSize('S')">S</button>
 <button class="size-btn-pill" onclick="pickPdpSize('M')">M</button>
 <button class="size-btn-pill" onclick="pickPdpSize('L')">L</button>
 <button class="size-btn-pill" onclick="pickPdpSize('XL')">XL</button>
+<button class="size-btn-pill" onclick="pickPdpSize('XXL')">XXL</button>
 </div>
 
-<!-- NATURAL INLINE BUTTON (PLACED BELOW SIZES, NOT FLOATING OVER SCREEN) -->
+<!-- INLINE ADD TO BAG BUTTON (Positioned below sizes, not floating over the screen) -->
 <button class="btn-pdp-add-inline" onclick="addCurrentPdp()">
 🛍️ Add to Shopping Bag
 </button>
@@ -911,7 +899,7 @@ SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
 
 <!-- Checkout Footer -->
 <div class="bag-footer" id="bagFooter">
-<!-- Coupon Box -->
+<!-- Coupon Section -->
 <div class="coupon-section">
 <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Promo / Coupon Code</div>
 <div class="coupon-row">
@@ -967,10 +955,10 @@ JAVASCRIPT LOGIC
 ========================================== -->
 <script>
 // 1. STORE CONFIGURATION
-const WHATSAPP_PHONE = "919876543210"; // Put your WhatsApp number with country code
+const WHATSAPP_PHONE = "919876543210"; // Enter your WhatsApp phone number with country code
 const CURRENCY = "₹";
 
-// 2. PRODUCT DATABASE (With Ratings & Monthly Bought Numbers)
+// 2. PRODUCT DATABASE (High Quality Real Fashion Images + Color Options)
 const products = [
 {
 id: "ZY-101",
@@ -982,10 +970,15 @@ tag: "Bestseller",
 rating: "4.9",
 reviews: "328",
 boughtThisMonth: "640+ bought this month",
-slides: [
-{ label: "Front Profile", bg: "slide-bg-1" },
-{ label: "Embroidery Detail", bg: "slide-bg-2" },
-{ label: "Dupatta Drape", bg: "slide-bg-3" }
+images: [
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80"
+],
+colors: [
+{ name: "Sage Green", hex: "#8A9A86" },
+{ name: "Blush Pink", hex: "#E8C5C8" },
+{ name: "Ivory Cream", hex: "#FDFBF7" }
 ],
 description: "Handcrafted pure mulmul cotton kurta with delicate hand chikankari embroidery, paired with relaxed pants and matching dupatta."
 },
@@ -999,10 +992,15 @@ tag: "Trending",
 rating: "4.8",
 reviews: "214",
 boughtThisMonth: "420+ bought this month",
-slides: [
-{ label: "Full Silhouette", bg: "slide-bg-2" },
-{ label: "Micro-Pleat Texture", bg: "slide-bg-3" },
-{ label: "Back Straps View", bg: "slide-bg-1" }
+images: [
+"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
+],
+colors: [
+{ name: "Champagne Gold", hex: "#E6D3B3" },
+{ name: "Midnight Noir", hex: "#1C1B1A" },
+{ name: "Rose Wine", hex: "#8E4A49" }
 ],
 description: "Fluid champagne satin evening slip dress featuring fine micro-pleating, square cowl neckline, and adjustable shoulder straps."
 },
@@ -1016,10 +1014,15 @@ tag: "New",
 rating: "4.7",
 reviews: "186",
 boughtThisMonth: "310+ bought this month",
-slides: [
-{ label: "Tailored Ensemble", bg: "slide-bg-3" },
-{ label: "Linen Weave Close-up", bg: "slide-bg-1" },
-{ label: "Trouser Fit", bg: "slide-bg-2" }
+images: [
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80"
+],
+colors: [
+{ name: "Warm Oatmeal", hex: "#D6C7B2" },
+{ name: "Earthy Olive", hex: "#686D5A" },
+{ name: "Charcoal Slate", hex: "#3A3D40" }
 ],
 description: "Two-piece premium linen set with an oversized single-breasted blazer and matching high-waisted pleated trousers."
 },
@@ -1033,10 +1036,15 @@ tag: "Exclusive",
 rating: "5.0",
 reviews: "92",
 boughtThisMonth: "190+ bought this month",
-slides: [
-{ label: "Pallu Drape", bg: "slide-bg-1" },
-{ label: "Hand-Painted Motif", bg: "slide-bg-2" },
-{ label: "Zari Border Detail", bg: "slide-bg-3" }
+images: [
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80"
+],
+colors: [
+{ name: "Powder Pink", hex: "#F3D3D9" },
+{ name: "Sky Lavender", hex: "#DCD0E8" },
+{ name: "Mint Whisper", hex: "#D1E7DD" }
 ],
 description: "Pure organza silk saree hand-painted with pastel botanical blooms and finished with a fine scalloped golden zari border."
 },
@@ -1050,10 +1058,15 @@ tag: "Festive Edit",
 rating: "4.8",
 reviews: "155",
 boughtThisMonth: "280+ bought this month",
-slides: [
-{ label: "Kurta & Pant Set", bg: "slide-bg-2" },
-{ label: "Silver Tilla Work", bg: "slide-bg-3" },
-{ label: "Neckline Embroidery", bg: "slide-bg-1" }
+images: [
+"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80"
+],
+colors: [
+{ name: "Emerald Mint", hex: "#7DA591" },
+{ name: "Golden Ochre", hex: "#C79D4C" },
+{ name: "Royal Peach", hex: "#E8B298" }
 ],
 description: "Lustrous sage green tissue chanderi kurta detailed with fine silver tilla work along the neckline and cuffs. Paired with pants."
 },
@@ -1067,10 +1080,15 @@ tag: "Must-Have",
 rating: "4.7",
 reviews: "260",
 boughtThisMonth: "520+ bought this month",
-slides: [
-{ label: "Flowy Tier View", bg: "slide-bg-3" },
-{ label: "Botanical Print", bg: "slide-bg-1" },
-{ label: "Flutter Sleeve Detail", bg: "slide-bg-2" }
+images: [
+"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80"
+],
+colors: [
+{ name: "Floral Meadow", hex: "#D9822B" },
+{ name: "Rust Terracotta", hex: "#A94A42" },
+{ name: "Indigo Dusk", hex: "#2C3E50" }
 ],
 description: "Breathable tiered georgette midi with flutter sleeves and elasticated waist. Ideal for relaxed day outings."
 }
@@ -1089,11 +1107,11 @@ let cart = [];
 let appliedCoupon = null;
 let currentProduct = null;
 let currentSize = "S";
+let currentColor = null;
 let carouselTimers = {};
 
-// 3. RENDER CATALOG WITH AUTO-CAROUSEL & RATINGS
+// 3. RENDER CATALOG (AUTO-CAROUSEL PER CARD)
 function renderCatalog() {
-// Clear old intervals
 Object.values(carouselTimers).forEach(clearInterval);
 carouselTimers = {};
 
@@ -1110,21 +1128,20 @@ return `
 ${item.tag ? `<span class="tag-chip">${item.tag}</span>` : ''}
 
 <div class="carousel-track" id="track-${item.id}">
-${item.slides.map((s, idx) => `
-<div class="carousel-item ${s.bg}">
-<div class="slide-label">${s.label}</div>
-<div class="slide-sub">View ${idx + 1} of${item.slides.length}</div>
+${item.images.map(imgUrl => `
+<div class="carousel-slide">
+<img src="${imgUrl}" alt="${item.title}" loading="lazy">
 </div>
 `).join("")}
 </div>
 
-<div class="carousel-indicator-bar" id="bars-${item.id}">
-${item.slides.map((_, i) => `<span class="c-bar ${i === 0 ? 'active' : ''}"></span>`).join("")}
+<div class="carousel-dots" id="dots-${item.id}">
+${item.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></span>`).join("")}
 </div>
 </div>
 
 <div class="prod-info">
-<!-- Rating & Buyers Count -->
+<!-- Rating & Buyers -->
 <div class="rating-row">
 <span class="rating-stars">★ ${item.rating}</span>
 <span class="rating-count">(${item.reviews})</span>
@@ -1149,16 +1166,15 @@ Add to Cart
 `;
 }).join("");
 
-// Start auto carousels
 list.forEach(item => {
-startCardSlideLoop(item.id, item.slides.length);
+startCardSlideLoop(item.id, item.images.length);
 });
 }
 
 function startCardSlideLoop(id, count) {
 let activeIndex = 0;
 const track = document.getElementById(`track-${id}`);
-const barsContainer = document.getElementById(`bars-${id}`);
+const dotsContainer = document.getElementById(`dots-${id}`);
 
 if (!track || count <= 1) return;
 
@@ -1166,9 +1182,9 @@ const timer = setInterval(() => {
 activeIndex = (activeIndex + 1) % count;
 track.style.transform = `translateX(-${activeIndex * 100}%)`;
 
-if (barsContainer) {
-const bars = barsContainer.querySelectorAll(".c-bar");
-bars.forEach((b, i) => b.classList.toggle("active", i === activeIndex));
+if (dotsContainer) {
+const dots = dotsContainer.querySelectorAll(".c-dot");
+dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
 }
 }, 3200 + Math.random() * 800);
 
@@ -1184,13 +1200,14 @@ btn.classList.toggle("active", btn.textContent.includes(cat) || (cat === "All" &
 renderCatalog();
 }
 
-// 5. SEPARATE PAGE NAVIGATION (CATALOG <-> PRODUCT DETAILS)
+// 5. DEDICATED PRODUCT DETAILS PAGE (PDP)
 function showProductDetails(id) {
 const item = products.find(p => p.id === id);
 if (!item) return;
 
 currentProduct = item;
 currentSize = "S";
+currentColor = item.colors[0].name;
 
 document.getElementById("pdpCatName").textContent = item.category;
 document.getElementById("pdpItemTitle").textContent = item.title;
@@ -1205,16 +1222,30 @@ const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
 document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
 document.getElementById("pdpItemDesc").textContent = item.description;
 
-// Populate preview & thumbnails
-setPdpPreview(item.slides[0]);
+// Main image & thumbs
+const mainImg = document.getElementById("pdpMainImg");
+mainImg.src = item.images[0];
 
-const tray = document.getElementById("pdpThumbs");
-tray.innerHTML = item.slides.map((s, idx) => `
-<div class="thumb-item ${s.bg} ${idx === 0 ? 'active' : ''}" onclick="selectPdpThumb(${idx}, this)">
-${s.label}
+const thumbTray = document.getElementById("pdpThumbs");
+thumbTray.innerHTML = item.images.map((img, idx) => `
+<div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="setPdpPhoto('${img}', this)">
+<img src="${img}" alt="Thumbnail">
 </div>
 `).join("");
 
+// Colors group
+const colorGroup = document.getElementById("pdpColorsGroup");
+document.getElementById("pdpSelectedColorName").textContent = currentColor;
+colorGroup.innerHTML = item.colors.map((c, idx) => `
+<button
+class="color-swatch-btn ${idx === 0 ? 'selected' : ''}"
+style="background-color: ${c.hex};"
+title="${c.name}"
+onclick="pickPdpColor('${c.name}', this)">
+</button>
+`).join("");
+
+// Reset sizes to S
 pickPdpSize("S");
 
 // Switch views
@@ -1224,16 +1255,17 @@ window.scrollTo({ top: 0, behavior: "smooth" });
 window.location.hash = `item-${id}`;
 }
 
-function setPdpPreview(slide) {
-const preview = document.getElementById("pdpLargePreview");
-preview.className = `pdp-large-preview ${slide.bg}`;
-document.getElementById("pdpLargeLabel").textContent = slide.label;
+function setPdpPhoto(src, thumbElement) {
+document.getElementById("pdpMainImg").src = src;
+document.querySelectorAll(".thumb-item").forEach(t => t.classList.remove("active"));
+thumbElement.classList.add("active");
 }
 
-function selectPdpThumb(index, element) {
-setPdpPreview(currentProduct.slides[index]);
-document.querySelectorAll(".thumb-item").forEach(t => t.classList.remove("active"));
-element.classList.add("active");
+function pickPdpColor(colorName, btnElement) {
+currentColor = colorName;
+document.getElementById("pdpSelectedColorName").textContent = colorName;
+document.querySelectorAll(".color-swatch-btn").forEach(b => b.classList.remove("selected"));
+btnElement.classList.add("selected");
 }
 
 function pickPdpSize(sz) {
@@ -1257,18 +1289,18 @@ if (!window.location.hash) openHomeView();
 // 6. CART MANAGEMENT
 function addCurrentPdp() {
 if (currentProduct) {
-addToBag(currentProduct, currentSize);
+addToBag(currentProduct, currentSize, currentColor);
 }
 }
 
-function addToBag(item, size) {
-const match = cart.find(c => c.id === item.id && c.size === size);
+function addToBag(item, size, color) {
+const match = cart.find(c => c.id === item.id && c.size === size && c.color === color);
 if (match) {
 match.qty += 1;
 } else {
-cart.push({ ...item, size, qty: 1 });
+cart.push({ ...item, size, color, qty: 1 });
 }
-showToast(`Added: ${item.title} (${size})`);
+showToast(`Added: ${item.title} (${color} / ${size})`);
 updateBagDisplay();
 toggleBagDrawer(true);
 }
@@ -1375,11 +1407,15 @@ return;
 footer.style.display = "block";
 container.innerHTML = cart.map((item, idx) => `
 <div class="bag-row">
-<div class="bag-row-thumb">ZAYA</div>
+<div class="bag-row-thumb">
+<img src="${item.images[0]}" alt="${item.title}">
+</div>
 <div class="bag-row-info">
 <div>
 <div style="font-size: 0.84rem; font-weight: 600;">${item.title}</div>
-<div style="font-size: 0.72rem; color: var(--muted); margin: 2px 0;">Size: <strong>${item.size}</strong></div>
+<div style="font-size: 0.72rem; color: var(--muted); margin: 2px 0;">
+Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong>
+</div>
 </div>
 <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4px;">
 <span style="font-weight:700; font-size: 0.88rem;">${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}</span>
@@ -1414,7 +1450,7 @@ discount = appliedCoupon.type === "percent"
 const payable = Math.max(0, subtotal - discount);
 
 const itemsSummary = cart.map((item, i) =>
-`${i + 1}. *${item.title}*\n Size: ${item.size} | Qty: ${item.qty} | Price: ${CURRENCY}${item.price * item.qty}`
+`${i + 1}. *${item.title}*\n Color: ${item.color} | Size: ${item.size} | Qty: ${item.qty} | Price: ${CURRENCY}${item.price * item.qty}`
 ).join("\n\n");
 
 const message =
@@ -1443,7 +1479,7 @@ function showToast(msg) {
 const toast = document.getElementById("toastNotice");
 toast.textContent = `✓ ${msg}`;
 toast.classList.add("show");
-setTimeout(() => toast.classList.remove("show"), 2000);
+setTimeout(() => toast.classList.remove("show"), 2200);
 }
 
 // INITIAL RENDER

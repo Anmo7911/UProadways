@@ -42,13 +42,15 @@
       line-height: 1.45;
       overflow-x: hidden;
       min-height: 100vh;
+      position: relative;
     }
 
-    button {
+    button, a {
       font-family: inherit;
       cursor: pointer;
       border: none;
       background: none;
+      text-decoration: none;
       transition: all 0.2s ease;
     }
 
@@ -84,6 +86,7 @@
       letter-spacing: 0.12em;
       cursor: pointer;
       text-transform: uppercase;
+      color: var(--noir);
     }
 
     .bag-btn {
@@ -179,7 +182,7 @@
     .main-wrap {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 12px 60px;
+      padding: 0 12px 70px;
     }
 
     .grid-layout {
@@ -212,7 +215,7 @@
       overflow: hidden;
     }
 
-    /* --- FULL-BLEED EVEN CAROUSEL --- */
+    /* --- FULL-BLEED CAROUSEL --- */
     .carousel-box {
       position: relative;
       width: 100%;
@@ -254,7 +257,7 @@
       display: flex;
       gap: 4px;
       z-index: 5;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.35);
       padding: 3px 6px;
       border-radius: var(--radius-full);
       backdrop-filter: blur(4px);
@@ -389,7 +392,7 @@
     .pdp-container {
       max-width: 980px;
       margin: 0 auto;
-      padding: 12px 16px 50px;
+      padding: 12px 16px 70px;
     }
 
     .back-nav {
@@ -484,13 +487,13 @@
       margin-bottom: 14px;
     }
 
-    /* UPI & COD TRUST NOTICE ON PRODUCT PAGE */
+    /* UPI & COD TRUST STRIP */
     .pdp-payment-notice {
       background: #F3F8F4;
       border: 1px solid #D6E8D8;
       border-radius: var(--radius-sm);
       padding: 10px 12px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .pdp-payment-notice-title {
       font-size: 0.8rem;
@@ -503,6 +506,29 @@
     .pdp-payment-notice-desc {
       font-size: 0.73rem;
       color: #435E47;
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    /* EASY EXCHANGE TRUST BANNER */
+    .pdp-exchange-notice {
+      background: #F8F5FE;
+      border: 1px solid #E4DAF8;
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+    .pdp-exchange-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #5F259F;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pdp-exchange-desc {
+      font-size: 0.73rem;
+      color: #4D386D;
       margin-top: 2px;
       line-height: 1.35;
     }
@@ -577,7 +603,7 @@
     }
     .btn-pdp-add-inline:hover { background: var(--noir-light); }
 
-    /* PRODUCT SPECS IN BULLET POINTS */
+    /* SPECIFICATIONS IN BULLET POINTS */
     .pdp-block {
       border-top: 1px solid var(--border);
       padding: 14px 0;
@@ -767,7 +793,7 @@
       cursor: pointer;
     }
 
-    /* 5-BOX STRUCTURED ADDRESS FORM */
+    /* 5-BOX ADDRESS FORM */
     .address-section {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -904,6 +930,29 @@
     }
     .btn-wa-order:hover { background: var(--wa-dark); }
 
+    /* --- FLOATING CHAT BUTTON (BOTTOM RIGHT) --- */
+    .floating-chat-btn {
+      position: fixed;
+      bottom: 22px;
+      right: 20px;
+      background: var(--wa-green);
+      color: #fff;
+      padding: 11px 18px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      box-shadow: 0 6px 22px rgba(37, 211, 102, 0.45);
+      z-index: 90;
+      cursor: pointer;
+    }
+    .floating-chat-btn:hover {
+      background: var(--wa-dark);
+      transform: translateY(-2px);
+    }
+
     /* TOAST */
     .toast {
       position: fixed;
@@ -927,7 +976,7 @@
 
   <!-- Top Announcement Bar -->
   <div class="top-bar">
-    Festive Pret Collection • Use Code <strong>FESTIVE20</strong> for 20% Off
+    Festive Pret Collection • <strong>Easy 7-Day Exchange</strong> • Use Code <strong>FESTIVE20</strong> for 20% Off
   </div>
 
   <!-- Sticky Header -->
@@ -1014,6 +1063,16 @@
             </div>
           </div>
 
+          <!-- EASY 7-DAY EXCHANGE BANNER -->
+          <div class="pdp-exchange-notice">
+            <div class="pdp-exchange-title">
+              <span>🔄</span> Easy 7-Day Doorstep Exchange
+            </div>
+            <div class="pdp-exchange-desc">
+              Size or fitting issue? We arrange a quick pickup & replacement directly at your doorstep hassle-free.
+            </div>
+          </div>
+
           <!-- Color Swatches Section -->
           <div class="color-section">
             <div class="section-label">Select Color: <span id="pdpSelectedColorName" style="color: var(--accent); text-transform: none;"></span></div>
@@ -1045,11 +1104,11 @@
             </ul>
           </div>
           <div class="pdp-block">
-            <h4>Shipping & Dispatch</h4>
+            <h4>Shipping & Exchange Policy</h4>
             <ul class="spec-list">
               <li><span class="spec-bullet">✓</span> Dispatches within 24–48 business hours.</li>
               <li><span class="spec-bullet">✓</span> Free express shipping across India.</li>
-              <li><span class="spec-bullet">✓</span> 7-day hassle-free size exchange guarantee.</li>
+              <li><span class="spec-bullet">✓</span> <strong>Easy 7-Day Size & Color Exchange:</strong> Doorstep pickup available if you need a different size.</li>
             </ul>
           </div>
         </div>
@@ -1089,15 +1148,34 @@
         <div id="couponStatus" style="font-size: 0.72rem; margin-top: 4px; font-weight: 600;"></div>
       </div>
 
-      <!-- 5-BOX STRUCTURED ADDRESS FORM -->
+      <!-- 5-BOX STRUCTURED ADDRESS FORM (STRICT 6-DIGIT PINCODE) -->
       <div class="address-section">
         <div class="form-heading">1. Delivery Address</div>
         <div class="cust-group">
           <input type="text" id="custName" class="cust-field" placeholder="Full Name *" />
           <input type="text" id="custAddr1" class="cust-field" placeholder="Address (Flat / House No. / Street / Area) *" />
           <input type="text" id="custNearby" class="cust-field" placeholder="Nearby Landmark (Optional)" />
-          <input type="text" id="custPincode" class="cust-field" placeholder="Pincode & City *" />
-          <input type="tel" id="custPhone" class="cust-field" placeholder="Phone Number (10 digits) *" />
+          
+          <!-- STRICT 6-DIGIT NUMERIC ONLY INPUT -->
+          <input 
+            type="tel" 
+            id="custPincode" 
+            class="cust-field" 
+            placeholder="6-Digit Pincode *" 
+            inputmode="numeric" 
+            maxlength="6" 
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6)" 
+          />
+          
+          <input 
+            type="tel" 
+            id="custPhone" 
+            class="cust-field" 
+            placeholder="Phone Number (10 digits) *" 
+            inputmode="numeric" 
+            maxlength="10" 
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)" 
+          />
         </div>
       </div>
 
@@ -1169,6 +1247,17 @@
     </div>
   </aside>
 
+  <!-- FLOATING CHAT BUTTON (BOTTOM RIGHT) -->
+  <a 
+    href="javascript:void(0)" 
+    onclick="openGeneralChatWhatsApp()" 
+    class="floating-chat-btn" 
+    aria-label="Chat on WhatsApp"
+  >
+    <span>💬</span>
+    <span>Chat with Us</span>
+  </a>
+
   <!-- Interactive Toast Notification -->
   <div class="toast" id="toastNotice">Item added to your shopping bag!</div>
 
@@ -1181,7 +1270,7 @@
     const CURRENCY = "₹";
     const COD_FEE = 50;
 
-    // 2. PRODUCT DATABASE (WITH BULLET SPECS)
+    // 2. PRODUCT DATABASE
     const products = [
       {
         id: "ZY-101",
@@ -1208,6 +1297,7 @@
           "Work: Intricate Handcrafted Chikankari & Mirror Lace",
           "Fit: Flared Anarkali Silhouette with Tassels",
           "Set Contains: 1 Flared Kurta, 1 Straight Pant, 1 Organza Dupatta",
+          "Exchange: Eligible for Easy 7-Day Doorstep Size Exchange",
           "Care: Hand wash gently in cold water or dry clean"
         ]
       },
@@ -1235,7 +1325,7 @@
           "Fabric: Fluid Micro-Pleated Premium Heavy Satin",
           "Neckline: Soft Cowl Square Neck with adjustable criss-cross straps",
           "Fit: Body-skimming contour drape that flows effortlessly",
-          "Length: Floor-length evening maxi gown",
+          "Exchange: Eligible for Easy 7-Day Doorstep Size Exchange",
           "Care: Dry clean only to preserve fine pleat memory"
         ]
       },
@@ -1263,7 +1353,7 @@
           "Fabric: Pure Washed Belgian Linen (Pre-shrunk)",
           "Blazer: Relaxed-fit single-breasted jacket with tortoiseshell buttons",
           "Trousers: High-waist tailored pants with deep slant pockets",
-          "Set Contains: 1 Linen Blazer + 1 Pleated Trouser",
+          "Exchange: Eligible for Easy 7-Day Doorstep Size Exchange",
           "Care: Machine wash gentle cycle or professional dry clean"
         ]
       },
@@ -1292,7 +1382,7 @@
           "Artistry: Hand-painted watercolor botanical blossoms",
           "Borders: Fine scalloped golden zari embroidery with cutwork",
           "Includes: 5.5 meters saree + 0.8 meter matching unstitched blouse",
-          "Care: Strict dry clean only"
+          "Exchange: 7-Day Exchange available in case of transit damages"
         ]
       },
       {
@@ -1319,7 +1409,7 @@
           "Fabric: Lustrous festive tissue Chanderi silk with cotton lining",
           "Work: Traditional Kashmiri tilla resham embroidery on V-neck & cuffs",
           "Bottoms: Elasticated ankle-length cigarette pants",
-          "Set Contains: 1 Straight Kurta, 1 Tapered Pant",
+          "Exchange: Eligible for Easy 7-Day Doorstep Size Exchange",
           "Care: Dry clean recommended"
         ]
       },
@@ -1347,7 +1437,7 @@
           "Fabric: Breathable premium georgette with soft crepe inner lining",
           "Sleeve: Three-quarter delicate flutter ruffle sleeves",
           "Waist: Smocked elasticated empire waist for universal fit",
-          "Skirt: Flared 3-tier flowing hemline",
+          "Exchange: Eligible for Easy 7-Day Doorstep Size Exchange",
           "Care: Machine wash cold with similar colors"
         ]
       }
@@ -1370,9 +1460,13 @@
     let currentColor = null;
     let carouselTimers = {};
 
-    // 3. RENDER CATALOG (FULL-WIDTH EVEN CAROUSELS)
+    // 3. RENDER CATALOG WITH STAGGERED TIMERS
     function renderCatalog() {
-      Object.values(carouselTimers).forEach(clearInterval);
+      // Clear old timers
+      Object.values(carouselTimers).forEach(timer => {
+        clearTimeout(timer.timeout);
+        clearInterval(timer.interval);
+      });
       carouselTimers = {};
 
       const list = currentCategory === "All"
@@ -1426,29 +1520,40 @@
         `;
       }).join("");
 
-      list.forEach(item => {
-        startCardSlideLoop(item.id, item.images.length);
+      // STAGGERED AUTO CAROUSEL TIMINGS
+      // Each card has a different start delay & different duration so they never slide in unison
+      const durations = [3200, 4200, 3600, 4800, 3900, 5200];
+      list.forEach((item, index) => {
+        const delay = 600 + (index * 500); // 600ms, 1100ms, 1600ms, etc.
+        const speed = durations[index % durations.length];
+        startStaggeredCardSlide(item.id, item.images.length, delay, speed);
       });
     }
 
-    function startCardSlideLoop(id, count) {
+    function startStaggeredCardSlide(id, count, startDelay, cycleSpeed) {
+      if (count <= 1) return;
       let activeIndex = 0;
       const track = document.getElementById(`track-${id}`);
       const dotsContainer = document.getElementById(`dots-${id}`);
 
-      if (!track || count <= 1) return;
+      // First wait for staggered delay, then start the recurring interval
+      const timeoutId = setTimeout(() => {
+        const intervalId = setInterval(() => {
+          activeIndex = (activeIndex + 1) % count;
+          if (track) {
+            track.style.transform = `translateX(-${activeIndex * 100}%)`;
+          }
 
-      const timer = setInterval(() => {
-        activeIndex = (activeIndex + 1) % count;
-        track.style.transform = `translateX(-${activeIndex * 100}%)`;
+          if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll(".c-dot");
+            dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+          }
+        }, cycleSpeed);
 
-        if (dotsContainer) {
-          const dots = dotsContainer.querySelectorAll(".c-dot");
-          dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
-        }
-      }, 3400);
+        carouselTimers[id] = { interval: intervalId, timeout: null };
+      }, startDelay);
 
-      carouselTimers[id] = timer;
+      carouselTimers[id] = { timeout: timeoutId, interval: null };
     }
 
     // 4. CATEGORY SELECTION
@@ -1713,7 +1818,7 @@
       `).join("");
     }
 
-    // 10. FINAL WHATSAPP ORDER SUBMISSION
+    // 10. FINAL WHATSAPP ORDER SUBMISSION WITH STRICT 6-DIGIT PINCODE VALIDATION
     function submitOrderToWhatsApp() {
       if (cart.length === 0) {
         alert("Your shopping bag is empty.");
@@ -1727,9 +1832,21 @@
       const pincode = document.getElementById("custPincode").value.trim();
       const phone = document.getElementById("custPhone").value.trim();
 
-      // Quick validation
-      if (!name || !addr1 || !pincode || !phone) {
-        alert("Please fill in your Name, Address, Pincode & City, and Phone Number before ordering.");
+      // STRICT VALIDATIONS
+      if (!name) {
+        alert("Please enter your Full Name.");
+        return;
+      }
+      if (!addr1) {
+        alert("Please enter your Street / Flat Address.");
+        return;
+      }
+      if (!/^\d{6}$/.test(pincode)) {
+        alert("Please enter a valid 6-digit Pincode (numbers only).");
+        return;
+      }
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit Phone Number.");
         return;
       }
 
@@ -1748,7 +1865,7 @@
       ).join("\n\n");
 
       const paymentText = (selectedPayment === "COD") 
-        ? "Cash on Delivery (COD) [₹50 Extra Fee Included]" 
+        ? "Cash on Delivery (COD) [₹50 Convenience Fee Included]" 
         : "UPI / Online Payment (Google Pay / PhonePe / Paytm)";
 
       const message = 
@@ -1757,20 +1874,20 @@
 *CUSTOMER DETAILS:*
 • Name: ${name}
 • Phone: ${phone}
-• Address: ${addr1}
-${nearby ? `• Landmark: ${nearby}\n` : ""}• Pincode & City: ${pincode}
+• Delivery Address: ${addr1}
+${nearby ? `• Landmark: ${nearby}\n` : ""}• Pincode: ${pincode}
 
 ------------------------------------
 *ORDERED ITEMS:*
 ${itemsSummary}
 ------------------------------------
 
-*PAYMENT SELECTION:*
-• Mode: *${paymentText}*
+*PAYMENT PREFERENCE:*
+• Selected Mode: *${paymentText}*
 
-*BILLING BREAKDOWN:*
+*BILLING SUMMARY:*
 • Subtotal: ${CURRENCY}${subtotal.toLocaleString('en-IN')}
-${appliedCoupon ? `• Coupon Discount (${appliedCoupon.code}): -${CURRENCY}${discount.toLocaleString('en-IN')}\n` : ""}${selectedPayment === "COD" ? `• COD Convenience Charge: +${CURRENCY}${COD_FEE}\n` : ""}• Delivery Shipping: FREE
+${appliedCoupon ? `• Coupon Discount (${appliedCoupon.code}): -${CURRENCY}${discount.toLocaleString('en-IN')}\n` : ""}${selectedPayment === "COD" ? `• COD Convenience Charge: +${CURRENCY}${COD_FEE}\n` : ""}• Shipping: FREE (Complimentary)
 *• Grand Total Payable: ${CURRENCY}${payable.toLocaleString('en-IN')}*
 
 ${selectedPayment === "UPI" ? "Please share your UPI ID / QR code to complete payment." : "Please confirm my COD order and dispatch date."}`;
@@ -1779,7 +1896,14 @@ ${selectedPayment === "UPI" ? "Please share your UPI ID / QR code to complete pa
       window.open(waUrl, "_blank");
     }
 
-    // 11. TOAST NOTIFICATION
+    // 11. FLOATING WHATSAPP CHAT REDIRECT
+    function openGeneralChatWhatsApp() {
+      const msg = `Hi ZAYA Team, I am browsing your online store and have a question regarding an outfit/order.`;
+      const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, "_blank");
+    }
+
+    // 12. TOAST NOTIFICATION
     function showToast(msg) {
       const toast = document.getElementById("toastNotice");
       toast.textContent = `✓ ${msg}`;

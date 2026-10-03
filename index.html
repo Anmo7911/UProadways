@@ -2,37 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ZAYA | Women's Fashion & Pret</title>
-<meta name="description" content="Chic and elegant ethnic & western wear for women. Order directly on WhatsApp." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>MAISON ZAYA | Women's Couture & Pret</title>
 
-<!-- Google Fonts for luxury boutique feel -->
+<!-- Google Fonts: Luxury Editorial Serif & Clean Modern Sans -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ---------------------------------
-CSS VARIABLES & RESET
---------------------------------- */
 :root {
---bg-cream: #FAF8F5;
---bg-white: #FFFFFF;
---primary: #1C1917;
---primary-accent: #8E5B4C;
---accent-soft: #F4EBE6;
---text-main: #292524;
---text-muted: #78716C;
---border-color: #E7E5E4;
+--bg-page: #FAF7F2;
+--bg-surface: #FFFFFF;
+--noir: #141414;
+--noir-light: #2A2A2A;
+--gold-bronze: #B3806D;
+--gold-light: #F4ECE7;
+--text-muted: #736E69;
+--border-subtle: #E8E2D9;
+--border-light: #F0ECE6;
 --wa-green: #25D366;
---wa-hover: #1EBE5B;
---shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
---shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
---radius-sm: 8px;
---radius-md: 14px;
+--wa-dark: #1EBE5B;
+--danger: #D9534F;
+--radius-sm: 6px;
+--radius-md: 12px;
+--radius-lg: 20px;
 --radius-full: 9999px;
---font-serif: 'Cormorant Garamond', Georgia, serif;
---font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+--font-display: 'Playfair Display', serif;
+--font-ui: 'Plus Jakarta Sans', -apple-system, sans-serif;
+--shadow-soft: 0 10px 30px -10px rgba(20, 20, 20, 0.07);
+--shadow-hover: 0 18px 40px -12px rgba(20, 20, 20, 0.12);
 }
 
 * {
@@ -43,16 +42,12 @@ padding: 0;
 }
 
 body {
-background-color: var(--bg-cream);
-color: var(--text-main);
-font-family: var(--font-sans);
-line-height: 1.5;
-padding-bottom: 70px;
-}
-
-a {
-color: inherit;
-text-decoration: none;
+background-color: var(--bg-page);
+color: var(--noir);
+font-family: var(--font-ui);
+line-height: 1.45;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
 }
 
 button {
@@ -60,151 +55,181 @@ font-family: inherit;
 cursor: pointer;
 border: none;
 background: none;
-transition: all 0.2s ease;
+transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 img {
-max-width: 100%;
-height: auto;
+width: 100%;
+height: 100%;
+object-fit: cover;
 display: block;
 }
 
-/* ---------------------------------
-HEADER & ANNOUNCEMENT BAR
---------------------------------- */
-.announcement-bar {
-background: var(--primary);
-color: #fff;
-font-size: 0.75rem;
-text-align: center;
-padding: 7px 12px;
-letter-spacing: 0.05em;
+/* ------------------------------------
+STICKY MARQUEE & NAVBAR
+------------------------------------ */
+.top-marquee {
+background: var(--noir);
+color: #F8F5F0;
+font-size: 0.72rem;
+letter-spacing: 0.15em;
 text-transform: uppercase;
+text-align: center;
+padding: 7px 10px;
 font-weight: 500;
 }
 
+.top-marquee span {
+color: var(--gold-bronze);
+font-weight: 700;
+}
+
 .navbar {
-background: rgba(250, 248, 245, 0.95);
-backdrop-filter: blur(10px);
 position: sticky;
 top: 0;
-z-index: 40;
-border-bottom: 1px solid var(--border-color);
+z-index: 50;
+background: rgba(250, 247, 242, 0.92);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border-bottom: 1px solid var(--border-subtle);
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 14px 20px;
 }
 
-.logo {
-font-family: var(--font-serif);
-font-size: 1.9rem;
-font-weight: 600;
-letter-spacing: 0.1em;
-color: var(--primary);
+.nav-brand {
+font-family: var(--font-display);
+font-size: 1.85rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+color: var(--noir);
 text-transform: uppercase;
 }
 
 .nav-actions {
 display: flex;
 align-items: center;
-gap: 16px;
+gap: 12px;
 }
 
-.cart-btn {
+.bag-icon-btn {
 position: relative;
-padding: 8px;
+background: var(--noir);
+color: white;
+padding: 10px 14px;
+border-radius: var(--radius-full);
 display: flex;
 align-items: center;
-justify-content: center;
+gap: 8px;
+font-size: 0.8rem;
+font-weight: 600;
 }
 
-.cart-badge {
-position: absolute;
-top: 2px;
-right: 2px;
-background: var(--primary-accent);
+.bag-icon-btn:hover {
+background: var(--noir-light);
+}
+
+.bag-badge {
+background: var(--gold-bronze);
 color: white;
-font-size: 0.65rem;
+font-size: 0.7rem;
 font-weight: 700;
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 border-radius: var(--radius-full);
 display: flex;
 align-items: center;
 justify-content: center;
 }
 
-/* ---------------------------------
+/* ------------------------------------
 HERO BANNER
---------------------------------- */
-.hero {
-padding: 30px 20px 20px;
+------------------------------------ */
+.hero-banner {
+position: relative;
+margin: 16px 16px 24px;
+border-radius: var(--radius-lg);
+background: linear-gradient(135deg, #2b2523 0%, #171514 100%);
+color: #fff;
+padding: 44px 24px;
 text-align: center;
-max-width: 650px;
-margin: 0 auto;
+overflow: hidden;
+}
+
+.hero-banner::after {
+content: "";
+position: absolute;
+top: -50%;
+right: -20%;
+width: 300px;
+height: 300px;
+background: radial-gradient(circle, rgba(179, 128, 109, 0.25) 0%, transparent 70%);
+pointer-events: none;
 }
 
 .hero-tag {
-font-size: 0.75rem;
+display: inline-block;
+font-size: 0.7rem;
 text-transform: uppercase;
-letter-spacing: 0.15em;
-color: var(--primary-accent);
+letter-spacing: 0.25em;
+color: var(--gold-bronze);
 font-weight: 600;
-margin-bottom: 6px;
+margin-bottom: 8px;
 }
 
-.hero h1 {
-font-family: var(--font-serif);
-font-size: 2.2rem;
-font-weight: 500;
-line-height: 1.2;
-margin-bottom: 10px;
-color: var(--primary);
+.hero-title {
+font-family: var(--font-display);
+font-size: 2.3rem;
+font-weight: 600;
+line-height: 1.18;
+margin-bottom: 12px;
+font-style: italic;
 }
 
-.hero p {
-font-size: 0.9rem;
-color: var(--text-muted);
+.hero-sub {
+font-size: 0.88rem;
+color: #D3CCC4;
+max-width: 440px;
+margin: 0 auto;
+font-weight: 300;
 }
 
-/* ---------------------------------
-CATEGORY FILTERS (SCROLLABLE)
---------------------------------- */
-.categories-wrapper {
-padding: 10px 20px 20px;
+/* ------------------------------------
+CATEGORY PILLS
+------------------------------------ */
+.filter-scroll {
 display: flex;
-gap: 8px;
+gap: 10px;
+padding: 0 16px 20px;
 overflow-x: auto;
 scrollbar-width: none;
--ms-overflow-style: none;
 }
-.categories-wrapper::-webkit-scrollbar {
-display: none;
-}
+.filter-scroll::-webkit-scrollbar { display: none; }
 
-.cat-pill {
+.filter-btn {
 white-space: nowrap;
-padding: 7px 16px;
+padding: 8px 18px;
 border-radius: var(--radius-full);
-font-size: 0.85rem;
+font-size: 0.82rem;
 font-weight: 500;
-background: var(--bg-white);
-border: 1px solid var(--border-color);
+background: var(--bg-surface);
+border: 1px solid var(--border-subtle);
 color: var(--text-muted);
 }
 
-.cat-pill.active {
-background: var(--primary);
-color: white;
-border-color: var(--primary);
+.filter-btn.active {
+background: var(--noir);
+color: #fff;
+border-color: var(--noir);
+font-weight: 600;
 }
 
-/* ---------------------------------
+/* ------------------------------------
 PRODUCT GRID
---------------------------------- */
+------------------------------------ */
 .container {
-max-width: 1200px;
+max-width: 1240px;
 margin: 0 auto;
 padding: 0 16px;
 }
@@ -212,13 +237,13 @@ padding: 0 16px;
 .product-grid {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-gap: 14px;
+gap: 16px;
 }
 
 @media (min-width: 768px) {
 .product-grid {
 grid-template-columns: repeat(3, 1fr);
-gap: 24px;
+gap: 26px;
 }
 }
 
@@ -229,140 +254,129 @@ grid-template-columns: repeat(4, 1fr);
 }
 
 .product-card {
-background: var(--bg-white);
+background: var(--bg-surface);
 border-radius: var(--radius-md);
 overflow: hidden;
-border: 1px solid var(--border-color);
-box-shadow: var(--shadow-sm);
+border: 1px solid var(--border-subtle);
+box-shadow: var(--shadow-soft);
 display: flex;
 flex-direction: column;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+transform: translateY(-4px);
+box-shadow: var(--shadow-hover);
+}
+
+.card-media {
 position: relative;
-}
-
-.badge {
-position: absolute;
-top: 10px;
-left: 10px;
-background: rgba(255, 255, 255, 0.9);
-backdrop-filter: blur(4px);
-padding: 3px 8px;
-border-radius: var(--radius-sm);
-font-size: 0.68rem;
-font-weight: 600;
-color: var(--primary-accent);
-letter-spacing: 0.05em;
-text-transform: uppercase;
-z-index: 2;
-}
-
-.card-img-wrap {
 width: 100%;
-aspect-ratio: 3 / 4;
-background: #f0ece8;
+aspect-ratio: 3/4;
+background: #ece7e0;
 overflow: hidden;
 cursor: pointer;
 }
 
-.card-img-wrap img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-transition: transform 0.4s ease;
+.card-media img {
+transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card-img-wrap:hover img {
-transform: scale(1.03);
+.product-card:hover .card-media img {
+transform: scale(1.06);
 }
 
-.card-info {
-padding: 12px;
+.card-tag {
+position: absolute;
+top: 10px;
+left: 10px;
+background: rgba(255, 255, 255, 0.94);
+backdrop-filter: blur(4px);
+padding: 3px 9px;
+border-radius: var(--radius-sm);
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(--gold-bronze);
+z-index: 2;
+}
+
+.card-body {
+padding: 14px;
 display: flex;
 flex-direction: column;
 flex-grow: 1;
 }
 
 .card-category {
-font-size: 0.7rem;
-color: var(--text-muted);
+font-size: 0.68rem;
 text-transform: uppercase;
-letter-spacing: 0.05em;
-margin-bottom: 2px;
+color: var(--text-muted);
+letter-spacing: 0.08em;
+margin-bottom: 3px;
 }
 
 .card-title {
 font-size: 0.92rem;
 font-weight: 600;
-color: var(--primary);
+color: var(--noir);
 margin-bottom: 6px;
-white-space: nowrap;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
 overflow: hidden;
-text-overflow: ellipsis;
 }
 
-.price-box {
+.price-wrap {
 display: flex;
 align-items: baseline;
 gap: 6px;
 margin-bottom: 12px;
 }
 
-.price-current {
+.curr-price {
 font-weight: 700;
-font-size: 1rem;
-color: var(--primary);
+font-size: 1.05rem;
+color: var(--noir);
 }
 
-.price-original {
-font-size: 0.78rem;
+.orig-price {
+font-size: 0.8rem;
 color: var(--text-muted);
 text-decoration: line-through;
 }
 
-.card-actions {
+.card-add-btn {
 margin-top: auto;
-display: flex;
-gap: 6px;
-}
-
-.btn-quick-wa {
-flex: 1;
-background: var(--wa-green);
-color: white;
-padding: 8px 10px;
+width: 100%;
+background: var(--bg-page);
+border: 1px solid var(--border-subtle);
+color: var(--noir);
+padding: 10px 12px;
 border-radius: var(--radius-sm);
-font-size: 0.78rem;
+font-size: 0.82rem;
 font-weight: 600;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 5px;
+gap: 6px;
 }
 
-.btn-quick-wa:hover {
-background: var(--wa-hover);
+.card-add-btn:hover {
+background: var(--noir);
+color: #fff;
+border-color: var(--noir);
 }
 
-.btn-details {
-background: var(--bg-cream);
-border: 1px solid var(--border-color);
-border-radius: var(--radius-sm);
-padding: 8px 10px;
-font-size: 0.78rem;
-font-weight: 500;
-color: var(--text-main);
-}
-
-/* ---------------------------------
-MODAL (PRODUCT DETAILS)
---------------------------------- */
+/* ------------------------------------
+PRODUCT QUICK VIEW MODAL
+------------------------------------ */
 .modal-overlay {
 position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.6);
-backdrop-filter: blur(4px);
+inset: 0;
+background: rgba(18, 16, 15, 0.65);
+backdrop-filter: blur(6px);
 display: none;
 align-items: flex-end;
 justify-content: center;
@@ -376,533 +390,727 @@ padding: 20px;
 }
 }
 
-.modal-sheet {
-background: var(--bg-white);
+.modal-card {
+background: var(--bg-surface);
 width: 100%;
-max-width: 500px;
-border-radius: 20px 20px 0 0;
+max-width: 520px;
+border-radius: 24px 24px 0 0;
 max-height: 90vh;
 overflow-y: auto;
-padding: 20px;
+padding: 22px;
 position: relative;
-animation: slideUp 0.3s ease;
+animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (min-width: 640px) {
-.modal-sheet {
+.modal-card {
 border-radius: 20px;
 max-height: 85vh;
 }
 }
 
-@keyframes slideUp {
+@keyframes modalSlide {
 from { transform: translateY(100%); }
 to { transform: translateY(0); }
 }
 
 .modal-close {
 position: absolute;
-top: 14px;
-right: 14px;
-background: #f3f3f3;
+top: 16px;
+right: 16px;
+background: #f4f0eb;
 width: 32px;
 height: 32px;
 border-radius: var(--radius-full);
+font-size: 1.1rem;
 display: flex;
 align-items: center;
 justify-content: center;
-font-weight: bold;
 z-index: 10;
 }
 
-.modal-img {
+.modal-img-frame {
 width: 100%;
-height: 280px;
-object-fit: cover;
+height: 290px;
 border-radius: var(--radius-md);
-margin-bottom: 14px;
-}
-
-.option-title {
-font-size: 0.8rem;
-font-weight: 600;
-color: var(--text-muted);
-text-transform: uppercase;
-letter-spacing: 0.05em;
-margin-bottom: 6px;
-}
-
-.size-picker {
-display: flex;
-gap: 8px;
+overflow: hidden;
 margin-bottom: 16px;
 }
 
-.size-btn {
-width: 42px;
+.section-label {
+font-size: 0.72rem;
+font-weight: 700;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.08em;
+margin: 14px 0 8px;
+}
+
+.size-selector {
+display: flex;
+gap: 8px;
+}
+
+.size-chip {
+flex: 1;
 height: 42px;
-border: 1px solid var(--border-color);
+border: 1px solid var(--border-subtle);
 border-radius: var(--radius-sm);
 display: flex;
 align-items: center;
 justify-content: center;
 font-size: 0.85rem;
 font-weight: 600;
+background: var(--bg-surface);
+color: var(--noir);
 }
 
-.size-btn.active {
-background: var(--primary);
+.size-chip.selected {
+background: var(--noir);
 color: white;
-border-color: var(--primary);
+border-color: var(--noir);
 }
 
-.modal-actions {
-display: flex;
-flex-direction: column;
-gap: 10px;
-margin-top: 16px;
-}
-
-.btn-primary-wa {
-background: var(--wa-green);
+.btn-modal-add {
+width: 100%;
+background: var(--noir);
 color: white;
 padding: 14px;
-border-radius: var(--radius-md);
-font-size: 0.95rem;
+border-radius: var(--radius-sm);
+font-size: 0.92rem;
 font-weight: 600;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-width: 100%;
-box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+margin-top: 20px;
 }
 
-.btn-add-cart {
-background: var(--primary);
-color: white;
-padding: 12px;
-border-radius: var(--radius-md);
-font-size: 0.9rem;
-font-weight: 600;
-width: 100%;
+.btn-modal-add:hover {
+background: var(--noir-light);
 }
 
-/* ---------------------------------
-CART DRAWER
---------------------------------- */
+/* ------------------------------------
+CHECKOUT / CART DRAWER
+------------------------------------ */
+.cart-drawer-backdrop {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.5);
+z-index: 150;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.cart-drawer-backdrop.active {
+opacity: 1;
+visibility: visible;
+}
+
 .cart-drawer {
 position: fixed;
 top: 0;
 right: 0;
 width: 100%;
-max-width: 380px;
+max-width: 440px;
 height: 100%;
-background: var(--bg-white);
-z-index: 120;
-box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+background: var(--bg-surface);
+z-index: 160;
+box-shadow: -10px 0 35px rgba(0,0,0,0.12);
 transform: translateX(100%);
-transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 display: flex;
 flex-direction: column;
 }
 
-.cart-drawer.open {
+.cart-drawer.active {
 transform: translateX(0);
 }
 
-.cart-header {
-padding: 16px 20px;
-border-bottom: 1px solid var(--border-color);
+.drawer-header {
+padding: 18px 22px;
+border-bottom: 1px solid var(--border-subtle);
 display: flex;
 justify-content: space-between;
 align-items: center;
 }
 
-.cart-items {
+.drawer-title {
+font-family: var(--font-display);
+font-size: 1.4rem;
+font-weight: 600;
+}
+
+.drawer-body {
 flex: 1;
 overflow-y: auto;
-padding: 16px 20px;
+padding: 18px 22px;
 display: flex;
 flex-direction: column;
-gap: 14px;
+gap: 16px;
 }
 
-.cart-item {
+.cart-item-row {
 display: flex;
 gap: 12px;
-border-bottom: 1px solid #f5f5f5;
-padding-bottom: 12px;
+border-bottom: 1px solid var(--border-light);
+padding-bottom: 14px;
 }
 
-.cart-item-img {
-width: 65px;
-height: 80px;
-object-fit: cover;
+.cart-item-thumb {
+width: 70px;
+height: 90px;
 border-radius: var(--radius-sm);
+overflow: hidden;
+flex-shrink: 0;
 }
 
-.cart-item-info {
+.cart-item-details {
 flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 }
 
-.cart-footer {
-padding: 20px;
-border-top: 1px solid var(--border-color);
-background: var(--bg-cream);
-}
-
-.cart-total-row {
+.cart-item-top {
 display: flex;
 justify-content: space-between;
-font-size: 1.1rem;
-font-weight: 700;
-margin-bottom: 14px;
+gap: 8px;
 }
 
-/* Floating WhatsApp Contact Icon */
-.floating-help {
-position: fixed;
-bottom: 20px;
-right: 20px;
-background: var(--wa-green);
-color: white;
-width: 48px;
-height: 48px;
-border-radius: var(--radius-full);
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.cart-item-title {
+font-size: 0.88rem;
+font-weight: 600;
+}
+
+.cart-item-meta {
+font-size: 0.75rem;
+color: var(--text-muted);
+margin-top: 2px;
+}
+
+.qty-controls {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.qty-btn {
+width: 26px;
+height: 26px;
+border: 1px solid var(--border-subtle);
+border-radius: 4px;
 display: flex;
 align-items: center;
 justify-content: center;
-z-index: 30;
+font-weight: bold;
+}
+
+/* ------------------------------------
+COUPON SECTION
+------------------------------------ */
+.coupon-box {
+background: var(--bg-page);
+border: 1px dashed var(--border-subtle);
+border-radius: var(--radius-md);
+padding: 14px;
+}
+
+.coupon-input-group {
+display: flex;
+gap: 8px;
+margin-top: 6px;
+}
+
+.coupon-input {
+flex: 1;
+background: #fff;
+border: 1px solid var(--border-subtle);
+padding: 10px 12px;
+border-radius: var(--radius-sm);
+text-transform: uppercase;
+font-weight: 600;
+font-size: 0.82rem;
+outline: none;
+}
+
+.coupon-apply-btn {
+background: var(--noir);
+color: white;
+padding: 10px 16px;
+border-radius: var(--radius-sm);
+font-size: 0.8rem;
+font-weight: 600;
+}
+
+.coupon-pills {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+margin-top: 8px;
+}
+
+.coupon-pill {
+font-size: 0.7rem;
+background: #fff;
+border: 1px solid #D5CEC3;
+padding: 3px 8px;
+border-radius: var(--radius-full);
+color: var(--gold-bronze);
+font-weight: 600;
+cursor: pointer;
+}
+
+.coupon-alert {
+font-size: 0.75rem;
+margin-top: 6px;
+font-weight: 500;
+}
+
+.coupon-alert.success { color: #2E7D32; }
+.coupon-alert.error { color: var(--danger); }
+
+/* ------------------------------------
+CHECKOUT DETAILS INPUTS
+------------------------------------ */
+.customer-box {
+border: 1px solid var(--border-subtle);
+border-radius: var(--radius-md);
+padding: 14px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.customer-input {
+width: 100%;
+background: var(--bg-page);
+border: 1px solid var(--border-subtle);
+padding: 9px 12px;
+border-radius: var(--radius-sm);
+font-size: 0.82rem;
+outline: none;
+}
+
+/* ------------------------------------
+DRAWER FOOTER & WA CHECKOUT
+------------------------------------ */
+.drawer-footer {
+border-top: 1px solid var(--border-subtle);
+padding: 18px 22px;
+background: var(--bg-page);
+}
+
+.summary-line {
+display: flex;
+justify-content: space-between;
+font-size: 0.85rem;
+color: var(--text-muted);
+margin-bottom: 6px;
+}
+
+.summary-line.total {
+font-size: 1.15rem;
+font-weight: 700;
+color: var(--noir);
+border-top: 1px dashed var(--border-subtle);
+padding-top: 10px;
+margin-top: 8px;
+}
+
+.btn-checkout-whatsapp {
+width: 100%;
+background: var(--wa-green);
+color: white;
+padding: 15px;
+border-radius: var(--radius-sm);
+font-size: 0.95rem;
+font-weight: 700;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+margin-top: 14px;
+box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.btn-checkout-whatsapp:hover {
+background: var(--wa-dark);
+}
+
+/* ------------------------------------
+TOAST NOTIFICATION
+------------------------------------ */
+.toast {
+position: fixed;
+bottom: 24px;
+left: 50%;
+transform: translateX(-50%) translateY(100px);
+background: var(--noir);
+color: #fff;
+padding: 10px 20px;
+border-radius: var(--radius-full);
+font-size: 0.84rem;
+font-weight: 500;
+display: flex;
+align-items: center;
+gap: 8px;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+z-index: 200;
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+pointer-events: none;
+}
+
+.toast.show {
+transform: translateX(-50%) translateY(0);
 }
 </style>
 </head>
 <body>
 
-<!-- Announcement Bar -->
-<div class="announcement-bar">
-✨ Free Shipping On Orders Above ₹1,499 | Instant WhatsApp Checkout
+<!-- Top Announcement Bar -->
+<div class="top-marquee">
+Exclusive Pret & Couture • Use code <span>FESTIVE20</span> for 20% Off
 </div>
 
 <!-- Navbar -->
 <header class="navbar">
-<div class="logo">ZAYA</div>
+<div class="nav-brand">ZAYA</div>
 <div class="nav-actions">
-<button class="cart-btn" id="openCartBtn" aria-label="Open Bag">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<button class="bag-icon-btn" id="openBagBtn" aria-label="Shopping Bag">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
 <line x1="3" y1="6" x2="21" y2="6"></line>
 <path d="M16 10a4 4 0 0 1-8 0"></path>
 </svg>
-<span class="cart-badge" id="cartCount">0</span>
+<span>Bag</span>
+<span class="bag-badge" id="bagBadge">0</span>
 </button>
 </div>
 </header>
 
-<!-- Hero Section -->
-<section class="hero">
-<div class="hero-tag">Festive & Pret Edit '26</div>
-<h1>Effortless Elegance for Women</h1>
-<p>Handcrafted kurtis, modern co-ord sets, and statement dresses. Pick your style and order directly via WhatsApp.</p>
+<!-- Editorial Hero Section -->
+<section class="hero-banner">
+<span class="hero-tag">New Season Edit '26</span>
+<h1 class="hero-title">Timeless Grace & Modern Pret</h1>
+<p class="hero-sub">Finest silks, lightweight chanderi, and crafted tailored silhouettes. Add your favorites to bag and finalize on WhatsApp.</p>
 </section>
 
-<!-- Categories Filter -->
-<div class="categories-wrapper" id="categoryContainer">
-<button class="cat-pill active" onclick="filterCategory('All')">All Collection</button>
-<button class="cat-pill" onclick="filterCategory('Kurtas')">Kurtas & Sets</button>
-<button class="cat-pill" onclick="filterCategory('Dresses')">Western Dresses</button>
-<button class="cat-pill" onclick="filterCategory('Co-ords')">Co-ord Sets</button>
-<button class="cat-pill" onclick="filterCategory('Sarees')">Sarees</button>
+<!-- Category Filter Pills -->
+<div class="filter-scroll" id="catFilterContainer">
+<button class="filter-btn active" onclick="setCategory('All')">All Pieces</button>
+<button class="filter-btn" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
+<button class="filter-btn" onclick="setCategory('Dresses')">Western Dresses</button>
+<button class="filter-btn" onclick="setCategory('Co-ords')">Co-ord Sets</button>
+<button class="filter-btn" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
 </div>
 
-<!-- Product Grid -->
+<!-- Product Catalog Grid -->
 <main class="container">
 <div class="product-grid" id="productGrid">
-<!-- Injected via JavaScript -->
+<!-- Injected by JavaScript -->
 </div>
 </main>
 
-<!-- Product Details Modal -->
-<div class="modal-overlay" id="productModal" onclick="closeModalOnOverlay(event)">
-<div class="modal-sheet">
+<!-- Product Quick View Modal -->
+<div class="modal-overlay" id="quickModal" onclick="closeModalOnBackdrop(event)">
+<div class="modal-card">
 <button class="modal-close" onclick="closeModal()">&times;</button>
-<img src="" id="modalImg" class="modal-img" alt="Product image">
+
+<div class="modal-img-frame">
+<img src="" id="modalImage" alt="Product Preview">
+</div>
+
 <div class="card-category" id="modalCategory"></div>
-<h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 4px;" id="modalTitle"></h2>
+<h2 style="font-family: var(--font-display); font-size: 1.45rem; margin-bottom: 4px;" id="modalTitle"></h2>
 
-<div class="price-box" style="margin-bottom: 12px;">
-<span class="price-current" id="modalPrice"></span>
-<span class="price-original" id="modalOriginalPrice"></span>
+<div class="price-wrap">
+<span class="curr-price" id="modalPrice"></span>
+<span class="orig-price" id="modalOrigPrice"></span>
 </div>
 
-<p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;" id="modalDesc"></p>
+<p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;" id="modalDesc"></p>
 
-<div class="option-title">Select Size:</div>
-<div class="size-picker" id="sizePicker">
-<button class="size-btn active" onclick="selectSize('XS')">XS</button>
-<button class="size-btn" onclick="selectSize('S')">S</button>
-<button class="size-btn" onclick="selectSize('M')">M</button>
-<button class="size-btn" onclick="selectSize('L')">L</button>
-<button class="size-btn" onclick="selectSize('XL')">XL</button>
+<div class="section-label">Select Size:</div>
+<div class="size-selector" id="modalSizeGroup">
+<button class="size-chip" onclick="pickModalSize('XS')">XS</button>
+<button class="size-chip selected" onclick="pickModalSize('S')">S</button>
+<button class="size-chip" onclick="pickModalSize('M')">M</button>
+<button class="size-chip" onclick="pickModalSize('L')">L</button>
+<button class="size-chip" onclick="pickModalSize('XL')">XL</button>
 </div>
 
-<div class="modal-actions">
-<button class="btn-primary-wa" id="modalWaBtn">
+<button class="btn-modal-add" id="modalAddBtn">
+Add to Shopping Bag
+</button>
+</div>
+</div>
+
+<!-- Shopping Bag / Checkout Drawer -->
+<div class="cart-drawer-backdrop" id="drawerBackdrop" onclick="toggleBag(false)"></div>
+<aside class="cart-drawer" id="cartDrawer">
+<div class="drawer-header">
+<h3 class="drawer-title">Shopping Bag (<span id="drawerCount">0</span>)</h3>
+<button onclick="toggleBag(false)" style="font-size: 1.6rem; color: var(--noir);">&times;</button>
+</div>
+
+<div class="drawer-body" id="drawerBody">
+<!-- Cart Items Injected Here -->
+</div>
+
+<!-- Drawer Footer / Checkout -->
+<div class="drawer-footer" id="drawerFooter">
+
+<!-- Coupon Section -->
+<div class="coupon-box">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--noir);">Have a Promo Code?</div>
+<div class="coupon-input-group">
+<input type="text" id="couponInput" class="coupon-input" placeholder="e.g. FESTIVE20" />
+<button class="coupon-apply-btn" onclick="applyCoupon()">Apply</button>
+</div>
+<div class="coupon-pills">
+<span class="coupon-pill" onclick="quickApplyCoupon('FESTIVE20')">FESTIVE20 (20% OFF)</span>
+<span class="coupon-pill" onclick="quickApplyCoupon('WELCOME10')">WELCOME10 (10% OFF)</span>
+<span class="coupon-pill" onclick="quickApplyCoupon('FLAT500')">FLAT500</span>
+</div>
+<div id="couponMessage" class="coupon-alert"></div>
+</div>
+
+<!-- Quick Delivery Details -->
+<div class="customer-box" style="margin-top: 12px;">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Shipping Info (For WhatsApp Order):</div>
+<input type="text" id="custName" class="customer-input" placeholder="Your Full Name" />
+<input type="text" id="custCity" class="customer-input" placeholder="City & Delivery Pincode" />
+</div>
+
+<!-- Price Breakdown -->
+<div style="margin-top: 14px;">
+<div class="summary-line">
+<span>Bag Subtotal:</span>
+<span id="subtotalVal">₹0</span>
+</div>
+<div class="summary-line" id="discountLine" style="display: none; color: #2E7D32; font-weight: 600;">
+<span id="discountLabel">Discount:</span>
+<span id="discountVal">-₹0</span>
+</div>
+<div class="summary-line">
+<span>Standard Delivery:</span>
+<span style="color: #2E7D32; font-weight: 600;">FREE</span>
+</div>
+<div class="summary-line total">
+<span>Final Payable:</span>
+<span id="finalTotalVal">₹0</span>
+</div>
+</div>
+
+<!-- ONLY WHATSAPP ORDER BUTTON AT CHECKOUT -->
+<button class="btn-checkout-whatsapp" onclick="proceedToWhatsAppOrder()">
 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
 <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.824 2.791.824h.005c3.18 0 5.767-2.586 5.768-5.766.001-3.181-2.586-5.77-5.768-5.77zm3.385 8.163c-.145.411-.849.791-1.189.843-.328.051-.735.084-2.316-.575-1.921-.799-3.13-2.776-3.226-2.905-.095-.129-.773-1.03-.773-1.966 0-.936.491-1.396.666-1.587.175-.191.381-.239.508-.239s.254.005.365.011c.117.006.273-.044.427.327.16.381.547 1.332.595 1.428.048.096.079.208.016.334-.064.126-.095.205-.191.317-.095.111-.202.249-.288.334-.096.095-.197.199-.085.39.111.191.495.817 1.062 1.321.73.649 1.346.85 1.537.945.191.096.302.08.414-.048.111-.127.476-.556.603-.746.127-.191.254-.159.428-.095.175.064 1.111.524 1.302.619.191.096.317.143.365.223.048.079.048.459-.097.87z"/>
 </svg>
-Order This via WhatsApp
-</button>
-<button class="btn-add-cart" id="modalAddToCartBtn">Add to Bag</button>
-</div>
-</div>
-</div>
-
-<!-- Cart Slide-Over Drawer -->
-<aside class="cart-drawer" id="cartDrawer">
-<div class="cart-header">
-<h3 style="font-family: var(--font-serif); font-size: 1.3rem;">Shopping Bag (<span id="cartDrawerCount">0</span>)</h3>
-<button onclick="toggleCart(false)" style="font-size: 1.5rem;">&times;</button>
-</div>
-
-<div class="cart-items" id="cartItemsContainer">
-<!-- Items dynamically populated -->
-</div>
-
-<div class="cart-footer">
-<div class="cart-total-row">
-<span>Total:</span>
-<span id="cartTotal">₹0</span>
-</div>
-<button class="btn-primary-wa" onclick="checkoutViaWhatsApp()">
-Checkout via WhatsApp
+Order on WhatsApp
 </button>
 </div>
 </aside>
 
-<!-- Floating WhatsApp Quick Support -->
-<a href="https://wa.me/919876543210?text=Hi%20ZAYA%2C%20I%20have%20a%20question%20about%20your%20products."
-target="_blank"
-class="floating-help"
-aria-label="Contact on WhatsApp">
-<svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.824 2.791.824h.005c3.18 0 5.767-2.586 5.768-5.766.001-3.181-2.586-5.77-5.768-5.77zm3.385 8.163c-.145.411-.849.791-1.189.843-.328.051-.735.084-2.316-.575-1.921-.799-3.13-2.776-3.226-2.905-.095-.129-.773-1.03-.773-1.966 0-.936.491-1.396.666-1.587.175-.191.381-.239.508-.239s.254.005.365.011c.117.006.273-.044.427.327.16.381.547 1.332.595 1.428.048.096.079.208.016.334-.064.126-.095.205-.191.317-.095.111-.202.249-.288.334-.096.095-.197.199-.085.39.111.191.495.817 1.062 1.321.73.649 1.346.85 1.537.945.191.096.302.08.414-.048.111-.127.476-.556.603-.746.127-.191.254-.159.428-.095.175.064 1.111.524 1.302.619.191.096.317.143.365.223.048.079.048.459-.097.87z"/>
-</svg>
-</a>
+<!-- Interactive Toast -->
+<div class="toast" id="toastBox">
+<span>✨</span> Added to your shopping bag!
+</div>
 
-<!-- ---------------------------------
-JAVASCRIPT LOGIC
----------------------------------- -->
+<!-- ------------------------------------
+SCRIPT: STATE & LOGIC
+------------------------------------ -->
 <script>
-// 1. CONFIGURATION (REPLACE WITH YOUR WHATSAPP NUMBER)
-// Format: CountryCode + Number (No '+' or spaces)
-const WHATSAPP_PHONE = "919876543210";
+// 1. CONFIGURATION
+const WHATSAPP_PHONE = "919876543210"; // Enter your WhatsApp phone number with country code
 const CURRENCY = "₹";
 
-// 2. PRODUCT CATALOG DATA (Women's Wear)
-const products = [
+// 2. PRODUCT DATABASE
+const catalog = [
 {
-id: "ZY-101",
-title: "Mulmul Embroidered Anarkali Kurta",
+id: "ZY-201",
+title: "Mulmul Embroidered Anarkali Set",
 category: "Kurtas",
-price: 1899,
-originalPrice: 2499,
-badge: "Bestseller",
+price: 2499,
+originalPrice: 3299,
+tag: "Bestseller",
 image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
-description: "Breathable pure mulmul cotton with delicate chikankari embroidery on neck and sleeves. Comes with matching dupatta."
+description: "Handcrafted pure mulmul cotton with intricate chikankari needlework, matching palazzo pants, and organza dupatta."
 },
 {
-id: "ZY-102",
-title: "Pleated Satin Evening Slip Dress",
+id: "ZY-202",
+title: "Champagne Micro-Pleated Slip Dress",
 category: "Dresses",
-price: 2299,
-originalPrice: 2999,
-badge: "Trending",
+price: 2799,
+originalPrice: 3599,
+tag: "Trending",
 image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80",
-description: "Luxurious champagne satin slip dress featuring fine micro-pleating and adjustable shoulder straps."
+description: "Lustrous evening slip dress in fluid satin with delicate micro-pleating and adjustable criss-cross straps."
 },
 {
-id: "ZY-103",
-title: "Linen Blazer & Trousers Co-ord Set",
+id: "ZY-203",
+title: "Tailored Belgian Linen Co-ord",
 category: "Co-ords",
-price: 2899,
-originalPrice: 3499,
-badge: "New",
+price: 3199,
+originalPrice: 3999,
+tag: "New Arrival",
 image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
-description: "Premium washed linen relaxed-fit blazer paired with high-waist straight fit tailored trousers."
+description: "Modern two-piece linen ensemble featuring an oversized notch-lapel blazer and straight high-rise trousers."
 },
 {
-id: "ZY-104",
-title: "Organza Floral Hand-Painted Saree",
+id: "ZY-204",
+title: "Pure Organza Hand-Painted Saree",
 category: "Sarees",
-price: 3499,
-originalPrice: 4299,
-badge: "Exclusive",
+price: 4299,
+originalPrice: 5499,
+tag: "Exclusive",
 image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80",
-description: "Handcrafted pure organza silk saree highlighted with botanical motifs and scallops along the border."
+description: "Pastel blush organza silk with hand-painted botanical blossoms and scalloped golden resham borders."
 },
 {
-id: "ZY-105",
-title: "Floral Tiered Bohemian Maxi Dress",
-category: "Dresses",
-price: 1699,
-originalPrice: 2199,
-badge: "Must Have",
-image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80",
-description: "Flowy rayon maxi dress with balloon sleeves and a relaxed tiered skirt. Perfect for casual day-outs."
-},
-{
-id: "ZY-106",
-title: "Pastel Chanderi Straight Kurta Set",
+id: "ZY-205",
+title: "Chanderi Zari Embroidered Kurta",
 category: "Kurtas",
-price: 2199,
-originalPrice: 2799,
-badge: "Festive",
+price: 2899,
+originalPrice: 3699,
+tag: "Festive Edit",
 image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80",
-description: "Elegant mint green chanderi silk straight kurta set with pant and zari embroidered border dupatta."
+description: "Sage green tissue chanderi kurta adorned with fine silver tilla work along the v-neck and flared cuffs."
+},
+{
+id: "ZY-206",
+title: "Bohemian Tiered Ruffle Maxi",
+category: "Dresses",
+price: 2199,
+originalPrice: 2899,
+tag: "Vacation Edit",
+image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80",
+description: "Lightweight tiered georgette dress with gentle flutter sleeves and a flattering elasticated empire waist."
 }
 ];
 
-// State Variables
-let currentCategory = "All";
-let selectedProduct = null;
-let selectedSize = "M";
+// Coupons database
+const COUPONS = {
+"FESTIVE20": { type: "percent", value: 20, minSpend: 0, desc: "20% Off" },
+"WELCOME10": { type: "percent", value: 10, minSpend: 0, desc: "10% Off" },
+"FLAT500": { type: "flat", value: 500, minSpend: 2000, desc: "₹500 Off (Min ₹2,000)" }
+};
+
+// State
+let activeCategory = "All";
+let activeModalItem = null;
+let activeModalSize = "S";
 let cart = [];
+let appliedCoupon = null;
 
 // DOM Elements
 const productGrid = document.getElementById("productGrid");
-const modal = document.getElementById("productModal");
+const quickModal = document.getElementById("quickModal");
 const cartDrawer = document.getElementById("cartDrawer");
-const cartCount = document.getElementById("cartCount");
-const cartDrawerCount = document.getElementById("cartDrawerCount");
-const cartItemsContainer = document.getElementById("cartItemsContainer");
-const cartTotal = document.getElementById("cartTotal");
+const drawerBackdrop = document.getElementById("drawerBackdrop");
+const bagBadge = document.getElementById("bagBadge");
+const drawerCount = document.getElementById("drawerCount");
+const drawerBody = document.getElementById("drawerBody");
+const subtotalVal = document.getElementById("subtotalVal");
+const discountLine = document.getElementById("discountLine");
+const discountLabel = document.getElementById("discountLabel");
+const discountVal = document.getElementById("discountVal");
+const finalTotalVal = document.getElementById("finalTotalVal");
+const couponInput = document.getElementById("couponInput");
+const couponMessage = document.getElementById("couponMessage");
+const toastBox = document.getElementById("toastBox");
 
-// 3. RENDER PRODUCTS
-function renderProducts() {
-const filtered = currentCategory === "All"
-? products
-: products.filter(p => p.category === currentCategory);
+// 3. RENDER PRODUCTS (ALL HAVE "ADD TO BAG", NO DIRECT WA BUTTONS)
+function renderCatalog() {
+const items = activeCategory === "All"
+? catalog
+: catalog.filter(p => p.category === activeCategory);
 
-productGrid.innerHTML = filtered.map(item => `
+productGrid.innerHTML = items.map(prod => `
 <article class="product-card">
-${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
-<div class="card-img-wrap" onclick="openModal('${item.id}')">
-<img src="${item.image}" alt="${item.title}" loading="lazy">
+<div class="card-media" onclick="openProductModal('${prod.id}')">
+${prod.tag ? `<span class="card-tag">${prod.tag}</span>` : ''}
+<img src="${prod.image}" alt="${prod.title}" loading="lazy">
 </div>
-<div class="card-info">
-<span class="card-category">${item.category}</span>
-<h3 class="card-title">${item.title}</h3>
-<div class="price-box">
-<span class="price-current">${CURRENCY}${item.price.toLocaleString('en-IN')}</span>
-<span class="price-original">${CURRENCY}${item.originalPrice.toLocaleString('en-IN')}</span>
+<div class="card-body">
+<span class="card-category">${prod.category}</span>
+<h3 class="card-title">${prod.title}</h3>
+<div class="price-wrap">
+<span class="curr-price">${CURRENCY}${prod.price.toLocaleString('en-IN')}</span>
+<span class="orig-price">${CURRENCY}${prod.originalPrice.toLocaleString('en-IN')}</span>
 </div>
-<div class="card-actions">
-<button class="btn-quick-wa" onclick="quickWhatsAppOrder('${item.id}')">
-WhatsApp
+<button class="card-add-btn" onclick="openProductModal('${prod.id}')">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+Select Size & Add
 </button>
-<button class="btn-details" onclick="openModal('${item.id}')">
-View
-</button>
-</div>
 </div>
 </article>
 `).join("");
 }
 
 // 4. CATEGORY FILTER
-function filterCategory(cat) {
-currentCategory = cat;
-const buttons = document.querySelectorAll(".cat-pill");
-buttons.forEach(btn => {
+function setCategory(cat) {
+activeCategory = cat;
+document.querySelectorAll(".filter-btn").forEach(btn => {
 btn.classList.toggle("active", btn.textContent.includes(cat) || (cat === "All" && btn.textContent.includes("All")));
 });
-renderProducts();
+renderCatalog();
 }
 
 // 5. MODAL MANAGEMENT
-function openModal(id) {
-selectedProduct = products.find(p => p.id === id);
-selectedSize = "M"; // Reset to default
+function openProductModal(id) {
+activeModalItem = catalog.find(item => item.id === id);
+activeModalSize = "S";
 
-document.getElementById("modalImg").src = selectedProduct.image;
-document.getElementById("modalCategory").textContent = selectedProduct.category;
-document.getElementById("modalTitle").textContent = selectedProduct.title;
-document.getElementById("modalPrice").textContent = `${CURRENCY}${selectedProduct.price.toLocaleString('en-IN')}`;
-document.getElementById("modalOriginalPrice").textContent = `${CURRENCY}${selectedProduct.originalPrice.toLocaleString('en-IN')}`;
-document.getElementById("modalDesc").textContent = selectedProduct.description;
+document.getElementById("modalImage").src = activeModalItem.image;
+document.getElementById("modalCategory").textContent = activeModalItem.category;
+document.getElementById("modalTitle").textContent = activeModalItem.title;
+document.getElementById("modalPrice").textContent = `${CURRENCY}${activeModalItem.price.toLocaleString('en-IN')}`;
+document.getElementById("modalOrigPrice").textContent = `${CURRENCY}${activeModalItem.originalPrice.toLocaleString('en-IN')}`;
+document.getElementById("modalDesc").textContent = activeModalItem.description;
 
-// Reset size buttons
-document.querySelectorAll(".size-btn").forEach(btn => {
-btn.classList.toggle("active", btn.textContent === selectedSize);
-});
+updateModalSizeChips();
 
-// Update Modal WhatsApp Button
-document.getElementById("modalWaBtn").onclick = () => {
-orderSingleViaWhatsApp(selectedProduct, selectedSize);
-};
-
-document.getElementById("modalAddToCartBtn").onclick = () => {
-addToCart(selectedProduct, selectedSize);
+document.getElementById("modalAddBtn").onclick = () => {
+addToCart(activeModalItem, activeModalSize);
 closeModal();
-toggleCart(true);
+toggleBag(true);
 };
 
-modal.style.display = "flex";
+quickModal.style.display = "flex";
 document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
-modal.style.display = "none";
+quickModal.style.display = "none";
 document.body.style.overflow = "auto";
 }
 
-function closeModalOnOverlay(e) {
-if (e.target === modal) closeModal();
+function closeModalOnBackdrop(e) {
+if (e.target === quickModal) closeModal();
 }
 
-function selectSize(size) {
-selectedSize = size;
-document.querySelectorAll(".size-btn").forEach(btn => {
-btn.classList.toggle("active", btn.textContent === size);
+function pickModalSize(size) {
+activeModalSize = size;
+updateModalSizeChips();
+}
+
+function updateModalSizeChips() {
+document.querySelectorAll("#modalSizeGroup .size-chip").forEach(chip => {
+chip.classList.toggle("selected", chip.textContent === activeModalSize);
 });
 }
 
-// 6. WHATSAPP DIRECT LINK BUILDER
-function generateWhatsAppUrl(messageText) {
-return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(messageText)}`;
-}
-
-function quickWhatsAppOrder(productId) {
-const prod = products.find(p => p.id === productId);
-// Ask or default to M if quick clicked
-orderSingleViaWhatsApp(prod, "M (Standard)");
-}
-
-function orderSingleViaWhatsApp(product, size) {
-const msg =
-`Hello ZAYA Boutique,
-
-I want to place an order for this product:
-*Item:* ${product.title} (Code: ${product.id})
-*Price:* ${CURRENCY}${product.price}
-*Size:* ${size}
-
-Please confirm stock availability and share payment/delivery details.`;
-
-window.open(generateWhatsAppUrl(msg), "_blank");
-}
-
-// 7. CART FUNCTIONALITY
+// 6. CART MANAGEMENT
 function addToCart(product, size) {
-const existing = cart.find(item => item.id === product.id && item.size === size);
-if (existing) {
-existing.qty += 1;
+const match = cart.find(c => c.id === product.id && c.size === size);
+if (match) {
+match.qty += 1;
 } else {
 cart.push({ ...product, size, qty: 1 });
 }
-updateCartUI();
+showToast(`Added ${product.title} (${size}) to Bag!`);
+updateCartDisplay();
 }
 
 function changeQuantity(index, delta) {
@@ -910,79 +1118,181 @@ cart[index].qty += delta;
 if (cart[index].qty <= 0) {
 cart.splice(index, 1);
 }
-updateCartUI();
+updateCartDisplay();
 }
 
-function updateCartUI() {
-const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+function toggleBag(open) {
+cartDrawer.classList.toggle("active", open);
+drawerBackdrop.classList.toggle("active", open);
+document.body.style.overflow = open ? "hidden" : "auto";
+}
 
-cartCount.textContent = totalCount;
-cartDrawerCount.textContent = totalCount;
-cartTotal.textContent = `${CURRENCY}${totalPrice.toLocaleString('en-IN')}`;
+document.getElementById("openBagBtn").addEventListener("click", () => toggleBag(true));
 
-if (cart.length === 0) {
-cartItemsContainer.innerHTML = `
-<div style="text-align:center; padding: 40px 10px; color: var(--text-muted);">
-Your shopping bag is currently empty.
-</div>
-`;
+// 7. COUPON CODE LOGIC
+function quickApplyCoupon(code) {
+couponInput.value = code;
+applyCoupon();
+}
+
+function applyCoupon() {
+const code = couponInput.value.trim().toUpperCase();
+const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+if (!code) {
+couponMessage.className = "coupon-alert error";
+couponMessage.textContent = "Please enter a coupon code.";
 return;
 }
 
-cartItemsContainer.innerHTML = cart.map((item, idx) => `
-<div class="cart-item">
-<img src="${item.image}" alt="${item.title}" class="cart-item-img">
-<div class="cart-item-info">
-<h4 style="font-size: 0.88rem; font-weight: 600;">${item.title}</h4>
-<div style="font-size: 0.75rem; color: var(--text-muted); margin: 2px 0;">Size: ${item.size}</div>
-<div style="font-size: 0.85rem; font-weight: 700;">${CURRENCY}${item.price.toLocaleString('en-IN')}</div>
-<div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
-<button onclick="changeQuantity(${idx}, -1)" style="border:1px solid #ccc; width:22px; height:22px; border-radius:4px;">-</button>
-<span style="font-size: 0.85rem;">${item.qty}</span>
-<button onclick="changeQuantity(${idx}, 1)" style="border:1px solid #ccc; width:22px; height:22px; border-radius:4px;">+</button>
+if (!COUPONS[code]) {
+couponMessage.className = "coupon-alert error";
+couponMessage.textContent = "Invalid code. Try FESTIVE20 or WELCOME10.";
+appliedCoupon = null;
+updateCartDisplay();
+return;
+}
+
+const rule = COUPONS[code];
+if (subtotal < rule.minSpend) {
+couponMessage.className = "coupon-alert error";
+couponMessage.textContent = `Code ${code} requires minimum bag value of ${CURRENCY}${rule.minSpend}.`;
+appliedCoupon = null;
+updateCartDisplay();
+return;
+}
+
+appliedCoupon = { code, ...rule };
+couponMessage.className = "coupon-alert success";
+couponMessage.textContent = `✓ Coupon applied! You got ${rule.desc}.`;
+updateCartDisplay();
+}
+
+// 8. UPDATE CART DISPLAY
+function updateCartDisplay() {
+const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+bagBadge.textContent = totalCount;
+drawerCount.textContent = totalCount;
+subtotalVal.textContent = `${CURRENCY}${subtotal.toLocaleString('en-IN')}`;
+
+// Calculate discount
+let discount = 0;
+if (appliedCoupon && subtotal > 0) {
+if (appliedCoupon.type === "percent") {
+discount = Math.round((subtotal * appliedCoupon.value) / 100);
+} else if (appliedCoupon.type === "flat") {
+discount = appliedCoupon.value;
+}
+}
+
+if (discount > 0) {
+discountLine.style.display = "flex";
+discountLabel.textContent = `Discount (${appliedCoupon.code}):`;
+discountVal.textContent = `-${CURRENCY}${discount.toLocaleString('en-IN')}`;
+} else {
+discountLine.style.display = "none";
+}
+
+const finalPayable = Math.max(0, subtotal - discount);
+finalTotalVal.textContent = `${CURRENCY}${finalPayable.toLocaleString('en-IN')}`;
+
+// Render items
+if (cart.length === 0) {
+drawerBody.innerHTML = `
+<div style="text-align:center; padding: 60px 10px; color: var(--text-muted);">
+<div style="font-size: 2.2rem; margin-bottom: 8px;">🛍️</div>
+<div style="font-size: 0.95rem; font-weight: 600; color: var(--noir);">Your Shopping Bag is Empty</div>
+<div style="font-size: 0.8rem; margin-top: 4px;">Explore our pieces and add your favorites.</div>
+</div>
+`;
+document.getElementById("drawerFooter").style.display = "none";
+return;
+}
+
+document.getElementById("drawerFooter").style.display = "block";
+
+drawerBody.innerHTML = cart.map((item, idx) => `
+<div class="cart-item-row">
+<div class="cart-item-thumb">
+<img src="${item.image}" alt="${item.title}">
+</div>
+<div class="cart-item-details">
+<div class="cart-item-top">
+<div>
+<div class="cart-item-title">${item.title}</div>
+<div class="cart-item-meta">Size: <strong>${item.size}</strong></div>
+</div>
+<div style="font-weight: 700; font-size: 0.9rem;">
+${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}
+</div>
+</div>
+<div class="qty-controls">
+<button class="qty-btn" onclick="changeQuantity(${idx}, -1)">−</button>
+<span style="font-size: 0.85rem; font-weight: 600;">${item.qty}</span>
+<button class="qty-btn" onclick="changeQuantity(${idx}, 1)">+</button>
 </div>
 </div>
 </div>
 `).join("");
 }
 
-function toggleCart(show) {
-cartDrawer.classList.toggle("open", show);
-}
-
-document.getElementById("openCartBtn").addEventListener("click", () => toggleCart(true));
-
-// 8. MULTI-ITEM CHECKOUT VIA WHATSAPP
-function checkoutViaWhatsApp() {
+// 9. FINAL CHECKOUT VIA WHATSAPP
+function proceedToWhatsAppOrder() {
 if (cart.length === 0) {
-alert("Your bag is empty!");
+alert("Your shopping bag is empty.");
 return;
 }
 
-let orderList = cart.map((item, i) =>
-`${i + 1}. *${item.title}* | Size: ${item.size} | Qty: ${item.qty} | ${CURRENCY}${item.price * item.qty}`
-).join("\n");
+const name = document.getElementById("custName").value.trim() || "Valued Customer";
+const city = document.getElementById("custCity").value.trim() || "Not specified";
 
-const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+let discount = 0;
+if (appliedCoupon && subtotal > 0) {
+discount = appliedCoupon.type === "percent"
+? Math.round((subtotal * appliedCoupon.value) / 100)
+: appliedCoupon.value;
+}
+const finalAmount = Math.max(0, subtotal - discount);
+
+// Itemized receipt
+const itemList = cart.map((item, i) =>
+`${i + 1}. *${item.title}*\n • Size: ${item.size}\n • Qty: ${item.qty}\n • Price: ${CURRENCY}${item.price * item.qty}`
+).join("\n\n");
 
 const message =
-`Hello ZAYA Boutique,
+`✨ *NEW ORDER REQUEST — MAISON ZAYA* ✨
 
-I would like to order the following items from my shopping bag:
+*Customer Name:* ${name}
+*Delivery City / Pincode:* ${city}
 
-${orderList}
+------------------------------------
+*ORDERED ITEMS:*
+${itemList}
+------------------------------------
 
-*Grand Total:* ${CURRENCY}${total.toLocaleString('en-IN')}
+*Subtotal:* ${CURRENCY}${subtotal.toLocaleString('en-IN')}
+${appliedCoupon ? `*Coupon Applied:* ${appliedCoupon.code} (-${CURRENCY}${discount})\n` : ""}*Shipping:* FREE (Complimentary)
+*Grand Total Payable:* ${CURRENCY}${finalAmount.toLocaleString('en-IN')}
 
-Please share payment options (UPI/Bank) and estimated delivery time.`;
+Please share UPI ID / payment link and estimated dispatch date.`;
 
-window.open(generateWhatsAppUrl(message), "_blank");
+const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+window.open(waUrl, "_blank");
 }
 
-// Initial render
-renderProducts();
-updateCartUI();
+// 10. TOAST
+function showToast(text) {
+toastBox.innerHTML = `<span>✨</span> ${text}`;
+toastBox.classList.add("show");
+setTimeout(() => toastBox.classList.remove("show"), 2400);
+}
+
+// Initialize
+renderCatalog();
+updateCartDisplay();
 </script>
 </body>
 </html>

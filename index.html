@@ -215,7 +215,7 @@ height: 100%;
 overflow: hidden;
 }
 
-/* --- FULL-BLEED CAROUSEL --- */
+/* --- FULL-BLEED CAROUSEL ON CARD --- */
 .carousel-box {
 position: relative;
 width: 100%;
@@ -392,7 +392,7 @@ text-align: center;
 .pdp-container {
 max-width: 980px;
 margin: 0 auto;
-padding: 10px 14px 90px;
+padding: 10px 14px 105px;
 }
 
 .back-nav {
@@ -422,29 +422,47 @@ align-items: flex-start;
 .pdp-info-pane { width: 52%; }
 }
 
-/* REDUCED IMAGE SIZE ON MOBILE (NAME & PRICE VISIBLE AT FIRST VIEW) */
-.pdp-large-preview {
+/* -----------------------------------------------------------------
+VERTICAL 90% / 10% PEEK SLIDER (INCREASED SIZE, NO BUTTONS)
+------------------------------------------------------------------ */
+.pdp-peek-slider-wrapper {
+position: relative;
 width: 100%;
+margin-bottom: 8px;
+}
+
+.pdp-peek-slider {
+display: flex;
+gap: 12px;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+-webkit-overflow-scrolling: touch;
+scrollbar-width: none;
+padding-bottom: 4px;
+}
+.pdp-peek-slider::-webkit-scrollbar { display: none; }
+
+.pdp-peek-slide {
+flex: 0 0 90%; /* Exactly 90% active image, 10% next sneak-peek */
+width: 90%;
+height: 390px; /* Distinct vertical fashion model height */
+aspect-ratio: 3 / 4;
 border-radius: var(--radius-md);
 overflow: hidden;
+scroll-snap-align: start;
 background: #EAE6DF;
+position: relative;
+flex-shrink: 0;
 }
 
-@media (max-width: 767px) {
-.pdp-large-preview {
-max-height: 260px;
-aspect-ratio: 1 / 1;
-margin: 0 auto;
-}
-}
 @media (min-width: 768px) {
-.pdp-large-preview {
-aspect-ratio: 3 / 4;
-max-height: 480px;
+.pdp-peek-slide {
+flex: 0 0 88%;
+height: 470px;
 }
 }
 
-.pdp-large-preview img {
+.pdp-peek-slide img {
 width: 100%;
 height: 100%;
 object-fit: cover;
@@ -452,40 +470,19 @@ object-position: top center;
 display: block;
 }
 
-.thumb-tray {
-display: flex;
-gap: 8px;
-margin-top: 8px;
-justify-content: center;
-}
-
-.thumb-item {
-width: 55px;
-height: 68px;
-border-radius: var(--radius-sm);
-border: 2px solid transparent;
-overflow: hidden;
-cursor: pointer;
-opacity: 0.6;
-background: #EAE6DF;
-}
-.thumb-item img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-object-position: top center;
-display: block;
-}
-.thumb-item.active {
-border-color: var(--noir);
-opacity: 1;
+.swipe-hint-pill {
+font-size: 0.68rem;
+color: var(--muted);
+text-align: center;
+margin-top: 4px;
+font-weight: 500;
 }
 
 .pdp-heading {
 font-family: var(--font-serif);
 font-size: 1.65rem;
 font-weight: normal;
-margin: 4px 0 6px;
+margin: 6px 0 6px;
 line-height: 1.25;
 }
 
@@ -646,7 +643,7 @@ margin-top: 2px;
 line-height: 1.35;
 }
 
-/* EXCHANGE AVAILABLE (NO DAYS SPECIFIED) */
+/* EXCHANGE AVAILABLE (NO DAYS CLAIMED) */
 .pdp-exchange-notice {
 background: #F8F5FE;
 border: 1px solid #E4DAF8;
@@ -726,7 +723,7 @@ position: relative;
 display: flex;
 gap: 12px;
 width: max-content;
-animation: scrollLeftToRight 30s linear infinite;
+animation: scrollLeftToRight 28s linear infinite;
 }
 .marquee-track:hover {
 animation-play-state: paused;
@@ -742,7 +739,7 @@ background: var(--surface);
 border: 1px solid var(--border);
 border-radius: var(--radius-md);
 padding: 12px 14px;
-width: 270px;
+width: 275px;
 flex-shrink: 0;
 box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
@@ -771,7 +768,7 @@ font-size: 0.72rem;
 margin-bottom: 4px;
 }
 .review-comment {
-font-size: 0.75rem;
+font-size: 0.76rem;
 color: #4A4541;
 line-height: 1.35;
 }
@@ -1093,11 +1090,13 @@ box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 }
 .btn-wa-order:hover { background: var(--wa-dark); }
 
-/* FLOATING CHAT BUTTON (BOTTOM RIGHT) */
+/* -----------------------------------------------------------------
+FLOATING CHAT BUTTON (ELEVATED HIGHER SO IT CANNOT OVERLAP)
+------------------------------------------------------------------ */
 .floating-chat-btn {
 position: fixed;
-bottom: 74px; /* Lifted so it does not block the sticky bottom bar on PDP */
-right: 18px;
+bottom: 120px; /* Elevated cleanly above mobile bottom bars */
+right: 16px;
 background: var(--wa-green);
 color: #fff;
 padding: 10px 16px;
@@ -1116,23 +1115,30 @@ background: var(--wa-dark);
 transform: translateY(-2px);
 }
 
-/* TOAST */
+/* -----------------------------------------------------------------
+TOAST (DISMISSES COMPLETELY OFF-SCREEN DOWNWARDS)
+------------------------------------------------------------------ */
 .toast {
 position: fixed;
-bottom: 24px;
+bottom: 60px;
 left: 50%;
-transform: translateX(-50%) translateY(80px);
+transform: translateX(-50%) translateY(180px); /* Deeply hidden downwards */
+opacity: 0;
 background: var(--noir);
 color: #fff;
-padding: 10px 18px;
+padding: 9px 18px;
 border-radius: var(--radius-full);
-font-size: 0.82rem;
+font-size: 0.8rem;
 font-weight: 500;
 z-index: 300;
-transition: transform 0.3s ease;
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 pointer-events: none;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
-.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.show {
+transform: translateX(-50%) translateY(0);
+opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -1188,13 +1194,13 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
 </div>
 
 <div class="pdp-split">
-<!-- 1. Media Gallery (Reduced Size on Mobile so Title/Price is Visible immediately) -->
+<!-- 1. Media Gallery: 90% / 10% Peek Slider (Taller Vertical Format, No Thumbnails) -->
 <div class="pdp-media-pane">
-<div class="pdp-large-preview">
-<img id="pdpMainImg" src="" alt="Selected Product Preview">
+<div class="pdp-peek-slider-wrapper">
+<div class="pdp-peek-slider" id="pdpPeekSlider">
+<!-- Slides Injected Here (90% active image, 10% next sneak-peek) -->
 </div>
-<div class="thumb-tray" id="pdpThumbs">
-<!-- Thumbnails Injected Here -->
+<div class="swipe-hint-pill">👉 Swipe left to see more photos</div>
 </div>
 </div>
 
@@ -1281,7 +1287,7 @@ Size or fitting issue? We arrange a quick pickup & replacement directly at your 
 </ul>
 </div>
 
-<!-- REVIEWS CAROUSEL: MOVING LEFT TO RIGHT -->
+<!-- REVIEWS CAROUSEL: MOVING LEFT TO RIGHT WITH NATURAL LANGUAGE & CASUAL SLANG -->
 <div class="reviews-section">
 <div class="reviews-header">
 <span>Customer Reviews & Photos</span>
@@ -1289,7 +1295,7 @@ Size or fitting issue? We arrange a quick pickup & replacement directly at your 
 </div>
 <div class="marquee-wrapper">
 <div class="marquee-track" id="reviewsTrack">
-<!-- Review bubbles injected here -->
+<!-- Natural human reviews injected here -->
 </div>
 </div>
 </div>
@@ -1441,14 +1447,14 @@ oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
 </div>
 </div>
 
-<!-- FINAL ORDER BUTTON (WHATSAPP ONLY) -->
+<!-- FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) -->
 <button class="btn-wa-order" onclick="submitOrderToWhatsApp()">
 Order on WhatsApp
 </button>
 </div>
 </aside>
 
-<!-- FLOATING CHAT BUTTON (BOTTOM RIGHT) -->
+<!-- FLOATING CHAT BUTTON (ELEVATED TO 120PX TO NEVER OVERLAP WITH ORDER NOW) -->
 <a
 href="javascript:void(0)"
 onclick="openGeneralChatWhatsApp()"
@@ -1459,7 +1465,7 @@ aria-label="Chat on WhatsApp"
 <span>Chat with Us</span>
 </a>
 
-<!-- Interactive Toast Notification -->
+<!-- Interactive Toast (Completely dismisses downwards off-screen) -->
 <div class="toast" id="toastNotice">Item added to your shopping bag!</div>
 
 <!-- =========================================
@@ -1644,14 +1650,16 @@ specs: [
 }
 ];
 
-// CUSTOMER REVIEWS DATABASE FOR MOVING MARQUEE
+// REALISTIC, AUTHENTIC INDIAN BUYER REVIEWS (NATURAL CONVERSATIONAL SLANG)
 const customerReviews = [
-{ name: "Priya Sharma", city: "Delhi", stars: "★★★★★", text: "The chikankari embroidery on the Anarkali is so fine! Fabric feels like a dream in warm weather." },
-{ name: "Ananya Mehta", city: "Mumbai", stars: "★★★★★", text: "Ordered the slip dress for an evening gala. Looks like a designer boutique piece worth 10k!" },
-{ name: "Sneha Patel", city: "Ahmedabad", stars: "★★★★★", text: "The 3XL size fit me so perfectly without feeling tight at the bust. Very happy with the fit!" },
-{ name: "Ritu Sengupta", city: "Kolkata", stars: "★★★★★", text: "Organza saree reached within 2 days. The hand-painted flowers and zari borders are flawless." },
-{ name: "Kavita Rao", city: "Bangalore", stars: "★★★★★", text: "Linen co-ord set has amazing stitching and structure. Got so many compliments at work!" },
-{ name: "Meera Deshmukh", city: "Pune", stars: "★★★★★", text: "Super smooth ordering on WhatsApp. When I needed a size change, the doorstep exchange was fast!" }
+{ name: "Priya S.", city: "Delhi", stars: "★★★★★", text: "Got this for clg farewell last week.. fabric is pure mulmul not transparent at all. 10/10 fit for me" },
+{ name: "Ananya Mehta", city: "Mumbai", stars: "★★★★★", text: "delivered in 3 days in malad. colour is slightly darker thn pic but looks v pretty after wearing ❤️" },
+{ name: "Sneha P.", city: "Ahmedabad", stars: "★★★★★", text: "3xl size milna muskil hota h usually but this suit fits so comfortably at bust!! thnx zaya team" },
+{ name: "Ritu K.", city: "Kolkata", stars: "★★★★★", text: "honestly was scared to order from insta ad but quality is legit good.. ordered L size fits perfect" },
+{ name: "Kavita R.", city: "Bangalore", stars: "★★★★★", text: "kurti ka kapda bhot acha hai, washed once no color bleeding at all. totally worth 2.5k" },
+{ name: "Meera D.", city: "Pune", stars: "★★★★★", text: "waist was slightly loose for me but mom adjusted it.. looking very classy & direct whatsapp pe tracking mil gayi thi!" },
+{ name: "Tanya G.", city: "Noida", stars: "★★★★★", text: "satin slip dress is pure love yar.. wore it to my frnd bday party got so many compliments haha" },
+{ name: "Aarti B.", city: "Lucknow", stars: "★★★★★", text: "exchange process was super fast whatsapp pe msg kiya next day pickup ho gaya tha.. thnx!" }
 ];
 
 // COUPONS
@@ -1670,6 +1678,7 @@ let currentProduct = null;
 let currentSize = "S";
 let currentColor = null;
 let carouselTimers = {};
+let toastTimer = null;
 
 // 3. RENDER CATALOG WITH STAGGERED TIMERS
 function renderCatalog() {
@@ -1721,6 +1730,7 @@ ${item.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></sp
 <span class="val-off">${offPct}% OFF</span>
 </div>
 
+<!-- SINGLE MERGED ADD TO CART BUTTON -->
 <button class="btn-add-cart-single" onclick="showProductDetails('${item.id}')">
 Add to Cart
 </button>
@@ -1793,16 +1803,14 @@ document.getElementById("pdpMrpVal").textContent = `${CURRENCY}${item.mrp.toLoca
 const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
 document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
 
-// Main image & thumbnails
-const mainImg = document.getElementById("pdpMainImg");
-mainImg.src = item.images[0];
-
-const thumbTray = document.getElementById("pdpThumbs");
-thumbTray.innerHTML = item.images.map((img, idx) => `
-<div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="setPdpPhoto('${img}', this)">
-<img src="${img}" alt="Thumbnail">
+// 90% / 10% Peek Slider (Horizontal Swipe, No 3-image buttons)
+const peekSlider = document.getElementById("pdpPeekSlider");
+peekSlider.innerHTML = item.images.map(img => `
+<div class="pdp-peek-slide">
+<img src="${img}" alt="${item.title}">
 </div>
 `).join("");
+peekSlider.scrollLeft = 0; // reset scroll to beginning
 
 // Colors group
 const colorGroup = document.getElementById("pdpColorsGroup");
@@ -1816,10 +1824,10 @@ onclick="pickPdpColor('${c.name}', this)">
 </button>
 `).join("");
 
-// Reset sizes to S (S, M, L, XL, XXL, 3XL)
+// Sizes: S, M, L, XL, XXL, 3XL
 pickPdpSize("S");
 
-// Inject specifications in bullet points
+// Specifications in bullet points
 const specsList = document.getElementById("pdpSpecsList");
 specsList.innerHTML = item.specs.map(spec => `
 <li><span class="spec-bullet">✓</span> ${spec}</li>
@@ -1836,12 +1844,6 @@ document.getElementById("catalogView").classList.remove("active");
 document.getElementById("pdpView").classList.add("active");
 window.scrollTo({ top: 0, behavior: "smooth" });
 window.location.hash = `item-${id}`;
-}
-
-function setPdpPhoto(src, thumbElement) {
-document.getElementById("pdpMainImg").src = src;
-document.querySelectorAll(".thumb-item").forEach(t => t.classList.remove("active"));
-thumbElement.classList.add("active");
 }
 
 function pickPdpColor(colorName, btnElement) {
@@ -2152,12 +2154,16 @@ const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
 window.open(waUrl, "_blank");
 }
 
-// 12. TOAST NOTIFICATION
+// 12. TOAST NOTIFICATION (AUTOMATICALLY DISMISSES OFF-SCREEN DOWNWARDS)
 function showToast(msg) {
 const toast = document.getElementById("toastNotice");
 toast.textContent = `✓ ${msg}`;
 toast.classList.add("show");
-setTimeout(() => toast.classList.remove("show"), 2200);
+
+if (toastTimer) clearTimeout(toastTimer);
+toastTimer = setTimeout(() => {
+toast.classList.remove("show");
+}, 1400); // Fast dismiss so it never stays stuck
 }
 
 // INITIAL RENDER

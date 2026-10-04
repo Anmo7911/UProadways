@@ -14,6 +14,8 @@
 --noir-light: #2D2A28;
 --accent: #A86B58;
 --accent-soft: #F6EDE8;
+--badge-pink: #FCE6EC;
+--badge-pink-border: #F8D0DC;
 --gold-star: #F5A623;
 --muted: #78726D;
 --border: #E8E2D9;
@@ -22,10 +24,12 @@
 --wa-dark: #1EBE5B;
 --radius-sm: 6px;
 --radius-md: 12px;
+--radius-lg: 20px;
 --radius-full: 9999px;
 --font-serif: Georgia, 'Times New Roman', serif;
 --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 --shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+--shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -51,21 +55,43 @@ cursor: pointer;
 border: none;
 background: none;
 text-decoration: none;
-transition: all 0.2s ease;
+transition: all 0.25s ease;
 }
 
-/* --- TOP ANNOUNCEMENT & HEADER --- */
+/* -------------------------------------------------------------
+SCROLL-TRIGGERED FADE-UP ANIMATION
+-------------------------------------------------------------- */
+.fade-up-init {
+opacity: 0;
+transform: translateY(24px);
+transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: opacity, transform;
+}
+.fade-up-in {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* -------------------------------------------------------------
+STRICT SINGLE-LINE TOP OFFER BANNER
+-------------------------------------------------------------- */
 .top-bar {
 background: var(--noir);
 color: #fff;
-font-size: 0.72rem;
+font-size: clamp(0.64rem, 2.4vw, 0.74rem);
 text-transform: uppercase;
-letter-spacing: 0.12em;
+letter-spacing: 0.08em;
 text-align: center;
 padding: 8px 12px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+display: block;
+width: 100%;
 }
 .top-bar strong { color: #E0B2A3; }
 
+/* --- STICKY HEADER --- */
 .header {
 position: sticky;
 top: 0;
@@ -87,7 +113,9 @@ letter-spacing: 0.12em;
 cursor: pointer;
 text-transform: uppercase;
 color: var(--noir);
+transition: opacity 0.2s ease;
 }
+.brand-logo:hover { opacity: 0.8; }
 
 .bag-btn {
 background: var(--noir);
@@ -99,6 +127,11 @@ align-items: center;
 gap: 6px;
 font-size: 0.8rem;
 font-weight: 600;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.bag-btn:hover {
+background: var(--noir-light);
+transform: translateY(-1px);
 }
 
 .badge-count {
@@ -125,8 +158,9 @@ margin: 14px 14px 20px;
 background: linear-gradient(135deg, #2A2523, #151312);
 color: #fff;
 border-radius: var(--radius-md);
-padding: 30px 18px;
+padding: 34px 18px;
 text-align: center;
+box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 .hero-tag {
 font-size: 0.7rem;
@@ -151,7 +185,7 @@ max-width: 440px;
 margin: 0 auto;
 }
 
-/* --- CATEGORY FILTERS --- */
+/* --- CATEGORY FILTERS WITH HOVER EFFECT --- */
 .cat-scroll {
 display: flex;
 gap: 8px;
@@ -170,6 +204,12 @@ font-weight: 500;
 background: var(--surface);
 border: 1px solid var(--border);
 color: var(--muted);
+transition: all 0.25s ease;
+}
+.cat-pill:hover {
+border-color: var(--noir);
+color: var(--noir);
+transform: translateY(-1px);
 }
 .cat-pill.active {
 background: var(--noir);
@@ -178,11 +218,11 @@ border-color: var(--noir);
 font-weight: 600;
 }
 
-/* --- RESPONSIVE PRODUCT GRID --- */
+/* --- RESPONSIVE PRODUCT GRID & CARD HOVER EFFECTS --- */
 .main-wrap {
 max-width: 1200px;
 margin: 0 auto;
-padding: 0 12px 70px;
+padding: 0 12px 60px;
 }
 
 .grid-layout {
@@ -213,9 +253,14 @@ display: flex;
 flex-direction: column;
 height: 100%;
 overflow: hidden;
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.prod-card:hover {
+transform: translateY(-4px);
+box-shadow: var(--shadow-hover);
 }
 
-/* --- FULL-BLEED CAROUSEL ON CARD --- */
+/* FULL-BLEED CAROUSEL ON CARD */
 .carousel-box {
 position: relative;
 width: 100%;
@@ -247,6 +292,10 @@ height: 100%;
 object-fit: cover;
 object-position: top center;
 display: block;
+transition: transform 0.6s ease;
+}
+.prod-card:hover .carousel-slide img {
+transform: scale(1.03);
 }
 
 .carousel-dots {
@@ -291,7 +340,7 @@ z-index: 6;
 box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* --- CARD DETAILS --- */
+/* CARD DETAILS */
 .prod-info {
 padding: 12px 10px 10px;
 display: flex;
@@ -385,14 +434,18 @@ font-size: 0.8rem;
 font-weight: 600;
 color: #fff;
 text-align: center;
+transition: all 0.2s ease;
 }
-.btn-add-cart-single:hover { background: var(--noir-light); }
+.btn-add-cart-single:hover {
+background: var(--noir-light);
+transform: translateY(-1px);
+}
 
 /* --- DEDICATED PRODUCT DETAILS PAGE (PDP) --- */
 .pdp-container {
 max-width: 980px;
 margin: 0 auto;
-padding: 10px 14px 105px;
+padding: 10px 14px 110px;
 }
 
 .back-nav {
@@ -404,7 +457,9 @@ font-weight: 600;
 cursor: pointer;
 margin-bottom: 12px;
 color: var(--noir);
+transition: opacity 0.2s ease;
 }
+.back-nav:hover { opacity: 0.7; }
 
 .pdp-split {
 display: flex;
@@ -422,9 +477,7 @@ align-items: flex-start;
 .pdp-info-pane { width: 52%; }
 }
 
-/* -----------------------------------------------------------------
-VERTICAL 90% / 10% PEEK SLIDER (INCREASED SIZE, NO BUTTONS)
------------------------------------------------------------------- */
+/* VERTICAL 90% / 10% PEEK SLIDER */
 .pdp-peek-slider-wrapper {
 position: relative;
 width: 100%;
@@ -443,9 +496,9 @@ padding-bottom: 4px;
 .pdp-peek-slider::-webkit-scrollbar { display: none; }
 
 .pdp-peek-slide {
-flex: 0 0 90%; /* Exactly 90% active image, 10% next sneak-peek */
+flex: 0 0 90%;
 width: 90%;
-height: 390px; /* Distinct vertical fashion model height */
+height: 390px;
 aspect-ratio: 3 / 4;
 border-radius: var(--radius-md);
 overflow: hidden;
@@ -620,65 +673,114 @@ font-weight: 700;
 font-size: 0.86rem;
 }
 
-/* UPI & COD NOTICE (BELOW BUTTONS) */
-.pdp-payment-notice {
-background: #F3F8F4;
-border: 1px solid #D6E8D8;
-border-radius: var(--radius-sm);
-padding: 10px 12px;
-margin-bottom: 12px;
+/* -------------------------------------------------------------
+CIRCULAR PINK TRUST BADGES (MATCHING ATTACHED IMAGE)
+-------------------------------------------------------------- */
+.trust-badges-strip {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 8px;
+margin: 18px 0 16px;
+padding: 14px 6px;
+background: #FFFFFF;
+border: 1px solid var(--border-light);
+border-radius: var(--radius-md);
+text-align: center;
 }
-.pdp-payment-notice-title {
-font-size: 0.8rem;
-font-weight: 700;
-color: #2E7D32;
+
+.trust-badge-item {
 display: flex;
+flex-direction: column;
 align-items: center;
 gap: 6px;
 }
-.pdp-payment-notice-desc {
-font-size: 0.73rem;
-color: #435E47;
-margin-top: 2px;
-line-height: 1.35;
-}
 
-/* EXCHANGE AVAILABLE (NO DAYS CLAIMED) */
-.pdp-exchange-notice {
-background: #F8F5FE;
-border: 1px solid #E4DAF8;
-border-radius: var(--radius-sm);
-padding: 10px 12px;
-margin-bottom: 16px;
-}
-.pdp-exchange-title {
-font-size: 0.8rem;
-font-weight: 700;
-color: #5F259F;
+.trust-badge-circle {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+background: var(--badge-pink);
+border: 1px solid var(--badge-pink-border);
 display: flex;
 align-items: center;
-gap: 6px;
+justify-content: center;
+font-size: 1.25rem;
+transition: transform 0.2s ease;
 }
-.pdp-exchange-desc {
-font-size: 0.73rem;
-color: #4D386D;
-margin-top: 2px;
-line-height: 1.35;
+.trust-badge-item:hover .trust-badge-circle {
+transform: scale(1.08);
 }
 
-/* SPECIFICATIONS IN BULLET POINTS */
-.pdp-block {
-border-top: 1px solid var(--border);
-padding: 14px 0;
+.trust-badge-title {
+font-size: 0.72rem;
+font-weight: 700;
+color: var(--noir);
+line-height: 1.2;
+}
+.trust-badge-sub {
+font-size: 0.64rem;
+color: var(--muted);
+line-height: 1.1;
+display: block;
+}
+
+/* -------------------------------------------------------------
+CLOSED-BY-DEFAULT ACCORDION DROPDOWNS
+-------------------------------------------------------------- */
+.accordion-group {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-top: 14px;
+}
+
+.accordion-box {
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+background: #FFFFFF;
+overflow: hidden;
+transition: border-color 0.2s ease;
+}
+
+.accordion-header {
+padding: 13px 14px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+cursor: pointer;
+user-select: none;
 font-size: 0.84rem;
-}
-.pdp-block h4 {
 font-weight: 700;
-font-size: 0.85rem;
-margin-bottom: 8px;
+color: var(--noir);
 text-transform: uppercase;
-letter-spacing: 0.05em;
+letter-spacing: 0.04em;
 }
+.accordion-header:hover {
+background: #FAF7F2;
+}
+
+.acc-toggle-icon {
+font-size: 1.1rem;
+font-weight: bold;
+color: var(--accent);
+transition: transform 0.3s ease;
+line-height: 1;
+}
+
+.accordion-content {
+display: none; /* By default it is closed */
+padding: 12px 14px 16px;
+border-top: 1px solid var(--border-light);
+background: #FAF8F5;
+font-size: 0.82rem;
+animation: accSlideDown 0.25s ease;
+}
+
+@keyframes accSlideDown {
+from { opacity: 0; transform: translateY(-4px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
 .spec-list {
 list-style: none;
 display: flex;
@@ -793,6 +895,135 @@ gap: 12px;
 .similar-grid {
 grid-template-columns: repeat(4, 1fr);
 }
+}
+
+/* -------------------------------------------------------------
+UNIVERSAL FOOTER (VISIBLE ACROSS ALL PAGES)
+-------------------------------------------------------------- */
+.site-footer {
+background: #161413;
+color: #E2DDD7;
+padding: 40px 18px 90px; /* Generous bottom spacing for mobile */
+border-top: 1px solid #2B2724;
+font-size: 0.84rem;
+}
+.footer-inner {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr;
+gap: 30px;
+}
+@media (min-width: 768px) {
+.footer-inner {
+grid-template-columns: 1.5fr 1fr 1fr 1fr;
+gap: 36px;
+}
+}
+
+.footer-brand {
+font-family: var(--font-serif);
+font-size: 1.8rem;
+font-weight: 700;
+color: #fff;
+letter-spacing: 0.1em;
+margin-bottom: 8px;
+}
+.footer-desc {
+font-size: 0.8rem;
+color: #A8A29D;
+line-height: 1.5;
+margin-bottom: 14px;
+}
+
+.footer-heading {
+font-size: 0.82rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: #fff;
+margin-bottom: 12px;
+}
+.footer-links {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+.footer-links a {
+color: #B5AFA8;
+font-size: 0.8rem;
+transition: color 0.2s ease;
+}
+.footer-links a:hover {
+color: #FFFFFF;
+}
+
+.footer-payment-strip {
+margin-top: 30px;
+padding-top: 20px;
+border-top: 1px solid #2A2522;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 12px;
+text-align: center;
+}
+@media (min-width: 768px) {
+.footer-payment-strip {
+flex-direction: row;
+justify-content: space-between;
+}
+}
+
+.footer-pay-badges {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+justify-content: center;
+}
+.footer-badge {
+background: #23201D;
+border: 1px solid #38332F;
+padding: 3px 8px;
+border-radius: 4px;
+font-size: 0.68rem;
+font-weight: 700;
+color: #D6CEC5;
+}
+.copyright-text {
+font-size: 0.72rem;
+color: #8C857E;
+}
+
+/* --- LEGAL MODAL POPUP --- */
+.legal-modal-overlay {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(4px);
+z-index: 200;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+.legal-modal-box {
+background: #FFFFFF;
+width: 100%;
+max-width: 520px;
+border-radius: var(--radius-md);
+padding: 24px;
+max-height: 80vh;
+overflow-y: auto;
+position: relative;
+}
+.legal-modal-close {
+position: absolute;
+top: 14px;
+right: 14px;
+font-size: 1.2rem;
+font-weight: bold;
 }
 
 /* --- BAG & CHECKOUT DRAWER --- */
@@ -1090,12 +1321,10 @@ box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 }
 .btn-wa-order:hover { background: var(--wa-dark); }
 
-/* -----------------------------------------------------------------
-FLOATING CHAT BUTTON (ELEVATED HIGHER SO IT CANNOT OVERLAP)
------------------------------------------------------------------- */
+/* FLOATING CHAT BUTTON */
 .floating-chat-btn {
 position: fixed;
-bottom: 120px; /* Elevated cleanly above mobile bottom bars */
+bottom: 110px;
 right: 16px;
 background: var(--wa-green);
 color: #fff;
@@ -1115,14 +1344,12 @@ background: var(--wa-dark);
 transform: translateY(-2px);
 }
 
-/* -----------------------------------------------------------------
-TOAST (DISMISSES COMPLETELY OFF-SCREEN DOWNWARDS)
------------------------------------------------------------------- */
+/* TOAST */
 .toast {
 position: fixed;
 bottom: 60px;
 left: 50%;
-transform: translateX(-50%) translateY(180px); /* Deeply hidden downwards */
+transform: translateX(-50%) translateY(180px);
 opacity: 0;
 background: var(--noir);
 color: #fff;
@@ -1143,9 +1370,9 @@ opacity: 1;
 </head>
 <body>
 
-<!-- Top Announcement Bar (No Days Mentioned) -->
+<!-- 1. STRICT SINGLE-LINE TOP OFFER ELEMENT -->
 <div class="top-bar">
-Festive Pret Collection • <strong>Easy Doorstep Exchange Available</strong> • Use Code <strong>FESTIVE20</strong> for 20% Off
+Festive Pret Collection • <strong>Easy Doorstep Exchange</strong> • Use Code <strong>FESTIVE20</strong> for 20% Off
 </div>
 
 <!-- Sticky Header -->
@@ -1161,14 +1388,15 @@ Festive Pret Collection • <strong>Easy Doorstep Exchange Available</strong> �
 VIEW 1: CATALOG VIEW
 ========================================== -->
 <section id="catalogView" class="view-container active">
-<div class="hero-card">
+<!-- Hero Banner with Fade-Up -->
+<div class="hero-card fade-up-init">
 <div class="hero-tag">New Season '26</div>
 <h1 class="hero-title">Timeless Grace & Modern Pret</h1>
 <p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to pick your color & size, and order on WhatsApp.</p>
 </div>
 
 <!-- Category Filters -->
-<div class="cat-scroll">
+<div class="cat-scroll fade-up-init">
 <button class="cat-pill active" onclick="setCategory('All')">All Pieces</button>
 <button class="cat-pill" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
 <button class="cat-pill" onclick="setCategory('Dresses')">Western Dresses</button>
@@ -1176,7 +1404,7 @@ VIEW 1: CATALOG VIEW
 <button class="cat-pill" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
 </div>
 
-<!-- Product Grid -->
+<!-- Product Grid with Scroll Fade-Up -->
 <main class="main-wrap">
 <div class="grid-layout" id="productGrid">
 <!-- Products Injected Here -->
@@ -1194,11 +1422,11 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
 </div>
 
 <div class="pdp-split">
-<!-- 1. Media Gallery: 90% / 10% Peek Slider (Taller Vertical Format, No Thumbnails) -->
+<!-- 1. Media Gallery: 90% / 10% Peek Slider -->
 <div class="pdp-media-pane">
 <div class="pdp-peek-slider-wrapper">
 <div class="pdp-peek-slider" id="pdpPeekSlider">
-<!-- Slides Injected Here (90% active image, 10% next sneak-peek) -->
+<!-- Slides Injected Here -->
 </div>
 <div class="swipe-hint-pill">👉 Swipe left to see more photos</div>
 </div>
@@ -1241,7 +1469,7 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
 <button class="size-btn-pill" onclick="pickPdpSize('3XL')">3XL</button>
 </div>
 
-<!-- INLINE DUAL BUTTONS: ADD TO BAG & ORDER NOW -->
+<!-- INLINE DUAL BUTTONS -->
 <div class="pdp-actions-row">
 <button class="btn-action-bag" onclick="addCurrentPdp(false)">
 🛍️ Add to Bag
@@ -1251,51 +1479,67 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
 </button>
 </div>
 
-<!-- UPI & COD TRUST STRIP (BELOW BUTTONS) -->
-<div class="pdp-payment-notice">
-<div class="pdp-payment-notice-title">
-<span>💳</span> UPI & Cash on Delivery (COD) Available
+<!-- 3. CIRCULAR PINK TRUST BADGES (MATCHING YOUR IMAGE) -->
+<div class="trust-badges-strip">
+<div class="trust-badge-item">
+<div class="trust-badge-circle">📦</div>
+<div class="trust-badge-title">Cash<span class="trust-badge-sub">On Delivery</span></div>
 </div>
-<div class="pdp-payment-notice-desc">
-Instant zero-fee payment via Google Pay, PhonePe, Paytm, or UPI. Cash on Delivery (COD) is available with a ₹50 convenience charge.
+<div class="trust-badge-item">
+<div class="trust-badge-circle">🚚</div>
+<div class="trust-badge-title">Free<span class="trust-badge-sub">Shipping</span></div>
+</div>
+<div class="trust-badge-item">
+<div class="trust-badge-circle">🔄</div>
+<div class="trust-badge-title">Easy<span class="trust-badge-sub">Exchange</span></div>
+</div>
+<div class="trust-badge-item">
+<div class="trust-badge-circle">⏱️</div>
+<div class="trust-badge-title">24hrs<span class="trust-badge-sub">Dispatch</span></div>
 </div>
 </div>
 
-<!-- EASY EXCHANGE AVAILABLE (NO DAYS CLAIMED) -->
-<div class="pdp-exchange-notice">
-<div class="pdp-exchange-title">
-<span>🔄</span> Easy Doorstep Exchange Available
+<!-- 4. CLOSED-BY-DEFAULT ACCORDIONS -->
+<div class="accordion-group">
+<!-- Specification Dropdown -->
+<div class="accordion-box">
+<div class="accordion-header" onclick="togglePdpAccordion(this)">
+<span>Product Specifications</span>
+<span class="acc-toggle-icon">+</span>
 </div>
-<div class="pdp-exchange-desc">
-Size or fitting issue? We arrange a quick pickup & replacement directly at your doorstep hassle-free.
-</div>
-</div>
-
-<!-- SPECIFICATIONS IN BULLET POINTS -->
-<div class="pdp-block">
-<h4>Product Specifications</h4>
+<div class="accordion-content">
 <ul class="spec-list" id="pdpSpecsList">
 <!-- Bullet points injected here -->
 </ul>
 </div>
-<div class="pdp-block">
-<h4>Shipping & Exchange Policy</h4>
-<ul class="spec-list">
-<li><span class="spec-bullet">✓</span> Dispatches within 24–48 business hours.</li>
-<li><span class="spec-bullet">✓</span> Free express shipping across India.</li>
-<li><span class="spec-bullet">✓</span> <strong>Doorstep Exchange Available:</strong> Hassle-free pickup directly at your doorstep if you need a different size.</li>
-</ul>
 </div>
 
-<!-- REVIEWS CAROUSEL: MOVING LEFT TO RIGHT WITH NATURAL LANGUAGE & CASUAL SLANG -->
+<!-- Shipping & Exchange Dropdown -->
+<div class="accordion-box">
+<div class="accordion-header" onclick="togglePdpAccordion(this)">
+<span>Shipping & Exchange Policy</span>
+<span class="acc-toggle-icon">+</span>
+</div>
+<div class="accordion-content">
+<ul class="spec-list">
+<li><span class="spec-bullet">✓</span> Dispatches within 24 business hours from our atelier.</li>
+<li><span class="spec-bullet">✓</span> Free express shipping across India on all prepaid orders.</li>
+<li><span class="spec-bullet">✓</span> <strong>Doorstep Exchange Available:</strong> If you need a size or color swap, we arrange hassle-free doorstep pickup.</li>
+<li><span class="spec-bullet">✓</span> Cash on Delivery (COD) available with a ₹50 courier convenience fee.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- REVIEWS CAROUSEL: MOVING LEFT TO RIGHT -->
 <div class="reviews-section">
 <div class="reviews-header">
-<span>Customer Reviews & Photos</span>
-<span style="font-size: 0.8rem; color: #2E7D32; font-weight: 700;">★ 4.9 / 5.0 Rating</span>
+<span>Customer Reviews</span>
+<span style="font-size: 0.8rem; color: #2E7D32; font-weight: 700;">★ 4.9 Rating</span>
 </div>
 <div class="marquee-wrapper">
 <div class="marquee-track" id="reviewsTrack">
-<!-- Natural human reviews injected here -->
+<!-- Human reviews injected here -->
 </div>
 </div>
 </div>
@@ -1312,7 +1556,7 @@ Size or fitting issue? We arrange a quick pickup & replacement directly at your 
 </div>
 </div>
 
-<!-- STICKY BOTTOM BAR ON MOBILE PDP: DUAL BUTTONS -->
+<!-- STICKY BOTTOM BAR ON MOBILE PDP -->
 <div class="pdp-sticky-bar">
 <button class="btn-sticky-bag" onclick="addCurrentPdp(false)">
 🛍️ Add to Bag
@@ -1322,6 +1566,81 @@ Size or fitting issue? We arrange a quick pickup & replacement directly at your 
 </button>
 </div>
 </section>
+
+<!-- =========================================
+UNIVERSAL FOOTER (VISIBLE ACROSS ALL PAGES)
+========================================== -->
+<footer class="site-footer">
+<div class="footer-inner">
+<!-- Col 1: Brand Info -->
+<div>
+<div class="footer-brand">ZAYA</div>
+<p class="footer-desc">
+Redefining contemporary women's couture and festive pret. Handcrafted breathable fabrics, authentic embroidery, and silhouettes designed to empower effortless elegance.
+</p>
+<div style="font-size: 0.78rem; color: #E0B2A3; font-weight: 600;">
+📞 WhatsApp Helpdesk: +91 98765 43210
+</div>
+</div>
+
+<!-- Col 2: Quick Links -->
+<div>
+<div class="footer-heading">Collections</div>
+<ul class="footer-links">
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Kurtas');">Kurtas & Sets</a></li>
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Dresses');">Western Dresses</a></li>
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Co-ords');">Co-ord Sets</a></li>
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Sarees');">Pure Silk Sarees</a></li>
+</ul>
+</div>
+
+<!-- Col 3: Customer Care -->
+<div>
+<div class="footer-heading">Customer Care</div>
+<ul class="footer-links">
+<li><a href="javascript:void(0)" onclick="openGeneralChatWhatsApp()">Track WhatsApp Order</a></li>
+<li><a href="javascript:void(0)" onclick="openGeneralChatWhatsApp()">Doorstep Exchange Request</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('exchange')">Exchange & Returns Policy</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('shipping')">Shipping Information</a></li>
+</ul>
+</div>
+
+<!-- Col 4: Legal & Policies -->
+<div>
+<div class="footer-heading">Legal & Trust</div>
+<ul class="footer-links">
+<li><a href="javascript:void(0)" onclick="openLegalModal('privacy')">Privacy Policy</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('terms')">Terms & Conditions</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('payment')">Payment Security</a></li>
+</ul>
+</div>
+</div>
+
+<!-- Payment Badges & Copyright -->
+<div class="footer-payment-strip">
+<div class="copyright-text">
+© 2026 ZAYA ATELIER. All rights reserved. Designed for mobile-first shopping.
+</div>
+<div class="footer-pay-badges">
+<span class="footer-badge">UPI</span>
+<span class="footer-badge">Google Pay</span>
+<span class="footer-badge">PhonePe</span>
+<span class="footer-badge">Paytm</span>
+<span class="footer-badge">Cash on Delivery</span>
+</div>
+</div>
+</footer>
+
+<!-- =========================================
+LEGAL / POLICY POPUP MODAL
+========================================== -->
+<div class="legal-modal-overlay" id="legalModal" onclick="closeLegalModal(event)">
+<div class="legal-modal-box">
+<button class="legal-modal-close" onclick="closeLegalModalDirect()">&times;</button>
+<h3 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 12px;" id="legalModalTitle"></h3>
+<div style="font-size: 0.82rem; color: #4A4541; line-height: 1.6;" id="legalModalBody"></div>
+</div>
+</div>
 
 <!-- =========================================
 SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
@@ -1454,7 +1773,7 @@ Order on WhatsApp
 </div>
 </aside>
 
-<!-- FLOATING CHAT BUTTON (ELEVATED TO 120PX TO NEVER OVERLAP WITH ORDER NOW) -->
+<!-- FLOATING CHAT BUTTON -->
 <a
 href="javascript:void(0)"
 onclick="openGeneralChatWhatsApp()"
@@ -1465,7 +1784,7 @@ aria-label="Chat on WhatsApp"
 <span>Chat with Us</span>
 </a>
 
-<!-- Interactive Toast (Completely dismisses downwards off-screen) -->
+<!-- Interactive Toast Notification -->
 <div class="toast" id="toastNotice">Item added to your shopping bag!</div>
 
 <!-- =========================================
@@ -1650,7 +1969,7 @@ specs: [
 }
 ];
 
-// REALISTIC, AUTHENTIC INDIAN BUYER REVIEWS (NATURAL CONVERSATIONAL SLANG)
+// REALISTIC, HUMAN BUYER REVIEWS
 const customerReviews = [
 { name: "Priya S.", city: "Delhi", stars: "★★★★★", text: "Got this for clg farewell last week.. fabric is pure mulmul not transparent at all. 10/10 fit for me" },
 { name: "Ananya Mehta", city: "Mumbai", stars: "★★★★★", text: "delivered in 3 days in malad. colour is slightly darker thn pic but looks v pretty after wearing ❤️" },
@@ -1680,7 +1999,23 @@ let currentColor = null;
 let carouselTimers = {};
 let toastTimer = null;
 
-// 3. RENDER CATALOG WITH STAGGERED TIMERS
+// -------------------------------------------------------------
+// SCROLL-TRIGGERED FADE-UP ANIMATION OBSERVER
+// -------------------------------------------------------------
+function setupScrollObserver() {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('fade-up-in');
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up-init').forEach(el => observer.observe(el));
+}
+
+// 3. RENDER CATALOG WITH STAGGERED TIMERS & FADE-UP
 function renderCatalog() {
 Object.values(carouselTimers).forEach(timer => {
 clearTimeout(timer.timeout);
@@ -1696,7 +2031,7 @@ const grid = document.getElementById("productGrid");
 grid.innerHTML = list.map(item => {
 const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
 return `
-<article class="prod-card">
+<article class="prod-card fade-up-init">
 <div class="carousel-box" onclick="showProductDetails('${item.id}')">
 ${item.tag ? `<span class="tag-chip">${item.tag}</span>` : ''}
 
@@ -1746,6 +2081,9 @@ const delay = 600 + (index * 500);
 const speed = durations[index % durations.length];
 startStaggeredCardSlide(item.id, item.images.length, delay, speed);
 });
+
+// Bind scroll observer to new cards
+setupScrollObserver();
 }
 
 function startStaggeredCardSlide(id, count, startDelay, cycleSpeed) {
@@ -1803,14 +2141,14 @@ document.getElementById("pdpMrpVal").textContent = `${CURRENCY}${item.mrp.toLoca
 const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
 document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
 
-// 90% / 10% Peek Slider (Horizontal Swipe, No 3-image buttons)
+// 90% / 10% Peek Slider (Horizontal Swipe)
 const peekSlider = document.getElementById("pdpPeekSlider");
 peekSlider.innerHTML = item.images.map(img => `
 <div class="pdp-peek-slide">
 <img src="${img}" alt="${item.title}">
 </div>
 `).join("");
-peekSlider.scrollLeft = 0; // reset scroll to beginning
+peekSlider.scrollLeft = 0; // reset scroll
 
 // Colors group
 const colorGroup = document.getElementById("pdpColorsGroup");
@@ -1833,6 +2171,13 @@ specsList.innerHTML = item.specs.map(spec => `
 <li><span class="spec-bullet">✓</span> ${spec}</li>
 `).join("");
 
+// Ensure accordions are closed by default on view
+document.querySelectorAll(".accordion-content").forEach(el => el.style.display = "none");
+document.querySelectorAll(".acc-toggle-icon").forEach(el => {
+el.textContent = "+";
+el.style.transform = "rotate(0deg)";
+});
+
 // Render customer reviews marquee
 renderReviewsMarquee();
 
@@ -1844,6 +2189,25 @@ document.getElementById("catalogView").classList.remove("active");
 document.getElementById("pdpView").classList.add("active");
 window.scrollTo({ top: 0, behavior: "smooth" });
 window.location.hash = `item-${id}`;
+}
+
+// -------------------------------------------------------------
+// ACCORDION DROPDOWN TOGGLE (DEFAULT CLOSED)
+// -------------------------------------------------------------
+function togglePdpAccordion(headerElement) {
+const content = headerElement.nextElementSibling;
+const icon = headerElement.querySelector(".acc-toggle-icon");
+const isOpen = content.style.display === "block";
+
+if (isOpen) {
+content.style.display = "none";
+icon.textContent = "+";
+icon.style.transform = "rotate(0deg)";
+} else {
+content.style.display = "block";
+icon.textContent = "−";
+icon.style.transform = "rotate(180deg)";
+}
 }
 
 function pickPdpColor(colorName, btnElement) {
@@ -1860,10 +2224,10 @@ b.classList.toggle("selected", b.textContent === sz);
 });
 }
 
-// RENDER MOVING REVIEWS (DUPLICATED FOR CONTINUOUS SEAMLESS SCROLL)
+// RENDER MOVING REVIEWS (SEAMLESS INFINITE LOOP)
 function renderReviewsMarquee() {
 const track = document.getElementById("reviewsTrack");
-const doubleList = [...customerReviews, ...customerReviews]; // seamless infinite loop
+const doubleList = [...customerReviews, ...customerReviews];
 track.innerHTML = doubleList.map(r => `
 <div class="review-bubble">
 <div class="review-user-row">
@@ -1904,6 +2268,50 @@ window.scrollTo({ top: 0, behavior: "smooth" });
 window.addEventListener("hashchange", () => {
 if (!window.location.hash) openHomeView();
 });
+
+// -------------------------------------------------------------
+// LEGAL POLICY MODAL (PRIVACY, TERMS, EXCHANGE)
+// -------------------------------------------------------------
+const legalContent = {
+privacy: {
+title: "Privacy Policy",
+body: "At ZAYA, we are dedicated to protecting your personal data. We strictly use your name, shipping address, and phone number solely to prepare and fulfill your boutique orders via WhatsApp. We never sell, lease, or monetize your contact information with external marketing agencies."
+},
+terms: {
+title: "Terms & Conditions",
+body: "By shopping on ZAYA, you agree to our direct order processing terms. Orders placed via WhatsApp receive an official itemized confirmation bill before dispatch. Deliveries are executed via authorized express courier partners across India."
+},
+exchange: {
+title: "Exchange Policy",
+body: "We offer an Easy Doorstep Size & Color Exchange. If your outfit needs a different size, simply reach out to us on WhatsApp with your order code. Our courier representative will deliver the fresh size and pick up the exchange piece directly at your doorstep."
+},
+shipping: {
+title: "Shipping & Delivery Policy",
+body: "All orders are prepared and dispatched within 24–48 business hours. Prepaid orders via UPI enjoy 100% complimentary free shipping across India. Cash on Delivery (COD) carries a nominal ₹50 courier convenience charge."
+},
+payment: {
+title: "Payment Security",
+body: "All digital payments are processed through trusted, encrypted UPI gateways including Google Pay, PhonePe, and Paytm. Your UPI credentials and banking details are never stored on our servers."
+}
+};
+
+function openLegalModal(type) {
+const data = legalContent[type];
+if (!data) return;
+document.getElementById("legalModalTitle").textContent = data.title;
+document.getElementById("legalModalBody").textContent = data.body;
+document.getElementById("legalModal").style.display = "flex";
+document.body.style.overflow = "hidden";
+}
+
+function closeLegalModalDirect() {
+document.getElementById("legalModal").style.display = "none";
+document.body.style.overflow = "auto";
+}
+
+function closeLegalModal(e) {
+if (e.target.id === "legalModal") closeLegalModalDirect();
+}
 
 // 6. CART MANAGEMENT (HANDLES BOTH "ADD TO BAG" & "ORDER NOW")
 function addCurrentPdp(isDirectOrder) {
@@ -2154,7 +2562,7 @@ const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
 window.open(waUrl, "_blank");
 }
 
-// 12. TOAST NOTIFICATION (AUTOMATICALLY DISMISSES OFF-SCREEN DOWNWARDS)
+// 12. TOAST NOTIFICATION (DISMISSES DOWNWARDS OFF-SCREEN)
 function showToast(msg) {
 const toast = document.getElementById("toastNotice");
 toast.textContent = `✓ ${msg}`;
@@ -2163,12 +2571,13 @@ toast.classList.add("show");
 if (toastTimer) clearTimeout(toastTimer);
 toastTimer = setTimeout(() => {
 toast.classList.remove("show");
-}, 1400); // Fast dismiss so it never stays stuck
+}, 1400);
 }
 
 // INITIAL RENDER
 renderCatalog();
 updateBagDisplay();
+setupScrollObserver();
 </script>
 </body>
 </html>

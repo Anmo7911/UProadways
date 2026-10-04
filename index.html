@@ -58,9 +58,7 @@ text-decoration: none;
 transition: all 0.25s ease;
 }
 
-/* -------------------------------------------------------------
-SCROLL-TRIGGERED FADE-UP ANIMATION
--------------------------------------------------------------- */
+/* --- SCROLL-TRIGGERED FADE-UP ANIMATION --- */
 .fade-up-init {
 opacity: 0;
 transform: translateY(24px);
@@ -72,9 +70,7 @@ opacity: 1;
 transform: translateY(0);
 }
 
-/* -------------------------------------------------------------
-STRICT SINGLE-LINE TOP OFFER BANNER
--------------------------------------------------------------- */
+/* --- STRICT SINGLE-LINE TOP OFFER BANNER --- */
 .top-bar {
 background: var(--noir);
 color: #fff;
@@ -91,7 +87,9 @@ width: 100%;
 }
 .top-bar strong { color: #E0B2A3; }
 
-/* --- STICKY HEADER --- */
+/* -------------------------------------------------------------
+STICKY HEADER & TOP RIGHT ACTION ICONS
+-------------------------------------------------------------- */
 .header {
 position: sticky;
 top: 0;
@@ -102,7 +100,7 @@ border-bottom: 1px solid var(--border);
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 12px 18px;
+padding: 10px 16px;
 }
 
 .brand-logo {
@@ -117,27 +115,35 @@ transition: opacity 0.2s ease;
 }
 .brand-logo:hover { opacity: 0.8; }
 
-.bag-btn {
-background: var(--noir);
-color: #fff;
-padding: 8px 14px;
-border-radius: var(--radius-full);
+.header-actions-right {
 display: flex;
 align-items: center;
-gap: 6px;
-font-size: 0.8rem;
-font-weight: 600;
-box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.bag-btn:hover {
-background: var(--noir-light);
-transform: translateY(-1px);
+gap: 12px;
 }
 
-.badge-count {
+.header-icon-btn {
+position: relative;
+width: 38px;
+height: 38px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+color: var(--noir);
+transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.header-icon-btn:hover {
+background: var(--border-light);
+transform: scale(1.05);
+}
+
+.bag-badge-pill {
+position: absolute;
+top: 2px;
+right: 2px;
 background: var(--accent);
 color: #fff;
-font-size: 0.7rem;
+font-size: 0.65rem;
 font-weight: 700;
 min-width: 18px;
 height: 18px;
@@ -146,6 +152,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 padding: 0 4px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
 /* --- VIEW TOGGLE --- */
@@ -185,7 +192,7 @@ max-width: 440px;
 margin: 0 auto;
 }
 
-/* --- CATEGORY FILTERS WITH HOVER EFFECT --- */
+/* --- CATEGORY FILTERS --- */
 .cat-scroll {
 display: flex;
 gap: 8px;
@@ -218,7 +225,7 @@ border-color: var(--noir);
 font-weight: 600;
 }
 
-/* --- RESPONSIVE PRODUCT GRID & CARD HOVER EFFECTS --- */
+/* --- PRODUCT GRID --- */
 .main-wrap {
 max-width: 1200px;
 margin: 0 auto;
@@ -260,7 +267,6 @@ transform: translateY(-4px);
 box-shadow: var(--shadow-hover);
 }
 
-/* FULL-BLEED CAROUSEL ON CARD */
 .carousel-box {
 position: relative;
 width: 100%;
@@ -340,7 +346,6 @@ z-index: 6;
 box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* CARD DETAILS */
 .prod-info {
 padding: 12px 10px 10px;
 display: flex;
@@ -673,9 +678,7 @@ font-weight: 700;
 font-size: 0.86rem;
 }
 
-/* -------------------------------------------------------------
-CIRCULAR PINK TRUST BADGES (MATCHING ATTACHED IMAGE)
--------------------------------------------------------------- */
+/* CIRCULAR PINK TRUST BADGES (MATCHING YOUR IMAGE) */
 .trust-badges-strip {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
@@ -724,9 +727,7 @@ line-height: 1.1;
 display: block;
 }
 
-/* -------------------------------------------------------------
-CLOSED-BY-DEFAULT ACCORDION DROPDOWNS
--------------------------------------------------------------- */
+/* CLOSED-BY-DEFAULT ACCORDIONS */
 .accordion-group {
 display: flex;
 flex-direction: column;
@@ -768,7 +769,7 @@ line-height: 1;
 }
 
 .accordion-content {
-display: none; /* By default it is closed */
+display: none;
 padding: 12px 14px 16px;
 border-top: 1px solid var(--border-light);
 background: #FAF8F5;
@@ -800,7 +801,7 @@ color: var(--accent);
 font-weight: bold;
 }
 
-/* --- REVIEWS MOVING LEFT TO RIGHT --- */
+/* REVIEWS MOVING LEFT TO RIGHT */
 .reviews-section {
 border-top: 1px solid var(--border);
 padding: 24px 0 16px;
@@ -875,7 +876,7 @@ color: #4A4541;
 line-height: 1.35;
 }
 
-/* --- SIMILAR PRODUCTS SECTION --- */
+/* SIMILAR PRODUCTS SECTION */
 .similar-section {
 border-top: 1px solid var(--border);
 padding: 24px 0 20px;
@@ -898,12 +899,159 @@ grid-template-columns: repeat(4, 1fr);
 }
 
 /* -------------------------------------------------------------
-UNIVERSAL FOOTER (VISIBLE ACROSS ALL PAGES)
+SLIDE-IN MOBILE NAVIGATION SIDEBAR (FROM THREE LINES MENU)
 -------------------------------------------------------------- */
+.sidebar-overlay {
+position: fixed;
+inset: 0;
+background: rgba(18, 16, 15, 0.6);
+backdrop-filter: blur(4px);
+z-index: 120;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.sidebar-overlay.open {
+opacity: 1;
+visibility: visible;
+}
+
+.mobile-sidebar {
+position: fixed;
+top: 0;
+right: 0;
+width: 100%;
+max-width: 320px;
+height: 100%;
+background: var(--surface);
+z-index: 130;
+box-shadow: -10px 0 35px rgba(0,0,0,0.15);
+transform: translateX(100%);
+transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+display: flex;
+flex-direction: column;
+}
+.mobile-sidebar.open {
+transform: translateX(0);
+}
+
+.sidebar-header {
+padding: 16px 20px;
+border-bottom: 1px solid var(--border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.sidebar-brand {
+font-family: var(--font-serif);
+font-size: 1.5rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+}
+
+.sidebar-content {
+flex: 1;
+overflow-y: auto;
+padding: 18px 20px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+/* PROFILE GREETING CARD INSIDE SIDEBAR */
+.sidebar-profile-card {
+background: var(--bg);
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+padding: 14px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.sidebar-avatar {
+width: 44px;
+height: 44px;
+border-radius: 50%;
+background: var(--accent);
+color: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+font-size: 1.1rem;
+}
+.sidebar-user-name {
+font-size: 0.88rem;
+font-weight: 700;
+color: var(--noir);
+}
+.sidebar-user-action {
+font-size: 0.74rem;
+color: var(--accent);
+font-weight: 600;
+cursor: pointer;
+}
+
+.sidebar-group-title {
+font-size: 0.72rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(--muted);
+margin-bottom: 8px;
+}
+
+.sidebar-menu-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+.sidebar-menu-link {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 10px 12px;
+border-radius: var(--radius-sm);
+font-size: 0.86rem;
+font-weight: 600;
+color: var(--noir);
+transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.sidebar-menu-link:hover {
+background: var(--bg);
+transform: translateX(3px);
+}
+
+/* -------------------------------------------------------------
+TRACK ORDER POPUP MODAL
+-------------------------------------------------------------- */
+.track-modal-overlay {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.6);
+backdrop-filter: blur(4px);
+z-index: 180;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+.track-modal-box {
+background: #FFFFFF;
+width: 100%;
+max-width: 440px;
+border-radius: var(--radius-md);
+padding: 24px;
+position: relative;
+box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* --- UNIVERSAL FOOTER --- */
 .site-footer {
 background: #161413;
 color: #E2DDD7;
-padding: 40px 18px 90px; /* Generous bottom spacing for mobile */
+padding: 40px 18px 90px;
 border-top: 1px solid #2B2724;
 font-size: 0.84rem;
 }
@@ -1304,7 +1452,7 @@ padding-top: 8px;
 margin-top: 6px;
 }
 
-/* FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) */
+/* FINAL ORDER BUTTON */
 .btn-wa-order {
 width: 100%;
 background: var(--wa-green);
@@ -1324,7 +1472,7 @@ box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 /* FLOATING CHAT BUTTON */
 .floating-chat-btn {
 position: fixed;
-bottom: 110px;
+bottom: 120px;
 right: 16px;
 background: var(--wa-green);
 color: #fff;
@@ -1370,19 +1518,171 @@ opacity: 1;
 </head>
 <body>
 
-<!-- 1. STRICT SINGLE-LINE TOP OFFER ELEMENT -->
+<!-- 1. STRICT SINGLE-LINE TOP OFFER BANNER -->
 <div class="top-bar">
 Festive Pret Collection • <strong>Easy Doorstep Exchange</strong> • Use Code <strong>FESTIVE20</strong> for 20% Off
 </div>
 
-<!-- Sticky Header -->
+<!-- -------------------------------------------------------------
+STICKY HEADER WITH LUCIDE ICONS (BAG -> PROFILE -> 3 LINES)
+-------------------------------------------------------------- -->
 <header class="header">
 <div class="brand-logo" onclick="openHomeView()">ZAYA</div>
-<button class="bag-btn" id="openBagTrigger">
-<span>🛍️ Bag</span>
-<span class="badge-count" id="headerBagCount">0</span>
+
+<div class="header-actions-right">
+<!-- 1. Bag Icon (with Count Badge) -->
+<button class="header-icon-btn" id="openBagTrigger" aria-label="Open Shopping Bag">
+<!-- Lucide 'shopping-bag' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+<path d="M3 6h18"/>
+<path d="M16 10a4 4 0 0 1-8 0"/>
+</svg>
+<span class="bag-badge-pill" id="headerBagCount">0</span>
 </button>
+
+<!-- 2. Profile Icon (Just before three lines) -->
+<button class="header-icon-btn" onclick="toggleSidebar(true)" aria-label="User Profile">
+<!-- Lucide 'user' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+<circle cx="12" cy="7" r="4"/>
+</svg>
+</button>
+
+<!-- 3. Three Lines Hamburger Menu (Right corner) -->
+<button class="header-icon-btn" onclick="toggleSidebar(true)" aria-label="Open Mobile Menu">
+<!-- Lucide 'menu' icon (Three Lines) -->
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="4" x2="20" y1="12" y2="12"/>
+<line x1="4" x2="20" y1="6" y2="6"/>
+<line x1="4" x2="20" y1="18" y2="18"/>
+</svg>
+</button>
+</div>
 </header>
+
+<!-- -------------------------------------------------------------
+MOBILE SLIDE-IN NAVIGATION SIDEBAR
+-------------------------------------------------------------- -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
+<aside class="mobile-sidebar" id="mobileSidebar">
+<div class="sidebar-header">
+<div class="sidebar-brand">ZAYA</div>
+<button class="header-icon-btn" onclick="toggleSidebar(false)" aria-label="Close Sidebar">
+<!-- Lucide 'x' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+</svg>
+</button>
+</div>
+
+<div class="sidebar-content">
+<!-- Profile Quick Card -->
+<div class="sidebar-profile-card">
+<div class="sidebar-avatar">Z</div>
+<div>
+<div class="sidebar-user-name">Welcome to ZAYA</div>
+<div class="sidebar-user-action" onclick="openTrackModal()">Track My Orders →</div>
+</div>
+</div>
+
+<!-- Categories & Collections -->
+<div>
+<div class="sidebar-group-title">Shop by Category</div>
+<ul class="sidebar-menu-list">
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('All'); toggleSidebar(false);">
+<!-- Lucide 'sparkles' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+<span>New Arrivals '26</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Kurtas'); toggleSidebar(false);">
+<!-- Lucide 'shirt' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+<span>Kurtas & Sets</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Dresses'); toggleSidebar(false);">
+<!-- Lucide 'heart' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+<span>Western Dresses</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Co-ords'); toggleSidebar(false);">
+<!-- Lucide 'layers' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+<span>Co-ord Sets</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Sarees'); toggleSidebar(false);">
+<!-- Lucide 'feather' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" x2="2" y1="8" y2="22"/><line x1="17.5" x2="9" y1="15" y2="15"/></svg>
+<span>Pure Silk & Sarees</span>
+</a>
+</li>
+</ul>
+</div>
+
+<!-- Orders & Customer Care -->
+<div>
+<div class="sidebar-group-title">Orders & Assistance</div>
+<ul class="sidebar-menu-list">
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openTrackModal(); toggleSidebar(false);">
+<!-- Lucide 'package' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+<span>Track My Order</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openGeneralChatWhatsApp(); toggleSidebar(false);">
+<!-- Lucide 'refresh-cw' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+<span>Doorstep Exchange Request</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openGeneralChatWhatsApp(); toggleSidebar(false);">
+<!-- Lucide 'message-circle' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+<span>WhatsApp Helpdesk</span>
+</a>
+</li>
+</ul>
+</div>
+
+<!-- Quick Promo Highlight -->
+<div style="background:var(--accent-soft); border:1px solid #E4D2C9; border-radius:var(--radius-sm); padding:12px; margin-top:auto;">
+<div style="font-size:0.75rem; font-weight:700; color:var(--accent); text-transform:uppercase;">Special Offer</div>
+<div style="font-size:0.78rem; color:var(--noir); margin-top:2px;">Use promo code <strong>FESTIVE20</strong> at checkout for 20% flat discount!</div>
+</div>
+</div>
+</aside>
+
+<!-- -------------------------------------------------------------
+TRACK ORDER MODAL (POPUP)
+-------------------------------------------------------------- -->
+<div class="track-modal-overlay" id="trackModal" onclick="closeTrackModal(event)">
+<div class="track-modal-box">
+<button class="legal-modal-close" onclick="closeTrackModalDirect()">&times;</button>
+<h3 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 6px;">Track Your Order</h3>
+<p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 16px;">
+Enter your 10-digit mobile number or order code below to check instant live tracking updates directly on WhatsApp.
+</p>
+<input type="text" id="trackInput" class="cust-field" placeholder="Enter Mobile Number or Order Code" style="margin-bottom: 12px; width: 100%;" />
+<button class="btn-wa-order" onclick="submitTrackingInquiry()">
+<!-- Lucide 'truck' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+Track on WhatsApp
+</button>
+</div>
+</div>
 
 <!-- =========================================
 VIEW 1: CATALOG VIEW
@@ -1418,7 +1718,9 @@ VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
 <section id="pdpView" class="view-container">
 <div class="pdp-container">
 <div class="back-nav" onclick="openHomeView()">
-<span>← Back to All Pieces</span>
+<!-- Lucide 'arrow-left' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+<span>Back to All Pieces</span>
 </div>
 
 <div class="pdp-split">
@@ -1598,7 +1900,7 @@ Redefining contemporary women's couture and festive pret. Handcrafted breathable
 <div>
 <div class="footer-heading">Customer Care</div>
 <ul class="footer-links">
-<li><a href="javascript:void(0)" onclick="openGeneralChatWhatsApp()">Track WhatsApp Order</a></li>
+<li><a href="javascript:void(0)" onclick="openTrackModal()">Track WhatsApp Order</a></li>
 <li><a href="javascript:void(0)" onclick="openGeneralChatWhatsApp()">Doorstep Exchange Request</a></li>
 <li><a href="javascript:void(0)" onclick="openLegalModal('exchange')">Exchange & Returns Policy</a></li>
 <li><a href="javascript:void(0)" onclick="openLegalModal('shipping')">Shipping Information</a></li>
@@ -1649,7 +1951,10 @@ SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
 <aside class="bag-pane" id="bagDrawer">
 <div class="bag-header">
 <h3 class="bag-title">Shopping Bag (<span id="drawerCount">0</span>)</h3>
-<button onclick="toggleBagDrawer(false)" style="font-size: 1.4rem;">✕</button>
+<button class="header-icon-btn" onclick="toggleBagDrawer(false)" aria-label="Close Bag">
+<!-- Lucide 'x' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+</button>
 </div>
 
 <div class="bag-items-scroll" id="bagItemsContainer">
@@ -1780,11 +2085,12 @@ onclick="openGeneralChatWhatsApp()"
 class="floating-chat-btn"
 aria-label="Chat on WhatsApp"
 >
-<span>💬</span>
+<!-- Lucide 'message-circle' icon -->
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
 <span>Chat with Us</span>
 </a>
 
-<!-- Interactive Toast Notification -->
+<!-- Interactive Toast -->
 <div class="toast" id="toastNotice">Item added to your shopping bag!</div>
 
 <!-- =========================================
@@ -1969,7 +2275,7 @@ specs: [
 }
 ];
 
-// REALISTIC, HUMAN BUYER REVIEWS
+// HUMANIZED REVIEWS WITH CASUAL SLANG
 const customerReviews = [
 { name: "Priya S.", city: "Delhi", stars: "★★★★★", text: "Got this for clg farewell last week.. fabric is pure mulmul not transparent at all. 10/10 fit for me" },
 { name: "Ananya Mehta", city: "Mumbai", stars: "★★★★★", text: "delivered in 3 days in malad. colour is slightly darker thn pic but looks v pretty after wearing ❤️" },
@@ -2065,7 +2371,6 @@ ${item.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></sp
 <span class="val-off">${offPct}% OFF</span>
 </div>
 
-<!-- SINGLE MERGED ADD TO CART BUTTON -->
 <button class="btn-add-cart-single" onclick="showProductDetails('${item.id}')">
 Add to Cart
 </button>
@@ -2191,9 +2496,7 @@ window.scrollTo({ top: 0, behavior: "smooth" });
 window.location.hash = `item-${id}`;
 }
 
-// -------------------------------------------------------------
 // ACCORDION DROPDOWN TOGGLE (DEFAULT CLOSED)
-// -------------------------------------------------------------
 function togglePdpAccordion(headerElement) {
 const content = headerElement.nextElementSibling;
 const icon = headerElement.querySelector(".acc-toggle-icon");
@@ -2224,7 +2527,7 @@ b.classList.toggle("selected", b.textContent === sz);
 });
 }
 
-// RENDER MOVING REVIEWS (SEAMLESS INFINITE LOOP)
+// RENDER MOVING REVIEWS
 function renderReviewsMarquee() {
 const track = document.getElementById("reviewsTrack");
 const doubleList = [...customerReviews, ...customerReviews];
@@ -2270,7 +2573,45 @@ if (!window.location.hash) openHomeView();
 });
 
 // -------------------------------------------------------------
-// LEGAL POLICY MODAL (PRIVACY, TERMS, EXCHANGE)
+// MOBILE NAVIGATION SIDEBAR TOGGLE
+// -------------------------------------------------------------
+function toggleSidebar(open) {
+document.getElementById("mobileSidebar").classList.toggle("open", open);
+document.getElementById("sidebarOverlay").classList.toggle("open", open);
+document.body.style.overflow = open ? "hidden" : "auto";
+}
+
+// -------------------------------------------------------------
+// TRACK ORDER MODAL HANDLERS
+// -------------------------------------------------------------
+function openTrackModal() {
+document.getElementById("trackModal").style.display = "flex";
+document.body.style.overflow = "hidden";
+}
+
+function closeTrackModalDirect() {
+document.getElementById("trackModal").style.display = "none";
+document.body.style.overflow = "auto";
+}
+
+function closeTrackModal(e) {
+if (e.target.id === "trackModal") closeTrackModalDirect();
+}
+
+function submitTrackingInquiry() {
+const val = document.getElementById("trackInput").value.trim();
+if (!val) {
+alert("Please enter your Phone Number or Order Code.");
+return;
+}
+const msg = `Hi ZAYA Team, I would like to track my order for Mobile/Order Code: ${val}. Please share the current dispatch & delivery status.`;
+const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+window.open(waUrl, "_blank");
+closeTrackModalDirect();
+}
+
+// -------------------------------------------------------------
+// LEGAL POLICY MODAL
 // -------------------------------------------------------------
 const legalContent = {
 privacy: {
@@ -2477,14 +2818,13 @@ Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong>
 `).join("");
 }
 
-// 10. FINAL WHATSAPP ORDER SUBMISSION WITH 6-DIGIT PINCODE VALIDATION
+// 10. FINAL WHATSAPP ORDER SUBMISSION
 function submitOrderToWhatsApp() {
 if (cart.length === 0) {
 alert("Your shopping bag is empty.");
 return;
 }
 
-// Read 5 Address Form Fields
 const name = document.getElementById("custName").value.trim();
 const addr1 = document.getElementById("custAddr1").value.trim();
 const nearby = document.getElementById("custNearby").value.trim();
@@ -2562,7 +2902,7 @@ const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
 window.open(waUrl, "_blank");
 }
 
-// 12. TOAST NOTIFICATION (DISMISSES DOWNWARDS OFF-SCREEN)
+// 12. TOAST NOTIFICATION
 function showToast(msg) {
 const toast = document.getElementById("toastNotice");
 toast.textContent = `✓ ${msg}`;

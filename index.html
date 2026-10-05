@@ -1,1 +1,2923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>ZAYA | Women's Pret & Couture</title>
 
+<style>
+/* --- CSS RESET & THEME VARIABLES --- */
+:root {
+--bg: #FBF9F6;
+--surface: #FFFFFF;
+--noir: #181615;
+--noir-light: #2D2A28;
+--accent: #A86B58;
+--accent-soft: #F6EDE8;
+--badge-pink: #FCE6EC;
+--badge-pink-border: #F8D0DC;
+--gold-star: #F5A623;
+--muted: #78726D;
+--border: #E8E2D9;
+--border-light: #F2ECE5;
+--wa-green: #25D366;
+--wa-dark: #1EBE5B;
+--radius-sm: 6px;
+--radius-md: 12px;
+--radius-lg: 20px;
+--radius-full: 9999px;
+--font-serif: Georgia, 'Times New Roman', serif;
+--font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+--shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+--shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+-webkit-tap-highlight-color: transparent;
+}
+
+body {
+background: var(--bg);
+color: var(--noir);
+font-family: var(--font-sans);
+line-height: 1.45;
+overflow-x: hidden;
+min-height: 100vh;
+position: relative;
+}
+
+button, a {
+font-family: inherit;
+cursor: pointer;
+border: none;
+background: none;
+text-decoration: none;
+transition: all 0.25s ease;
+}
+
+/* --- SCROLL-TRIGGERED FADE-UP ANIMATION --- */
+.fade-up-init {
+opacity: 0;
+transform: translateY(24px);
+transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: opacity, transform;
+}
+.fade-up-in {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* --- STRICT SINGLE-LINE TOP OFFER BANNER --- */
+.top-bar {
+background: var(--noir);
+color: #fff;
+font-size: clamp(0.64rem, 2.4vw, 0.74rem);
+text-transform: uppercase;
+letter-spacing: 0.08em;
+text-align: center;
+padding: 8px 12px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+display: block;
+width: 100%;
+}
+.top-bar strong { color: #E0B2A3; }
+
+/* -------------------------------------------------------------
+STICKY HEADER & TOP RIGHT ACTION ICONS
+-------------------------------------------------------------- */
+.header {
+position: sticky;
+top: 0;
+z-index: 50;
+background: rgba(251, 249, 246, 0.96);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid var(--border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 16px;
+}
+
+.brand-logo {
+font-family: var(--font-serif);
+font-size: 1.8rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+cursor: pointer;
+text-transform: uppercase;
+color: var(--noir);
+transition: opacity 0.2s ease;
+}
+.brand-logo:hover { opacity: 0.8; }
+
+.header-actions-right {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.header-icon-btn {
+position: relative;
+width: 38px;
+height: 38px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+color: var(--noir);
+transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.header-icon-btn:hover {
+background: var(--border-light);
+transform: scale(1.05);
+}
+
+.bag-badge-pill {
+position: absolute;
+top: 2px;
+right: 2px;
+background: var(--accent);
+color: #fff;
+font-size: 0.65rem;
+font-weight: 700;
+min-width: 18px;
+height: 18px;
+border-radius: var(--radius-full);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0 4px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* --- VIEW TOGGLE --- */
+.view-container { display: none; }
+.view-container.active { display: block; }
+
+/* --- HERO BANNER --- */
+.hero-card {
+margin: 14px 14px 20px;
+background: linear-gradient(135deg, #2A2523, #151312);
+color: #fff;
+border-radius: var(--radius-md);
+padding: 34px 18px;
+text-align: center;
+box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.hero-tag {
+font-size: 0.7rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: #E0B2A3;
+font-weight: 600;
+margin-bottom: 6px;
+}
+.hero-title {
+font-family: var(--font-serif);
+font-size: 2.1rem;
+font-weight: normal;
+font-style: italic;
+margin-bottom: 8px;
+line-height: 1.2;
+}
+.hero-desc {
+font-size: 0.84rem;
+color: #CBC5BE;
+max-width: 440px;
+margin: 0 auto;
+}
+
+/* --- CATEGORY FILTERS --- */
+.cat-scroll {
+display: flex;
+gap: 8px;
+padding: 0 16px 16px;
+overflow-x: auto;
+scrollbar-width: none;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+
+.cat-pill {
+white-space: nowrap;
+padding: 7px 16px;
+border-radius: var(--radius-full);
+font-size: 0.8rem;
+font-weight: 500;
+background: var(--surface);
+border: 1px solid var(--border);
+color: var(--muted);
+transition: all 0.25s ease;
+}
+.cat-pill:hover {
+border-color: var(--noir);
+color: var(--noir);
+transform: translateY(-1px);
+}
+.cat-pill.active {
+background: var(--noir);
+color: #fff;
+border-color: var(--noir);
+font-weight: 600;
+}
+
+/* --- PRODUCT GRID --- */
+.main-wrap {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 12px 60px;
+}
+
+.grid-layout {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+}
+
+@media (min-width: 768px) {
+.grid-layout {
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+}
+@media (min-width: 1024px) {
+.grid-layout {
+grid-template-columns: repeat(4, 1fr);
+gap: 24px;
+}
+}
+
+.prod-card {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow);
+display: flex;
+flex-direction: column;
+height: 100%;
+overflow: hidden;
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.prod-card:hover {
+transform: translateY(-4px);
+box-shadow: var(--shadow-hover);
+}
+
+.carousel-box {
+position: relative;
+width: 100%;
+aspect-ratio: 3 / 4;
+background: #EAE6DF;
+overflow: hidden;
+cursor: pointer;
+}
+
+.carousel-track {
+display: flex;
+width: 100%;
+height: 100%;
+transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+will-change: transform;
+}
+
+.carousel-slide {
+flex: 0 0 100%;
+width: 100%;
+min-width: 100%;
+max-width: 100%;
+height: 100%;
+}
+
+.carousel-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: top center;
+display: block;
+transition: transform 0.6s ease;
+}
+.prod-card:hover .carousel-slide img {
+transform: scale(1.03);
+}
+
+.carousel-dots {
+position: absolute;
+bottom: 8px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+gap: 4px;
+z-index: 5;
+background: rgba(0, 0, 0, 0.35);
+padding: 3px 6px;
+border-radius: var(--radius-full);
+backdrop-filter: blur(4px);
+}
+
+.c-dot {
+width: 5px;
+height: 5px;
+border-radius: var(--radius-full);
+background: rgba(255, 255, 255, 0.5);
+transition: all 0.25s ease;
+}
+.c-dot.active {
+width: 14px;
+background: #FFFFFF;
+}
+
+.tag-chip {
+position: absolute;
+top: 8px;
+left: 8px;
+background: rgba(255, 255, 255, 0.95);
+padding: 3px 7px;
+border-radius: var(--radius-sm);
+font-size: 0.62rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+color: var(--accent);
+z-index: 6;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.prod-info {
+padding: 12px 10px 10px;
+display: flex;
+flex-direction: column;
+flex-grow: 1;
+}
+
+.rating-row {
+display: flex;
+align-items: center;
+gap: 4px;
+font-size: 0.72rem;
+margin-bottom: 4px;
+}
+.rating-stars {
+color: var(--gold-star);
+font-weight: 700;
+font-size: 0.75rem;
+}
+.rating-count {
+color: var(--muted);
+font-size: 0.68rem;
+}
+
+.bought-badge {
+font-size: 0.68rem;
+color: #B45309;
+background: #FEF3C7;
+padding: 2px 6px;
+border-radius: var(--radius-sm);
+display: inline-block;
+width: fit-content;
+margin-bottom: 6px;
+font-weight: 600;
+}
+
+.prod-cat {
+font-size: 0.65rem;
+text-transform: uppercase;
+color: var(--muted);
+letter-spacing: 0.06em;
+margin-bottom: 2px;
+}
+
+.prod-name {
+font-size: 0.88rem;
+font-weight: 600;
+color: var(--noir);
+line-height: 1.3;
+margin-bottom: 6px;
+height: 2.6em;
+overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+word-break: break-word;
+}
+
+.prod-price-row {
+display: flex;
+align-items: baseline;
+gap: 6px;
+margin-bottom: 10px;
+flex-wrap: wrap;
+}
+
+.val-sale {
+font-weight: 700;
+font-size: 0.98rem;
+color: var(--noir);
+}
+.val-mrp {
+font-size: 0.76rem;
+color: var(--muted);
+text-decoration: line-through;
+}
+.val-off {
+font-size: 0.68rem;
+color: #2E7D32;
+font-weight: 700;
+}
+
+.btn-add-cart-single {
+margin-top: auto;
+width: 100%;
+background: var(--noir);
+border: 1px solid var(--noir);
+border-radius: var(--radius-sm);
+padding: 10px 8px;
+font-size: 0.8rem;
+font-weight: 600;
+color: #fff;
+text-align: center;
+transition: all 0.2s ease;
+}
+.btn-add-cart-single:hover {
+background: var(--noir-light);
+transform: translateY(-1px);
+}
+
+/* --- DEDICATED PRODUCT DETAILS PAGE (PDP) --- */
+.pdp-container {
+max-width: 980px;
+margin: 0 auto;
+padding: 10px 14px 110px;
+}
+
+.back-nav {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+font-size: 0.84rem;
+font-weight: 600;
+cursor: pointer;
+margin-bottom: 12px;
+color: var(--noir);
+transition: opacity 0.2s ease;
+}
+.back-nav:hover { opacity: 0.7; }
+
+.pdp-split {
+display: flex;
+flex-direction: column;
+gap: 16px;
+}
+
+@media (min-width: 768px) {
+.pdp-split {
+flex-direction: row;
+gap: 32px;
+align-items: flex-start;
+}
+.pdp-media-pane { width: 48%; }
+.pdp-info-pane { width: 52%; }
+}
+
+/* VERTICAL 90% / 10% PEEK SLIDER */
+.pdp-peek-slider-wrapper {
+position: relative;
+width: 100%;
+margin-bottom: 8px;
+}
+
+.pdp-peek-slider {
+display: flex;
+gap: 12px;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+-webkit-overflow-scrolling: touch;
+scrollbar-width: none;
+padding-bottom: 4px;
+}
+.pdp-peek-slider::-webkit-scrollbar { display: none; }
+
+.pdp-peek-slide {
+flex: 0 0 90%;
+width: 90%;
+height: 390px;
+aspect-ratio: 3 / 4;
+border-radius: var(--radius-md);
+overflow: hidden;
+scroll-snap-align: start;
+background: #EAE6DF;
+position: relative;
+flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+.pdp-peek-slide {
+flex: 0 0 88%;
+height: 470px;
+}
+}
+
+.pdp-peek-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: top center;
+display: block;
+}
+
+.swipe-hint-pill {
+font-size: 0.68rem;
+color: var(--muted);
+text-align: center;
+margin-top: 4px;
+font-weight: 500;
+}
+
+.pdp-heading {
+font-family: var(--font-serif);
+font-size: 1.65rem;
+font-weight: normal;
+margin: 6px 0 6px;
+line-height: 1.25;
+}
+
+.pdp-rating-strip {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 8px;
+}
+
+.pdp-price-box {
+display: flex;
+align-items: baseline;
+gap: 10px;
+margin-bottom: 14px;
+}
+
+/* COLOR SWATCHES */
+.color-section {
+margin-bottom: 14px;
+}
+.section-label {
+font-size: 0.78rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+margin-bottom: 6px;
+}
+.color-swatches {
+display: flex;
+gap: 10px;
+align-items: center;
+}
+.color-swatch-btn {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+border: 2px solid #FFFFFF;
+outline: 1px solid var(--border);
+cursor: pointer;
+transition: transform 0.2s ease, outline 0.2s ease;
+position: relative;
+}
+.color-swatch-btn.selected {
+outline: 2px solid var(--noir);
+transform: scale(1.1);
+}
+
+/* SIZES: S, M, L, XL, XXL, 3XL */
+.sizes-flex {
+display: flex;
+gap: 6px;
+margin-bottom: 16px;
+flex-wrap: wrap;
+}
+
+.size-btn-pill {
+flex: 1;
+min-width: 48px;
+height: 40px;
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+font-weight: 600;
+font-size: 0.82rem;
+background: var(--surface);
+}
+.size-btn-pill.selected {
+background: var(--noir);
+color: #fff;
+border-color: var(--noir);
+}
+
+/* DUAL BUTTONS INLINE (DESKTOP) */
+.pdp-actions-row {
+display: flex;
+gap: 10px;
+margin-bottom: 18px;
+}
+.btn-action-bag {
+flex: 1;
+background: var(--surface);
+border: 1.5px solid var(--noir);
+color: var(--noir);
+padding: 13px;
+border-radius: var(--radius-sm);
+font-size: 0.88rem;
+font-weight: 700;
+text-align: center;
+}
+.btn-action-order {
+flex: 1;
+background: var(--noir);
+border: 1.5px solid var(--noir);
+color: #fff;
+padding: 13px;
+border-radius: var(--radius-sm);
+font-size: 0.88rem;
+font-weight: 700;
+text-align: center;
+}
+
+/* STICKY BOTTOM DUAL BUTTONS (ON MOBILE PDP) */
+.pdp-sticky-bar {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+background: rgba(255, 255, 255, 0.98);
+backdrop-filter: blur(10px);
+border-top: 1px solid var(--border);
+padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+display: flex;
+gap: 10px;
+z-index: 45;
+box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.08);
+}
+.btn-sticky-bag {
+flex: 1;
+background: var(--surface);
+border: 1.5px solid var(--noir);
+color: var(--noir);
+height: 46px;
+border-radius: var(--radius-sm);
+font-weight: 700;
+font-size: 0.86rem;
+}
+.btn-sticky-order {
+flex: 1;
+background: var(--noir);
+border: 1.5px solid var(--noir);
+color: #fff;
+height: 46px;
+border-radius: var(--radius-sm);
+font-weight: 700;
+font-size: 0.86rem;
+}
+
+/* CIRCULAR PINK TRUST BADGES (MATCHING YOUR IMAGE) */
+.trust-badges-strip {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 8px;
+margin: 18px 0 16px;
+padding: 14px 6px;
+background: #FFFFFF;
+border: 1px solid var(--border-light);
+border-radius: var(--radius-md);
+text-align: center;
+}
+
+.trust-badge-item {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 6px;
+}
+
+.trust-badge-circle {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+background: var(--badge-pink);
+border: 1px solid var(--badge-pink-border);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.25rem;
+transition: transform 0.2s ease;
+}
+.trust-badge-item:hover .trust-badge-circle {
+transform: scale(1.08);
+}
+
+.trust-badge-title {
+font-size: 0.72rem;
+font-weight: 700;
+color: var(--noir);
+line-height: 1.2;
+}
+.trust-badge-sub {
+font-size: 0.64rem;
+color: var(--muted);
+line-height: 1.1;
+display: block;
+}
+
+/* CLOSED-BY-DEFAULT ACCORDIONS */
+.accordion-group {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-top: 14px;
+}
+
+.accordion-box {
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+background: #FFFFFF;
+overflow: hidden;
+transition: border-color 0.2s ease;
+}
+
+.accordion-header {
+padding: 13px 14px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+cursor: pointer;
+user-select: none;
+font-size: 0.84rem;
+font-weight: 700;
+color: var(--noir);
+text-transform: uppercase;
+letter-spacing: 0.04em;
+}
+.accordion-header:hover {
+background: #FAF7F2;
+}
+
+.acc-toggle-icon {
+font-size: 1.1rem;
+font-weight: bold;
+color: var(--accent);
+transition: transform 0.3s ease;
+line-height: 1;
+}
+
+.accordion-content {
+display: none;
+padding: 12px 14px 16px;
+border-top: 1px solid var(--border-light);
+background: #FAF8F5;
+font-size: 0.82rem;
+animation: accSlideDown 0.25s ease;
+}
+
+@keyframes accSlideDown {
+from { opacity: 0; transform: translateY(-4px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.spec-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+.spec-list li {
+font-size: 0.8rem;
+color: var(--noir);
+display: flex;
+align-items: flex-start;
+gap: 8px;
+line-height: 1.4;
+}
+.spec-bullet {
+color: var(--accent);
+font-weight: bold;
+}
+
+/* REVIEWS MOVING LEFT TO RIGHT */
+.reviews-section {
+border-top: 1px solid var(--border);
+padding: 24px 0 16px;
+overflow: hidden;
+}
+.reviews-header {
+font-family: var(--font-serif);
+font-size: 1.35rem;
+font-weight: 600;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.marquee-wrapper {
+width: 100%;
+overflow: hidden;
+position: relative;
+}
+.marquee-track {
+display: flex;
+gap: 12px;
+width: max-content;
+animation: scrollLeftToRight 28s linear infinite;
+}
+.marquee-track:hover {
+animation-play-state: paused;
+}
+
+@keyframes scrollLeftToRight {
+0% { transform: translateX(-50%); }
+100% { transform: translateX(0%); }
+}
+
+.review-bubble {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+padding: 12px 14px;
+width: 275px;
+flex-shrink: 0;
+box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+.review-user-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 4px;
+}
+.review-name {
+font-size: 0.78rem;
+font-weight: 700;
+color: var(--noir);
+}
+.verified-chip {
+font-size: 0.62rem;
+color: #2E7D32;
+background: #E8F5E9;
+padding: 1px 5px;
+border-radius: 4px;
+font-weight: 700;
+}
+.review-stars {
+color: var(--gold-star);
+font-size: 0.72rem;
+margin-bottom: 4px;
+}
+.review-comment {
+font-size: 0.76rem;
+color: #4A4541;
+line-height: 1.35;
+}
+
+/* SIMILAR PRODUCTS SECTION */
+.similar-section {
+border-top: 1px solid var(--border);
+padding: 24px 0 20px;
+}
+.similar-title {
+font-family: var(--font-serif);
+font-size: 1.35rem;
+font-weight: 600;
+margin-bottom: 14px;
+}
+.similar-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+}
+@media (min-width: 768px) {
+.similar-grid {
+grid-template-columns: repeat(4, 1fr);
+}
+}
+
+/* -------------------------------------------------------------
+SLIDE-IN MOBILE NAVIGATION SIDEBAR (FROM THREE LINES MENU)
+-------------------------------------------------------------- */
+.sidebar-overlay {
+position: fixed;
+inset: 0;
+background: rgba(18, 16, 15, 0.6);
+backdrop-filter: blur(4px);
+z-index: 120;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.sidebar-overlay.open {
+opacity: 1;
+visibility: visible;
+}
+
+.mobile-sidebar {
+position: fixed;
+top: 0;
+right: 0;
+width: 100%;
+max-width: 320px;
+height: 100%;
+background: var(--surface);
+z-index: 130;
+box-shadow: -10px 0 35px rgba(0,0,0,0.15);
+transform: translateX(100%);
+transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+display: flex;
+flex-direction: column;
+}
+.mobile-sidebar.open {
+transform: translateX(0);
+}
+
+.sidebar-header {
+padding: 16px 20px;
+border-bottom: 1px solid var(--border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.sidebar-brand {
+font-family: var(--font-serif);
+font-size: 1.5rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+}
+
+.sidebar-content {
+flex: 1;
+overflow-y: auto;
+padding: 18px 20px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+/* PROFILE GREETING CARD INSIDE SIDEBAR */
+.sidebar-profile-card {
+background: var(--bg);
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+padding: 14px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.sidebar-avatar {
+width: 44px;
+height: 44px;
+border-radius: 50%;
+background: var(--accent);
+color: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+font-size: 1.1rem;
+}
+.sidebar-user-name {
+font-size: 0.88rem;
+font-weight: 700;
+color: var(--noir);
+}
+.sidebar-user-action {
+font-size: 0.74rem;
+color: var(--accent);
+font-weight: 600;
+cursor: pointer;
+}
+
+.sidebar-group-title {
+font-size: 0.72rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(--muted);
+margin-bottom: 8px;
+}
+
+.sidebar-menu-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+.sidebar-menu-link {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 10px 12px;
+border-radius: var(--radius-sm);
+font-size: 0.86rem;
+font-weight: 600;
+color: var(--noir);
+transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.sidebar-menu-link:hover {
+background: var(--bg);
+transform: translateX(3px);
+}
+
+/* -------------------------------------------------------------
+TRACK ORDER POPUP MODAL
+-------------------------------------------------------------- */
+.track-modal-overlay {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.6);
+backdrop-filter: blur(4px);
+z-index: 180;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+.track-modal-box {
+background: #FFFFFF;
+width: 100%;
+max-width: 440px;
+border-radius: var(--radius-md);
+padding: 24px;
+position: relative;
+box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* --- UNIVERSAL FOOTER --- */
+.site-footer {
+background: #161413;
+color: #E2DDD7;
+padding: 40px 18px 90px;
+border-top: 1px solid #2B2724;
+font-size: 0.84rem;
+}
+.footer-inner {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr;
+gap: 30px;
+}
+@media (min-width: 768px) {
+.footer-inner {
+grid-template-columns: 1.5fr 1fr 1fr 1fr;
+gap: 36px;
+}
+}
+
+.footer-brand {
+font-family: var(--font-serif);
+font-size: 1.8rem;
+font-weight: 700;
+color: #fff;
+letter-spacing: 0.1em;
+margin-bottom: 8px;
+}
+.footer-desc {
+font-size: 0.8rem;
+color: #A8A29D;
+line-height: 1.5;
+margin-bottom: 14px;
+}
+
+.footer-heading {
+font-size: 0.82rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: #fff;
+margin-bottom: 12px;
+}
+.footer-links {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+.footer-links a {
+color: #B5AFA8;
+font-size: 0.8rem;
+transition: color 0.2s ease;
+}
+.footer-links a:hover {
+color: #FFFFFF;
+}
+
+.footer-payment-strip {
+margin-top: 30px;
+padding-top: 20px;
+border-top: 1px solid #2A2522;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 12px;
+text-align: center;
+}
+@media (min-width: 768px) {
+.footer-payment-strip {
+flex-direction: row;
+justify-content: space-between;
+}
+}
+
+.footer-pay-badges {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+justify-content: center;
+}
+.footer-badge {
+background: #23201D;
+border: 1px solid #38332F;
+padding: 3px 8px;
+border-radius: 4px;
+font-size: 0.68rem;
+font-weight: 700;
+color: #D6CEC5;
+}
+.copyright-text {
+font-size: 0.72rem;
+color: #8C857E;
+}
+
+/* --- LEGAL MODAL POPUP --- */
+.legal-modal-overlay {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(4px);
+z-index: 200;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+.legal-modal-box {
+background: #FFFFFF;
+width: 100%;
+max-width: 520px;
+border-radius: var(--radius-md);
+padding: 24px;
+max-height: 80vh;
+overflow-y: auto;
+position: relative;
+}
+.legal-modal-close {
+position: absolute;
+top: 14px;
+right: 14px;
+font-size: 1.2rem;
+font-weight: bold;
+}
+
+/* --- BAG & CHECKOUT DRAWER --- */
+.drawer-scrim {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.5);
+z-index: 100;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.drawer-scrim.open { opacity: 1; visibility: visible; }
+
+.bag-pane {
+position: fixed;
+top: 0;
+right: 0;
+width: 100%;
+max-width: 440px;
+height: 100%;
+background: var(--surface);
+z-index: 110;
+box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+transform: translateX(100%);
+transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+display: flex;
+flex-direction: column;
+}
+.bag-pane.open { transform: translateX(0); }
+
+.bag-header {
+padding: 16px 20px;
+border-bottom: 1px solid var(--border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.bag-title {
+font-family: var(--font-serif);
+font-size: 1.35rem;
+font-weight: 700;
+}
+
+.bag-items-scroll {
+flex: 1;
+overflow-y: auto;
+padding: 16px 20px;
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+.bag-row {
+display: flex;
+gap: 12px;
+border-bottom: 1px solid var(--border);
+padding-bottom: 12px;
+}
+
+.bag-row-thumb {
+width: 60px;
+height: 75px;
+border-radius: var(--radius-sm);
+overflow: hidden;
+flex-shrink: 0;
+background: #EAE6DF;
+}
+.bag-row-thumb img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: top center;
+}
+
+.bag-row-info {
+flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.qty-wrap {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.step-btn {
+width: 24px;
+height: 24px;
+border: 1px solid var(--border);
+border-radius: 4px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+font-size: 0.8rem;
+}
+
+/* FOOTER & CHECKOUT OPTIONS */
+.bag-footer {
+border-top: 1px solid var(--border);
+padding: 14px 18px calc(16px + env(safe-area-inset-bottom));
+background: var(--bg);
+overflow-y: auto;
+max-height: 60vh;
+}
+
+.coupon-section {
+background: var(--surface);
+border: 1px dashed var(--border);
+border-radius: var(--radius-sm);
+padding: 10px 12px;
+margin-bottom: 12px;
+}
+
+.coupon-row {
+display: flex;
+gap: 6px;
+margin-top: 6px;
+}
+
+.coupon-box-input {
+flex: 1;
+border: 1px solid var(--border);
+padding: 8px 10px;
+border-radius: var(--radius-sm);
+font-size: 0.8rem;
+text-transform: uppercase;
+font-weight: 600;
+outline: none;
+}
+
+.btn-apply {
+background: var(--noir);
+color: #fff;
+padding: 8px 14px;
+border-radius: var(--radius-sm);
+font-size: 0.78rem;
+font-weight: 600;
+}
+
+.pills-group {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+margin-top: 6px;
+}
+
+.chip-code {
+font-size: 0.68rem;
+background: var(--accent-soft);
+color: var(--accent);
+padding: 3px 8px;
+border-radius: var(--radius-full);
+font-weight: 700;
+cursor: pointer;
+}
+
+/* 5-BOX ADDRESS FORM */
+.address-section {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+padding: 12px;
+margin-bottom: 12px;
+}
+.form-heading {
+font-size: 0.75rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+margin-bottom: 8px;
+color: var(--noir);
+}
+.cust-group {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+.cust-field {
+background: #FAFAFA;
+border: 1px solid var(--border);
+padding: 8px 10px;
+border-radius: var(--radius-sm);
+font-size: 0.8rem;
+outline: none;
+}
+
+/* PAYMENT METHOD SELECTOR */
+.payment-section {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+padding: 12px;
+margin-bottom: 12px;
+}
+.payment-options-row {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-top: 6px;
+}
+.payment-card {
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+padding: 10px;
+display: flex;
+align-items: flex-start;
+gap: 10px;
+cursor: pointer;
+background: #FAFAFA;
+transition: all 0.2s ease;
+}
+.payment-card.active {
+border-color: var(--noir);
+background: #FFFFFF;
+box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.payment-radio {
+margin-top: 3px;
+accent-color: var(--noir);
+cursor: pointer;
+}
+.payment-card-body {
+flex: 1;
+}
+.payment-card-title {
+font-size: 0.82rem;
+font-weight: 700;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.pay-badge-list {
+display: flex;
+gap: 4px;
+margin-top: 4px;
+flex-wrap: wrap;
+}
+.pay-logo-badge {
+font-size: 0.65rem;
+font-weight: 800;
+padding: 2px 6px;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: 0.02em;
+}
+.badge-gpay { background: #E8F0FE; color: #1A73E8; }
+.badge-phonepe { background: #EDE7F6; color: #5F259F; }
+.badge-paytm { background: #E1F5FE; color: #00B9F5; }
+.badge-upi { background: #FFF3E0; color: #E65100; }
+.badge-cod { background: #EFEBE9; color: #4E342E; }
+
+.price-ledger {
+font-size: 0.82rem;
+margin-bottom: 12px;
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+padding: 10px 12px;
+}
+
+.ledger-row {
+display: flex;
+justify-content: space-between;
+color: var(--muted);
+margin-bottom: 5px;
+}
+
+.ledger-row.total {
+font-size: 1.1rem;
+font-weight: 700;
+color: var(--noir);
+border-top: 1px dashed var(--border);
+padding-top: 8px;
+margin-top: 6px;
+}
+
+/* FINAL ORDER BUTTON */
+.btn-wa-order {
+width: 100%;
+background: var(--wa-green);
+color: #fff;
+padding: 14px;
+border-radius: var(--radius-sm);
+font-size: 0.94rem;
+font-weight: 700;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+.btn-wa-order:hover { background: var(--wa-dark); }
+
+/* FLOATING CHAT BUTTON */
+.floating-chat-btn {
+position: fixed;
+bottom: 120px;
+right: 16px;
+background: var(--wa-green);
+color: #fff;
+padding: 10px 16px;
+border-radius: var(--radius-full);
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 0.82rem;
+font-weight: 700;
+box-shadow: 0 6px 22px rgba(37, 211, 102, 0.45);
+z-index: 80;
+cursor: pointer;
+}
+.floating-chat-btn:hover {
+background: var(--wa-dark);
+transform: translateY(-2px);
+}
+
+/* TOAST */
+.toast {
+position: fixed;
+bottom: 60px;
+left: 50%;
+transform: translateX(-50%) translateY(180px);
+opacity: 0;
+background: var(--noir);
+color: #fff;
+padding: 9px 18px;
+border-radius: var(--radius-full);
+font-size: 0.8rem;
+font-weight: 500;
+z-index: 300;
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+pointer-events: none;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+.toast.show {
+transform: translateX(-50%) translateY(0);
+opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<!-- 1. STRICT SINGLE-LINE TOP OFFER BANNER -->
+<div class="top-bar">
+Festive Pret Collection • <strong>Easy Doorstep Exchange</strong> • Use Code <strong>FESTIVE20</strong> for 20% Off
+</div>
+
+<!-- -------------------------------------------------------------
+STICKY HEADER WITH LUCIDE ICONS (BAG -> PROFILE -> 3 LINES)
+-------------------------------------------------------------- -->
+<header class="header">
+<div class="brand-logo" onclick="openHomeView()">ZAYA</div>
+
+<div class="header-actions-right">
+<!-- 1. Bag Icon (with Count Badge) -->
+<button class="header-icon-btn" id="openBagTrigger" aria-label="Open Shopping Bag">
+<!-- Lucide 'shopping-bag' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+<path d="M3 6h18"/>
+<path d="M16 10a4 4 0 0 1-8 0"/>
+</svg>
+<span class="bag-badge-pill" id="headerBagCount">0</span>
+</button>
+
+<!-- 2. Profile Icon (Just before three lines) -->
+<button class="header-icon-btn" onclick="toggleSidebar(true)" aria-label="User Profile">
+<!-- Lucide 'user' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+<circle cx="12" cy="7" r="4"/>
+</svg>
+</button>
+
+<!-- 3. Three Lines Hamburger Menu (Right corner) -->
+<button class="header-icon-btn" onclick="toggleSidebar(true)" aria-label="Open Mobile Menu">
+<!-- Lucide 'menu' icon (Three Lines) -->
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="4" x2="20" y1="12" y2="12"/>
+<line x1="4" x2="20" y1="6" y2="6"/>
+<line x1="4" x2="20" y1="18" y2="18"/>
+</svg>
+</button>
+</div>
+</header>
+
+<!-- -------------------------------------------------------------
+MOBILE SLIDE-IN NAVIGATION SIDEBAR
+-------------------------------------------------------------- -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
+<aside class="mobile-sidebar" id="mobileSidebar">
+<div class="sidebar-header">
+<div class="sidebar-brand">ZAYA</div>
+<button class="header-icon-btn" onclick="toggleSidebar(false)" aria-label="Close Sidebar">
+<!-- Lucide 'x' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+</svg>
+</button>
+</div>
+
+<div class="sidebar-content">
+<!-- Profile Quick Card -->
+<div class="sidebar-profile-card">
+<div class="sidebar-avatar">Z</div>
+<div>
+<div class="sidebar-user-name">Welcome to ZAYA</div>
+<div class="sidebar-user-action" onclick="openTrackModal()">Track My Orders →</div>
+</div>
+</div>
+
+<!-- Categories & Collections -->
+<div>
+<div class="sidebar-group-title">Shop by Category</div>
+<ul class="sidebar-menu-list">
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('All'); toggleSidebar(false);">
+<!-- Lucide 'sparkles' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+<span>New Arrivals '26</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Kurtas'); toggleSidebar(false);">
+<!-- Lucide 'shirt' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+<span>Kurtas & Sets</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Dresses'); toggleSidebar(false);">
+<!-- Lucide 'heart' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+<span>Western Dresses</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Co-ords'); toggleSidebar(false);">
+<!-- Lucide 'layers' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+<span>Co-ord Sets</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openHomeView(); setCategory('Sarees'); toggleSidebar(false);">
+<!-- Lucide 'feather' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" x2="2" y1="8" y2="22"/><line x1="17.5" x2="9" y1="15" y2="15"/></svg>
+<span>Pure Silk & Sarees</span>
+</a>
+</li>
+</ul>
+</div>
+
+<!-- Orders & Customer Care -->
+<div>
+<div class="sidebar-group-title">Orders & Assistance</div>
+<ul class="sidebar-menu-list">
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openTrackModal(); toggleSidebar(false);">
+<!-- Lucide 'package' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+<span>Track My Order</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openGeneralChatWhatsApp(); toggleSidebar(false);">
+<!-- Lucide 'refresh-cw' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+<span>Doorstep Exchange Request</span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)" class="sidebar-menu-link" onclick="openGeneralChatWhatsApp(); toggleSidebar(false);">
+<!-- Lucide 'message-circle' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+<span>WhatsApp Helpdesk</span>
+</a>
+</li>
+</ul>
+</div>
+
+<!-- Quick Promo Highlight -->
+<div style="background:var(--accent-soft); border:1px solid #E4D2C9; border-radius:var(--radius-sm); padding:12px; margin-top:auto;">
+<div style="font-size:0.75rem; font-weight:700; color:var(--accent); text-transform:uppercase;">Special Offer</div>
+<div style="font-size:0.78rem; color:var(--noir); margin-top:2px;">Use promo code <strong>FESTIVE20</strong> at checkout for 20% flat discount!</div>
+</div>
+</div>
+</aside>
+
+<!-- -------------------------------------------------------------
+TRACK ORDER MODAL (POPUP)
+-------------------------------------------------------------- -->
+<div class="track-modal-overlay" id="trackModal" onclick="closeTrackModal(event)">
+<div class="track-modal-box">
+<button class="legal-modal-close" onclick="closeTrackModalDirect()">&times;</button>
+<h3 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 6px;">Track Your Order</h3>
+<p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 16px;">
+Enter your 10-digit mobile number or order code below to check instant live tracking updates directly on WhatsApp.
+</p>
+<input type="text" id="trackInput" class="cust-field" placeholder="Enter Mobile Number or Order Code" style="margin-bottom: 12px; width: 100%;" />
+<button class="btn-wa-order" onclick="submitTrackingInquiry()">
+<!-- Lucide 'truck' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+Track on WhatsApp
+</button>
+</div>
+</div>
+
+<!-- =========================================
+VIEW 1: CATALOG VIEW
+========================================== -->
+<section id="catalogView" class="view-container active">
+<!-- Hero Banner with Fade-Up -->
+<div class="hero-card fade-up-init">
+<div class="hero-tag">New Season '26</div>
+<h1 class="hero-title">Timeless Grace & Modern Pret</h1>
+<p class="hero-desc">Bespoke kurtas, coordinated sets, and flowing silk silhouettes. Tap Add to Cart to pick your color & size, and order on WhatsApp.</p>
+</div>
+
+<!-- Category Filters -->
+<div class="cat-scroll fade-up-init">
+<button class="cat-pill active" onclick="setCategory('All')">All Pieces</button>
+<button class="cat-pill" onclick="setCategory('Kurtas')">Kurtas & Sets</button>
+<button class="cat-pill" onclick="setCategory('Dresses')">Western Dresses</button>
+<button class="cat-pill" onclick="setCategory('Co-ords')">Co-ord Sets</button>
+<button class="cat-pill" onclick="setCategory('Sarees')">Pure Silk & Sarees</button>
+</div>
+
+<!-- Product Grid with Scroll Fade-Up -->
+<main class="main-wrap">
+<div class="grid-layout" id="productGrid">
+<!-- Products Injected Here -->
+</div>
+</main>
+</section>
+
+<!-- =========================================
+VIEW 2: DEDICATED PRODUCT DETAILS PAGE (PDP)
+========================================== -->
+<section id="pdpView" class="view-container">
+<div class="pdp-container">
+<div class="back-nav" onclick="openHomeView()">
+<!-- Lucide 'arrow-left' icon -->
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+<span>Back to All Pieces</span>
+</div>
+
+<div class="pdp-split">
+<!-- 1. Media Gallery: 90% / 10% Peek Slider -->
+<div class="pdp-media-pane">
+<div class="pdp-peek-slider-wrapper">
+<div class="pdp-peek-slider" id="pdpPeekSlider">
+<!-- Slides Injected Here -->
+</div>
+<div class="swipe-hint-pill">👉 Swipe left to see more photos</div>
+</div>
+</div>
+
+<!-- 2. Product Details & Sequential Flow -->
+<div class="pdp-info-pane">
+<div style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.08em;" id="pdpCatName"></div>
+<h1 class="pdp-heading" id="pdpItemTitle"></h1>
+
+<!-- Ratings & Monthly Bought Badge -->
+<div class="pdp-rating-strip">
+<span class="rating-stars" id="pdpRatingStars">★ 4.9</span>
+<span class="rating-count" id="pdpRatingReviews">(184 Reviews)</span>
+<span class="bought-badge" id="pdpBoughtStats">🔥 420+ bought this month</span>
+</div>
+
+<div class="pdp-price-box">
+<span style="font-size: 1.45rem; font-weight: 700;" id="pdpPriceVal"></span>
+<span style="font-size: 0.95rem; color: var(--muted); text-decoration: line-through;" id="pdpMrpVal"></span>
+<span style="background: #E8F5E9; color: #2E7D32; font-size: 0.74rem; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm);" id="pdpOffVal"></span>
+</div>
+
+<!-- Color Swatches Section -->
+<div class="color-section">
+<div class="section-label">Select Color: <span id="pdpSelectedColorName" style="color: var(--accent); text-transform: none;"></span></div>
+<div class="color-swatches" id="pdpColorsGroup">
+<!-- Swatches Injected Here -->
+</div>
+</div>
+
+<!-- Size Selector: S, M, L, XL, XXL, 3XL -->
+<div class="section-label">Select Size:</div>
+<div class="sizes-flex" id="pdpSizesGroup">
+<button class="size-btn-pill selected" onclick="pickPdpSize('S')">S</button>
+<button class="size-btn-pill" onclick="pickPdpSize('M')">M</button>
+<button class="size-btn-pill" onclick="pickPdpSize('L')">L</button>
+<button class="size-btn-pill" onclick="pickPdpSize('XL')">XL</button>
+<button class="size-btn-pill" onclick="pickPdpSize('XXL')">XXL</button>
+<button class="size-btn-pill" onclick="pickPdpSize('3XL')">3XL</button>
+</div>
+
+<!-- INLINE DUAL BUTTONS -->
+<div class="pdp-actions-row">
+<button class="btn-action-bag" onclick="addCurrentPdp(false)">
+🛍️ Add to Bag
+</button>
+<button class="btn-action-order" onclick="addCurrentPdp(true)">
+⚡ Order Now
+</button>
+</div>
+
+<!-- 3. CIRCULAR PINK TRUST BADGES (MATCHING YOUR IMAGE) -->
+<div class="trust-badges-strip">
+<div class="trust-badge-item">
+<div class="trust-badge-circle">📦</div>
+<div class="trust-badge-title">Cash<span class="trust-badge-sub">On Delivery</span></div>
+</div>
+<div class="trust-badge-item">
+<div class="trust-badge-circle">🚚</div>
+<div class="trust-badge-title">Free<span class="trust-badge-sub">Shipping</span></div>
+</div>
+<div class="trust-badge-item">
+<div class="trust-badge-circle">🔄</div>
+<div class="trust-badge-title">Easy<span class="trust-badge-sub">Exchange</span></div>
+</div>
+<div class="trust-badge-item">
+<div class="trust-badge-circle">⏱️</div>
+<div class="trust-badge-title">24hrs<span class="trust-badge-sub">Dispatch</span></div>
+</div>
+</div>
+
+<!-- 4. CLOSED-BY-DEFAULT ACCORDIONS -->
+<div class="accordion-group">
+<!-- Specification Dropdown -->
+<div class="accordion-box">
+<div class="accordion-header" onclick="togglePdpAccordion(this)">
+<span>Product Specifications</span>
+<span class="acc-toggle-icon">+</span>
+</div>
+<div class="accordion-content">
+<ul class="spec-list" id="pdpSpecsList">
+<!-- Bullet points injected here -->
+</ul>
+</div>
+</div>
+
+<!-- Shipping & Exchange Dropdown -->
+<div class="accordion-box">
+<div class="accordion-header" onclick="togglePdpAccordion(this)">
+<span>Shipping & Exchange Policy</span>
+<span class="acc-toggle-icon">+</span>
+</div>
+<div class="accordion-content">
+<ul class="spec-list">
+<li><span class="spec-bullet">✓</span> Dispatches within 24 business hours from our atelier.</li>
+<li><span class="spec-bullet">✓</span> Free express shipping across India on all prepaid orders.</li>
+<li><span class="spec-bullet">✓</span> <strong>Doorstep Exchange Available:</strong> If you need a size or color swap, we arrange hassle-free doorstep pickup.</li>
+<li><span class="spec-bullet">✓</span> Cash on Delivery (COD) available with a ₹50 courier convenience fee.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- REVIEWS CAROUSEL: MOVING LEFT TO RIGHT -->
+<div class="reviews-section">
+<div class="reviews-header">
+<span>Customer Reviews</span>
+<span style="font-size: 0.8rem; color: #2E7D32; font-weight: 700;">★ 4.9 Rating</span>
+</div>
+<div class="marquee-wrapper">
+<div class="marquee-track" id="reviewsTrack">
+<!-- Human reviews injected here -->
+</div>
+</div>
+</div>
+
+<!-- SIMILAR PRODUCTS SECTION -->
+<div class="similar-section">
+<h3 class="similar-title">You May Also Like</h3>
+<div class="similar-grid" id="similarGrid">
+<!-- Similar items injected here -->
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- STICKY BOTTOM BAR ON MOBILE PDP -->
+<div class="pdp-sticky-bar">
+<button class="btn-sticky-bag" onclick="addCurrentPdp(false)">
+🛍️ Add to Bag
+</button>
+<button class="btn-sticky-order" onclick="addCurrentPdp(true)">
+⚡ Order Now
+</button>
+</div>
+</section>
+
+<!-- =========================================
+UNIVERSAL FOOTER (VISIBLE ACROSS ALL PAGES)
+========================================== -->
+<footer class="site-footer">
+<div class="footer-inner">
+<!-- Col 1: Brand Info -->
+<div>
+<div class="footer-brand">ZAYA</div>
+<p class="footer-desc">
+Redefining contemporary women's couture and festive pret. Handcrafted breathable fabrics, authentic embroidery, and silhouettes designed to empower effortless elegance.
+</p>
+<div style="font-size: 0.78rem; color: #E0B2A3; font-weight: 600;">
+📞 WhatsApp Helpdesk: +91 98765 43210
+</div>
+</div>
+
+<!-- Col 2: Quick Links -->
+<div>
+<div class="footer-heading">Collections</div>
+<ul class="footer-links">
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Kurtas');">Kurtas & Sets</a></li>
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Dresses');">Western Dresses</a></li>
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Co-ords');">Co-ord Sets</a></li>
+<li><a href="javascript:void(0)" onclick="openHomeView(); setCategory('Sarees');">Pure Silk Sarees</a></li>
+</ul>
+</div>
+
+<!-- Col 3: Customer Care -->
+<div>
+<div class="footer-heading">Customer Care</div>
+<ul class="footer-links">
+<li><a href="javascript:void(0)" onclick="openTrackModal()">Track WhatsApp Order</a></li>
+<li><a href="javascript:void(0)" onclick="openGeneralChatWhatsApp()">Doorstep Exchange Request</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('exchange')">Exchange & Returns Policy</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('shipping')">Shipping Information</a></li>
+</ul>
+</div>
+
+<!-- Col 4: Legal & Policies -->
+<div>
+<div class="footer-heading">Legal & Trust</div>
+<ul class="footer-links">
+<li><a href="javascript:void(0)" onclick="openLegalModal('privacy')">Privacy Policy</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('terms')">Terms & Conditions</a></li>
+<li><a href="javascript:void(0)" onclick="openLegalModal('payment')">Payment Security</a></li>
+</ul>
+</div>
+</div>
+
+<!-- Payment Badges & Copyright -->
+<div class="footer-payment-strip">
+<div class="copyright-text">
+© 2026 ZAYA ATELIER. All rights reserved. Designed for mobile-first shopping.
+</div>
+<div class="footer-pay-badges">
+<span class="footer-badge">UPI</span>
+<span class="footer-badge">Google Pay</span>
+<span class="footer-badge">PhonePe</span>
+<span class="footer-badge">Paytm</span>
+<span class="footer-badge">Cash on Delivery</span>
+</div>
+</div>
+</footer>
+
+<!-- =========================================
+LEGAL / POLICY POPUP MODAL
+========================================== -->
+<div class="legal-modal-overlay" id="legalModal" onclick="closeLegalModal(event)">
+<div class="legal-modal-box">
+<button class="legal-modal-close" onclick="closeLegalModalDirect()">&times;</button>
+<h3 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 12px;" id="legalModalTitle"></h3>
+<div style="font-size: 0.82rem; color: #4A4541; line-height: 1.6;" id="legalModalBody"></div>
+</div>
+</div>
+
+<!-- =========================================
+SHOPPING BAG / WHATSAPP CHECKOUT DRAWER
+========================================== -->
+<div class="drawer-scrim" id="drawerScrim" onclick="toggleBagDrawer(false)"></div>
+<aside class="bag-pane" id="bagDrawer">
+<div class="bag-header">
+<h3 class="bag-title">Shopping Bag (<span id="drawerCount">0</span>)</h3>
+<button class="header-icon-btn" onclick="toggleBagDrawer(false)" aria-label="Close Bag">
+<!-- Lucide 'x' icon -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+</button>
+</div>
+
+<div class="bag-items-scroll" id="bagItemsContainer">
+<!-- Items dynamically populated -->
+</div>
+
+<!-- Checkout Footer -->
+<div class="bag-footer" id="bagFooter">
+
+<!-- Coupon Section -->
+<div class="coupon-section">
+<div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Promo / Coupon Code</div>
+<div class="coupon-row">
+<input type="text" id="couponInput" class="coupon-box-input" placeholder="e.g. FESTIVE20" />
+<button class="btn-apply" onclick="applyCoupon()">Apply</button>
+</div>
+<div class="pills-group">
+<span class="chip-code" onclick="quickCoupon('FESTIVE20')">FESTIVE20 (20% OFF)</span>
+<span class="chip-code" onclick="quickCoupon('WELCOME10')">WELCOME10 (10% OFF)</span>
+<span class="chip-code" onclick="quickCoupon('FLAT500')">FLAT500</span>
+</div>
+<div id="couponStatus" style="font-size: 0.72rem; margin-top: 4px; font-weight: 600;"></div>
+</div>
+
+<!-- 5-BOX ADDRESS FORM -->
+<div class="address-section">
+<div class="form-heading">1. Delivery Address</div>
+<div class="cust-group">
+<input type="text" id="custName" class="cust-field" placeholder="Full Name *" />
+<input type="text" id="custAddr1" class="cust-field" placeholder="Address (Flat / House No. / Street / Area) *" />
+<input type="text" id="custNearby" class="cust-field" placeholder="Nearby Landmark (Optional)" />
+
+<!-- STRICT 6-DIGIT NUMERIC PINCODE -->
+<input
+type="tel"
+id="custPincode"
+class="cust-field"
+placeholder="6-Digit Pincode *"
+inputmode="numeric"
+maxlength="6"
+oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6)"
+/>
+
+<input
+type="tel"
+id="custPhone"
+class="cust-field"
+placeholder="Phone Number (10 digits) *"
+inputmode="numeric"
+maxlength="10"
+oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+/>
+</div>
+</div>
+
+<!-- PAYMENT METHOD SELECTION -->
+<div class="payment-section">
+<div class="form-heading">2. Select Payment Method</div>
+<div class="payment-options-row">
+<!-- UPI Option -->
+<label class="payment-card active" id="payCardUpi" onclick="selectPaymentMethod('UPI')">
+<input type="radio" name="payMethod" value="UPI" checked class="payment-radio" />
+<div class="payment-card-body">
+<div class="payment-card-title">
+<span>UPI / Online Payment</span>
+<span style="color:#2E7D32; font-size:0.75rem;">FREE</span>
+</div>
+<div class="pay-badge-list">
+<span class="pay-logo-badge badge-gpay">GPay</span>
+<span class="pay-logo-badge badge-phonepe">PhonePe</span>
+<span class="pay-logo-badge badge-paytm">Paytm</span>
+<span class="pay-logo-badge badge-upi">BHIM UPI</span>
+</div>
+</div>
+</label>
+
+<!-- COD Option (+₹50) -->
+<label class="payment-card" id="payCardCod" onclick="selectPaymentMethod('COD')">
+<input type="radio" name="payMethod" value="COD" class="payment-radio" />
+<div class="payment-card-body">
+<div class="payment-card-title">
+<span>Cash on Delivery (COD)</span>
+<span style="color:var(--accent); font-size:0.75rem;">+₹50</span>
+</div>
+<div class="pay-badge-list">
+<span class="pay-logo-badge badge-cod">Pay Cash at Doorstep</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+
+<!-- Price Ledger -->
+<div class="price-ledger">
+<div class="ledger-row">
+<span>Bag Subtotal:</span>
+<span id="ledgerSubtotal">₹0</span>
+</div>
+<div class="ledger-row" id="ledgerDiscountRow" style="display: none; color: #2E7D32; font-weight: 600;">
+<span id="ledgerDiscountLabel">Discount:</span>
+<span id="ledgerDiscountVal">-₹0</span>
+</div>
+<div class="ledger-row" id="ledgerCodRow" style="display: none; color: var(--accent); font-weight: 600;">
+<span>COD Convenience Fee:</span>
+<span>+₹50</span>
+</div>
+<div class="ledger-row">
+<span>Standard Delivery:</span>
+<span style="color: #2E7D32; font-weight: 600;">FREE</span>
+</div>
+<div class="ledger-row total">
+<span>Total Payable:</span>
+<span id="ledgerTotal">₹0</span>
+</div>
+</div>
+
+<!-- FINAL ORDER BUTTON (WHATSAPP ONLY AT CHECKOUT) -->
+<button class="btn-wa-order" onclick="submitOrderToWhatsApp()">
+Order on WhatsApp
+</button>
+</div>
+</aside>
+
+<!-- FLOATING CHAT BUTTON -->
+<a
+href="javascript:void(0)"
+onclick="openGeneralChatWhatsApp()"
+class="floating-chat-btn"
+aria-label="Chat on WhatsApp"
+>
+<!-- Lucide 'message-circle' icon -->
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+<span>Chat with Us</span>
+</a>
+
+<!-- Interactive Toast -->
+<div class="toast" id="toastNotice">Item added to your shopping bag!</div>
+
+<!-- =========================================
+JAVASCRIPT LOGIC
+========================================== -->
+<script>
+// 1. STORE CONFIGURATION
+const WHATSAPP_PHONE = "919876543210"; // Enter your WhatsApp phone number with country code
+const CURRENCY = "₹";
+const COD_FEE = 50;
+
+// 2. PRODUCT DATABASE
+const products = [
+{
+id: "ZY-101",
+title: "Mulmul Embroidered Anarkali Set",
+category: "Kurtas",
+price: 2499,
+mrp: 3499,
+tag: "Bestseller",
+rating: "4.9",
+reviews: "328",
+boughtThisMonth: "640+ bought this month",
+images: [
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&h=933&q=80"
+],
+colors: [
+{ name: "Sage Green", hex: "#8A9A86" },
+{ name: "Blush Pink", hex: "#E8C5C8" },
+{ name: "Ivory Cream", hex: "#FDFBF7" }
+],
+specs: [
+"Fabric: 100% Pure Breathable Mulmul Cotton",
+"Work: Intricate Handcrafted Chikankari & Mirror Lace",
+"Fit: Flared Anarkali Silhouette with Handcrafted Tassels",
+"Set Contains: 1 Flared Kurta, 1 Straight Pant, 1 Organza Dupatta",
+"Exchange: Eligible for Easy Doorstep Size & Color Exchange",
+"Care: Hand wash gently in cold water or dry clean"
+]
+},
+{
+id: "ZY-102",
+title: "Micro-Pleated Satin Evening Slip Dress",
+category: "Dresses",
+price: 2799,
+mrp: 3899,
+tag: "Trending",
+rating: "4.8",
+reviews: "214",
+boughtThisMonth: "420+ bought this month",
+images: [
+"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=933&q=80"
+],
+colors: [
+{ name: "Champagne Gold", hex: "#E6D3B3" },
+{ name: "Midnight Noir", hex: "#1C1B1A" },
+{ name: "Rose Wine", hex: "#8E4A49" }
+],
+specs: [
+"Fabric: Fluid Micro-Pleated Premium Heavy Satin",
+"Neckline: Soft Cowl Square Neck with adjustable criss-cross straps",
+"Fit: Body-skimming contour drape that flows effortlessly",
+"Exchange: Eligible for Easy Doorstep Size & Color Exchange",
+"Care: Dry clean only to preserve fine pleat memory"
+]
+},
+{
+id: "ZY-103",
+title: "Belgian Linen Blazer & Trouser Co-ord",
+category: "Co-ords",
+price: 3299,
+mrp: 4499,
+tag: "New",
+rating: "4.7",
+reviews: "186",
+boughtThisMonth: "310+ bought this month",
+images: [
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&h=933&q=80"
+],
+colors: [
+{ name: "Warm Oatmeal", hex: "#D6C7B2" },
+{ name: "Earthy Olive", hex: "#686D5A" },
+{ name: "Charcoal Slate", hex: "#3A3D40" }
+],
+specs: [
+"Fabric: Pure Washed Belgian Linen (Pre-shrunk)",
+"Blazer: Relaxed-fit single-breasted jacket with tortoiseshell buttons",
+"Trousers: High-waist tailored pants with deep slant pockets",
+"Exchange: Eligible for Easy Doorstep Size & Color Exchange",
+"Care: Machine wash gentle cycle or professional dry clean"
+]
+},
+{
+id: "ZY-104",
+title: "Hand-Painted Floral Organza Saree",
+category: "Sarees",
+price: 4499,
+mrp: 5999,
+tag: "Exclusive",
+rating: "5.0",
+reviews: "92",
+boughtThisMonth: "190+ bought this month",
+images: [
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&h=933&q=80"
+],
+colors: [
+{ name: "Powder Pink", hex: "#F3D3D9" },
+{ name: "Sky Lavender", hex: "#DCD0E8" },
+{ name: "Mint Whisper", hex: "#D1E7DD" }
+],
+specs: [
+"Fabric: Lightweight translucent pure organza silk",
+"Artistry: Hand-painted watercolor botanical blossoms",
+"Borders: Fine scalloped golden zari embroidery with cutwork",
+"Includes: 5.5 meters saree + 0.8 meter matching unstitched blouse",
+"Exchange: Doorstep exchange available if transit damage occurs"
+]
+},
+{
+id: "ZY-105",
+title: "Tissue Chanderi Straight Kurta Set",
+category: "Kurtas",
+price: 2999,
+mrp: 3999,
+tag: "Festive Edit",
+rating: "4.8",
+reviews: "155",
+boughtThisMonth: "280+ bought this month",
+images: [
+"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&h=933&q=80"
+],
+colors: [
+{ name: "Emerald Mint", hex: "#7DA591" },
+{ name: "Golden Ochre", hex: "#C79D4C" },
+{ name: "Royal Peach", hex: "#E8B298" }
+],
+specs: [
+"Fabric: Lustrous festive tissue Chanderi silk with cotton lining",
+"Work: Traditional Kashmiri tilla resham embroidery on V-neck & cuffs",
+"Bottoms: Elasticated ankle-length cigarette pants",
+"Exchange: Eligible for Easy Doorstep Size & Color Exchange",
+"Care: Dry clean recommended"
+]
+},
+{
+id: "ZY-106",
+title: "Tiered Bohemian Floral Maxi Dress",
+category: "Dresses",
+price: 2199,
+mrp: 2999,
+tag: "Must-Have",
+rating: "4.7",
+reviews: "260",
+boughtThisMonth: "520+ bought this month",
+images: [
+"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&h=933&q=80",
+"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&h=933&q=80"
+],
+colors: [
+{ name: "Floral Meadow", hex: "#D9822B" },
+{ name: "Rust Terracotta", hex: "#A94A42" },
+{ name: "Indigo Dusk", hex: "#2C3E50" }
+],
+specs: [
+"Fabric: Breathable premium georgette with soft crepe inner lining",
+"Sleeve: Three-quarter delicate flutter ruffle sleeves",
+"Waist: Smocked elasticated empire waist for universal fit",
+"Exchange: Eligible for Easy Doorstep Size & Color Exchange",
+"Care: Machine wash cold with similar colors"
+]
+}
+];
+
+// HUMANIZED REVIEWS WITH CASUAL SLANG
+const customerReviews = [
+{ name: "Priya S.", city: "Delhi", stars: "★★★★★", text: "Got this for clg farewell last week.. fabric is pure mulmul not transparent at all. 10/10 fit for me" },
+{ name: "Ananya Mehta", city: "Mumbai", stars: "★★★★★", text: "delivered in 3 days in malad. colour is slightly darker thn pic but looks v pretty after wearing ❤️" },
+{ name: "Sneha P.", city: "Ahmedabad", stars: "★★★★★", text: "3xl size milna muskil hota h usually but this suit fits so comfortably at bust!! thnx zaya team" },
+{ name: "Ritu K.", city: "Kolkata", stars: "★★★★★", text: "honestly was scared to order from insta ad but quality is legit good.. ordered L size fits perfect" },
+{ name: "Kavita R.", city: "Bangalore", stars: "★★★★★", text: "kurti ka kapda bhot acha hai, washed once no color bleeding at all. totally worth 2.5k" },
+{ name: "Meera D.", city: "Pune", stars: "★★★★★", text: "waist was slightly loose for me but mom adjusted it.. looking very classy & direct whatsapp pe tracking mil gayi thi!" },
+{ name: "Tanya G.", city: "Noida", stars: "★★★★★", text: "satin slip dress is pure love yar.. wore it to my frnd bday party got so many compliments haha" },
+{ name: "Aarti B.", city: "Lucknow", stars: "★★★★★", text: "exchange process was super fast whatsapp pe msg kiya next day pickup ho gaya tha.. thnx!" }
+];
+
+// COUPONS
+const COUPONS = {
+"FESTIVE20": { type: "percent", val: 20, min: 0, desc: "20% Discount" },
+"WELCOME10": { type: "percent", val: 10, min: 0, desc: "10% Discount" },
+"FLAT500": { type: "flat", val: 500, min: 2000, desc: "₹500 Off (Min ₹2,000)" }
+};
+
+// APP STATE
+let currentCategory = "All";
+let cart = [];
+let appliedCoupon = null;
+let selectedPayment = "UPI"; // 'UPI' or 'COD'
+let currentProduct = null;
+let currentSize = "S";
+let currentColor = null;
+let carouselTimers = {};
+let toastTimer = null;
+
+// -------------------------------------------------------------
+// SCROLL-TRIGGERED FADE-UP ANIMATION OBSERVER
+// -------------------------------------------------------------
+function setupScrollObserver() {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('fade-up-in');
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up-init').forEach(el => observer.observe(el));
+}
+
+// 3. RENDER CATALOG WITH STAGGERED TIMERS & FADE-UP
+function renderCatalog() {
+Object.values(carouselTimers).forEach(timer => {
+clearTimeout(timer.timeout);
+clearInterval(timer.interval);
+});
+carouselTimers = {};
+
+const list = currentCategory === "All"
+? products
+: products.filter(p => p.category === currentCategory);
+
+const grid = document.getElementById("productGrid");
+grid.innerHTML = list.map(item => {
+const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
+return `
+<article class="prod-card fade-up-init">
+<div class="carousel-box" onclick="showProductDetails('${item.id}')">
+${item.tag ? `<span class="tag-chip">${item.tag}</span>` : ''}
+
+<div class="carousel-track" id="track-${item.id}">
+${item.images.map(imgUrl => `
+<div class="carousel-slide">
+<img src="${imgUrl}" alt="${item.title}" loading="lazy">
+</div>
+`).join("")}
+</div>
+
+<div class="carousel-dots" id="dots-${item.id}">
+${item.images.map((_, i) => `<span class="c-dot ${i === 0 ? 'active' : ''}"></span>`).join("")}
+</div>
+</div>
+
+<div class="prod-info">
+<!-- Rating & Buyers -->
+<div class="rating-row">
+<span class="rating-stars">★ ${item.rating}</span>
+<span class="rating-count">(${item.reviews})</span>
+</div>
+<div class="bought-badge">🔥 ${item.boughtThisMonth}</div>
+
+<span class="prod-cat">${item.category}</span>
+<h3 class="prod-name" title="${item.title}">${item.title}</h3>
+
+<div class="prod-price-row">
+<span class="val-sale">${CURRENCY}${item.price.toLocaleString('en-IN')}</span>
+<span class="val-mrp">${CURRENCY}${item.mrp.toLocaleString('en-IN')}</span>
+<span class="val-off">${offPct}% OFF</span>
+</div>
+
+<button class="btn-add-cart-single" onclick="showProductDetails('${item.id}')">
+Add to Cart
+</button>
+</div>
+</article>
+`;
+}).join("");
+
+// Staggered timing for independent carousel motion
+const durations = [3200, 4200, 3600, 4800, 3900, 5200];
+list.forEach((item, index) => {
+const delay = 600 + (index * 500);
+const speed = durations[index % durations.length];
+startStaggeredCardSlide(item.id, item.images.length, delay, speed);
+});
+
+// Bind scroll observer to new cards
+setupScrollObserver();
+}
+
+function startStaggeredCardSlide(id, count, startDelay, cycleSpeed) {
+if (count <= 1) return;
+let activeIndex = 0;
+const track = document.getElementById(`track-${id}`);
+const dotsContainer = document.getElementById(`dots-${id}`);
+
+const timeoutId = setTimeout(() => {
+const intervalId = setInterval(() => {
+activeIndex = (activeIndex + 1) % count;
+if (track) {
+track.style.transform = `translateX(-${activeIndex * 100}%)`;
+}
+
+if (dotsContainer) {
+const dots = dotsContainer.querySelectorAll(".c-dot");
+dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+}
+}, cycleSpeed);
+
+carouselTimers[id] = { interval: intervalId, timeout: null };
+}, startDelay);
+
+carouselTimers[id] = { timeout: timeoutId, interval: null };
+}
+
+// 4. CATEGORY SELECTION
+function setCategory(cat) {
+currentCategory = cat;
+document.querySelectorAll(".cat-pill").forEach(btn => {
+btn.classList.toggle("active", btn.textContent.includes(cat) || (cat === "All" && btn.textContent.includes("All")));
+});
+renderCatalog();
+}
+
+// 5. DEDICATED PRODUCT DETAILS PAGE (PDP)
+function showProductDetails(id) {
+const item = products.find(p => p.id === id);
+if (!item) return;
+
+currentProduct = item;
+currentSize = "S";
+currentColor = item.colors[0].name;
+
+document.getElementById("pdpCatName").textContent = item.category;
+document.getElementById("pdpItemTitle").textContent = item.title;
+document.getElementById("pdpRatingStars").textContent = `★ ${item.rating}`;
+document.getElementById("pdpRatingReviews").textContent = `(${item.reviews} Reviews)`;
+document.getElementById("pdpBoughtStats").textContent = `🔥 ${item.boughtThisMonth}`;
+
+document.getElementById("pdpPriceVal").textContent = `${CURRENCY}${item.price.toLocaleString('en-IN')}`;
+document.getElementById("pdpMrpVal").textContent = `${CURRENCY}${item.mrp.toLocaleString('en-IN')}`;
+
+const offPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
+document.getElementById("pdpOffVal").textContent = `${offPct}% OFF`;
+
+// 90% / 10% Peek Slider (Horizontal Swipe)
+const peekSlider = document.getElementById("pdpPeekSlider");
+peekSlider.innerHTML = item.images.map(img => `
+<div class="pdp-peek-slide">
+<img src="${img}" alt="${item.title}">
+</div>
+`).join("");
+peekSlider.scrollLeft = 0; // reset scroll
+
+// Colors group
+const colorGroup = document.getElementById("pdpColorsGroup");
+document.getElementById("pdpSelectedColorName").textContent = currentColor;
+colorGroup.innerHTML = item.colors.map((c, idx) => `
+<button
+class="color-swatch-btn ${idx === 0 ? 'selected' : ''}"
+style="background-color: ${c.hex};"
+title="${c.name}"
+onclick="pickPdpColor('${c.name}', this)">
+</button>
+`).join("");
+
+// Sizes: S, M, L, XL, XXL, 3XL
+pickPdpSize("S");
+
+// Specifications in bullet points
+const specsList = document.getElementById("pdpSpecsList");
+specsList.innerHTML = item.specs.map(spec => `
+<li><span class="spec-bullet">✓</span> ${spec}</li>
+`).join("");
+
+// Ensure accordions are closed by default on view
+document.querySelectorAll(".accordion-content").forEach(el => el.style.display = "none");
+document.querySelectorAll(".acc-toggle-icon").forEach(el => {
+el.textContent = "+";
+el.style.transform = "rotate(0deg)";
+});
+
+// Render customer reviews marquee
+renderReviewsMarquee();
+
+// Render similar products
+renderSimilarProducts(item);
+
+// Switch views
+document.getElementById("catalogView").classList.remove("active");
+document.getElementById("pdpView").classList.add("active");
+window.scrollTo({ top: 0, behavior: "smooth" });
+window.location.hash = `item-${id}`;
+}
+
+// ACCORDION DROPDOWN TOGGLE (DEFAULT CLOSED)
+function togglePdpAccordion(headerElement) {
+const content = headerElement.nextElementSibling;
+const icon = headerElement.querySelector(".acc-toggle-icon");
+const isOpen = content.style.display === "block";
+
+if (isOpen) {
+content.style.display = "none";
+icon.textContent = "+";
+icon.style.transform = "rotate(0deg)";
+} else {
+content.style.display = "block";
+icon.textContent = "−";
+icon.style.transform = "rotate(180deg)";
+}
+}
+
+function pickPdpColor(colorName, btnElement) {
+currentColor = colorName;
+document.getElementById("pdpSelectedColorName").textContent = colorName;
+document.querySelectorAll(".color-swatch-btn").forEach(b => b.classList.remove("selected"));
+btnElement.classList.add("selected");
+}
+
+function pickPdpSize(sz) {
+currentSize = sz;
+document.querySelectorAll(".size-btn-pill").forEach(b => {
+b.classList.toggle("selected", b.textContent === sz);
+});
+}
+
+// RENDER MOVING REVIEWS
+function renderReviewsMarquee() {
+const track = document.getElementById("reviewsTrack");
+const doubleList = [...customerReviews, ...customerReviews];
+track.innerHTML = doubleList.map(r => `
+<div class="review-bubble">
+<div class="review-user-row">
+<span class="review-name">${r.name} (${r.city})</span>
+<span class="verified-chip">✓ Verified</span>
+</div>
+<div class="review-stars">${r.stars}</div>
+<div class="review-comment">"${r.text}"</div>
+</div>
+`).join("");
+}
+
+// RENDER SIMILAR PRODUCTS GRID
+function renderSimilarProducts(currentItem) {
+const similar = products.filter(p => p.id !== currentItem.id).slice(0, 4);
+const grid = document.getElementById("similarGrid");
+grid.innerHTML = similar.map(p => `
+<div class="prod-card" style="cursor:pointer;" onclick="showProductDetails('${p.id}')">
+<div style="aspect-ratio:3/4; overflow:hidden; background:#eae6df;">
+<img src="${p.images[0]}" alt="${p.title}" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+</div>
+<div style="padding:10px;">
+<div style="font-size:0.65rem; color:var(--muted); text-transform:uppercase;">${p.category}</div>
+<div style="font-size:0.82rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.title}</div>
+<div style="font-weight:700; font-size:0.9rem; margin-top:2px;">${CURRENCY}${p.price.toLocaleString('en-IN')}</div>
+</div>
+</div>
+`).join("");
+}
+
+function openHomeView() {
+document.getElementById("pdpView").classList.remove("active");
+document.getElementById("catalogView").classList.add("active");
+window.location.hash = "";
+window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+window.addEventListener("hashchange", () => {
+if (!window.location.hash) openHomeView();
+});
+
+// -------------------------------------------------------------
+// MOBILE NAVIGATION SIDEBAR TOGGLE
+// -------------------------------------------------------------
+function toggleSidebar(open) {
+document.getElementById("mobileSidebar").classList.toggle("open", open);
+document.getElementById("sidebarOverlay").classList.toggle("open", open);
+document.body.style.overflow = open ? "hidden" : "auto";
+}
+
+// -------------------------------------------------------------
+// TRACK ORDER MODAL HANDLERS
+// -------------------------------------------------------------
+function openTrackModal() {
+document.getElementById("trackModal").style.display = "flex";
+document.body.style.overflow = "hidden";
+}
+
+function closeTrackModalDirect() {
+document.getElementById("trackModal").style.display = "none";
+document.body.style.overflow = "auto";
+}
+
+function closeTrackModal(e) {
+if (e.target.id === "trackModal") closeTrackModalDirect();
+}
+
+function submitTrackingInquiry() {
+const val = document.getElementById("trackInput").value.trim();
+if (!val) {
+alert("Please enter your Phone Number or Order Code.");
+return;
+}
+const msg = `Hi ZAYA Team, I would like to track my order for Mobile/Order Code: ${val}. Please share the current dispatch & delivery status.`;
+const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+window.open(waUrl, "_blank");
+closeTrackModalDirect();
+}
+
+// -------------------------------------------------------------
+// LEGAL POLICY MODAL
+// -------------------------------------------------------------
+const legalContent = {
+privacy: {
+title: "Privacy Policy",
+body: "At ZAYA, we are dedicated to protecting your personal data. We strictly use your name, shipping address, and phone number solely to prepare and fulfill your boutique orders via WhatsApp. We never sell, lease, or monetize your contact information with external marketing agencies."
+},
+terms: {
+title: "Terms & Conditions",
+body: "By shopping on ZAYA, you agree to our direct order processing terms. Orders placed via WhatsApp receive an official itemized confirmation bill before dispatch. Deliveries are executed via authorized express courier partners across India."
+},
+exchange: {
+title: "Exchange Policy",
+body: "We offer an Easy Doorstep Size & Color Exchange. If your outfit needs a different size, simply reach out to us on WhatsApp with your order code. Our courier representative will deliver the fresh size and pick up the exchange piece directly at your doorstep."
+},
+shipping: {
+title: "Shipping & Delivery Policy",
+body: "All orders are prepared and dispatched within 24–48 business hours. Prepaid orders via UPI enjoy 100% complimentary free shipping across India. Cash on Delivery (COD) carries a nominal ₹50 courier convenience charge."
+},
+payment: {
+title: "Payment Security",
+body: "All digital payments are processed through trusted, encrypted UPI gateways including Google Pay, PhonePe, and Paytm. Your UPI credentials and banking details are never stored on our servers."
+}
+};
+
+function openLegalModal(type) {
+const data = legalContent[type];
+if (!data) return;
+document.getElementById("legalModalTitle").textContent = data.title;
+document.getElementById("legalModalBody").textContent = data.body;
+document.getElementById("legalModal").style.display = "flex";
+document.body.style.overflow = "hidden";
+}
+
+function closeLegalModalDirect() {
+document.getElementById("legalModal").style.display = "none";
+document.body.style.overflow = "auto";
+}
+
+function closeLegalModal(e) {
+if (e.target.id === "legalModal") closeLegalModalDirect();
+}
+
+// 6. CART MANAGEMENT (HANDLES BOTH "ADD TO BAG" & "ORDER NOW")
+function addCurrentPdp(isDirectOrder) {
+if (currentProduct) {
+addToBag(currentProduct, currentSize, currentColor);
+if (isDirectOrder) {
+toggleBagDrawer(true);
+}
+}
+}
+
+function addToBag(item, size, color) {
+const match = cart.find(c => c.id === item.id && c.size === size && c.color === color);
+if (match) {
+match.qty += 1;
+} else {
+cart.push({ ...item, size, color, qty: 1 });
+}
+showToast(`Added: ${item.title} (${color} / ${size})`);
+updateBagDisplay();
+}
+
+function changeQty(idx, delta) {
+cart[idx].qty += delta;
+if (cart[idx].qty <= 0) cart.splice(idx, 1);
+updateBagDisplay();
+}
+
+function toggleBagDrawer(open) {
+document.getElementById("bagDrawer").classList.toggle("open", open);
+document.getElementById("drawerScrim").classList.toggle("open", open);
+document.body.style.overflow = open ? "hidden" : "auto";
+}
+
+document.getElementById("openBagTrigger").addEventListener("click", () => toggleBagDrawer(true));
+
+// 7. COUPON LOGIC
+function quickCoupon(code) {
+document.getElementById("couponInput").value = code;
+applyCoupon();
+}
+
+function applyCoupon() {
+const input = document.getElementById("couponInput");
+const code = input.value.trim().toUpperCase();
+const status = document.getElementById("couponStatus");
+const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+if (!code) {
+status.style.color = "#D9534F";
+status.textContent = "Please enter a code.";
+return;
+}
+
+if (!COUPONS[code]) {
+status.style.color = "#D9534F";
+status.textContent = "Invalid code. Try FESTIVE20 or WELCOME10.";
+appliedCoupon = null;
+updateBagDisplay();
+return;
+}
+
+const rule = COUPONS[code];
+if (subtotal < rule.min) {
+status.style.color = "#D9534F";
+status.textContent = `Requires minimum bag value of ${CURRENCY}${rule.min}.`;
+appliedCoupon = null;
+updateBagDisplay();
+return;
+}
+
+appliedCoupon = { code, ...rule };
+status.style.color = "#2E7D32";
+status.textContent = `✓ Code '${code}' applied! (${rule.desc})`;
+updateBagDisplay();
+}
+
+// 8. PAYMENT METHOD SWITCHER (UPI vs COD)
+function selectPaymentMethod(method) {
+selectedPayment = method;
+document.getElementById("payCardUpi").classList.toggle("active", method === "UPI");
+document.getElementById("payCardCod").classList.toggle("active", method === "COD");
+document.querySelector(`input[name="payMethod"][value="${method}"]`).checked = true;
+updateBagDisplay();
+}
+
+// 9. UPDATE CART & CHECKOUT LEDGER
+function updateBagDisplay() {
+const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+document.getElementById("headerBagCount").textContent = totalCount;
+document.getElementById("drawerCount").textContent = totalCount;
+document.getElementById("ledgerSubtotal").textContent = `${CURRENCY}${subtotal.toLocaleString('en-IN')}`;
+
+// Calculate discount
+let discountAmount = 0;
+if (appliedCoupon && subtotal > 0) {
+discountAmount = appliedCoupon.type === "percent"
+? Math.round((subtotal * appliedCoupon.val) / 100)
+: appliedCoupon.val;
+}
+
+const discountRow = document.getElementById("ledgerDiscountRow");
+if (discountAmount > 0) {
+discountRow.style.display = "flex";
+document.getElementById("ledgerDiscountLabel").textContent = `Discount (${appliedCoupon.code}):`;
+document.getElementById("ledgerDiscountVal").textContent = `-${CURRENCY}${discountAmount.toLocaleString('en-IN')}`;
+} else {
+discountRow.style.display = "none";
+}
+
+// COD Fee logic (+₹50 if COD selected)
+const codExtra = (selectedPayment === "COD" && subtotal > 0) ? COD_FEE : 0;
+const codRow = document.getElementById("ledgerCodRow");
+if (codExtra > 0) {
+codRow.style.display = "flex";
+} else {
+codRow.style.display = "none";
+}
+
+const totalPayable = Math.max(0, subtotal - discountAmount + codExtra);
+document.getElementById("ledgerTotal").textContent = `${CURRENCY}${totalPayable.toLocaleString('en-IN')}`;
+
+const container = document.getElementById("bagItemsContainer");
+const footer = document.getElementById("bagFooter");
+
+if (cart.length === 0) {
+container.innerHTML = `
+<div style="text-align:center; padding: 50px 10px; color: var(--muted);">
+<div style="font-size: 2rem; margin-bottom: 6px;">🛍️</div>
+<div style="font-size: 0.95rem; font-weight: 600; color: var(--noir);">Your shopping bag is empty</div>
+<div style="font-size: 0.8rem; margin-top: 4px;">Explore our pieces and add your favorites.</div>
+</div>
+`;
+footer.style.display = "none";
+return;
+}
+
+footer.style.display = "block";
+container.innerHTML = cart.map((item, idx) => `
+<div class="bag-row">
+<div class="bag-row-thumb">
+<img src="${item.images[0]}" alt="${item.title}">
+</div>
+<div class="bag-row-info">
+<div>
+<div style="font-size: 0.84rem; font-weight: 600;">${item.title}</div>
+<div style="font-size: 0.72rem; color: var(--muted); margin: 2px 0;">
+Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong>
+</div>
+</div>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4px;">
+<span style="font-weight:700; font-size: 0.88rem;">${CURRENCY}${(item.price * item.qty).toLocaleString('en-IN')}</span>
+<div class="qty-wrap">
+<button class="step-btn" onclick="changeQty(${idx}, -1)">−</button>
+<span style="font-size:0.85rem; font-weight:600;">${item.qty}</span>
+<button class="step-btn" onclick="changeQty(${idx}, 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+`).join("");
+}
+
+// 10. FINAL WHATSAPP ORDER SUBMISSION
+function submitOrderToWhatsApp() {
+if (cart.length === 0) {
+alert("Your shopping bag is empty.");
+return;
+}
+
+const name = document.getElementById("custName").value.trim();
+const addr1 = document.getElementById("custAddr1").value.trim();
+const nearby = document.getElementById("custNearby").value.trim();
+const pincode = document.getElementById("custPincode").value.trim();
+const phone = document.getElementById("custPhone").value.trim();
+
+// STRICT VALIDATIONS
+if (!name) {
+alert("Please enter your Full Name.");
+return;
+}
+if (!addr1) {
+alert("Please enter your Street / Flat Address.");
+return;
+}
+if (!/^\d{6}$/.test(pincode)) {
+alert("Please enter a valid 6-digit Pincode (numbers only).");
+return;
+}
+if (!/^\d{10}$/.test(phone)) {
+alert("Please enter a valid 10-digit Phone Number.");
+return;
+}
+
+const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+let discount = 0;
+if (appliedCoupon && subtotal > 0) {
+discount = appliedCoupon.type === "percent"
+? Math.round((subtotal * appliedCoupon.val) / 100)
+: appliedCoupon.val;
+}
+const codExtra = (selectedPayment === "COD") ? COD_FEE : 0;
+const payable = Math.max(0, subtotal - discount + codExtra);
+
+const itemsSummary = cart.map((item, i) =>
+`${i + 1}. *${item.title}*\n • Color: ${item.color}\n • Size: ${item.size}\n • Qty: ${item.qty}\n • Price: ${CURRENCY}${item.price * item.qty}`
+).join("\n\n");
+
+const paymentText = (selectedPayment === "COD")
+? "Cash on Delivery (COD) [₹50 Convenience Fee Included]"
+: "UPI / Online Payment (Google Pay / PhonePe / Paytm)";
+
+const message =
+`✨ *NEW ORDER — ZAYA BOUTIQUE* ✨
+
+*CUSTOMER DETAILS:*
+• Name: ${name}
+• Phone: ${phone}
+• Delivery Address: ${addr1}
+${nearby ? `• Landmark: ${nearby}\n` : ""}• Pincode: ${pincode}
+
+------------------------------------
+*ORDERED ITEMS:*
+${itemsSummary}
+------------------------------------
+
+*PAYMENT PREFERENCE:*
+• Selected Mode: *${paymentText}*
+
+*BILLING SUMMARY:*
+• Subtotal: ${CURRENCY}${subtotal.toLocaleString('en-IN')}
+${appliedCoupon ? `• Coupon Discount (${appliedCoupon.code}): -${CURRENCY}${discount.toLocaleString('en-IN')}\n` : ""}${selectedPayment === "COD" ? `• COD Convenience Charge: +${CURRENCY}${COD_FEE}\n` : ""}• Shipping: FREE (Complimentary)
+*• Grand Total Payable: ${CURRENCY}${payable.toLocaleString('en-IN')}*
+
+${selectedPayment === "UPI" ? "Please share your UPI ID / QR code to complete payment." : "Please confirm my COD order and dispatch date."}`;
+
+const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+window.open(waUrl, "_blank");
+}
+
+// 11. FLOATING WHATSAPP CHAT
+function openGeneralChatWhatsApp() {
+const msg = `Hi ZAYA Team, I am browsing your store and have a question regarding an outfit/order.`;
+const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+window.open(waUrl, "_blank");
+}
+
+// 12. TOAST NOTIFICATION
+function showToast(msg) {
+const toast = document.getElementById("toastNotice");
+toast.textContent = `✓ ${msg}`;
+toast.classList.add("show");
+
+if (toastTimer) clearTimeout(toastTimer);
+toastTimer = setTimeout(() => {
+toast.classList.remove("show");
+}, 1400);
+}
+
+// INITIAL RENDER
+renderCatalog();
+updateBagDisplay();
+setupScrollObserver();
+</script>
+</body>
+</html>

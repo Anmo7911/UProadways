@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBF9F6">
+  <title>Product | ZAYA</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/">ZAYA</a>
+    <a class="header-action" id="authAction" href="/auth.html">Sign In</a>
+  </header>
+
+  <main class="pdp">
+    <button class="back-button" id="backButton" type="button">← Back to collection</button>
+
+    <div id="productState" hidden></div>
+
+    <section class="pdp-layout" id="productContent">
+      <div class="pdp-image-panel">
+        <img id="productImage" src="" alt="" decoding="async">
+      </div>
+
+      <div class="pdp-details">
+        <div class="eyebrow" id="productCategory">Collection</div>
+        <h1 id="productTitle">Loading…</h1>
+
+        <div class="pdp-price">
+          <strong id="productPrice">₹0</strong>
+          <span class="mrp" id="productMrp" hidden></span>
+          <span class="discount" id="productDiscount" hidden></span>
+        </div>
+
+        <div class="color-label">Select color: <span id="selectedColor">—</span></div>
+        <div class="color-swatches" id="colorSwatches" aria-label="Product colors"></div>
+
+        <div class="button-row">
+          <button class="primary-button wa-button" id="orderWhatsApp" type="button">
+            Order on WhatsApp
+          </button>
+          <a class="secondary-button" href="/">Continue shopping</a>
+        </div>
+
+        <div class="product-meta">
+          <strong>Product token:</strong> <span id="productToken">From URL</span><br>
+          Select another color above to update the product image and URL instantly.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /*
+     * Optional global store configuration.
+     * Keep the WhatsApp number in international format without + or spaces.
+     */
+    window.ZAYA_WHATSAPP_PHONE = "";
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase.js"></script>
+  <script src="/js/product.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const token = new URLSearchParams(location.search).get("token") || location.pathname.split("/").filter(Boolean)[1] || "";
+      document.getElementById("productToken").textContent = token || "—";
+    });
+  </script>
+</body>
+</html>

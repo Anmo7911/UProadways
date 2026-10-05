@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBF9F6">
+  <title>Admin | ZAYA</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="admin-shell">
+  <header class="site-header">
+    <a class="logo" href="/">ZAYA</a>
+    <button class="header-action" id="signOutButton" type="button">Sign Out</button>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-top">
+      <div>
+        <div class="eyebrow">ADMIN PORTAL</div>
+        <h1>Collection manager</h1>
+      </div>
+      <small id="adminEmail"></small>
+    </div>
+
+    <div class="admin-grid">
+      <section class="admin-card">
+        <h2>Publish a product</h2>
+
+        <form class="form-stack" id="productForm">
+          <label class="form-label">
+            Title
+            <input class="form-control" name="title" type="text" maxlength="160" required>
+          </label>
+
+          <label class="form-label">
+            Token / Slug
+            <input class="form-control" name="token" type="text" maxlength="120" placeholder="mulmul-anarkali-set" required>
+          </label>
+
+          <label class="form-label">
+            Category
+            <input class="form-control" name="category" type="text" maxlength="80" placeholder="Kurtas & Sets" required>
+          </label>
+
+          <div class="button-row">
+            <label class="form-label">
+              Price
+              <input class="form-control" name="price" type="number" min="0" step="1" required>
+            </label>
+            <label class="form-label">
+              MRP
+              <input class="form-control" name="mrp" type="number" min="0" step="1" required>
+            </label>
+          </div>
+
+          <label class="form-label">
+            Color Variant Name
+            <input class="form-control" name="colorName" type="text" maxlength="60" placeholder="Sage Green" required>
+          </label>
+
+          <label class="form-label">
+            Color Hex Code
+            <input class="form-control" name="colorHex" type="text" maxlength="7" placeholder="#8A9A86" required>
+          </label>
+
+          <label class="form-label">
+            Product image
+            <input class="form-control" id="fileInput" name="image" type="file" accept="image/*" required>
+          </label>
+
+          <img class="preview" id="imagePreview" alt="Selected product preview" hidden>
+
+          <div class="form-message" id="adminMessage" role="status"></div>
+          <button class="primary-button" id="saveProductButton" type="submit">Publish product</button>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Published products</h2>
+        <div class="admin-product-list" id="adminProductList">
+          <div class="empty-state">Loading…</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
